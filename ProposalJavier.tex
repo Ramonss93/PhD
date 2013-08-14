@@ -1,0 +1,192 @@
+\documentclass{book}
+
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amssymb,amsmath}
+\newcommand{\bm}[1]{\boldsymbol{#1}}
+\usepackage{indentfirst}
+\setlength{\parindent}{1cm}
+\usepackage{multirow}
+\usepackage{fullpage}
+\usepackage{appendix}
+\usepackage{setspace}
+\usepackage[bf, small, center]{caption}
+\setlength{\belowcaptionskip}{10pt}
+\usepackage{longtable}
+
+\usepackage{geometry}
+\geometry{
+%  top=1.0in,  
+%  inner=1.5in,
+%  outer=1.5in,
+  bottom=1.2in,
+%  headheight=3ex, 
+  headsep=3ex,         
+}
+
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhead[LO, RE]{\rightmark}
+\fancyhead[LE, RO]{\thepage}
+\fancyfoot[]{}
+%\renewcommand{\headrulewidth}{0.3pt}
+
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+
+\onehalfspacing
+
+\usepackage[phd]{thesisfrontmatter}
+
+% *** NOTE WHICH PROGRAM GENERATED IMAGES OR WHICH POWER POINT THEY ARE FROM
+%compare methodology with script for final process
+%how much detail in methodology?
+%some sort of processing flowchart?
+%how much do we care about processing?
+
+\usepackage[parfill]{parskip}    % Activate to begin paragraphs with an empty line rather than an indent
+
+
+\usepackage{mathtools}
+\usepackage{epstopdf}
+
+\usepackage{color}
+\usepackage{soul}
+
+
+
+\DeclareGraphicsRule{.tif}{png}{.png}{`convert #1 `dirname #1`/`basename #1 .tif`.png}
+
+\let\stdsection\chapter  
+\renewcommand\chapter{\newpage\stdsection}  
+
+
+
+
+% \title{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
+% \author{
+% 	\textsc{Javier A. Concha}%\thanks{Contact Author}
+% 	\mbox{}\\
+% 	Center for Imaging Science\\ 
+% 	Rochester Institute of Technology\\
+% 	Rochester, NY, USA\\
+% 	\mbox{}\\
+% 	\normalsize
+% 		\texttt{jxc4005@rit.edu}
+% 	}
+% \date{}                                           % Activate to display a given date or no date
+% %\date{\today}
+
+%%%%%%%%%%% for Appendix
+\makeatletter
+\newcommand\appendix@section[1]{%
+  \refstepcounter{section}%
+  \orig@section*{Appendix \@Alph\c@section: #1}%
+  \addcontentsline{toc}{section}{Appendix \@Alph\c@section: #1}%
+}
+\let\orig@section\section
+\g@addto@macro\appendix{\let\section\appendix@section}
+\makeatother
+
+
+%%%%%%%%%%%%%%
+
+\usepackage{hyperref}
+\hypersetup{
+    bookmarks=true,         % show bookmarks bar?
+    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+    pdftoolbar=true,        % show Acrobat’s toolbar?
+    pdfmenubar=true,        % show Acrobat’s menu?
+    pdffitwindow=false,     % window fit to page when opened
+    pdfstartview={FitH},    % fits the width of the page to the window
+    pdftitle={WV-2 In Water Component Retrieval },    % title
+    pdfauthor={Javier Concha},     % author
+    pdfsubject={Subject},   % subject of the document
+    pdfcreator={Creator},   % creator of the document
+    pdfproducer={Producer}, % producer of the document
+    pdfkeywords={keyword1} {key2} {key3}, % list of keywords
+    pdfnewwindow=true,      % links in new window
+    colorlinks=true,       % false: boxed links; true: colored links
+    linkcolor=blue,          % color of internal links
+    citecolor=green,        % color of links to bibliography
+    filecolor=magenta,      % color of file links
+    urlcolor=cyan           % color of external links
+}
+
+\usepackage[all]{hypcap} % to see figure with hyper ref
+
+\setcounter{secnumdepth}{5}
+\setcounter{tocdepth}{5}
+
+%******************************************************************************************************
+
+\begin{document}
+
+\degreetitle{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
+\degreeauthor{Javier A. Concha}
+\degreedate{30 Noviembre 2013}
+\prevdegreeA{M.S. Rochester Institute of Technology, 2012}
+\advisor{Dr. John R. Schott}
+\memberA{Dr. Anthony Vodacek}
+\memberB{Dr. Aaron Gerace}
+\memberC{Dr. Charles M. Bachmann}
+\memberD{Dr. Christy Tyler}
+
+\makeproposaldeclaration
+\makePHDproposalapproval
+% \makecopyright
+
+
+% \maketitle
+
+\pagenumbering{roman}
+
+% \chapter*{Abstract}
+% \addcontentsline{toc}{chapter}{Abstract}
+
+\begin{abstract}
+
+The Landsat Data Continuity Mission (LDCM; a.k.a. Landsat-8), recently launched (February 2013), is the next generation of Landsat satellite and continues with more than 40 years of continuing imaging acquisition, playing a critical role in monitoring, understanding and managing natural resources such as water. Landsat-8, with its improved spectral bands and radiometric resolution, has the potential to dramatically improve our ability to simultaneously retrieve the three primary coloring agents, chlorophyll (Chl), colored dissolved organic material (CDOM) and suspended material (SM) from water bodies. This work presents the results obtained so far. To date, the method has been tested on Landsat-5 images because Landsat-8 images are still not available.
+
+In the Case 2 water problem, the sensor-reaching signal due to water is very small when compared to the signal due to the atmospheric effects. Therefore, adequate atmospheric correction becomes an important first step to accurately retrieving water parameters. As a first approach, a model based empirical line method (ELM) atmospheric correction method converts sensor-reaching radiance to water leaving reflectance. This model employs pseudo invariant feature (PIF) pixels extraction from Landsat images along with an in water radiative transfer model (HydroLight) to obtain the field spectra. Further atmospheric compensation technique will be investigated.
+
+A look-up-table (LUT) methodology is implemented to retrieve the water parameters. The LUT is created using HydroLight.
+
+Collections of water samples when the satellite passes over the Rochester area are planned for summer 2013. Concentration and inherent optical properties (IOPs) measurement will help to validate the methods.
+
+\end{abstract}
+
+% \chapter*{Acknowledgements}
+%*****************************************************************************************************
+\begin{acknowledgements}
+To my parents. USGS. 
+\end{acknowledgements}
+%*****************************************************************************************************
+
+\tableofcontents
+
+\listoffigures
+\addcontentsline{toc}{chapter}{List of Figures}
+
+\listoftables
+\addcontentsline{toc}{chapter}{List of Tables}
+
+\input{Introduction.tex}
+\input{Objectives.tex}
+\input{Background_and_Theory.tex}
+\input{Methodology.tex}
+\input{Results.tex}
+\input{Future_Work.tex}
+\input{Appendix.tex}
+
+  
+%\bibliographystyle{ieeetr}
+%\bibliographystyle{unsrtnat}
+\bibliographystyle{apalike}
+
+\bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
+
+
+\end{document}  
