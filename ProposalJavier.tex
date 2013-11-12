@@ -4,12 +4,15 @@
 \usepackage{float}
 \usepackage{amssymb,amsmath}
 \newcommand{\bm}[1]{\boldsymbol{#1}}
-\usepackage{indentfirst}
-\setlength{\parindent}{1cm}
+
+
+
+
 \usepackage{multirow}
 \usepackage{fullpage}
 \usepackage{appendix}
 \usepackage{setspace}
+
 \usepackage[bf, small, center]{caption}
 \setlength{\belowcaptionskip}{10pt}
 \usepackage{longtable}
@@ -36,7 +39,7 @@
 \newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 \newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
 
-\onehalfspacing
+
 
 \usepackage[phd]{thesisfrontmatter}
 
@@ -61,23 +64,6 @@
 
 \let\stdsection\chapter  
 \renewcommand\chapter{\newpage\stdsection}  
-
-
-
-
-% \title{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
-% \author{
-% 	\textsc{Javier A. Concha}%\thanks{Contact Author}
-% 	\mbox{}\\
-% 	Center for Imaging Science\\ 
-% 	Rochester Institute of Technology\\
-% 	Rochester, NY, USA\\
-% 	\mbox{}\\
-% 	\normalsize
-% 		\texttt{jxc4005@rit.edu}
-% 	}
-% \date{}                                           % Activate to display a given date or no date
-% %\date{\today}
 
 %%%%%%%%%%% for Appendix
 \makeatletter
@@ -120,6 +106,17 @@
 \setcounter{secnumdepth}{5}
 \setcounter{tocdepth}{5}
 
+% Added 11-12-13 ----------------------------------------
+
+\usepackage{titlesec} % For the spacing after and before chapter title
+
+\titleformat{\chapter}[display]
+    {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{40pt}{20pt}
+
+\usepackage{indentfirst}
+\setlength{\parindent}{20pt}
+\doublespacing
 %******************************************************************************************************
 
 \begin{document}
@@ -131,7 +128,7 @@
 \advisor{Dr. John R. Schott}
 \memberA{Dr. Anthony Vodacek}
 \memberB{Dr. Aaron Gerace}
-\memberC{Dr. Charles M. Bachmann}
+\memberC{Dr. Emmett Ientilucci}
 \memberD{Dr. Christy Tyler}
 
 \makeproposaldeclaration
@@ -147,7 +144,7 @@
 % \addcontentsline{toc}{chapter}{Abstract}
 
 \begin{abstract}
-
+\setlength{\parindent}{20pt}
 The Landsat Data Continuity Mission (LDCM; a.k.a. Landsat-8), recently launched (February 2013), is the next generation of Landsat satellite and continues with more than 40 years of continuing imaging acquisition, playing a critical role in monitoring, understanding and managing natural resources such as water. Landsat-8, with its improved spectral bands and radiometric resolution, has the potential to dramatically improve our ability to simultaneously retrieve the three primary coloring agents, chlorophyll (Chl), colored dissolved organic material (CDOM) and suspended material (SM) from water bodies. This work presents the results obtained so far. To date, the method has been tested on Landsat-5 images because Landsat-8 images are still not available.
 
 In the Case 2 water problem, the sensor-reaching signal due to water is very small when compared to the signal due to the atmospheric effects. Therefore, adequate atmospheric correction becomes an important first step to accurately retrieving water parameters. As a first approach, a model based empirical line method (ELM) atmospheric correction method converts sensor-reaching radiance to water leaving reflectance. This model employs pseudo invariant feature (PIF) pixels extraction from Landsat images along with an in water radiative transfer model (HydroLight) to obtain the field spectra. Further atmospheric compensation technique will be investigated.
@@ -161,7 +158,8 @@ Collections of water samples when the satellite passes over the Rochester area a
 % \chapter*{Acknowledgements}
 %*****************************************************************************************************
 \begin{acknowledgements}
-To my parents. USGS. 
+\setlength{\parindent}{20pt}
+To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center.
 \end{acknowledgements}
 %*****************************************************************************************************
 
@@ -173,13 +171,13 @@ To my parents. USGS.
 \listoftables
 \addcontentsline{toc}{chapter}{List of Tables}
 
-\input{Introduction.tex}
-\input{Objectives.tex}
-\input{Background_and_Theory.tex}
-\input{Methodology.tex}
-\input{Results.tex}
-\input{Future_Work.tex}
-\input{Appendix.tex}
+\input{Introduction}
+\input{Objectives}
+% \input{Background_and_Theory.tex}
+% \input{Methodology.tex}
+% \input{Results.tex}
+% \input{Future_Work.tex}
+% \input{Appendix.tex}
 
   
 %\bibliographystyle{ieeetr}

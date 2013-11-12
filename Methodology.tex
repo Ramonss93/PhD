@@ -13,5 +13,14 @@ Noise level. Quantization. SNR.
 
 
 \section{Over-Water Atmospheric Compensation}
-\subsection{The Empirical Line Method (ELM)}
+\subsection{Model Based Empirical Line Method}
+
+\subsubsection{Pseudo Invariant Features}
+
+This model employs pseudo-invariant feature (PIF) pixels extraction from the Landsat Climate Data Record (CDR) Surface Reflectance product along with an in-water radiative transfer model (HydroLight) to obtain the field spectra to be used in the ELM method. 
+ A mask is created applying a threshold a the ratio between the NIR band and the red band. 
+ A mask is created applying a threshold to the SWIR 2 band. 
+
+The model based empirical line method (MBELM) atmospheric correction method is based in the well known empirical line method (ELM).
+
 \subsection{LUT Method}

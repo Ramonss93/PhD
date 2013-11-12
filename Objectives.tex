@@ -1,28 +1,42 @@
-\chapter{Objectives}
-\label{ch:objectives}
+\chapter{Objectives}\label{ch:objectives}
+As discuss in Chapter \ref{ch:introduction},  the retrieval of water constituent concentration using multispectral satellite imagery in a effort to monitor fresh and coastal water (referred to as Case 2 waters) is a complex problem because there is no a direct relationship between pixel values and water constituent concentration. However, since it possess different links that depend of each other, it can be addressed in smaller tasks to make it easier to solve. 
 
-As discuss in Chapter \ref{ch:introduction},...
-
+The purpose of this chapter is precisely to define these tasks as an outline that will help to make the problem manageable. This  chapter is divided in four section in a effort to . Section \ref{sec:problemstatement} details the problem being approached. In Section \ref{sec:objectives}, the problem is outlined in {\color{red} three} separate objectives as well as some future objectives. Section \ref{sec:tasks} describes the tasks needed to accomplish these objectives. Finally, this chapter closes with Section \ref{sec:contributiontofield} that delineates this work's original contribution to the field of remote sensing, imaging science and ocean optics. 
+% -----------------------------------------------------------------
 \section{Problem Statement}
 \label{sec:problemstatement}
-Hypothesis: Landsat-8 can be used to water components retrieval.
+The problem to be addressed in this thesis is: can the L8 be used for monitoring of fresh and coastal water? This leads to the goal of our work that is to develop a process to retrieve water constituents from L8 imagery to evaluate this satellite performance. Specifically, the algorithm will be used over Case 2 water, which includes fresh and coastal water. The retrieval algorithm compares a water leaving reflectance with unknown concentrations with water leaving reflectance whose concentration are known. Because the comparison is made in reflectance domain, the process requires first to atmospherically correct the L8 image and two approaches are investigated to do so. The first one is ELM-based algorithm The second one is a band ratio approach.
 
+% -----------------------------------------------------------------
 \section{Statement of Objectives}
 \label{sec:objectives}
 
 \begin{enumerate}
-	\item 
-	\item
-	\item
-	\item
+	\item Develop over-water atmospheric correction algorithms for L8 reflective imagery.
+	\item Design a water constituent retrieval algorithm that can be applied to an specific study area.
+	\item Validate results by comparing with in-situ measurements.
+	\item Extend this process to any water body.
 \end{enumerate}
 
+% -----------------------------------------------------------------
 \section{Description of Tasks}
+\label{sec:tasks}
 \begin{enumerate}
-	{\bf \item h }
-	{\bf \item h}
-	{\bf \item h}
-	{\bf \item h}
+	{\bf \item Develop over-water atmospheric correction algorithms for L8 reflective imagery.} 
+
+The first objective in this research is to identify the best approach for atmospherically correct the type of dataset provide by the OLI sensor. Two methods will be investigated. The first method will be based in previous work made for synthetic OLI data \cite{Gerace:2013,Gerace:2012,GeraceThesis} that consist in a ELM based method. The second method will based in methods developed for ocean color satellite such as SeaWiFS, MODIS, and MERIS \cite{Gordon:1997} that is based in the no contribution of signal leaving the water to the overall signal beyond the NIR part of the spectrum of light, so the signal reaching the sensor is caused only by atmospheric scattering.
+
+	{\bf \item Design a water constituent retrieval algorithm that can be applied to an specific study area.}
+
+	The retrieval algorithm is based in previous by \cite{Raqueno:2003} and \cite{GeraceThesis}.
+
+
+	{\bf \item Validate results by comparing with in-situ measurements.}
+
+
+	{\bf \item Extend this process to any water body.}
+
+
 \end{enumerate}
 
 
@@ -32,5 +46,6 @@ Validation. RMS error and field data.
 % \subsection{Primary Requirements}
 % \subsection{Future Objectives}
 
+% -----------------------------------------------------------------
 \section{Contribution to Field}
-\label{contributiontofield}
+\label{sec:contributiontofield}
