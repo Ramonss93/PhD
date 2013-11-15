@@ -121,6 +121,14 @@
 % Select what to do with todonotes: 
 % \usepackage[disable]{todonotes} % notes not showed
 \usepackage[draft]{todonotes}   % notes showed
+% Added 11-15-13 ----------------------------------------
+\includeonly{Background_and_Theory} 
+\usepackage{tikz} % for flow charts
+  \usetikzlibrary{shapes,arrows,positioning,shadows,calc}
+\usepackage{colortbl}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{multirow}
 %******************************************************************************************************
 
 \begin{document}
@@ -176,8 +184,9 @@ To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nin
 \addcontentsline{toc}{chapter}{List of Tables}
 
 \include{Introduction}
+\pagenumbering{arabic} 
 \include{Objectives}
-% \input{Background_and_Theory.tex}
+\include{Background_and_Theory}
 % \input{Methodology.tex}
 % \input{Results.tex}
 % \input{Future_Work.tex}

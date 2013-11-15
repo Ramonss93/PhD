@@ -3,7 +3,9 @@
 %% CHAPTER
 \chapter{Background and Theory}
 \label{ch:background}
+% -----------------------------------------------------------------------------
 \section{IOPs}
+
 Absorption Coefficient.
 Scattering Coefficient.
 
@@ -12,43 +14,306 @@ bb, Bb
 VSF
 
 Volumen Scattering Phase Function, or $\beta{hat}$ 
-
+% -----------------------------------------------------------------------------
 \section{AOPs}
 Remote Sensing Reflectance
-
+% -----------------------------------------------------------------------------
 \section{Landsat-8}
 Landsat-5, Landsat-7
 MODIS, VIRSS
-
+% -----------------------------------------------------------------------------
 \section{Water Components}
 Pure Water. Chl (pigments). CDOM (or DOM). SM or minerals.
-
+% -----------------------------------------------------------------------------
 \section{Retrieval Algorithms}
 Invertion algorithm 
-
+% -----------------------------------------------------------------------------
 \section{Atmospheric Correction}
 Atmospheric Correction used for MODIS, VIIRS...
 ELM based develop. Band Ratio
 
 Explain CDR reflectance product.
-
+% -----------------------------------------------------------------------------
 \section{MODTRAN}
-
+% -----------------------------------------------------------------------------
 \section{HydroLight}
+HydroLight is a radiative transfer numerical model written in Fortran \cite{MobleHE}. It computes radiance distributions and derived quantities (e.g. irradiances, reflectances, K functions, etc.) for natural water bodies. It was developed by Dr. Curtis Mobley for over 20 years (since 1989) and is a commercial software product of Squoia Scientific, Inc.
+
+% \begin{figure}[H]
+% \begin{columns}[onlytextwidth] % contents are top vertically aligned
+% 	\column{.35\textwidth}
+%   		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/absvsz.png}
+%   	\column{.32\textwidth}
+%   	\footnotesize
+%   		\begin{equation}
+%   			\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}=\cdots \notag
+%   		\end{equation}
+% 	\column{.35\textwidth} 
+% 		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadSpec.png}
+% \end{columns}
+% \end{figure}
+\todo{Try to fix fig.} 
+\begin{figure}
+% \resizebox{1.0\textwidth}{!}{%
+	\centering
+  \begin{tikzpicture}[node distance=0.75cm, auto]
+          \tikzset{
+                  basenode/.style={rectangle,rounded corners,draw=black,very thick, inner sep=1em, minimum size=3em, text centered,text width=2cm},
+                  productnode/.style={ellipse,rounded corners,draw=black, very thick, text centered,text width=1.5cm},
+                  myarrow/.style={->,>=stealth',thick, double = black},
+                  mylabel/.style={text width=7em, text centered}
+          }
+          %\path[use as bounding box] (0,6) rectangle (4,2);
+          \node[basenode] (IOPs) {Inherent Optical Properties};
+          \node[basenode, below=of IOPs] (BC) {Boundary Conditions};
+          \node[basenode, right=of IOPs] (RTE) {Radiative Transfer Equation};
+          \node[basenode, right=of RTE] (rad) {Radiance Distribution};
+
+          \draw[myarrow] (IOPs)--(RTE);
+          \draw[myarrow] (BC)-|(RTE);
+          \draw[myarrow] (RTE)--(rad);
+  \end{tikzpicture}
+% } %xobeziser
+\caption{Hydrolight flow chart \label{fig:HLflowchart} } 
+\end{figure}
+\todo{talk about this figure}
+
+The HydroLight physical model has the following characteristics:
+
+\begin{itemize}
+	\item It is time-independent.
+	\item Horizontally homogeneous IOPs and boundary conditions $\Rightarrow$ one spatial dimension (depth): no restriction on depth dependence of IOPs.
+	\item Wavelength between 300 and 1000 nm.
+	\item Finite or infinitely deep (non-Lambertian) water-column bottom.
+	\item Arbitrary sky radiance onto sea surface.
+	\item Cox-Munk air-water surface (parameterizes gravity and capillary waves via the wind speed)
+	\item Various bottom boundary options.
+	\item Includes all orders of multiple scattering.
+	\item It can optionally include Raman scatter by water.
+	\item It can optionally include fluorescence by Chl and CDOM.
+	\item It can optionally include horizontally homogeneous internal sources such as bioluminescing layers.
+	\item Polarization not included.
+\end{itemize}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
+\caption{Radiance (Figure from \cite{Mobley:2001}) \label{fig:radiance} } 
+\end{figure}
+\todo{can I use a fig. from other author?} 
+where:\\
+			\noindent $\Delta Q$: radian energy incident \\
+			$\Delta t$: time interval \\
+			$\Delta A$: surface area at location (x,y,z)\\
+			$\Delta\Omega$: solid angle in direction ($\theta$,$\varphi$) \\
+			$\Delta\lambda$: photons wavelength interval
+% -----------------------------------------------------------------------------
+
+\begin{equation}
+	\small L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
+\end{equation}
+
+\begin{equation}
+	\small L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
+\end{equation}
 
 
+{\bf Radiometric Quantities}
+\textbf{Spectral downwelling scalar irradiance} at depth z:
+\begin{equation}
+	E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+\textbf{Spectral upwelling scalar irradiance} at depth z:
+\begin{equation}
+	E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+\textbf{Spectral scalar irradiance} at depth z:
+\begin{align}
+	E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\\
+					 &=\int_{4\pi} L(z,\theta,\varphi,\lambda)d\Omega
+\end{align}
+
+\textbf{Spectral downwelling plane irradiance} at depth z:
+\begin{equation}
+	E_{d}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)|cos\theta|d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+Photosynthetic available radiation, \textbf{PAR}:
+\begin{equation}
+	PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
+\end{equation}
+
+		\begin{figure}[H]
+		\centering
+		\includegraphics[height=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/IOPgeo.png}
+		\caption{caption \label{label} } 
+		\end{figure}
+
+		\textbf{Absorption coefficient:}
+		\begin{equation}
+			a(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_a(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+		\end{equation}
+		\textbf{Scattering coefficient:}
+		\begin{equation}
+			b(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_s(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+		\end{equation}
+		\textbf{Attenuation coefficient:}
+		\begin{equation}
+			c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right]
+		\end{equation}
+
+{\bf Inherent Optical Properties}
+Contributions by the various components to the absorption coefficient
+\begin{figure}[H]
+\centering
+  		\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
+\end{figure}
 
 
+\begin{figure}[H]
+\centering
+  		\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
+\end{figure}
 
 
+Volume scattering function, \textbf{VSF}:
+\begin{equation}
+	\beta(\psi,\lambda)\equiv \lim_{\Delta r\to 0} \lim_{\Delta \Omega\to 0}  \frac{\Phi_s(\psi,\lambda)}{\Phi_i(\lambda)\Delta r\Delta \Omega}~~\left[m^{-1}sr^{-1} \right]
+\end{equation}
+but $\Phi_s(\psi,\lambda)=I_s(\psi,\lambda)\Delta \Omega$ and $E_i(\lambda)=\Phi_i(\lambda)/\Delta A \Rightarrow$
+\begin{equation}
+	\beta(\psi,\lambda)= \lim_{\Delta V\to 0} \frac{I_s(\psi,\lambda)}{E_i(\lambda)\Delta V}~~\left[m^{-1}sr^{-1} \right]
+\end{equation}
+with $\Delta V=\Delta r\Delta A$
+
+Scattering coefficient from VSF:
+\begin{equation}
+	b(\lambda)=\int_{4\pi} \beta(\psi,\lambda)d\Omega=2\pi\int_0^\pi \beta(\psi,\lambda)sin\psi d\psi
+\end{equation}
+And \textbf{backscatter coefficient}:
+\begin{equation}
+	b_b(\lambda)\equiv 2\pi\int_{\pi/2}^\pi \beta(\psi,\lambda)sin\psi d\psi
+\end{equation}
 
 
+\begin{figure}[H]
+\centering
+  		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
+\end{figure}
+Example VSFs:\\
+\textcolor{blue}{blue curve} : clear, open ocean water ($\lambda = 514 nm$)\\
+\textcolor{green}{green curve} : harbor ($\lambda = 514 nm$)\\
+\textcolor{red}{red curve} : very productive coastal waters ($\lambda = 530 nm$)
 
+\textbf{Backscatter fraction:}
+\begin{equation}
+	B_b=\frac{b_b}{b}
+\end{equation}
+\textbf{Single-scattering albedo:}
+\begin{equation}
+	\omega_o=\frac{b(\lambda)}{c(\lambda)}
+\end{equation}
+\textbf{Volumen scattering phase function:}
+\begin{equation}
+	\tilde{\beta}(\psi,\lambda)\equiv \frac{\beta(\psi,\lambda)}{b(\lambda)}~~\left[sr^{-1} \right]\Rightarrow \beta(\psi,\lambda)=b(\lambda)\tilde{\beta}(\psi,\lambda)
+\end{equation}
 
+{Apparent Optical Properties}
+\textbf{AOPs:} depend both on the medium and on the directional structure of the ambient light field
 
+\vspace{\baselineskip}
 
+\textbf{Irradiance reflectance:}
+\begin{equation}
+	R(z,\lambda)\equiv \frac{E_u(z,\lambda)}{E_d(z,\lambda)}
+\end{equation}
+\textbf{Remote sensing reflectance:}
+\begin{equation}
+	R_{rs}(\theta,\varphi,\lambda)\equiv \frac{L_w(\theta,\varphi,\lambda)}{E_d(\lambda)}~~\left[sr^{-1} \right]
+\end{equation}
+where $L_w$ is the \textbf{water-leaving radiance}
 
+Under typical oceanic conditions, irradiances and radiances decrease exponentially with depth, then
+\begin{equation}
+	E_d(z,\lambda)\equiv E_d(0,\lambda) exp\left[-\int_0^{z}K_d(z',\lambda)dz'\right]
+\end{equation}
+where $K_d(z,\lambda)$ is the \textbf{spectral diffuse attenuation coefficient} for spectral downwelling plane irradiance. 
+\begin{align}
+	K_d(z,\lambda) 	&=- \frac{d\ln E_d(z,\lambda)}{dz} \notag \\
+					&=-\frac{1}{E_d(z,\lambda)}\frac{dE_d(z,\lambda)}{dz} ~~\left[m^{-1} \right]
+\end{align}
 
+\textbf{Note:} IOPs are additive whereas AOPs are not
+
+{Optical Constituents of Water}
+\begin{itemize}
+	\item Water
+	\item Dissolved Organic Compounds (CDOM)
+	\item Organic Particles (Chlorophyll)
+	\item Inorganic Particles (Suspended Matter)
+\end{itemize}
+
+\textbf{Total IOP:}
+
+\begin{equation}
+	a_{total}(z,\lambda) = \sum_{i=1}^{ncomp} a_i(z,\lambda)
+\end{equation}
+e.g.,
+\begin{equation}
+	a_{total}(z,\lambda) =  a_w(\lambda) +a_{CDOM}(z,\lambda)+ a_{Chl}(z,\lambda)+a_{SM}(z,\lambda) \notag
+\end{equation}
+
+{The Radiative Transfer Equation}
+\textbf{RTE} expresses conservation of energy for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium
+
+\vspace{\baselineskip}
+
+The \textbf{RTE}:
+\begin{align}
+	\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
+	&+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
+	&+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
+\end{align}
+
+\begin{figure}[H]
+\centering
+  		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE1.png}
+\end{figure}
+
+\begin{equation}
+	-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag 
+\end{equation}
+
+\begin{figure}[H]
+\centering
+  		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
+\end{figure}
+
+\begin{equation}
++\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag
+\end{equation}
+
+{\centering
+\begin{equation}
+	S(z,\theta,\varphi,\lambda) \notag
+\end{equation}}
+
+\begin{itemize}
+
+\item {$S$ account for bioluminescence or inelastic-scattering processes}
+
+\vspace{\baselineskip}
+
+\item For example, the model is first run at the wavelength of excitation, $\lambda_{ex}$ to compute the energy shifted by inelastic scattering from $\lambda_{ex}$ to another wavelength $\lambda$, and the model is run again at $\lambda$, with the radiance shifted from $\lambda_{ex}$ appearing as a source term $S$ at $\lambda$
+
+\end{itemize}
+
+The \textbf{RTE}:
+\begin{align}
+	\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
+	&+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
+	&+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
+\end{align}
+% ----------------------------------------------------------------------------------
 \section{Water Quality Parameters Retrieval}
 \cite{Jensen}
 \cite{Mustard2001}
