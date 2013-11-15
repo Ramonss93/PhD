@@ -82,9 +82,9 @@
 \usepackage{hyperref}
 \hypersetup{
     bookmarks=true,         % show bookmarks bar?
-    unicode=false,          % non-Latin characters in Acrobat’s bookmarks
-    pdftoolbar=true,        % show Acrobat’s toolbar?
-    pdfmenubar=true,        % show Acrobat’s menu?
+    unicode=false,          % non-Latin characters in Acrobat√ïs bookmarks
+    pdftoolbar=true,        % show Acrobat√ïs toolbar?
+    pdfmenubar=true,        % show Acrobat√ïs menu?
     pdffitwindow=false,     % window fit to page when opened
     pdfstartview={FitH},    % fits the width of the page to the window
     pdftitle={WV-2 In Water Component Retrieval },    % title
@@ -117,13 +117,17 @@
 \usepackage{indentfirst}
 \setlength{\parindent}{20pt}
 \doublespacing
+% Added 11-13-13 ----------------------------------------
+% Select what to do with todonotes: 
+% \usepackage[disable]{todonotes} % notes not showed
+\usepackage[draft]{todonotes}   % notes showed
 %******************************************************************************************************
 
 \begin{document}
 
 \degreetitle{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
 \degreeauthor{Javier A. Concha}
-\degreedate{30 Noviembre 2013}
+\degreedate{\today{}}
 \prevdegreeA{M.S. Rochester Institute of Technology, 2012}
 \advisor{Dr. John R. Schott}
 \memberA{Dr. Anthony Vodacek}
@@ -159,7 +163,7 @@ Collections of water samples when the satellite passes over the Rochester area a
 %*****************************************************************************************************
 \begin{acknowledgements}
 \setlength{\parindent}{20pt}
-To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center.
+To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center. Fulbright commission. My advisor Dr. John Schott. Amanda and Cindy.
 \end{acknowledgements}
 %*****************************************************************************************************
 
@@ -171,15 +175,16 @@ To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nin
 \listoftables
 \addcontentsline{toc}{chapter}{List of Tables}
 
-\input{Introduction}
-\input{Objectives}
+\include{Introduction}
+\include{Objectives}
 % \input{Background_and_Theory.tex}
 % \input{Methodology.tex}
 % \input{Results.tex}
 % \input{Future_Work.tex}
 % \input{Appendix.tex}
 
-  
+\listoftodos
+
 %\bibliographystyle{ieeetr}
 %\bibliographystyle{unsrtnat}
 \bibliographystyle{apalike}
