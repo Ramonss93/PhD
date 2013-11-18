@@ -81,7 +81,7 @@
 
 \usepackage{hyperref}
 \hypersetup{
-    bookmarks=true,         % show bookmarks bar?
+    % bookmarks=true,         % show bookmarks bar?
     unicode=false,          % non-Latin characters in AcrobatÕs bookmarks
     pdftoolbar=true,        % show AcrobatÕs toolbar?
     pdfmenubar=true,        % show AcrobatÕs menu?
@@ -117,10 +117,15 @@
 \usepackage{indentfirst}
 \setlength{\parindent}{20pt}
 \doublespacing
-% Added 11-13-13 ----------------------------------------
+
+% Added 11-17-13 ----------------------------------------
 % Select what to do with todonotes: 
 % \usepackage[disable]{todonotes} % notes not showed
-\usepackage[draft]{todonotes}   % notes showed
+% \usepackage[draft]{todonotes}   % notes showed
+% \setlength{\marginparwidth}{2cm}
+\usepackage[textwidth=3.7cm]{todonotes}
+\setlength{\marginparwidth}{3.7cm}
+
 % Added 11-15-13 ----------------------------------------
 \includeonly{Background_and_Theory} 
 \usepackage{tikz} % for flow charts
@@ -129,6 +134,10 @@
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{multirow}
+
+\listfiles
+
+\setlength{\headheight}{15pt} % to avoid "Package Fancyhdr Warning: \headheight is too small (0.0pt): Make it at least 12.0pt."
 %******************************************************************************************************
 
 \begin{document}
