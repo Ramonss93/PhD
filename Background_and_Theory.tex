@@ -26,13 +26,58 @@ MODIS, VIRSS
 Pure Water. Chl (pigments). CDOM (or DOM). SM or minerals.
 % -----------------------------------------------------------------------------
 \section{Retrieval Algorithms}
-Invertion algorithm 
+Inversion algorithm 
 % -----------------------------------------------------------------------------
 \section{Atmospheric Correction}
-Atmospheric Correction used for MODIS, VIIRS...
-ELM based develop. Band Ratio
+\subsection{Atmospheric Correction for Ocean Color Satellites}
+Atmospheric Correction used for SeaWiFS, MODIS, VIIRS...
 
-Explain CDR reflectance product.
+\subsection{ELM-based Algorithm}
+\todo{Explain the original ELM} 
+The ELM-based algorithm uses HydroLight for the estimation of the dark pixel field spectra and the Landsat reflectance product \todo{Explain CDR reflectance product.} (Landsat Surface Reflectance CDR;\cite{LandsatCDR}) for the estimation of the bright pixel spectra data.
+
+This method employs pseudo-invariant feature (PIF) pixel extraction \cite{Schott:1988} to mask urban landscape from both the reflectance product and the L8 image for the bright pixel determination. The PIF extraction isolates the pseudoinvariant features from the digital imagery. In our case, the PIF are the man-made urban features in a scene. A flowchart of the process is shown in \autoref{fig:PIFflowchart}. The PIF extraction from digital imagery proceeds in the following fashion. An infrared-to-red ratio image is very effective in the classification of water, vegetation, and urban features. The vegetation in this ratio image will tend to have a high brightness when compared to the urban features and water brightness. This infrared-to-red ratio image can be derived from the quotient of the NIR band (band 4 for Landsat-5; band 5 for Landsat-8) and the red band (band 3 for Landsat-5,band 4 for Landsat-8). This ratio image is thresholded from the high digital count values downward to create a mask so the high brightness pixels are eliminated (vegetation pixels) from the image, that is, these pixels are set to a value of zero and the rest (water and urban pixels) to a value of one. The SWIR 2 band (band 7 in Landsat-5 and Landsat-8) is used to eliminate the water pixels from the previous mask since water has nearly zero reflectance in this spectral region. This SWIR 2 band is thresholded from the low brightness values upward. Water pixels will exhibit a low value when compare to the rest of the pixels. A mask is created by assigning a value of zero to the low brightness pixels (water pixels) and a value of one to the rest (urban features and vegetation). Finally, the two mask created are combined using a logical .AND. resulting in a mask that will have a value of one only in the urban feature pixels, i.e. the PIF's. This mask will be named PIF mask for the rest of this document.
+
+The PIF mask is used to determine the bright pixel spectra in both radiance and reflectance values. This is made by applying the PIF mask in ENVI to both the L8 image (in radiance values) and Landsat reflectance product (in reflectance values), and then calculating the statistics. The mean values of the statistics are used as the bright pixel spectra.
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=120mm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFflowchart.png}
+	\caption{Illustration of the logic used to segment PIF features. \label{fig:PIFflowchart}}
+\end{figure}
+
+\begin{figure}
+	\centering
+  \begin{tikzpicture}[node distance=0.75cm, auto]
+          \tikzset{
+                  basenode/.style={rectangle,rounded corners,draw=black,very thick, inner sep=1em, minimum size=3em, text centered,text width=2cm},
+                  productnode/.style={ellipse,rounded corners,draw=black, very thick, text centered,text width=1.5cm},
+                  myarrow/.style={->,>=stealth',thick, double = black},
+                  mylabel/.style={text width=7em, text centered}
+          }
+          %\path[use as bounding box] (0,6) rectangle (4,2);
+          \node[basenode] (SWIR) {SWIR 2 Band};
+          \node[basenode, below=of SWIR] (TS1) {Mask by Threshold};
+          \node[basenode, right=of SWIR] (Ratio) {Ratio NIR Band/ Red Band};
+          \node[basenode, below=of Ratio] (TS2) {Mask by Threshold};
+          \node[basenode] (AND) [below right= 1cm of TS1] {AND}
+
+          \draw[myarrow] (SWIR)--(TS1);
+          \draw[myarrow] (Ratio)--(TS2);
+          \draw[myarrow] (TS1)--(AND)
+          \draw[myarrow] (TS2)--(AND)
+    
+  \end{tikzpicture}
+\caption{PIF flow chart \label{fig:PIFflowchart} } 
+\end{figure}
+
+The dark pixel spectra in reflectance values is obtained from a HydroLight run with low concentration of water constituents typical of a open lake region. The HydroLight run is spectrally sampled to the L8 sensor response. The dark pixel spectral in radiance values is obtained from a dark region in the lake pixels of the L8 image. This dark region is determined using a statistical analysis to the lake pixels\todo{describe the statistical analysis}. Statistics are computed in this dark region, and the mean values in each band is used as the dark pixel spectra in radiance values.
+
+At the end of this PIF extraction, there are four different spectra: a reflectance (labeled field spectra in ENVI) bright and dark pixel, and a radiance (labeled data spectra in ENVI) bright and dark pixel. These spectra are used in the "Empirical Line" algorithm of the "Calibration Utilities" in ENVI classic to atmospherically correct the L8 image. The product of this process is a image in reflectance values.
+
+\subsection{Band Ratio}
+
+
+\subsection{TAFKAA}
 % -----------------------------------------------------------------------------
 \section{MODTRAN}
 % -----------------------------------------------------------------------------
