@@ -53,7 +53,7 @@ The area of study is the lake Ontario Rochester embayment that includes some nea
  
 	{\bf \item Validate results by comparing with in-situ measurements and products from ocean color satellites.}
 
-The results from the retrieval process are validated by comparison with measurements taken from the water bodies being studied. Before comparison, the measurements were validated by comparison with measurement analyzed by a credible lab (Monroe County Environmental Laboratory). This comparison showed agreement between the measurements. 
+The results from the retrieval process are validated by comparison with measurements taken from the water bodies being studied. Before this process, the measurements needed to be validated with measurements analyzed by a credible lab (Monroe County Environmental Laboratory). This comparison with this lab shows agreement between the measurements. 
 
 \todo{Should I do this?} For further validation, the results will be compared with products derived from ocean color satellites such as MODIS (e.g. MODIS Chl{\it a} product) if possible.
 
@@ -68,13 +68,13 @@ After validation of the retrieval algorithm over the study area, the next step w
 % \subsection{Primary Requirements}
 \subsection{Future Objectives}
 	\begin{enumerate}
-			{\bf \item Integration with Hydrodynamics model. \todo{continue numeration} } 
+			{\bf \item Integration with hydrodynamics models. \todo{continue numeration} } 
 
-The next step would be to use the validated results from the retrieval process for training hydrodynamics models to predicts future behavior of the water body. This would be based in previous work made by \cite{Pahlevan:2012} and \cite{GeraceThesis}. The hydrodynamic model would allow to monitor the dynamics of coastal/inland waters near river discharges, for example. The maps of water constituent concentration on the surface can be used to feed in the hydrodynamic model in order to calibrate it. 
+The next step would be to use the validated results from the retrieval process for training hydrodynamics models to predicts future behavior of the water bodies. This would be based in previous work made by \cite{Pahlevan:2012} and \cite{GeraceThesis}, who used concentration maps obtained from retrieval process using satellite imagery to train hydrodynamic models. For example, the hydrodynamic model would allow to monitor the dynamics of coastal/inland waters near river discharges. The maps of water constituent concentrations on the surface can be used to feed in the hydrodynamic models in order to calibrate them. 
 
 			{\bf \item Make the processes and algorithms more user friendly} 
 
-These research requires to integrate different modules from different softwares and using different programming languages. The next step would be to create a graphical user interface (GUI) in Python to make the process more user friendly, so that anyone with basic remote sensing knowledge could use the methods describe in this thesis. We suggest Python because it a free platform.
+The retrieval process described here requires integration of different modules from different softwares and use of different programming languages. The next step would be to create a graphical user interface (GUI) in Python to make the process more user friendly, so that anyone with basic remote sensing knowledge could use the methods describe in this thesis. We suggest Python because it is a free platform.
 
 	\end{enumerate}	
 
@@ -85,14 +85,14 @@ These research requires to integrate different modules from different softwares 
 \label{sec:contributiontofield}
 This research will make several contributions to the field of remote sensing.
 
-First, one important contribution to the field of remote sensing is to demonstrate that Landsat satellites, which have been historically underestimated for the use of water quality measurements, could have a good performance in the estimation of water constituent concentrations.
+First, one important contribution to demonstrate that Landsat satellites, which have been historically underestimated for the use of water quality measurements, could have a good performance in the estimation of water constituent concentrations.
 
-Second, L8 was just launched on February 2013 and therefore there are few studies done about its performance so far, specially in its applications related to water assessments. Hence, this is the perfect time to investigate how its new upgrades will improve/impact our capability of retrieving water parameters. Therefore, this research will present one of the first results of L8 performance.  
+Second, L8 was just launched in February 2013 and therefore there are few studies done about its performance so far, specially in its applications related to water assessments. Hence, this is the perfect time to investigate how its new upgrades will improve/impact our capability of retrieving water parameters. Therefore, this research will present one of the first results of L8 performance.  
 
-Third, while there other global water constituent concentrations products, Landsat provides a unique combination of temporal (16 days repeat cycle) and spatial resolution (30 m pixel size). The most of the retrieval algorithms available in literature use ocean color satellites (e.g. SeaWiFS), whose spatial resolution is about 1 km to 250 m. Even though this resolution are suitable for large scale studies, they fail to cover small scale studies (less than 100 m). On the other hand, high resolution sensors carried in aircrafts (e.g. AVIRIS) or even airborne (e.g. WorldView-2) although can be applied to small scale studies, their imagery tend to be expensive or no frequently available. Here is where L8 has the potential of filling that gap because its spatial resolution (30 m), which could allow to describe medium size targets, a river plume, for instance, and it free to the international community.
+Third, while there are other global water constituent concentrations products, Landsat provides a unique combination of temporal (16 days repeat cycle) and spatial resolution (30 m pixel size). The most of the retrieval algorithms available in literature use ocean color satellites (e.g. SeaWiFS), which have spatial resolution of about 1 km to 250 m. Even though this resolution are suitable for large scale studies, they fail to cover small scale studies (less than 100 m). On the other hand, high spatial resolution sensors carried in aircrafts (e.g. AVIRIS) or even airborne (e.g. WorldView-2) although can be used for small scale studies, their imagery tends to be expensive or not frequently available. Here is where L8 has the potential of filling that gap because its spatial resolution (30 m), which could allow to describe medium size targets, a river plume, for instance, and it is free to the international scientific community.
 
-This research also contributes to the field of remote sensing by developing an novel approach to correct the atmospheric effect in L8 images over Case 2 waters via two different approach. In spite of the fact that the ELM method is widely used to correct satellite image, it needs measurements in the field that are not always available. We developed an algorithm that overcomes this issue by estimating these measurements. Additionally, the {\todo{correct name, is it band ratio?} \color{red} second method} tries to benefit from the concepts behind the methods largely developed and used to atmospherically correct ocean optics sensors.
+This research also contributes to the field of remote sensing by developing an novel approach to correct the atmospheric effect in L8 images over Case 2 waters via two different approaches. In spite of the fact that the ELM method is widely used to correct satellite image, it needs measurements in the field that are not always available. We developed an algorithm that overcomes this issue by estimating these measurements. Additionally, the {\todo{correct name, is it band ratio?} \color{red} second method} tries to benefit from the concepts behind the methods largely developed and used to atmospherically correct ocean optics sensors.
 
-Finally, a large dataset is made available to the water quality purpose through this research. L8 collects images all around the world where there is land including fresh and coastal waters. Such wide-reaching temporal and spatial coverage is not being broadly exploit for water quality studies.
+Finally, a large dataset is made available for potential water quality studies through this research. L8 collects images all around the world where there is land including fresh and coastal waters. Such wide-reaching temporal and spatial coverage is not being broadly exploited for water quality studies.
 
 The background material necessary to attain these goals are described in the following chapter.

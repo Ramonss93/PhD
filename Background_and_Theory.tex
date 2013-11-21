@@ -33,18 +33,27 @@ Inversion algorithm
 Atmospheric Correction used for SeaWiFS, MODIS, VIIRS...
 
 \subsection{ELM-based Algorithm}
-\todo{Explain the original ELM} 
-The ELM-based algorithm uses HydroLight for the estimation of the dark pixel field spectra and the Landsat reflectance product \todo{Explain CDR reflectance product.} (Landsat Surface Reflectance CDR;\cite{LandsatCDR}) for the estimation of the bright pixel spectra data.
+The {\it empirical line method} (ELM) is a method for calibration of image data to reflectance that uses ground truth.The ELM uses a linear regression in each band to relate digital counts or radiance to reflectance \cite{Schott}. The ground truth can be in general  either control panels or ad hoc control surfaces of known reflectance. These ground truth objects need to be approximately Lambertian to minimize any errors that could be introduced by sensor view angles effects. Also, this calibration targets are assumed flat and level, with no neighboring obscuration, and homogeneous as well. The ELM method generally assumes that the atmosphere is constant over the complete scene. If that is not the case, corrections must be made for changes in the atmosphere over the scene. The regression to be solved for each band in the ELM method is given by
+\begin{equation}
+	\label{eq:ELM} 
+	L = m\times r_d + b
+\end{equation}
+where $L$ is the radiance reaching the sensor value, $m$ is the slope of the regression, $r_d$ is the reflectance of the target, and $b=L_u$ is the intercept, with $L_u$ the upwelled radiance or path radiance. Then, the reflectance of the any Lambertian objects can be calculated by rearranging \autoref{eq:ELM}. In order to solved the below regression, i.e. determine the value of $m$ and $b$, we need to have two target with known radiance $L$ and reflectance $L_u$. After $m$ and $b$ been determined, the reflectance of each pixel at each wavelength can be calculated from its radiance value from the image.
+
+An ELM target needs to have a size at least three times the ground instantaneous field of view of the sensor that will image it at the time of data collection. Taking this in consideration, the target should be at least 90x90 meters big for the Landsat sensor, which is sometimes difficult to build or even to find in the scene. 
+
+In this research, a modification to the ELM methods is proposed as a calibration tool. This ELM-based method try to avoid the measurement of ground truth at every sensor passover over the scene by using pseudo-invariant features in the scene as one target along with a estimation of water reflectivity for an open lake region for the other target. Pseudo-invariant targets are defined as targets whose reflectivity properties do not change rapidly between different times of collection. Examples of pseudo-invariant target are urban features in the scene. The two targets used in this ELM-based to solve the regression in \autoref{eq:ELM} are referred to in this documents as the {\it bright pixel} and the {\it dark pixel}.
+
+The ELM-based algorithm uses HydroLight for the estimation of the dark pixel field spectra and the Landsat reflectance product (Landsat Surface Reflectance CDR;\cite{LandsatCDR}) for the estimation of the bright pixel spectra data. See \autoref{sec:CDR} for more details about the Landsat reflectance product.
 
 This method employs pseudo-invariant feature (PIF) pixel extraction \cite{Schott:1988} to mask urban landscape from both the reflectance product and the L8 image for the bright pixel determination. The PIF extraction isolates the pseudoinvariant features from the digital imagery. In our case, the PIF are the man-made urban features in a scene. A flowchart of the process is shown in \autoref{fig:PIFflowchart}. The PIF extraction from digital imagery proceeds in the following fashion. An infrared-to-red ratio image is very effective in the classification of water, vegetation, and urban features. The vegetation in this ratio image will tend to have a high brightness when compared to the urban features and water brightness. This infrared-to-red ratio image can be derived from the quotient of the NIR band (band 4 for Landsat-5; band 5 for Landsat-8) and the red band (band 3 for Landsat-5,band 4 for Landsat-8). This ratio image is thresholded from the high digital count values downward to create a mask so the high brightness pixels are eliminated (vegetation pixels) from the image, that is, these pixels are set to a value of zero and the rest (water and urban pixels) to a value of one. The SWIR 2 band (band 7 in Landsat-5 and Landsat-8) is used to eliminate the water pixels from the previous mask since water has nearly zero reflectance in this spectral region. This SWIR 2 band is thresholded from the low brightness values upward. Water pixels will exhibit a low value when compare to the rest of the pixels. A mask is created by assigning a value of zero to the low brightness pixels (water pixels) and a value of one to the rest (urban features and vegetation). Finally, the two mask created are combined using a logical .AND. resulting in a mask that will have a value of one only in the urban feature pixels, i.e. the PIF's. This mask will be named PIF mask for the rest of this document.
 
 The PIF mask is used to determine the bright pixel spectra in both radiance and reflectance values. This is made by applying the PIF mask in ENVI to both the L8 image (in radiance values) and Landsat reflectance product (in reflectance values), and then calculating the statistics. The mean values of the statistics are used as the bright pixel spectra.
-\begin{figure}[H]
-	\centering
-  \includegraphics[width=120mm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFflowchart.png}
-	\caption{Illustration of the logic used to segment PIF features. \label{fig:PIFflowchart}}
-\end{figure}
-
+% \begin{figure}[H]
+% 	\centering
+%   \includegraphics[width=120mm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFflowchart.png}
+% 	\caption{Illustration of the logic used to segment PIF features. \label{fig:PIFflowchart}}
+% \end{figure}
 \begin{figure}
 	\centering
   \begin{tikzpicture}[node distance=0.75cm, auto]
@@ -54,30 +63,68 @@ The PIF mask is used to determine the bright pixel spectra in both radiance and 
                   myarrow/.style={->,>=stealth',thick, double = black},
                   mylabel/.style={text width=7em, text centered}
           }
-          %\path[use as bounding box] (0,6) rectangle (4,2);
-          \node[basenode] (SWIR) {SWIR 2 Band};
+          % SWIR branch
+          \node[basenode] (SWIR) {SWIR 2\\ Band};
           \node[basenode, below=of SWIR] (TS1) {Mask by Threshold};
-          \node[basenode, right=of SWIR] (Ratio) {Ratio NIR Band/ Red Band};
+          \node[align=left, right=0.0 of TS1] (C1) {Urban\\Veget.\\Water};
+          \node[align=left, right=-0.15 of C1] (C2) {ON\\ON\\OFF};
+
+          % Ratio branch
+          \node[basenode, right=2.5cm of SWIR] (Ratio) {Ratio\\ NIR Band/ Red Band};
           \node[basenode, below=of Ratio] (TS2) {Mask by Threshold};
-          \node[basenode] (AND) [below right= 1cm of TS1] {AND}
+          \node[align=left, right=0.0 of TS2] (C3) {Urban\\Veget.\\Water};
+          \node[align=left, right=-0.15 of C3] (C4) {ON\\OFF\\ON};
+
+          % AND
+          \path (TS1.south)--(TS2.south) node[pos=.5,below=2cm] (AND) {AND};
+
+
+          % PIF Mask
+          \node[basenode, below=of AND] (PIFMask){PIF Mask};
+          \node[align=left, left=0.85 of PIFMask] (C5) {Urban\\Veget.\\Water};
+          \node[align=left, right=-0.15 of C5] (C6) {ON\\OFF\\OFF};
+
+          \node[basenode, below=of TS2,right=2.0cm of AND] (Image) {Image};
+          \path (Image.south)--(PIFMask.east) node[below=of Image,right=2cm of PIFMask] (AND2) {AND};
+          \node[basenode, right=2cm of AND2] (PIFIm){PIF Image};
 
           \draw[myarrow] (SWIR)--(TS1);
           \draw[myarrow] (Ratio)--(TS2);
-          \draw[myarrow] (TS1)--(AND)
-          \draw[myarrow] (TS2)--(AND)
+          \draw[myarrow] (TS1)--(AND);
+          \draw[myarrow] (TS2)--(AND);
+          \draw[myarrow] (AND)--(PIFMask);
+          \draw[myarrow] (Image)--(AND2);
+          \draw[myarrow] (PIFMask)--(AND2);
+          \draw[myarrow] (AND2)--(PIFIm);
     
   \end{tikzpicture}
-\caption{PIF flow chart \label{fig:PIFflowchart} } 
+\caption{Illustration of the logic used to segment PIF features. \label{fig:PIFflowchart}}
 \end{figure}
-
 The dark pixel spectra in reflectance values is obtained from a HydroLight run with low concentration of water constituents typical of a open lake region. The HydroLight run is spectrally sampled to the L8 sensor response. The dark pixel spectral in radiance values is obtained from a dark region in the lake pixels of the L8 image. This dark region is determined using a statistical analysis to the lake pixels\todo{describe the statistical analysis}. Statistics are computed in this dark region, and the mean values in each band is used as the dark pixel spectra in radiance values.
 
 At the end of this PIF extraction, there are four different spectra: a reflectance (labeled field spectra in ENVI) bright and dark pixel, and a radiance (labeled data spectra in ENVI) bright and dark pixel. These spectra are used in the "Empirical Line" algorithm of the "Calibration Utilities" in ENVI classic to atmospherically correct the L8 image. The product of this process is a image in reflectance values.
+
+
+
 
 \subsection{Band Ratio}
 
 
 \subsection{TAFKAA}
+% -----------------------------------------------------------------------------
+\section{Landsat Surface Reflectance CDR}
+\label{sec:CDR} 
+The Landsat climate data record (CDR) surface reflectance product is part of the higher-level Landsat data product to support land surface change study developed by USGS \cite{LandsatCDR}. The surface reflectance CDR is generated from specialized software called Landsat Ecosystem Disturbance Adaptive Processing System (LEDAPS \todo{Explain LEDAPS} ) \cite{Masek:2006}. The LEDAPS software uses MODIS atmospheric correction routines to correct Level-1 Landsat Thematic Mapper (TM) or Enhanced Thematic Mapper Plus (ETM+) data. Atmospheric variables such as water vapor, ozone, aerosol optical thickness along with geometric variables ({\todo{What is geopotential height?} geopotential height} and digital elevation) are input with Landsat data to the Second Simulation of a Satellite Signal in the Solar Spectrum (6S) radiative transfer model. The 6S model outputs surface reflectance among others parameters. This surface reflectance product is called the Landsat surface reflectance CDR. This Landsat surface reflectance product has comparable uncertainty to the standard MODIS reflectance product \cite{Masek:2006}.
+
+The LEDAPS algorithm works in the following fashion. First, calibrated images from the Landsat satellite are corrected to {\todo{What does TOA reflectance mean?} top-of-atmosphere (TOA) reflectance} by correcting for solar zenith, Sun-Earth distance, TM or ETM+ bandpass, and solar irradiance. Then, the TOA reflectance is atmospherically corrected with the assumptions that the target is Lambertian and infinite, and the gaseous absorption and particle scattering in the atmosphere can be decoupled. The authors expressed the TOA reflectance as
+\begin{equation}
+	\rho_{TOA}=T_g(O_3,O_2,CO_2,NO_2,CH_4)\\	
+		\times \left[\rho_{R+A}+T_{R+A}T_g(H_2O)\frac{\rho_s}{1-S_{R+A}\rho_s}\right]
+		\label{eq:TOAref} 
+\end{equation}
+where $\rho_s$ is the surface reflectance, $T_g$ is the gaseous transmission due to the atmospheric gases, $T_{R+A}$ is Rayleigh and aerosol transmission, $\rho_{R+A}$ is the Rayleigh and aerosols atmospheric intrinsic reflectance, and $S_{R+A}$ is the Rayleigh and aerosols spherical albedo. The 6S radiative transfer code is utilized to compute the transmission, intrinsic reflectance, and spherical albedo terms. Ozone concentrations and column water vapor are derived from ancillary data. The aerosol optical thickness (AOP) is extracted directly from the imagery by using the dark, dense vegetation (DDV) method of Kaufman {\it et al.} \todo{add reference}.This method postulates a linear relation between SWIR surface reflectance and reflectance in the visible bands, based on the physical correlation between chlorophyll absorption and bound water absorption \todo{Research more about AOT and the Kaufman method!!!}. Finally, the derived AOT, ozone, atmospheric pressure, and water vapor are supplied to the 6S radiative transfer algorithm, which then inverts TOA reflectance to surface reflectance using \autoref{eq:TOAref}. 
+
+According to the author in \cite{LandsatCDR}, the Landsat reflectance product has to be used with caution in coastal regions where land area is small relative to adjacent water because the efficacy of the surface correction is likely to be reduced. This product was available only for Landsat 4 TM, Landsat 5 TM and Landsat 7 ETM+ At the time of this publication. An quality assurance (QA) layers is attached to this product and it can be used for pixel-level conditions and validity production. The surface reflectance products is available in the earthexplorer.com website in a HDF-EOS package that contains all necessary files and it can be read in ENVI (through an ENVI header file).
 % -----------------------------------------------------------------------------
 \section{MODTRAN}
 % -----------------------------------------------------------------------------
@@ -432,5 +479,3 @@ where:
 
 As shown in \cite{GeraceThesis}
 and \cite{Mobley} and \cite{Lesser}
-
-\section{Atmospheric Compensation}
