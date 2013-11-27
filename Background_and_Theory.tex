@@ -1,10 +1,10 @@
 % !TEX root=ProposalJavier.tex 
 % the previous is to reference main .bib
 %% CHAPTER
-\chapter{Background and Theory}
+\chapter{ Background and Theory}
 \label{ch:background}
 % -----------------------------------------------------------------------------
-\section{IOPs}
+\section{ IOPs}
 
 Absorption Coefficient.
 Scattering Coefficient.
@@ -15,24 +15,36 @@ VSF
 
 Volumen Scattering Phase Function, or $\beta{hat}$ 
 % -----------------------------------------------------------------------------
-\section{AOPs}
+\section{ AOPs}
 Remote Sensing Reflectance
 % -----------------------------------------------------------------------------
-\section{Landsat-8}
+\section{ Landsat-8}
 Landsat-5, Landsat-7
 MODIS, VIRSS
 % -----------------------------------------------------------------------------
-\section{Water Components}
+\section{ Water Components}
 Pure Water. Chl (pigments). CDOM (or DOM). SM or minerals.
 % -----------------------------------------------------------------------------
 \section{Retrieval Algorithms}
 Inversion algorithm 
+
 % -----------------------------------------------------------------------------
 \section{Atmospheric Correction}
-\subsection{Atmospheric Correction for Ocean Color Satellites}
+% -----------------------------------------------------------------------------
+The goal of this section is to describe the different approaches used to atmospherically correct satellite imagery over water. First, we need to understand the effect of the atmosphere on the propagating energy. To do so, a description of the processes involved in the energy interaction in the atmosphere are described in the first part of this section. Later on, different techniques for atmospherically correcting satellite images are defined.
+
+\subsection{ Energy Interaction in the Atmosphere }
+
+The particles that are responsible for scattering range in size 
+
+Isotropic scattering at visible wavelengths occurs in nature in thick clouds or in fog. {\it Rayleigh scattering} (a.k.a. molecular scattering) occurs where the wavelength of the radiation is much larger than the molecular diameters (e.g. daylight scattering or very pure water). On the other hand, {\it Mie scattering} occurs when the wavelength is of the same order of magnitude as the particle diameter. It is often convenient in visible ocean remote sensing to consider the atmosphere to be made up of two components: Rayleigh scattering of the air molecules and Mie scattering of haze and other aerosols.
+
+{\todo{Change! Copied and Pasted} Aerosols are a natural constituent of the Earth’s atmosphere and their origin is mostly natural, although lately the anthropogenic contribution is increasing. An aerosol is defined as a stable suspension of particles, liquid or solid, in a carrier gas like atmospheric air. Therefore dust, haze, smoke, smog, fog, mist, and clouds can be considered to be specific aerosol types.}
+
+\subsection{ Atmospheric Correction for Ocean Color Satellites }
 Atmospheric Correction used for SeaWiFS, MODIS, VIIRS...
 
-\subsection{ELM-based Algorithm}
+\subsection{ ELM-based Algorithm}
 The {\it empirical line method} (ELM) is a method for calibration of image data to reflectance that uses ground truth.The ELM uses a linear regression in each band to relate digital counts or radiance to reflectance \cite{Schott}. The ground truth can be in general  either control panels or ad hoc control surfaces of known reflectance. These ground truth objects need to be approximately Lambertian to minimize any errors that could be introduced by sensor view angles effects. Also, this calibration targets are assumed flat and level, with no neighboring obscuration, and homogeneous as well. The ELM method generally assumes that the atmosphere is constant over the complete scene. If that is not the case, corrections must be made for changes in the atmosphere over the scene. The regression to be solved for each band in the ELM method is given by
 \begin{equation}
 	\label{eq:ELM} 
@@ -114,12 +126,12 @@ At the end of this PIF extraction, there are four different spectra: a reflectan
 % -----------------------------------------------------------------------------
 \section{Landsat Surface Reflectance CDR}
 \label{sec:CDR} 
-The Landsat climate data record (CDR) surface reflectance product is part of the higher-level Landsat data product to support land surface change study developed by USGS \cite{LandsatCDR}. The surface reflectance CDR is generated from specialized software called Landsat Ecosystem Disturbance Adaptive Processing System (LEDAPS \todo{Explain LEDAPS} ) \cite{Masek:2006}. The LEDAPS software uses MODIS atmospheric correction routines to correct Level-1 Landsat Thematic Mapper (TM) or Enhanced Thematic Mapper Plus (ETM+) data. Atmospheric variables such as water vapor, ozone, aerosol optical thickness along with geometric variables ({\todo{What is geopotential height?} geopotential height} and digital elevation) are input with Landsat data to the Second Simulation of a Satellite Signal in the Solar Spectrum (6S) radiative transfer model. The 6S model outputs surface reflectance among others parameters. This surface reflectance product is called the Landsat surface reflectance CDR. This Landsat surface reflectance product has comparable uncertainty to the standard MODIS reflectance product \cite{Masek:2006}.
+The Landsat climate data record (CDR) surface reflectance product is part of the higher-level Landsat data product to support land surface change study developed by USGS \cite{LandsatCDR}. The surface reflectance CDR is generated from specialized software called Landsat Ecosystem Disturbance Adaptive Processing System (LEDAPS) \cite{Masek:2006}. The LEDAPS software uses MODIS atmospheric correction routines to correct Level-1 Landsat Thematic Mapper (TM) or Enhanced Thematic Mapper Plus (ETM+) data. Atmospheric variables such as water vapor, ozone, aerosol optical thickness along with geometric variables ({\todo{What is geopotential height?} geopotential height} and digital elevation) are input with Landsat data to the Second Simulation of a Satellite Signal in the Solar Spectrum (6S) radiative transfer model. The 6S model outputs surface reflectance among others parameters. This surface reflectance product is called the Landsat surface reflectance CDR. This Landsat surface reflectance product has comparable uncertainty to the standard MODIS reflectance product \cite{Masek:2006}.
 
-The LEDAPS algorithm works in the following fashion. First, calibrated images from the Landsat satellite are corrected to {\todo{What does TOA reflectance mean?} top-of-atmosphere (TOA) reflectance} by correcting for solar zenith, Sun-Earth distance, TM or ETM+ bandpass, and solar irradiance. Then, the TOA reflectance is atmospherically corrected with the assumptions that the target is Lambertian and infinite, and the gaseous absorption and particle scattering in the atmosphere can be decoupled. The authors expressed the TOA reflectance as
+The LEDAPS algorithm works in the following fashion. First, calibrated images from the Landsat satellite are corrected to {\todo{What does TOA reflectance mean?} top-of-atmosphere (TOA) reflectance} by correcting for solar zenith, Sun-Earth distance, TM or ETM+ bandpass, and solar irradiance. Then, the TOA reflectance is atmospherically corrected with the assumptions that the target is Lambertian and infinite, and the gaseous absorption and particle scattering in the atmosphere can be decoupled. The TOA reflectance can be expressed as \cite{Masek:2006}
 \begin{equation}
 	\rho_{TOA}=T_g(O_3,O_2,CO_2,NO_2,CH_4)\\	
-		\times \left[\rho_{R+A}+T_{R+A}T_g(H_2O)\frac{\rho_s}{1-S_{R+A}\rho_s}\right]
+		\times \left[\rho_{R+A}+T_{R+A}T_g(H_2O)\frac{\rho_s}{1-\rho_s\times S_{R+A}}\right]
 		\label{eq:TOAref} 
 \end{equation}
 where $\rho_s$ is the surface reflectance, $T_g$ is the gaseous transmission due to the atmospheric gases, $T_{R+A}$ is Rayleigh and aerosol transmission, $\rho_{R+A}$ is the Rayleigh and aerosols atmospheric intrinsic reflectance, and $S_{R+A}$ is the Rayleigh and aerosols spherical albedo. The 6S radiative transfer code is utilized to compute the transmission, intrinsic reflectance, and spherical albedo terms. Ozone concentrations and column water vapor are derived from ancillary data. The aerosol optical thickness (AOP) is extracted directly from the imagery by using the dark, dense vegetation (DDV) method of Kaufman {\it et al.} \todo{add reference}.This method postulates a linear relation between SWIR surface reflectance and reflectance in the visible bands, based on the physical correlation between chlorophyll absorption and bound water absorption \todo{Research more about AOT and the Kaufman method!!!}. Finally, the derived AOT, ozone, atmospheric pressure, and water vapor are supplied to the 6S radiative transfer algorithm, which then inverts TOA reflectance to surface reflectance using \autoref{eq:TOAref}. 
