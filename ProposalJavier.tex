@@ -76,7 +76,11 @@
 \g@addto@macro\appendix{\let\section\appendix@section}
 \makeatother
 
-
+% Added 12-03-13 ----------------------------------------
+\usepackage{imakeidx}
+\indexsetup{othercode=\small}
+\makeindex[program=makeindex,columns=2,intoc=true,options={-s MyIndex.ist}]
+% -------------------------------------------------------
 %%%%%%%%%%%%%%
 
 \usepackage{hyperref}
@@ -128,7 +132,8 @@
 \setlength{\marginparwidth}{3.7cm}
 
 % Added 11-15-13 ----------------------------------------
-\includeonly{Background_and_Theory} 
+% \includeonly{Introduction,Objectives,Background_and_Theory} 
+\includeonly{Methodology} 
 \usepackage{tikz} % for flow charts
   \usetikzlibrary{shapes,arrows,positioning,shadows,calc}
 \usepackage{colortbl}
@@ -139,6 +144,8 @@
 \listfiles
 
 \setlength{\headheight}{15pt} % to avoid "Package Fancyhdr Warning: \headheight is too small (0.0pt): Make it at least 12.0pt."
+
+
 %******************************************************************************************************
 
 \begin{document}
@@ -181,7 +188,7 @@ Collections of water samples when the satellite passes over the Rochester area a
 %*****************************************************************************************************
 \begin{acknowledgements}
 \setlength{\parindent}{20pt}
-To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center. Fulbright commission. My advisor Dr. John Schott. Amanda and Cindy.
+To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center. Fulbright commission. My advisor Dr. John Schott. Amanda and Cindy. Susan. My girlfriend Kim Thoms.
 \end{acknowledgements}
 %*****************************************************************************************************
 
@@ -197,7 +204,7 @@ To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nin
 \pagenumbering{arabic} 
 \include{Objectives}
 \include{Background_and_Theory}
-% \input{Methodology.tex}
+\input{Methodology.tex}
 % \input{Results.tex}
 % \input{Future_Work.tex}
 % \input{Appendix.tex}
@@ -210,5 +217,6 @@ To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nin
 
 \bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
 
+\printindex
 
 \end{document}  

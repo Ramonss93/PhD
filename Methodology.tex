@@ -2,6 +2,66 @@
 % the previous is to reference main .bib
 %% CHAPTER
 \chapter{Methodology and Approach}
+\label{ch:method}
+
+The methodology is separated into the specific objectives mentioned in Section \ref{ch:objectives}. In this work, a look-up-table (LUT) methodology will be implemented to retrieve concentration of water constituents using Landsat 8 imagery. Figure~\ref{fig:retrieval} shows a diagram of this retrieval process. First, the Landsat 8 image data (shown at the top of the figure) needs to be atmospherically corrected. Then, a non-linear optimization routine uses the water pixels (reflectance values) and a LUT of reflectance spectra to estimate concentrations for each water pixels in the scene. The outputs to the process are concentration maps for each water constituents, as shown in Figure~\ref{fig:retrieval}. This process is explained in details in Subsections \ref{subsec:atmcorr} and \ref{subsec:retrieval} below.
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/Retrieval.pdf}
+  \caption{Retrieval process diagram. \label{fig:retrieval} } 
+\end{figure}
+
+\subsection{Atmospheric Correction} 
+\label{subsec:atmcorr}
+The first objective in this research is to identify a suitable approach to atmospherically correct the type of dataset provided by the OLI sensor. This is a complex task to perform over water because the signal leaving the water that reaches the sensor is very small compared to the signal reaching the sensor from atmospheric scattering. Most of the atmospheric correction algorithms applied to ocean color satellites are not suitable for highly turbid coastal waters because the {\it black pixel assumption} cannot be applied to these types of waters~\cite{Patt2003}. Two methods will be investigated in this research.
+
+The first method will be a model-based empirical line method (ELM) based on previous work done by Gerace {\it et al.}~\cite{Gerace:2013,Gerace:2012}  for simulated OLI data. While this new method is based on the traditional ELM method, it combines the Landsat reflectance product (Landsat Surface Reflectance CDR \cite{LandsatCDR}) and a physics-based numerical model over water (HydroLight \cite{MobleyHE}) to determine both the bright and dark pixel reflectance. The second method will be an extension of a method developed for SeaWiFS over turbid coastal and inland waters \cite{Ruddick:2000bs}. This method is a modified version of the methods developed by Gordon \cite{Gordon:1997} for ocean color satellites, but when the signal leaving the water does contribute to the overall signal beyond the NIR part of the spectrum. By using longer wavelengths and restricting the input pixels to open waters, these methods can be  applied to many fresh and coastal regions. The water surface reflectance values obtained after atmospheric correction will be validated through comparison to water surface reflectance measured in situ. 
+
+
+
+\subsection{In-Water Constituent Retrieval Process}
+\label{subsec:retrieval}
+The retrieval algorithm will be based on previous work done by Gerace {\it et al.} \cite{Gerace:2013} and Raqueno {\it et al.} \cite{Raqueno:2000}. The water surface reflectance product obtained after atmospheric correction from the previous stage is used as input to the retrieval algorithm. Each pixel in the reflectance product has an unknown concentration. A spectral matching technique is applied to predict this concentration by comparing the spectral shape of each pixel with the elements in a look-up table (LUT). The LUT is generated in HydroLight \cite{MobleyHE} for different triplets of water constituent concentrations. The spectral matching is made by a least square error minimization algorithm using the ``lsqnonlin'' package of the MATLAB's Optimization Toolbox. The output of this process is a concentration mapping for each water constituent that spans the range of constituents levels in the scene. An example of a LUT created in HydroLight is shown in Figure~\ref{fig:results1}. Preliminary results for concentration maps on a logarithmic scale over the area of study are shown in Figure~\ref{fig:results2} (Chlorophyll-{\it a} (CHL) in $[\mu g/L]$, SM in $[mg/L]$, and CDOM in $[1/m]$).
+
+\begin{figure}[htb]
+  \begin{minipage}[c]{0.48\linewidth}
+    \centering
+      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/LUTPixels_2.eps}
+      \caption{LUT created in HydroLight}
+      \label{fig:results1}
+    % \vspace{1.5cm}
+    % \centerline{(a)}\medskip
+  \end{minipage}
+  \hfill
+  \begin{minipage}[d]{0.5\linewidth}
+    \centering
+      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/RetrievalResultLog_2.eps}
+      \caption{Concentration mapping (Log scale).}
+      \label{fig:results2}
+    % \vspace{1.5cm}
+    % \centerline{(b)}\medskip
+  \end{minipage}
+  %
+  % \caption{Preliminary results: (a) LUT created in HydroLight and (b) concentration maps.}
+  % \label{fig:results}
+\end{figure}
+ 
+\subsection{Validation}
+The results from the retrieval process will be validated by comparison with the concentration of water samples taken during field campaigns in the spring and summer of 2013, 2014 and 2015. These concentrations will be obtained from lab measurements made at the Rochester Institute of Technology. For further validation, the results will be compared with products derived from ocean color satellites such as MODIS (e.g. MODIS Chl-{\it a} product), in regions where it is possible.
+
+\subsection{Hydrodynamics models} 
+The next step will be to use the validated results from the retrieval process for training hydrodynamics models to predict the future behavior of the water bodies. This would be based on previous work done by Pahlevan~{\it et al.} \cite{Pahlevan:2012b}, who used concentration maps obtained from the retrieval process using satellite imagery to train the ALGE hydrodynamic model. For example, the hydrodynamic model would allow us to monitor the dynamics of coastal and inland waters near river discharges. The maps of water constituent concentrations on the surface can be used to calibrate the hydrodynamic models.
+
+\subsection{Investigate New Sensor Enhancements for Future Missions}
+Water pixel spectra from a hyperspectral image (e.g. Hyperspectral Imager for the Coastal Ocean (HICO),  Airborne Visible/InfraRed Imaging Spectrometer (AVIRIS)) will be modified to simulate data similar to Landsat 8 but with the addition of a new NIR band. The retrieval process will be performed with these simulated data with and without the new NIR band in order to evaluate performance improvement. A similar analysis will be done to evaluate narrower spectral bandwidths available in Landsat 8 compared to those found in the MEdium Resolution Imaging Spectrometer (MERIS) and MODIS, for instance. 
+
+% --------------------------------------------------
+\section{Data and Models}
+\label{sec:datamod}
+The area of study for this research is the Lake Ontario Rochester Embayment, which includes some nearby ponds (Long and Cranberry Ponds), the Genesee River plume, the Irondequoit Bay and the southern end of Lake Ontario. This area was selected because it exhibits a wide range of variability in concentration of water constituents, so the retrieval algorithm can be tested with different scenarios. Landsat 8 images from this area of study and corresponding water samples collected at the time of the satellite's overpass will be used to test the retrieval algorithm. So far, there are only three satisfactory images available from the summer 2013. This project contemplates performing two new ground truth data collection during 2014 and 2015. Therefore, images from the 2013-2015 spring and summer collection seasons will be used to test the methodology. Note that a difficult challenge of this research is to obtain images with relatively clear weather conditions (i.e. cloud free) over the area of study.
+
+In order to have outputs in HydroLight that are representative of the water bodies that are being studied, inherent optical properties (IOPs) of those specific waters have to be defined as input to the HydroLight model. After collection, these water samples need to be analyzed in the lab to obtain IOPs for the main water constituents. Furthermore, apparent optical properties (AOPs) (i.e. water surface reflectance) and backscattering measurements will be also collected for further comparison and to pursue closure between the HydroLight AOPs results and in-situ AOPs measurements.
+
 \section{OLI Sensor}
 \subsection{Sensor Response}
 Noise level. Quantization. SNR.

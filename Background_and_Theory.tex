@@ -29,23 +29,58 @@ Pure Water. Chl (pigments). CDOM (or DOM). SM or minerals.
 Inversion algorithm 
 
 % -----------------------------------------------------------------------------
-\section{Atmospheric Correction}
+\section{Atmospheric Correction/Effect} 
 % -----------------------------------------------------------------------------
 The goal of this section is to describe the different approaches used to atmospherically correct satellite imagery over water. First, we need to understand the effect of the atmosphere on the propagating energy. To do so, a description of the processes involved in the energy interaction in the atmosphere are described in the first part of this section. Later on, different techniques for atmospherically correcting satellite images are defined.
 
 \subsection{ Energy Interaction in the Atmosphere }
 
-The particles that are responsible for scattering range in size 
+The smallest non-molecular particles that are responsible for scattering are aerosols. Aerosol can be defined as dispersed systems of particles of small particles, liquid or solid, suspended in a gas, like atmospheric air. Therefore dust, haze, smoke, smog, fog, mist, and clouds can be considered to be specific aerosol types. The typical size and number density for non-molecular particles are shown in Table \ref{tab:aerosol_size}
 
-Isotropic scattering at visible wavelengths occurs in nature in thick clouds or in fog. {\it Rayleigh scattering} (a.k.a. molecular scattering) occurs where the wavelength of the radiation is much larger than the molecular diameters (e.g. daylight scattering or very pure water). On the other hand, {\it Mie scattering} occurs when the wavelength is of the same order of magnitude as the particle diameter. It is often convenient in visible ocean remote sensing to consider the atmosphere to be made up of two components: Rayleigh scattering of the air molecules and Mie scattering of haze and other aerosols.
+%--------------------------------------
+\begin{table}[h!]
+\caption{ Typical sizes and typical number density for non-molecular particles. \label{tab:aerosol_size} } 
+\centering
+\begin{tabular}{c|c|c}
+        	\bfseries{Particle}  	& \bfseries{Size}  & \bfseries{Number Density} \\ 
+	& $[\mu m]$  		& $[m^{-3}]$ 			\\ \hline \hline
+		Aerosol (e.g. Haze)	& $0.01-1$ 	& 	$10^7-10^9$		\\
+		Fog			& 1-10		&	$10^7-10^8$		\\
+		Cloud			& 1-10		&	$10^7-10^9$		\\
+		Rain		& $10^2-10^4$		&	$10^3-10^4$		\\   
+ \end{tabular}
+\end{table}
 
-{\todo{Change! Copied and Pasted} Aerosols are a natural constituent of the Earth’s atmosphere and their origin is mostly natural, although lately the anthropogenic contribution is increasing. An aerosol is defined as a stable suspension of particles, liquid or solid, in a carrier gas like atmospheric air. Therefore dust, haze, smoke, smog, fog, mist, and clouds can be considered to be specific aerosol types.}
+
+
+Isotropic scattering at visible wavelengths occurs in nature in thick clouds or in fog. {\it Rayleigh scattering} \index{Rayleigh Scattering}  (a.k.a. molecular scattering) occurs where the wavelength of the radiation is much larger than the molecular diameters (e.g. daylight scattering or very pure water). On the other hand, {\it Mie scattering} occurs when the wavelength is of the same order of magnitude as the particle diameter. 
+
+It is often convenient in visible ocean remote sensing to consider the atmosphere to be made up of two components: Rayleigh scattering of the air molecules and Mie scattering of haze and other aerosols. 
+
+{\it Attenuation} is the lost of the radiation energy that combines scattering and absorption effects.
+
+A plane wave traveling through a homogeneous material in the $z$ direction can be perceived as the time-averaged quantity irradiance \index{irradiance}  (power per unit area) on a surface \cite{Eismann2012}. The irradiance after propagation distance $z$ is given by
+\begin{equation}
+  \label{eq:BeerLaw}
+  E(\lambda,z) = E(\lambda,0)e^{-\beta_a z}
+\end{equation}
+where $\beta_a$ is the absorption coefficient \index{absorption coefficient}  defined as
+\begin{equation}
+  \beta_a = \frac{4\pi \kappa}{\lambda}~~[m^{-1}],
+\end{equation}
+where $\kappa$ is the imaginary part of the complex index of refraction and quantifies the absorptive characteristic of the medium. The absorption coefficient $\beta_a$ represents the fractional amount of flux lost to absorption per unit length of transit in a propagating beam \cite{Schott}. Equation \ref{eq:BeerLaw} is known as Beer's law \index{Beer's law} and tell us that the energy of light decreases exponentially with distance.
+
+The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacity) expresses the extent to which a given layer of material attenuates the intensity of the radiation passing through it \cite{Rees1990}. It is defined as
+\begin{equation}
+    \delta = \beta_{a}z
+\end{equation}
+
 
 \subsection{ Atmospheric Correction for Ocean Color Satellites }
 Atmospheric Correction used for SeaWiFS, MODIS, VIIRS...
 
 \subsection{ ELM-based Algorithm}
-The {\it empirical line method} (ELM) is a method for calibration of image data to reflectance that uses ground truth.The ELM uses a linear regression in each band to relate digital counts or radiance to reflectance \cite{Schott}. The ground truth can be in general  either control panels or ad hoc control surfaces of known reflectance. These ground truth objects need to be approximately Lambertian to minimize any errors that could be introduced by sensor view angles effects. Also, this calibration targets are assumed flat and level, with no neighboring obscuration, and homogeneous as well. The ELM method generally assumes that the atmosphere is constant over the complete scene. If that is not the case, corrections must be made for changes in the atmosphere over the scene. The regression to be solved for each band in the ELM method is given by
+The {\it empirical line method}\index{ELM} (ELM) is a method for calibration of image data to reflectance that uses ground truth.The ELM uses a linear regression in each band to relate digital counts or radiance to reflectance \cite{Schott}. The ground truth can be in general  either control panels or ad hoc control surfaces of known reflectance. These ground truth objects need to be approximately Lambertian to minimize any errors that could be introduced by sensor view angles effects. Also, this calibration targets are assumed flat and level, with no neighboring obscuration, and homogeneous as well. The ELM method generally assumes that the atmosphere is constant over the complete scene. If that is not the case, corrections must be made for changes in the atmosphere over the scene. The regression to be solved for each band in the ELM method is given by
 \begin{equation}
 	\label{eq:ELM} 
 	L = m\times r_d + b
@@ -437,7 +472,7 @@ So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point so
 
 The light source, usually the sun, interact with the target and then reach the sensor. This interaction will help us to extract about the target, in this case the water body. That is why in order to understand how the water quality parameter are retrieved, first it is necessary to introduce the concept of sensor reaching radiance. The sensor reaching radiance is defined as the accumulation of photons at the front of a sensor that one wishes to collect in an effort to obtain information about the target \cite{GeraceThesis} . The total sensor-reaching radiance is the sum of the radiances due to the individual solar and thermal paths.  \cite{Schott} shows that in the VNIR region (approximately 0.3-2.5 [$\mu m$]), the solar energy is so many orders of the magnitude higher than the self-emitted energy, so the thermal paths are negligible for this study. Also, we consider that radiance from the background is negligible because the water bodies are typically several kilometers wide. Assuming that the target is approximately Lambertian (radiance is equal in all directions), the total sensor-reaching radiance, $L$, is defined as
 
-\begin{equation} \label{eq:gov1}s
+\begin{equation} \label{eq:gov1}
 L(\lambda) = \frac{E'_S(\lambda)cos(\sigma')r(\lambda)\tau_1(\lambda)\tau_2(\lambda)}{\pi} +
                         \frac{E_{ds}(\lambda)r(\lambda)\tau_2(\lambda)}{\pi} + L_{us}(\lambda)
 \end{equation} 
