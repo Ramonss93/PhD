@@ -5,9 +5,6 @@
 \usepackage{amssymb,amsmath}
 \newcommand{\bm}[1]{\boldsymbol{#1}}
 
-
-
-
 \usepackage{multirow}
 \usepackage{fullpage}
 \usepackage{appendix}
@@ -53,7 +50,7 @@
 
 
 \usepackage{mathtools}
-\usepackage{epstopdf}
+
 
 \usepackage{color}
 \usepackage{soul}
@@ -77,7 +74,7 @@
 \makeatother
 
 % Added 12-03-13 ----------------------------------------
-\usepackage{imakeidx}
+\usepackage{imakeidx} % to create index
 \indexsetup{othercode=\small}
 \makeindex[program=makeindex,columns=2,intoc=true,options={-s MyIndex.ist}]
 % -------------------------------------------------------
@@ -91,7 +88,7 @@
     pdfmenubar=true,        % show AcrobatÕs menu?
     pdffitwindow=false,     % window fit to page when opened
     pdfstartview={FitH},    % fits the width of the page to the window
-    pdftitle={WV-2 In Water Component Retrieval },    % title
+    pdftitle={L8's potential for water constituents retrieval },    % title
     pdfauthor={Javier Concha},     % author
     pdfsubject={Subject},   % subject of the document
     pdfcreator={Creator},   % creator of the document
@@ -100,9 +97,9 @@
     pdfnewwindow=true,      % links in new window
     colorlinks=true,       % false: boxed links; true: colored links
     linkcolor=blue,          % color of internal links
-    citecolor=green,        % color of links to bibliography
+    citecolor=cyan,        % color of links to bibliography
     filecolor=magenta,      % color of file links
-    urlcolor=cyan           % color of external links
+    urlcolor=green           % color of external links
 }
 
 \usepackage[all]{hypcap} % to see figure with hyper ref
@@ -118,6 +115,9 @@
     {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{10pt}{\Huge}
 \titlespacing*{\chapter}{0pt}{40pt}{20pt}
 
+\titlespacing*{\section}{0ex}{2.5ex}{2ex}
+\titlespacing*{\subsection}{0ex}{1.5ex}{1ex}
+
 \usepackage{indentfirst}
 \setlength{\parindent}{20pt}
 \doublespacing
@@ -132,7 +132,7 @@
 \setlength{\marginparwidth}{3.7cm}
 
 % Added 11-15-13 ----------------------------------------
-% \includeonly{Introduction,Objectives,Background_and_Theory} 
+% \includeonly{Introduction,Objectives,Background_and_Theory,Methodology,Results,Summary,Appendix} 
 \includeonly{Methodology} 
 \usepackage{tikz} % for flow charts
   \usetikzlibrary{shapes,arrows,positioning,shadows,calc}
@@ -145,9 +145,12 @@
 
 \setlength{\headheight}{15pt} % to avoid "Package Fancyhdr Warning: \headheight is too small (0.0pt): Make it at least 12.0pt."
 
-
+% Added 02-18-14 ----------------------------------------
+% \setlength{\abovecaptionskip}{-2ex}
+\setlength{\belowcaptionskip}{-4ex} % space after caption
 %******************************************************************************************************
-
+\usepackage{epsfig}
+\usepackage{epstopdf}
 \begin{document}
 
 \degreetitle{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
@@ -184,11 +187,11 @@ Collections of water samples when the satellite passes over the Rochester area a
 
 \end{abstract}
 
-% \chapter*{Acknowledgements}
+\chapter*{Acknowledgements}
 %*****************************************************************************************************
 \begin{acknowledgements}
 \setlength{\parindent}{20pt}
-To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center. Fulbright commission. My advisor Dr. John Schott. Amanda and Cindy. Susan. My girlfriend Kim Thoms.
+To my parents, Osvaldo Concha and Nelly Sepulveda, sister Loretto Concha and brother Alvaro Concha. USGS. Monroe County Environment: Scott, Providencia and Gary. Nina and Rolo. Dr. Christy Taylor. Paul. Aaron Gerace. Alan Wiedmman. Ocean Color community: Emmanuel Boss and attendants of the 2013 Ocean color and instrumentation summer course at the Darling Marine Center. Fulbright commission. My advisor Dr. John Schott. Amanda and Cindy. Classmates: Aly, Bikash, Viraj, Madurima, Peter Sun. Professor Dr. John Kerekes. Collection help: Harold Valdivia. My dear friends: Juan Saldana, Kader, Patrick, Sarada, Susan, Melisa, Sasha, Jeremy. The people at Crossfit Rochester: Joe, Andrew. The Latin Rhythm Dance Club at RIT. Aixa de Jesus. My adopted Chilean family and dancers in Rochester: Marcia, Rosa and Rosita, Raul, Willy and Marisol, Harold and Nancy. My Chilean friends in U. of R. Felipe, Maria Eugenia, Emilio, Brenda. And my lovely girlfriend Kimberley Thoms.
 \end{acknowledgements}
 %*****************************************************************************************************
 
@@ -200,14 +203,15 @@ To my parents. USGS. Monroe County Environment: Scott, Providencia and Gary. Nin
 \listoftables
 \addcontentsline{toc}{chapter}{List of Tables}
 
+% \input{Introduction.tex}
 \include{Introduction}
 \pagenumbering{arabic} 
 \include{Objectives}
 \include{Background_and_Theory}
-\input{Methodology.tex}
-% \input{Results.tex}
-% \input{Future_Work.tex}
-% \input{Appendix.tex}
+\include{Methodology}
+\include{Results}
+\include{Future_Work}
+\include{Appendix}
 
 \listoftodos
 
