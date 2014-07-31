@@ -77,7 +77,7 @@ The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacit
 
 
 \subsection{ Atmospheric Correction for Ocean Color Satellites }
-Atmospheric Correction used for SeaWiFS, MODIS, VIIRS...
+\cite{Gordon:1994} developed an algorithm for atmospherically correcting SeaWiFS data.
 
 \subsection{ Empirical Line Method}
 \label{subsec:ELM}
@@ -86,10 +86,27 @@ The {\it empirical line method}\index{ELM} (ELM) is a method for calibration of 
 	\label{eq:ELM} 
 	L = m\times r_d + b
 \end{equation}
-where $L$ is the radiance reaching the sensor value, $m$ is the slope of the regression, $r_d$ is the reflectance of the target, and $b=L_u$ is the intercept, with $L_u$ the upwelled radiance or path radiance. Then, the reflectance of the any Lambertian objects can be calculated by rearranging \autoref{eq:ELM}. In order to solved the below regression, i.e. determine the value of $m$ and $b$, we need to have two target with known radiance $L$ and reflectance $L_u$. After $m$ and $b$ been determined, the reflectance of each pixel at each wavelength can be calculated from its radiance value from the image.
+where $L$ is the radiance reaching the sensor value, $m$ is the slope of the regression, $r_d$ is the reflectance of the target, and $b=L_u$ is the intercept, with $L_u$ the upwelled radiance or path radiance. Then, the reflectance of the any Lambertian objects can be calculated by rearranging \autoref{eq:ELM}. In order to solved this regression, i.e. determine the value of $m$ and $b$, we need to have at least two targets with known radiance $L$ and reflectance $r_d$. After $m$ and $b$ been determined, the reflectance of each pixel at each wavelength can be calculated from its radiance value from the image.
 
 An ELM target needs to have a size at least three times the ground instantaneous field of view of the sensor that will image it at the time of data collection. Taking this in consideration, the target should be at least 90x90 meters big for the Landsat sensor, which is sometimes difficult to build or even to find in the scene. 
 
+% \begin{tikzpicture}[scale=1.5]
+%     % Draw axes
+%     \draw [<->,thick] (0,2) node (yaxis) [above] {$r_d$}
+%         |- (3,0) node (xaxis) [right] {$L$};
+%     % Draw two intersecting lines
+%     \draw (0,0) coordinate (a_1) -- (2,1.8) coordinate (a_2);
+%     \draw (0,1.5) coordinate (b_1) -- (2.5,0) coordinate (b_2);
+%     % Calculate the intersection of the lines a_1 -- a_2 and b_1 -- b_2
+%     % and store the coordinate in c.
+%     \coordinate (c) at (intersection of a_1--a_2 and b_1--b_2);
+%     % Draw lines indicating intersection with y and x axis. Here we use
+%     % the perpendicular coordinate system
+%     \draw[dashed] (yaxis |- c) node[left] {$y'$}
+%         -| (xaxis -| c) node[below] {$x'$};
+%     % Draw a dot to indicate intersection point
+%     \fill[red] (c) circle (2pt);
+% \end{tikzpicture}
 
 \subsection{Band Ratio}
 
