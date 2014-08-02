@@ -13,7 +13,9 @@ The methodology is separated into the specific objectives mentioned in Section \
 
 \section{Over-Water Atmospheric Correction} 
 \label{sec:atmcorr}
-The first objective in this research is to identify a suitable approach to atmospherically correct the type of dataset provided by the OLI sensor. This is a complex task to perform over water because the signal leaving the water that reaches the sensor is very small compared to the signal reaching the sensor from atmospheric scattering. Most of the atmospheric correction algorithms applied to ocean color satellites are not suitable for highly turbid coastal waters because the {\it black pixel assumption} cannot be applied to these types of waters~\cite{Patt2003}. Several methods are be investigated in this research.
+The first objective in this research is to identify a suitable approach to atmospherically correct the type of dataset provided by the OLI sensor. This is a complex task to perform over water because the signal leaving the water that reaches the sensor is very small compared to the signal reaching the sensor from atmospheric scattering. The most of the atmospheric correction algorithms used for Ocean Color Satellites (i.e. CZCS, MODIS, SeaWiFS) are based in the work done by \cite{Gordon:1994} (also described in \cite{Gordon:1997}).
+
+However, some of the atmospheric correction algorithms applied to Ocean Color Satellites are not suitable for highly turbid coastal waters because the {\it black pixel assumption} cannot be applied to these types of waters~\cite{Patt2003}. Several methods are be investigated in this research.
 
 Some atmospheric correction methods described in this section will use the notation used by \cite{Gordon:1994} and \cite{Ruddick:2000bs} who define the apparent reflectance as 
 
@@ -35,12 +37,14 @@ $T_v(\lambda)$ is the diffuse atmospheric transmittance from the water to the se
 $\rho_{wc}(\lambda)$ is the reflectance due to solar photons reflecting off the air-water interface (from whitecaps and glint or glitter)\\
 $\rho_w(\lambda)$ is the water-leaving reflectance
 
-In order to perform the water constituent retrieval, we need to solve for only the $\rho_w(\lambda)$ term in \autoref{eq:rho_t}, which would be a easy task if all the rest of the terms were known. Unfortunately, the only term known a priori is the $\rho_t(\lambda)$, which is precisely the image of the scene itself. This section describes the different alternatives to obtain the rest of the term in \autoref{eq:rho_t}.
+In order to perform the water constituent retrieval, we need to solve for only the $\rho_w(\lambda)$ term in \autoref{eq:rho_t}, which would be a easy task if all the rest of the terms were known. Unfortunately, the only term known a priori is the $\rho_t(\lambda)$, which is precisely the image of the scene itself. The main difference among the methods based in \cite{Gordon:1994} is in the approach to estimate $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the VIS using an estimation of $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the NIR.
+
+This section describes the different alternatives to obtain the rest of the term in \autoref{eq:rho_t}.
 
 \subsection{Solar-Glint Removal Algorithm}
 The first step to solve \autoref{eq:rho_t} is to find the term due to glint, $\rho_wc(\lambda)$ and remove it from the total signal. \autoref{eq:rho_t} assumes that effect from glint and it can be ignored since ocean-color sensors are designed to be tilted and to avoid the specular image of the sun. However, Landsat 8 is not cataloged as an ocean-color satellite and it needs to be corrected for the glint effect if needed.
 
-The method to remove the sun glint effect chosen for this study is the method suggested by Hedley, which is a revised version of the method suggested by Hochberg. \todo{insert citations} The method described by Hochberg was developed for high spatial resolutions where glint effects occur at physical scales comparable to image pixels ($<10m$) as opposed to methods developed for ocean-color sensor, which tend to have large physical scales ($>1km$).
+The method to remove the sun glint effect chosen for this study is the method suggested by \cite{Hedley:2005}, which is a revised version of the method suggested by \cite{Hochberg:2003}. The method described by Hochberg was developed for high spatial resolutions where glint effects occur at physical scales comparable to image pixels ($<10m$) as opposed to methods developed for ocean-color sensor, which tend to have large physical scales ($>1km$).
 The method presented by Hochberg is sensitive to outlier pixels and it needs to mask the land and cloud areas before deglinting. The method suggested by Hedley overcomes these inconveniences. This method assumes that (a) the brightness in the NIR is composed only by sun glint and a spatially constant ambient NIR component associated to NIR backscatter in the atmosphere (if the image is not atmospherically corrected), and (b) that the amount of sun glint in the visible bands is linearly related to the brightness in the NIR band. 
 
 The first assumption is true for waters that are not highly turbid since water is relatively opaque to NIR wavelength ($700-1000nm$). The second assumption of a linear relationship between NIR brightness and the amount of sun glint in the visible bands relays in the fact that the real index of refraction, which is associated with the reflection in the water surface, is nearly equal for NIR and visible wavelengths (\cite{Mobley1994}). As a result, the amount of light reflected in the visible bands is proportional to the amount of light reflected in the NIR, and therefore, a linear relationship can be established among them. The first step is to establish this relationship. This is accomplished by solving a linear regression between NIR and visible bands using one or more ROIs from the water pixels in the image where some sun glint is noticeable, and their pixels values would be of similar values otherwise. An example of ROI could be a ROI over deep water in the lake. A slope is determined from solving this linear regression with NIR pixel values in the ROI as the independent variable ($x$-axis) and a particular visible band as the dependent variable ($y$-axis), as shown in \todo{ref to fig.} FigureXXX. If the regression slope for band $i$ is $b_i$, then sun-glint corrected pixel brightness in band $i$ can be obtained by applying the following formula
@@ -330,7 +334,7 @@ Preliminary results of the model-based ELM atmospheric correction methods for an
 \end{figure}
 
 \subsection{SeaWiFS Algorithm for Case 1 Waters}
-The following algorithm is based in the methods developed by \cite{Gordon:1994} for retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS.
+The following algorithm is based in the method developed by \cite{Gordon:1994} for retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS. This method is still applied to the basic SeaWiFS and MODIS atmospheric correction algorithms for Case 1 water.
 
 The first step in this algorithm is performing a Rayleigh scattering correction, which means to subtract the reflectance due to Rayleigh scatter $\rho_r$ from the total TOA reflectance $\rho_t$ in \autoref{eq:rhodeglint}. This Rayleigh scattering component $\rho_r$ can be calculated directly from MODTRAN for the particular illumination and viewing geometry of the sun and the sensor in multiple-scatter mode but without aerosol. After calculating this component, \autoref{eq:rhodeglint} becomes 
 
@@ -348,6 +352,8 @@ then \autoref{eq:rhodeRayliegh} becomes
  \rho_c(\lambda) = \rho_{am}(\lambda) + T_v(\lambda)\rho_{w}(\lambda)
 \end{equation}
 
+There are two different approach to determine $\rho_{am}(\lambda)$ at this point. The first one is to use single-scattering approximation. The second one is to determine the multiple-scattering term $\rho_{am}(\lambda)$ based in the single scattering term.
+
 We need to calculate this total multiple-scattering aerosol reflectance $\rho_{am}$ in order to obtain the desired water-leaving reflectance $\rho_w$. For Case 1 waters, the term $\rho_{w}$ is assumed to be zero for NIR bands. If we take the SeaWiFS case for band 7 ($\lambda_7=765nm$) and band 8 ($\lambda_8=865nm$), then
 \begin{equation}\label{eq:seawifsam7}
     \rho_{am}^{(7)}=\rho_{c}^{(7)},
@@ -355,15 +361,21 @@ We need to calculate this total multiple-scattering aerosol reflectance $\rho_{a
 \begin{equation}\label{eq:seawifsam8}
     \rho_{am}^{(8)}=\rho_{c}^{(8)},
 \end{equation}
-where the notation $\rho_{x}^{(i)}$ denotes a reflectance at band $i$ with wavelength $\lambda_i$. \autoref{eq:seawifsam7} and \autoref{eq:seawifsam8} mean that the Rayleigh-corrected reflectance is equal to only the aerosol and aerosol-Rayleigh scattering in the atmosphere for band 7 and band 8. Now, we need to find a way to use this result to calculate the atmospheric reflectance for all bands.
+where $\rho_{x}^{(i)}$ denotes a reflectance at band $i$ with wavelength $\lambda_i$. \autoref{eq:seawifsam7} and \autoref{eq:seawifsam8} mean that the Rayleigh-corrected reflectance is equal to only the aerosol and aerosol-Rayleigh scattering in the atmosphere for band 7 and band 8 in SeaWiFS. Now, we need to find a way to use this result to calculate the atmospheric reflectance for all bands.
 
-\cite{Gordon:1994} define the atmospheric-correction parameters $\varepsilon_{s(I)}^{(i,j)}$ (with the notation used by \cite{Ruddick:2000bs}) as
+\cite{Gordon:1994} define the atmospheric-correction parameter named single scattering epsilon (SSE)(\cite{IOCCG:2010}) $\varepsilon_{s(I)}^{(i,j)}$ (with the notation used by \cite{Ruddick:2000bs}) as
 \begin{equation}\label{eq:espilon}
-    \varepsilon_{s(I)}^{(i,j)} \equiv \frac{\rho_{as}^{(i)}}{\rho_{as}^{(j)}}
+    \varepsilon_{s(I)}^{(i,j)} \equiv \frac{\rho_{as}^{(i)}}{\rho_{as}^{(j)}} = \frac{\omega_a(\lambda_i)\tau_a(\lambda_i)p_a(\lambda_i)}{\omega_a(\lambda_j)\tau_a(\lambda_j)p_a(\lambda_j)}
 \end{equation}
-where $\rho_{as}^{(i)}$ for band $i$ is the single-scattering aerosol reflectance and $I=1..N$ denominates a set of $N$ simulated aerosol models obtained from, for example, an atmospheric radiative transfer model such as MODTRAN. This set of simulated aerosol models could be MODTRAN runs for different combination of particle size distribution (e.g. maritime, tropospheric, coastal, or urban), relative humidity, visibility, water vapor to simulate different atmosphere conditions that can occur in the scene.
+where $\rho_{as}^{(i)}$ for band $i$ is the single-scattering aerosol reflectance and $I=1..N$ denominates a set of $N$ simulated aerosol models obtained from, for example, an atmospheric radiative transfer model such as MODTRAN. This set of simulated aerosol models could be MODTRAN runs for different combination of particle size distribution (e.g. maritime, tropospheric, coastal, or urban), relative humidity, visibility, water vapor, etc., to simulate different atmosphere conditions that can occur in the scene.
+% -------------------
+\subsubsection{Single Scattering}
 
-Wang \todo{citation} has shown that a near-linear relation exists between $\rho_a(\lambda)+\rho_{ra}(\lambda)$ for the multiple-scattering model and $\rho_{as}(\lambda)$ for the single-scattering model.
+
+
+% -------------------
+\subsubsection{Multiple Scattering}
+\cite{Wang:1991} has shown that a near-linear relation exists between $\rho_a(\lambda)+\rho_{ra}(\lambda)$ for the multiple-scattering model and $\rho_{as}(\lambda)$ for the single-scattering model.
 
 
 Because the zero water-leaving assumption is not valid over coastal and inland waters, and OLI does not include a second NIR band, I propose to use OLI's SWIR bands instead.
@@ -371,6 +383,9 @@ Because the zero water-leaving assumption is not valid over coastal and inland w
 \subsection{SeaWiFS Algorithm for Case 2 Water}
 The next atmospheric correction method is based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS), and extended by \cite{Ruddick:2000bs} for use over turbid coastal and inland waters. The method developed by \cite{Gordon:1994} assumes a zero water-leaving radiance for the NIR bands, which is not valid for highly turbid coastal and inland waters. In order to overcome this problem, \cite{Ruddick:2000bs} replace this assumption with the assumptions of spatial homogeneity of the SeaWiFS's NIR bands ratio for aerosol reflectance and for water-leaving reflectance. These two ratios are used as calibration parameters after inspection of the Rayleigh-corrected reflectance scatterplot.
 % The second atmospheric correction method will be an extension of a method developed for SeaWiFS over turbid coastal and inland waters \cite{Ruddick:2000bs}. This method is a modified version of the methods developed by Gordon \cite{Gordon:1997} for ocean color satellites, but when the signal leaving the water does contribute to the overall signal beyond the NIR part of the spectrum. By using longer wavelengths and restricting the input pixels to open waters, these methods can be  applied to many fresh and coastal regions. The water surface reflectance values obtained after atmospheric correction will be validated through comparison to water surface reflectance measured in situ. 
+
+\subsection{SWIR bands Atmospheric Correction}
+Based on \cite{Wang:2007}.
 
 \subsection{OLI Algorithm for Case 2 Waters (Blue Band)}
 
