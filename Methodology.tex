@@ -366,29 +366,55 @@ The aerosol is highly variable, and unlike the Rayleigh scattering component $\r
 where
 \begin{equation}
   \begin{gathered}
-    \rho_{as}(\lambda) = \frac{w_a(\lambda)\tau_a(\lambda)p_a(\theta,\theta_0,\lambda)}{4\cos(\theta)\cos(\theta_0)},\\  
+    \rho_{as}(\lambda) = \frac{\omega_a(\lambda)\tau_a(\lambda)p_a(\theta,\theta_0,\lambda)}{4\cos(\theta)\cos(\theta_0)},\\  
     p_a(\theta,\theta_0,\lambda) = P_a(\theta_{-},\lambda) + [r(\theta)+r(\theta_0)]P_a(\theta_{+},\lambda),\\
     \cos(\theta_{\pm}) = \pm \cos(\theta_0)\cos(\theta)-\sin(\theta_0)\sin(\theta)\cos(\phi-\phi_0)
   \end{gathered}
 \end{equation}
-and $r(\lambda)$ is the Fresnel reflectance of the interface for an incident angle $\theta$, $\rho_a(\lambda)$ is the aerosol optical thickness, $w_a(\lambda)$ is the aerosol single-scattering albedo, $P_a(\alpha,\lambda)$ is the aerosol scattering phase function for a scattering angle $\alpha$, $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sun, respectively, and $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sensor, respectively.
+and $r(\lambda)$ is the Fresnel reflectance of the interface for an incident angle $\theta$, $\rho_a(\lambda)$ is the aerosol optical thickness, $\omega_a(\lambda)$ is the aerosol single-scattering albedo, $P_a(\alpha,\lambda)$ is the aerosol scattering phase function for a scattering angle $\alpha$, $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sun, respectively, and $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sensor, respectively.
 
 
 For Case 1 waters, the term $\rho_{w}$ is assumed to be zero for NIR bands. If we take the SeaWiFS case for band 7 ($\lambda_7=765nm$) and band 8 ($\lambda_8=865nm$), from \autoref{eq:rhoam}
 \begin{equation}\label{eq:seawifsam7}
-    \rho_{am}^{(7)}=\rho_{c}^{(7)},
+    \rho_{am}^{(7)} = \rho_{c}^{(7)} = \rho_{as}^{(7)},
 \end{equation}
 \begin{equation}\label{eq:seawifsam8}
-    \rho_{am}^{(8)}=\rho_{c}^{(8)},
+    \rho_{am}^{(8)} = \rho_{c}^{(8)} = \rho_{as}^{(8)},
 \end{equation}
 where $\rho_{x}^{(i)}$ denotes a reflectance at band $i$ with wavelength $\lambda_i$. \autoref{eq:seawifsam7} and \autoref{eq:seawifsam8} mean that the aerosol reflectance term for band 7 and band 8 in SeaWiFS is equal to only the Rayleigh-corrected reflectance, which is known from the image. Now, we need to find a way to use this result to calculate the atmospheric reflectance for the rest of the bands.
 
-\cite{Gordon:1994} define the atmospheric-correction parameter named single scattering epsilon (SSE)(\cite{IOCCG:2010}) $\varepsilon_{s(I)}^{(i,j)}$ (with the notation used by \cite{Ruddick:2000bs}) as
+\cite{Gordon:1994} define the atmospheric-correction parameter named single scattering epsilon (SSE)(\cite{IOCCG:2010}) $\varepsilon(\lambda_s,\lambda_l)$ as
 \begin{equation}\label{eq:espilon}
-    \varepsilon_{s(I)}^{(i,j)} \equiv \frac{\rho_{as}^{(i)}}{\rho_{as}^{(j)}} = \frac{\omega_a(\lambda_i)\tau_a(\lambda_i)p_a(\lambda_i)}{\omega_a(\lambda_j)\tau_a(\lambda_j)p_a(\lambda_j)}
+  \varepsilon(\lambda_s,\lambda_l) \equiv \frac{\rho_{as}(\lambda_s)}{\rho_{as}(\lambda_l)} = \\
+  \frac{\omega_a(\lambda_s)\tau_a(\lambda_s)p_a(\theta_v,\phi_v;\theta_0,\phi_0;\lambda_s)}{\omega_a(\lambda_l)\tau_a(\lambda_l)p_a(\theta_v,\phi_v;\theta_0,\phi_0;\lambda_l)}
 \end{equation}
-where $\rho_{as}^{(i)}$ for band $i$ is the single-scattering aerosol reflectance and $I=1..N$ denominates a set of $N$ simulated aerosol models obtained from, for example, an atmospheric radiative transfer model such as MODTRAN. This set of simulated aerosol models could be MODTRAN runs for different combination of particle size distribution (e.g. maritime, tropospheric, coastal, or urban), relative humidity, visibility, water vapor, etc., to simulate different atmosphere conditions that can occur in the scene.
+where the indexes ``$s$'' and ``$l$'' stand for short and long wavelength, associated with the NIR bands, i.e. $\lambda_s=756nm$ and $\lambda_l=$ for SeaWiFS. If the value of $\varepsilon(\lambda_i,\lambda_l)$ for the band at $\lambda_i$ (visible bands) can be computed from $\varepsilon(\lambda_s,\lambda_l)$, then $\rho_{as}(\lambda_i)$ can be determined as
+\begin{equation}\label{eq:rholambda_i}
+  \rho_{as}(\lambda_i) = \varepsilon(\lambda_i,\lambda_l)\rho_{as}(\lambda_l),
+\end{equation}
+and therefore $\rho_w(\lambda_i)$ can be calculated using \autoref{eq:rhoam}.  The next step is find a way to relate $\varepsilon(\lambda_i,\lambda_l)$ from $\varepsilon(\lambda_s,\lambda_l)$. \cite{Gordon:1994} tried to find a relationship by computing  $\varepsilon(\lambda_i,\lambda_l)$ for several aerosol models that were developed by \cite{Shettle:1979} for the LOWTRAN-6 model. \autoref{fig:epsilonvslambda} shows sample results for $\varepsilon(\lambda_i,\lambda_l)$ for SeaWiFS for different aerosol models, where $\lambda_l=865nm$. It can be seen that over the range $412-865nm$, $\varepsilon(\lambda_i,\lambda_l)$ can be described as
+\begin{equation}\label{eq:epsilonexp}
+  \varepsilon(\lambda_i,\lambda_l) = \frac{\rho_{as}(\lambda_i)}{\rho_{as}(\lambda_l)} \approx exp[c(\lambda_i-\lambda_l)]
+\end{equation}
+where $c$ is a constant that depends on the viewing geometry and the aerosol model. 
 
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=11cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png}
+  \caption{$\varepsilon(\lambda,\lambda_l)$ values in natural logaritmic scale for different aerosol models and relative humidity (Note: image taken from \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
+  \vspace{0.5cm}
+\end{figure}
+
+The constant $c$ can be calculated using the known value $\varepsilon(\lambda_s,\lambda_l)$ for the NIR bands using \autoref{eq:seawifsam7} and \autoref{eq:seawifsam8}. If $c$ is known then \autoref{eq:rholambda_i} becomes
+\begin{equation}\label{eq:rholambda_ifinal}
+  \rho_{as}(\lambda_i) = exp[c(\lambda_i-\lambda_l)]\rho_{as}(\lambda_l),
+\end{equation}
+
+Once the aerosol single-scattering contribution is determined for the visible bands, $\rho_w$ can be calculated using \autoref{eq:rhoam}. The single-approximation is not longer an adequate approximation in cases where the aerosol are at least moderately absorbing (i.e. strong continental influence) or $\tau_a(\lambda)$ is sufficiently large. Therefore, a full multiple-scattering approach is needed for a more general application.
+
+
+
+%where $\rho_{as}^{(i)}$ for band $i$ is the single-scattering aerosol reflectance and $I=1..N$ denominates a set of $N$ simulated aerosol models obtained from, for example, an atmospheric radiative transfer model such as MODTRAN. This set of simulated aerosol models could be MODTRAN runs for different combination of particle size distribution (e.g. maritime, tropospheric, coastal, or urban), relative humidity, visibility, water vapor, etc., to simulate different atmosphere conditions that can occur in the scene.
 % -------------------
 \subsubsection{Multiple Scattering}
 As mentioned  previously, we need to calculate this total multiple-scattering aerosol reflectance $\rho_{am}$ in order to obtain the desired water-leaving reflectance $\rho_w$. \cite{Wang:1991} has shown that a near-linear relation exists between $\rho_a(\lambda)+\rho_{ra}(\lambda)$ for the multiple-scattering model and $\rho_{as}(\lambda)$ for the single-scattering model.
