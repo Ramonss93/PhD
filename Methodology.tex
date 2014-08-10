@@ -364,14 +364,14 @@ The aerosol is highly variable, and unlike the Rayleigh scattering component $\r
   \rho_{am}(\lambda) = \rho_a(\lambda)+\cancel{\rho_{ra}(\lambda)} \approx \rho_{as}(\lambda)
 \end{equation}
 where
-\begin{equation}
+\begin{equation}\label{eq:rhoas}
   \begin{gathered}
     \rho_{as}(\lambda) = \frac{\omega_a(\lambda)\tau_a(\lambda)p_a(\theta,\theta_0,\lambda)}{4\cos(\theta)\cos(\theta_0)},\\  
     p_a(\theta,\theta_0,\lambda) = P_a(\theta_{-},\lambda) + [r(\theta)+r(\theta_0)]P_a(\theta_{+},\lambda),\\
     \cos(\theta_{\pm}) = \pm \cos(\theta_0)\cos(\theta)-\sin(\theta_0)\sin(\theta)\cos(\phi-\phi_0)
   \end{gathered}
 \end{equation}
-and $r(\lambda)$ is the Fresnel reflectance of the interface for an incident angle $\theta$, $\rho_a(\lambda)$ is the aerosol optical thickness, $\omega_a(\lambda)$ is the aerosol single-scattering albedo, $P_a(\alpha,\lambda)$ is the aerosol scattering phase function for a scattering angle $\alpha$, $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sun, respectively, and $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sensor, respectively.
+and $r(\lambda)$ is the Fresnel reflectance of the interface for an incident angle $\theta$, $\tau_a(\lambda)$ is the aerosol optical thickness, $\omega_a(\lambda)$ is the aerosol single-scattering albedo, $P_a(\alpha,\lambda)$ is the aerosol scattering phase function for a scattering angle $\alpha$, $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sun, respectively, and $\theta_0$ and $\phi_0$ are the zenith and azimuth angles from the target to the sensor, respectively. 
 
 
 For Case 1 waters, the term $\rho_{w}$ is assumed to be zero for NIR bands. If we take the SeaWiFS case for band 7 ($\lambda_7=765nm$) and band 8 ($\lambda_8=865nm$), from \autoref{eq:rhoam}
@@ -392,7 +392,8 @@ where the indexes ``$s$'' and ``$l$'' stand for short and long wavelength, assoc
 \begin{equation}\label{eq:rholambda_i}
   \rho_{as}(\lambda_i) = \varepsilon(\lambda_i,\lambda_l)\rho_{as}(\lambda_l),
 \end{equation}
-and therefore $\rho_w(\lambda_i)$ can be calculated using \autoref{eq:rhoam}.  The next step is find a way to relate $\varepsilon(\lambda_i,\lambda_l)$ from $\varepsilon(\lambda_s,\lambda_l)$. \cite{Gordon:1994} tried to find a relationship by computing  $\varepsilon(\lambda_i,\lambda_l)$ for several aerosol models that were developed by \cite{Shettle:1979} for the LOWTRAN-6 model. \autoref{fig:epsilonvslambda} shows sample results for $\varepsilon(\lambda_i,\lambda_l)$ for SeaWiFS for different aerosol models, where $\lambda_l=865nm$. It can be seen that over the range $412-865nm$, $\varepsilon(\lambda_i,\lambda_l)$ can be described as
+
+The next step is find a way to relate $\varepsilon(\lambda_i,\lambda_l)$ from $\varepsilon(\lambda_s,\lambda_l)$. \cite{Gordon:1994} tried to find a relationship by computing  $\varepsilon(\lambda_i,\lambda_l)$ for several aerosol models that were developed by \cite{Shettle:1979} for the LOWTRAN-6 model. \autoref{fig:epsilonvslambda} shows sample results for $\varepsilon(\lambda_i,\lambda_l)$ for SeaWiFS for these different aerosol models, where $\lambda_l=865nm$. It can be seen that over the range $412-865nm$, $\varepsilon(\lambda_i,\lambda_l)$ can be described as
 \begin{equation}\label{eq:epsilonexp}
   \varepsilon(\lambda_i,\lambda_l) = \frac{\rho_{as}(\lambda_i)}{\rho_{as}(\lambda_l)} \approx exp[c(\lambda_i-\lambda_l)]
 \end{equation}
@@ -410,29 +411,57 @@ The constant $c$ can be calculated using the known value $\varepsilon(\lambda_s,
   \rho_{as}(\lambda_i) = exp[c(\lambda_i-\lambda_l)]\rho_{as}(\lambda_l),
 \end{equation}
 
-Once the aerosol single-scattering contribution is determined for the visible bands, $\rho_w$ can be calculated using \autoref{eq:rhoam}. The single-approximation is not longer an adequate approximation in cases where the aerosol are at least moderately absorbing (i.e. strong continental influence) or $\tau_a(\lambda)$ is sufficiently large. Therefore, a full multiple-scattering approach is needed for a more general application.
+Once the aerosol single-scattering contribution is determined for the visible bands, $\rho_w$ can be calculated using \autoref{eq:rhoam}, but assuming $\rho_{am}(\lambda)\approx\rho_{as}(\lambda)$. 
+
+The single-approximation is not longer an adequate approximation in cases where the aerosols are not at least moderately absorbing (i.e. strong continental influence) or $\tau_a(\lambda)$ is sufficiently large. Therefore, a full multiple-scattering approach is needed for a more general application.
 
 
 
 %where $\rho_{as}^{(i)}$ for band $i$ is the single-scattering aerosol reflectance and $I=1..N$ denominates a set of $N$ simulated aerosol models obtained from, for example, an atmospheric radiative transfer model such as MODTRAN. This set of simulated aerosol models could be MODTRAN runs for different combination of particle size distribution (e.g. maritime, tropospheric, coastal, or urban), relative humidity, visibility, water vapor, etc., to simulate different atmosphere conditions that can occur in the scene.
 % -------------------
 \subsubsection{Multiple Scattering}
-As mentioned  previously, we need to calculate this total multiple-scattering aerosol reflectance $\rho_{am}$ in order to obtain the desired water-leaving reflectance $\rho_w$. \cite{Wang:1991} has shown that a near-linear relation exists between $\rho_a(\lambda)+\rho_{ra}(\lambda)$ for the multiple-scattering model and $\rho_{as}(\lambda)$ for the single-scattering model.
+As mentioned  previously, we need to calculate this total multiple-scattering aerosol reflectance $\rho_{am}$ in order to obtain the desired water-leaving reflectance $\rho_w$. The multiple-scattering depends significantly on the aerosol model (\cite{Gordon:1997}). In the single-scattering approach previously described, the multiple-scattering was ignored and specific aerosol properties were not needed for the atmospheric correction. On the other hand, if we want to include the multiple-scattering effects in the atmospheric correction algorithm in order to obtain more accurate water reflectance $\rho_w$, it is necessary to utilize specific aerosol models. As a way to use the same reasoning used in the single-scattering algorithm, we can define multiple-scattering term as
+\begin{equation}\label{eq:multscat}
+  \rho_a(\lambda) + \rho_{ra}(\lambda) = K[\lambda,\rho_{as}(\lambda)]\rho_{as}(\lambda)
+\end{equation}
+where $K$ represents the relationship between the multiple-scattering and single-scattering. \cite{Wang:1991} has shown that a monotonic near-linear relation exists between $\rho_a(\lambda)+\rho_{ra}(\lambda)$ for the multiple-scattering model and $\rho_{as}(\lambda)$ for the single-scattering model. \cite{Gordon:1994} provided a LUT for $K[\lambda,\rho_{as}(\lambda)]$ by solving the radiative transfer equation (RTE) of a set of $N$ candidate aerosol models. These aerosol models were from, or derived from, the work of \cite{Shettle:1979}. This aerosol models are Oceanic, Maritime, Coastal and Tropospheric for different values of relative humidity (RH). The LUT was created for different sensor-sun geometry, single-scattering albedo and \AA ngstr\"{o}m exponent. The RTE is solved by using vector radiative transfer (\cite{IOCCG:2010}). For the SeaWiFS/MODIS algorithm, the $\rho_a(\lambda)+\rho_{ra}$ value for a given geometry is fit to a fourth order polynomial in the single-scattering aerosol reflectance $\rho_{as}(\lambda)$, i.e.,
+\begin{equation}\label{eq:polynomial}
+  \rho_a+\rho_{ra} = a\rho_{as}+b\rho_{as}^2+c\rho_{as}^3+d\rho_{as}^4
+\end{equation}
+where $a$, $b$, $c$ and $d$ are the constants contained in the LUT for a large number of viewing-sun geometries and for values of $\tau_a(\lambda)$ up to $0.8$.
 
+Same as the single-scattering approach, the assumption of negligible $\rho_w$ in the NIR allows to determine the quantities $\rho_a(\lambda_s)+\rho_{ra}(\lambda_s)$ and $\rho_a(\lambda_l)+\rho_{ra}(\lambda_l)$ in the NIR. Once these quantities are determined from the sensor-measured values, the $\rho_{as}(\lambda)$ values for the NIR bands are estimated from these quantities using the LUT. Furthermore, because $\rho_{as}(\lambda)$ depends on aerosol phase function, single-scattering albedo, and optical thickness, this value can be computed for each aerosol model. Then, the SSE values for the NIR bands (i.e. $\varepsilon(\lambda_s,\lambda_l)$) can be calculated from the single-scattering reflectance values for each aerosol model and the measured values using \autoref{eq:espilon}. 
 
-Because the zero water-leaving assumption is not valid over coastal and inland waters, and OLI does not include a second NIR band, I propose to use OLI's SWIR bands instead.
+In order to determine multiple-scattering values in the VIS, the most appropriate aerosol models are selected by comparing the SSE computed from the sensor-measured values with the ones computed from each aerosol model. This is accomplished in the following fashion. After deriving $\varepsilon(\lambda_s,\lambda_l)$, the next step is to estimate $\varepsilon(\lambda_i,\lambda_l)$. $\varepsilon(\lambda_s,\lambda_l)$ mostly falls between those for two of the $N$ aerosol models. Therefore, $\varepsilon(\lambda_i,\lambda_l)$ is assumed to fall between the same two aerosol models proportionately in the same manner as $\varepsilon(\lambda_s,\lambda_l)$. Then, \autoref{eq:rholambda_i} is used to estimate single-scattering value in the rest of the bands from $\rho_{as}(\lambda_l)$. 
 
-\subsection{SeaWiFS Algorithm for Case 2 Water}
-The next atmospheric correction method is based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS), and extended by \cite{Ruddick:2000bs} for use over turbid coastal and inland waters. The method developed by \cite{Gordon:1994} assumes a zero water-leaving radiance for the NIR bands, which is not valid for highly turbid coastal and inland waters. In order to overcome this problem, \cite{Ruddick:2000bs} replace this assumption with the assumptions of spatial homogeneity of the SeaWiFS's NIR bands ratio for aerosol reflectance and for water-leaving reflectance. These two ratios are used as calibration parameters after inspection of the Rayleigh-corrected reflectance scatterplot.
-% The second atmospheric correction method will be an extension of a method developed for SeaWiFS over turbid coastal and inland waters \cite{Ruddick:2000bs}. This method is a modified version of the methods developed by Gordon \cite{Gordon:1997} for ocean color satellites, but when the signal leaving the water does contribute to the overall signal beyond the NIR part of the spectrum. By using longer wavelengths and restricting the input pixels to open waters, these methods can be  applied to many fresh and coastal regions. The water surface reflectance values obtained after atmospheric correction will be validated through comparison to water surface reflectance measured in situ. 
+Finally, the LUT is used to transform single-scattering to multiple-scattering values to obtain $\rho_{am}(\lambda)$ and using \autoref{eq:rhoam} obtain $\rho_w(\lambda)$. 
 
+\noindent {\bf SeaWiFS/MODIS Atmospheric Correction Summary:}(\cite{Ruddick:2000bs})
+\begin{enumerate}[itemsep=2pt,parsep=2pt]
+  \item Enter the atmospheric correction routine with for Rayleigh-corrected reflectances $\rho_c(\lambda_s)$ and $\rho_c(\lambda_l)$.
+  \item Assuming water-leaving reflectances for NIR bands are equal to zero, set multiple-scattering aerosol reflectances $\rho_{am}(\lambda_s)$ and $\rho_{am}(\lambda_l)$ equal to Rayleigh-corrected reflectances.
+  \item Using the aerosol LUTs, calculate the corresponding single-scattering aerosol value at the two NIR bands, i.e. $\rho_{as}(\lambda_s)$ and $\rho_{as}(\lambda_l)$. Then, calculate corresponding SSE.
+  \item For each $N$ aerosol, compute the single-scattering value using \autoref{eq:rhoas}. Calculate corresponding SSE.
+  \item Select the best two aerosol model by comparing the retrieved SSE with the theoretical SSE and determine the interpolation ratio between them.
+  \item For the optimal aerosol model use the tabulated $\varepsilon(\lambda)$ in the VIS and $\varepsilon(\lambda_l)$ to obtain $\rho_{as}(\lambda)$ and then $\rho_{am}(\lambda)$ in the VIS using \autoref{eq:rholambda_i} and LUT.
+  \item Remove $\rho_{am}(\lambda)$ in the VIS from $\rho_c(\lambda)$ and divide by the corresponding atmospheric transmittance that corresponds to the best aerosol model to return $\rho_w(\lambda)$ in the VIS using \autoref{eq:rhoam}.
+\end{enumerate}
+% ------------------------------
 \subsection{SWIR bands Atmospheric Correction}
 Based on \cite{Wang:2007}.
+Because the zero water-leaving assumption is not valid over coastal and inland waters, and OLI does not include a second NIR band, I propose to use OLI's SWIR bands instead.
 
+% ------------------------------
+\subsection{SeaWiFS Algorithm for Case 2 Water}
+
+The next atmospheric correction method is based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS), and extended by \cite{Ruddick:2000bs} for use over turbid coastal and inland waters. The method developed by \cite{Gordon:1994} assumes a zero water-leaving radiance for the NIR bands, which is not valid for highly turbid coastal and inland waters. In order to overcome this problem, \cite{Ruddick:2000bs} replace this assumption with the assumptions of spatial homogeneity of the SeaWiFS's NIR bands ratio for aerosol reflectance and for water-leaving reflectance. These two ratios are used as calibration parameters after inspection of the Rayleigh-corrected reflectance scatterplot.
+% The second atmospheric correction method will be an extension of a method developed for SeaWiFS over turbid coastal and inland waters \cite{Ruddick:2000bs}. This method is a modified version of the methods developed by Gordon \cite{Gordon:1997} for ocean color satellites, but when the signal leaving the water does contribute to the overall signal beyond the NIR part of the spectrum. By using longer wavelengths and restricting the input pixels to open waters, these methods can be  applied to many fresh and coastal regions. The water surface reflectance values obtained after atmospheric correction will be validated through comparison to water surface reflectance measured in situ. 
+% ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Blue Band)}
-
+% ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Band Ratios)}
-% -----------------------------------------------
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{LUT generation}
 \begin{table}[!ht]
 \caption{ Concentration for the LUT generation. \label{tab:LUTconc} } 
