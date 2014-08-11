@@ -448,13 +448,52 @@ Finally, the LUT is used to transform single-scattering to multiple-scattering v
 \end{enumerate}
 % ------------------------------
 \subsection{SWIR bands Atmospheric Correction}
-Based on \cite{Wang:2007}.
-Because the zero water-leaving assumption is not valid over coastal and inland waters, and OLI does not include a second NIR band, I propose to use OLI's SWIR bands instead.
+
+For Case 2 or high productive Case 1 waters, specially turbid waters, there is a significant contribution from the water-leaving radiance and hence the zero water-leaving assumption the NIR bands is not valid anymore. This is often the case in inland and coastal waters and therefore the NIR bands cannot be used to atmospherically correct this kind of imagery. However, these kinds of waters are indeed black in the shortwave infrared (SWIR) bands ($\geq 1000nm$) due to stronger water absorption. So, we can use the same atmospheric correction procedure for the SeaWiFS and MODIS but replacing the NIR bands with the two OLI's SWIR band ($1690$ and $2200nm$) for the data processing, as suggested by \cite{Wang:2007,Wang:2005}. \cite{Wang:2007} evaluated different combinations of the MODIS' SWIR bands to atmospherically correct a specific case of study image and compare with the traditional algorithm (NIR bands). Actually, the lasted MODIS atmospheric algorithm uses an NIR-SWIR combined atmospheric correction approach that uses the NIR bands for Case 1 non-high productive water and the SWIR bands for Case 2 or high productive Case 1 waters, and a turbidity index to decide when to use them (\cite{Wang:2007dz}). 
 
 % ------------------------------
 \subsection{SeaWiFS Algorithm for Case 2 Water}
 
-The next atmospheric correction method is based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS), and extended by \cite{Ruddick:2000bs} for use over turbid coastal and inland waters. The method developed by \cite{Gordon:1994} assumes a zero water-leaving radiance for the NIR bands, which is not valid for highly turbid coastal and inland waters. In order to overcome this problem, \cite{Ruddick:2000bs} replace this assumption with the assumptions of spatial homogeneity of the SeaWiFS's NIR bands ratio for aerosol reflectance and for water-leaving reflectance. These two ratios are used as calibration parameters after inspection of the Rayleigh-corrected reflectance scatterplot.
+The next atmospheric correction method is based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS), and extended by \cite{Ruddick:2000bs} for use over turbid coastal and inland waters (Case 2) or high productive Case 1 waters. As stated previously, the methods developed by \cite{Gordon:1994} assumes a zero water-leaving radiance for the NIR bands, which is not valid for highly turbid coastal and inland waters. Backscatter from particles in this waters could contribute to signal in the NIR bands, causing a over-estimation of the aerosol contribution and therefore a under-estimation of the water-leaving reflectances, even leading to negative values in the visible, which is not possible. 
+
+In order to overcome this problem, \cite{Ruddick:2000bs} replaced the black water assumption with two assumptions: the assumption of spatial homogeneity of the SeaWiFS's NIR bands ratio ($765:865-nm$) for aerosol reflectance and for water-leaving reflectance. These two ratios are used as calibration parameters after inspection of the Rayleigh-corrected reflectance scatterplot. The algorithm is described in more details below.
+
+In order to extend the standard atmospheric correction to procedure to turbid water, two assumptions are used:
+
+\begin{enumerate}[itemsep=2pt,parsep=2pt]
+  \item At least over the ROI, the calibration parameter $\varepsilon_m(\lambda_s,\lambda_l)$, defined as the ratio of multiple-scattering aerosols and aerosol-Rayleigh reflectances at the NIR bands, is assumed to be spatially homogeneous, i.e.
+  \begin{equation}\label{eq:rhohomo}
+    \varepsilon_m(\lambda_s,\lambda_l)\equiv \frac{\rho_{am}(\lambda_s)}{\rho_{am}(\lambda_l)},
+  \end{equation}
+  and fixed for each image.
+
+  \item The calibration parameter $\alpha$, defined as the ratio of water-leaving reflectances normalized by the sun-sea atmospheric transmittance at the NIR bands $T_0{\lambda}$, is assumed to be spatially homogeneous, i.e.
+  \begin{equation}\label{eq:alpha}
+    \alpha \equiv \frac{\rho_w(\lambda_s)/T_0(\lambda_s)}{\rho_w(\lambda_l)/T_0(\lambda_l)},
+  \end{equation}
+  and fixed for each image.
+\end{enumerate}
+
+By using these two assumption, the multiple-scattering aerosol and the aerosol-Rayleigh reflectance for the NIR bands can be derived as
+
+\begin{equation}
+  \rho_{am}(\lambda_s) = \frac{\alpha\rho_c(\lambda_l)-\rho_c(\lambda_s)}{\alpha-\varepsilon_m(\lambda_s,\lambda_l)},
+\end{equation}
+and
+\begin{equation}
+  \rho_{am}(\lambda_l) = \varepsilon_m(\lambda_s,\lambda_l)\left[\frac{\alpha\rho_c(\lambda_l)-\rho_c(\lambda_s)}{\alpha-\varepsilon_m(\lambda_s,\lambda_l)}\right],
+\end{equation}
+
+Once these aerosol reflectances $\rho_{am}(\lambda_s)$ and $\rho_{am}(\lambda_l)$ are determined, they can be used in the standard algorithm, described in the previous section (instead of $\rho_c(\lambda_s)$ and $\rho_c(\lambda_l)$) to derive $\rho_w(\lambda)$ in the VIS.
+
+\cite{Ruddick:2000bs} suggested to determine the calibration parameter $\varepsilon_m(\lambda_s,\lambda_l)$ by inspection of the scatterplot between the Rayleigh-corrected reflectance $\rho_c$ in the NIR bands, as shown in \autoref{fig:ruddickplot}. This assumption is only valid for small scale space, where the aerosol type varies only weakly in space. As for the calibration parameter $\alpha$, \cite{Ruddick:2000bs} set it to a default value of $1.72$ 1.72, which is first-order estimate from a greatly simplified ocean color model. The derivation can be seen in \cite{Ruddick:2000bs} and will not be explained here.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=10cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RuddickPlot.png}
+  \caption{Scatterplot of Rayleigh-corrected reflectances at 765 and 865 nm for an subregion in a SeaWiFS image taken 28 October 1997, 12:15 UTC.  (Note: image taken from \cite{Ruddick:2000bs}). \label{fig:ruddickplot} } 
+  \vspace{0.5cm}
+\end{figure}
 % The second atmospheric correction method will be an extension of a method developed for SeaWiFS over turbid coastal and inland waters \cite{Ruddick:2000bs}. This method is a modified version of the methods developed by Gordon \cite{Gordon:1997} for ocean color satellites, but when the signal leaving the water does contribute to the overall signal beyond the NIR part of the spectrum. By using longer wavelengths and restricting the input pixels to open waters, these methods can be  applied to many fresh and coastal regions. The water surface reflectance values obtained after atmospheric correction will be validated through comparison to water surface reflectance measured in situ. 
 % ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Blue Band)}
