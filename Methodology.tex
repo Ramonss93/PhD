@@ -47,7 +47,7 @@ The first step to solve \autoref{eq:rho_t} is to find the term due to glint, $\r
 The method to remove the sun glint effect chosen for this study is the method suggested by \cite{Hedley:2005}, which is a revised version of the method suggested by \cite{Hochberg:2003}. The method described by Hochberg was developed for high spatial resolutions where glint effects occur at physical scales comparable to image pixels ($<10m$) as opposed to methods developed for ocean-color sensor, which tend to have large physical scales ($>1km$).
 The method presented by Hochberg is sensitive to outlier pixels and it needs to mask the land and cloud areas before deglinting. The method suggested by Hedley overcomes these inconveniences. This method assumes that (a) the brightness in the NIR is composed only by sun glint and a spatially constant ambient NIR component associated to NIR backscatter in the atmosphere (if the image is not atmospherically corrected), and (b) that the amount of sun glint in the visible bands is linearly related to the brightness in the NIR band. 
 
-The first assumption is true for waters that are not highly turbid since water is relatively opaque to NIR wavelength ($700-1000nm$). The second assumption of a linear relationship between NIR brightness and the amount of sun glint in the visible bands relays in the fact that the real index of refraction, which is associated with the reflection in the water surface, is nearly equal for NIR and visible wavelengths (\cite{Mobley1994}). As a result, the amount of light reflected in the visible bands is proportional to the amount of light reflected in the NIR, and therefore, a linear relationship can be established among them. The first step is to establish this relationship. This is accomplished by solving a linear regression between NIR and visible bands using one or more ROIs from the water pixels in the image where some sun glint is noticeable, and their pixels values would be of similar values otherwise. An example of ROI could be a ROI over deep water in the lake. A slope is determined from solving this linear regression with NIR pixel values in the ROI as the independent variable ($x$-axis) and a particular visible band as the dependent variable ($y$-axis), as shown in \todo{ref to fig.} FigureXXX. If the regression slope for band $i$ is $b_i$, then sun-glint corrected pixel brightness in band $i$ can be obtained by applying the following formula
+The first assumption is true for waters that are not highly turbid since water is relatively opaque to NIR wavelength ($700-1000nm$). The second assumption of a linear relationship between NIR brightness and the amount of sun glint in the visible bands relays in the fact that the real index of refraction, which is associated with the reflection in the water surface, is nearly equal for NIR and visible wavelengths (\cite{Mobley1994}). As a result, the amount of light reflected in the visible bands is proportional to the amount of light reflected in the NIR, and therefore, a linear relationship can be established among them. The first step is to establish this relationship. This is accomplished by solving a linear regression between NIR and visible bands using one or more ROIs from the water pixels in the image where some sun glint is noticeable, and their pixels values would be of similar values otherwise. An example of ROI could be a ROI over deep water in the lake. A slope is determined from solving this linear regression with NIR pixel values in the ROI as the independent variable ($x$-axis) and a particular visible band as the dependent variable ($y$-axis), as shown in \autoref{fig:regressiohedley}. If the regression slope for band $i$ is $b_i$, then sun-glint corrected pixel brightness in band $i$ can be obtained by applying the following formula
 \begin{equation}\label{eq:deglint}
   R_i' = R_i - b_i(R_{NIR}-min_{NIR})
 \end{equation}
@@ -60,7 +60,12 @@ where $R_i'$ is the sun-glint corrected pixel value in band $i$, $R_i$ is the pi
 {\bf Step 4:} Deglint all pixels in the image using \autoref{eq:deglint}.\\
 {\bf Step 5:} Repeat step 1-4 for each band to be deglinted.
 
-\missingfigure{Linear Regression from Hedley}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=11cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RegressionHedley.png}
+  \caption{Linear regression used in the deglinting process (Note: image taken from \cite{Hedley:2005}). \label{fig:regressiohedley} } 
+  \vspace{0.5cm}
+\end{figure}
 
 Some consideration need attention in order to be applied correctly. The first assumption is only valid when there is no water with high concentration of sediment present in the image, so precaution have to be taken to assure absent of highly turbid water in the image. As a way to overcome this problem, the OLI's SWIR band (band 6) will be used instead of the NIR band since the water-leaving signal is negligible at $1600nm$, as suggested by \cite{GeraceThesis}. The real part of the index of refraction is still nearly equal for all wavelengths in the VNIR/SWIR, and therefore the second assumption of a linear relationship between NIR values and the amount of sun glint in the visible band is still valid. Other consideration is that if the ROIs selected include non-submerged objects (i.e. buoys, boats, land), this algorithm could output negative values. Therefore, it is recommended to mask all non-submerged objects before applying this method.
 
@@ -446,10 +451,6 @@ Finally, the LUT is used to transform single-scattering to multiple-scattering v
   \item For the optimal aerosol model use the tabulated $\varepsilon(\lambda)$ in the VIS and $\varepsilon(\lambda_l)$ to obtain $\rho_{as}(\lambda)$ and then $\rho_{am}(\lambda)$ in the VIS using \autoref{eq:rholambda_i} and LUT.
   \item Remove $\rho_{am}(\lambda)$ in the VIS from $\rho_c(\lambda)$ and divide by the corresponding atmospheric transmittance that corresponds to the best aerosol model to return $\rho_w(\lambda)$ in the VIS using \autoref{eq:rhoam}.
 \end{enumerate}
-% ------------------------------
-\subsection{SWIR bands Atmospheric Correction}
-
-For Case 2 or high productive Case 1 waters, specially turbid waters, there is a significant contribution from the water-leaving radiance and hence the zero water-leaving assumption the NIR bands is not valid anymore. This is often the case in inland and coastal waters and therefore the NIR bands cannot be used to atmospherically correct this kind of imagery. However, these kinds of waters are indeed black in the shortwave infrared (SWIR) bands ($\geq 1000nm$) due to stronger water absorption. So, we can use the same atmospheric correction procedure for the SeaWiFS and MODIS but replacing the NIR bands with the two OLI's SWIR band ($1690$ and $2200nm$) for the data processing, as suggested by \cite{Wang:2007,Wang:2005}. \cite{Wang:2007} evaluated different combinations of the MODIS' SWIR bands to atmospherically correct a specific case of study image and compare with the traditional algorithm (NIR bands). Actually, the lasted MODIS atmospheric algorithm uses an NIR-SWIR combined atmospheric correction approach that uses the NIR bands for Case 1 non-high productive water and the SWIR bands for Case 2 or high productive Case 1 waters, and a turbidity index to decide when to use them (\cite{Wang:2007dz}). 
 
 % ------------------------------
 \subsection{SeaWiFS Algorithm for Case 2 Water}
@@ -476,11 +477,11 @@ In order to extend the standard atmospheric correction to procedure to turbid wa
 
 By using these two assumption, the multiple-scattering aerosol and the aerosol-Rayleigh reflectance for the NIR bands can be derived as
 
-\begin{equation}
+\begin{equation}\label{eq:rhoams}
   \rho_{am}(\lambda_s) = \frac{\alpha\rho_c(\lambda_l)-\rho_c(\lambda_s)}{\alpha-\varepsilon_m(\lambda_s,\lambda_l)},
 \end{equation}
 and
-\begin{equation}
+\begin{equation}\label{eq:rhoaml}
   \rho_{am}(\lambda_l) = \varepsilon_m(\lambda_s,\lambda_l)\left[\frac{\alpha\rho_c(\lambda_l)-\rho_c(\lambda_s)}{\alpha-\varepsilon_m(\lambda_s,\lambda_l)}\right],
 \end{equation}
 
@@ -494,11 +495,33 @@ Once these aerosol reflectances $\rho_{am}(\lambda_s)$ and $\rho_{am}(\lambda_l)
   \caption{Scatterplot of Rayleigh-corrected reflectances at 765 and 865 nm for an subregion in a SeaWiFS image taken 28 October 1997, 12:15 UTC.  (Note: image taken from \cite{Ruddick:2000bs}). \label{fig:ruddickplot} } 
   \vspace{0.5cm}
 \end{figure}
+
+\noindent {\bf SeaWiFS/MODIS Atmospheric Correction for Turbid Water Summary:}(\cite{Ruddick:2000bs})
+\begin{enumerate}[itemsep=2pt,parsep=2pt]
+  \item Enter the atmospheric correction routine to produce a scatter plot of Rayleigh-corrected reflectances $\rho_c(\lambda_s)$ and $\rho_c(\lambda_l)$) for the ROI of study, and select the calibration parameter $\varepsilon_m(\lambda_s,\lambda_l)$. Set calibration parameter$\alpha$ equal to 1.72.
+  \item Reenter the atmospheric correction routine with $\rho_c(\lambda_s)$ and $\rho_c(\lambda_l)$ and use \autoref{eq:rhoams} and \autoref{eq:rhoams} to obtain $\rho_{am}(\lambda_s)$ and $\rho_{am}(\lambda_l)$, taking account of nonzero water-leaving reflectances.
+
+  {\bf Note:} The following steps are the same as the standard algorithm.
+
+  \item Using the aerosol LUTs, calculate the corresponding single-scattering aerosol value at the two NIR bands, i.e. $\rho_{as}(\lambda_s)$ and $\rho_{as}(\lambda_l)$. Then, calculate corresponding SSE.
+  \item For each $N$ aerosol, compute the single-scattering value using \autoref{eq:rhoas}. Calculate corresponding SSE.
+  \item Select the best two aerosol model by comparing the retrieved SSE with the theoretical SSE and determine the interpolation ratio between them.
+  \item For the optimal aerosol model use the tabulated $\varepsilon(\lambda)$ in the VIS and $\varepsilon(\lambda_l)$ to obtain $\rho_{as}(\lambda)$ and then $\rho_{am}(\lambda)$ in the VIS using \autoref{eq:rholambda_i} and LUT.
+  \item Remove $\rho_{am}(\lambda)$ in the VIS from $\rho_c(\lambda)$ and divide by the corresponding atmospheric transmittance that corresponds to the best aerosol model to return $\rho_w(\lambda)$ in the VIS using \autoref{eq:rhoam}.
+\end{enumerate}
 % The second atmospheric correction method will be an extension of a method developed for SeaWiFS over turbid coastal and inland waters \cite{Ruddick:2000bs}. This method is a modified version of the methods developed by Gordon \cite{Gordon:1997} for ocean color satellites, but when the signal leaving the water does contribute to the overall signal beyond the NIR part of the spectrum. By using longer wavelengths and restricting the input pixels to open waters, these methods can be  applied to many fresh and coastal regions. The water surface reflectance values obtained after atmospheric correction will be validated through comparison to water surface reflectance measured in situ. 
+
+% ------------------------------
+\subsection{SWIR bands Atmospheric Correction}
+
+For Case 2 or high productive Case 1 waters, specially turbid waters, there is a significant contribution from the water-leaving radiance and hence the zero water-leaving assumption the NIR bands is not valid anymore. This is often the case in inland and coastal waters and therefore the NIR bands cannot be used to atmospherically correct this kind of imagery. However, these kinds of waters are indeed black in the shortwave infrared (SWIR) bands ($\geq 1000nm$) due to stronger water absorption. So, we can use the same atmospheric correction procedure for the SeaWiFS and MODIS but replacing the NIR bands with the two OLI's SWIR band ($1690$ and $2200nm$) for the data processing, as suggested by \cite{Wang:2007,Wang:2005}. \cite{Wang:2007} evaluated different combinations of the MODIS' SWIR bands to atmospherically correct a specific case of study image and compare with the traditional algorithm (NIR bands). Actually, the lasted MODIS atmospheric algorithm uses an NIR-SWIR combined atmospheric correction approach that uses the NIR bands for Case 1 non-high productive water and the SWIR bands for Case 2 or high productive Case 1 waters, and a turbidity index to decide when to use them (\cite{Wang:2007dz}). 
+
 % ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Blue Band)}
+To be completed from \cite{GeraceThesis}.
 % ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Band Ratios)}
+To be completed from \cite{GeraceThesis}.
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{LUT generation}
@@ -519,10 +542,8 @@ Once these aerosol reflectances $\rho_{am}(\lambda_s)$ and $\rho_{am}(\lambda_l)
 			120.0	& --	  &	--		\\
 			150.0	& --	  &	-- 		\\    
 	 	\end{tabular}
+    \vspace{1cm}
 	\end{table}
-
-
- 
 
 \begin{table}[!ht]
 \caption{ Concentration for the LUT generation. \label{tab:LUTconc2} } 

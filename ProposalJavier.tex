@@ -135,8 +135,8 @@
 
 % Added 11-15-13 ----------------------------------------
 % \includeonly{Introduction,Objectives,Background_and_Theory,Methodology,Results,Summary,Appendix} 
-\includeonly{Methodology} 
-% \includeonly{Introduction,Objectives,Methodology} 
+% \includeonly{Methodology} 
+\includeonly{Introduction,Objectives,Methodology} 
 \usepackage{tikz} % for flow charts
   \usetikzlibrary{shapes,arrows,positioning,shadows,calc}
 \usepackage{colortbl}
@@ -186,9 +186,9 @@
 
 \begin{abstract}
 \setlength{\parindent}{20pt}
-The Landsat Data Continuity Mission (LDCM; a.k.a. Landsat-8), recently launched (February 2013), is the next generation of Landsat satellite and continues with more than 40 years of continuing imaging acquisition, playing a critical role in monitoring, understanding and managing natural resources such as water. Landsat-8, with its improved spectral bands and radiometric resolution, has the potential to dramatically improve our ability to simultaneously retrieve the three primary coloring agents, chlorophyll (Chl), colored dissolved organic material (CDOM) and suspended material (SM) from water bodies. This work presents the results obtained so far. To date, the method has been tested on Landsat-5 images because Landsat-8 images are still not available.
+The Landsat Data Continuity Mission (LDCM; a.k.a. Landsat-8), recently launched (February 2013), is the next generation of Landsat satellite and continues with more than 40 years of continuing imaging acquisition, playing a critical role in monitoring, understanding and managing natural resources such as water. Landsat-8, with its improved spectral bands and radiometric resolution, has the potential to dramatically improve our ability to simultaneously retrieve the three primary coloring agents, chlorophyll (Chl), colored dissolved organic material (CDOM) and suspended material (SM) from water bodies. This work presents the results obtained so far.
 
-In the Case 2 water problem, the sensor-reaching signal due to water is very small when compared to the signal due to the atmospheric effects. Therefore, adequate atmospheric correction becomes an important first step to accurately retrieving water parameters. As a first approach, a model based empirical line method (ELM) atmospheric correction method converts sensor-reaching radiance to water leaving reflectance. This model employs pseudo invariant feature (PIF) pixels extraction from Landsat images along with an in water radiative transfer model (HydroLight) to obtain the field spectra. Further atmospheric compensation technique will be investigated.
+In the Case 2 water problem, the sensor-reaching signal due to water is very small when compared to the signal due to the atmospheric effects. Therefore, adequate atmospheric correction becomes an important first step to accurately retrieving water parameters. As a first approach, a model based empirical line method (ELM) atmospheric correction method converts sensor-reaching radiance to water leaving reflectance. This model employs pseudo invariant feature (PIF) pixels extraction from Landsat images along with an in water radiative transfer model (HydroLight) to obtain the field spectra. Further atmospheric compensation technique based in algorithms currently used in Ocean Color sensor will be investigated.
 
 A look-up-table (LUT) methodology is implemented to retrieve the water parameters. The LUT is created using HydroLight.
 
