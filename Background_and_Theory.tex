@@ -3,52 +3,69 @@
 %% CHAPTER
 \chapter{ Background and Theory}
 \label{ch:background}
-% -----------------------------------------------------------------------------
-\section{ IOPs}
+% ----------------------------------------------------
+\section{Remote Sensing of Water}
 
-Absorption Coefficient.
-Scattering Coefficient.
+\subsection{Sensor-reaching Radiance}
+\subsubsection{Reflective Paths}
+\subsubsection{Governing Equation}
 
-bb, Bb
+\subsection{Governing Equation}
+
+\hl{The comparison is performed in the reflectance domain.}
+
+\hl{CHL, SM and CDOM explanation}
+
+From the total energy coming from the sun, only approximately 1390 $\left[\frac{W}{m^2}\right]$ reaches the Earth's atmosphere \cite{Schott}. This integrated value is known as the \emph{exoatmospheric irradiance}, or $E_S'$, and represents the total energy per unit area just outside the Earth's atmosphere due to the solar energy. Recall that \emph{irradiance} is the rate at which the radiant flux ($\Phi$) is delivered to a surface ($A$), defined as
+
+\begin{equation} \label{eq:irradiance}
+E = \frac{d\Phi}{dA}   \indent   \indent  \left[\frac{W}{m^2}\right]  
+\end{equation} 
+
+So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an existence at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band.
+
+The light source, usually the sun, interact with the target and then reach the sensor. This interaction will help us to extract about the target, in this case the water body. That is why in order to understand how the water quality parameter are retrieved, first it is necessary to introduce the concept of sensor reaching radiance. The sensor reaching radiance is defined as the accumulation of photons at the front of a sensor that one wishes to collect in an effort to obtain information about the target \cite{GeraceThesis} . The total sensor-reaching radiance is the sum of the radiances due to the individual solar and thermal paths.  \cite{Schott} shows that in the VNIR region (approximately 0.3-2.5 [$\mu m$]), the solar energy is so many orders of the magnitude higher than the self-emitted energy, so the thermal paths are negligible for this study. Also, we consider that radiance from the background is negligible because the water bodies are typically several kilometers wide. Assuming that the target is approximately Lambertian (radiance is equal in all directions), the total sensor-reaching radiance, $L$, is defined as \begin{equation} \label{eq:gov1} L(\lambda) = \frac{E'_S(\lambda)cos(\sigma')r(\lambda)\tau_1(\lambda)\tau_2(\lambda)}{\pi} +
+                        \frac{E_{ds}(\lambda)r(\lambda)\tau_2(\lambda)}{\pi} + L_{us}(\lambda)
+\end{equation} 
+where:
+\begin{tabbing}
+\indent \indent \indent  $L(\lambda)$ \hspace{1mm}\=:  \indent \= total sensor-reaching radiance\\
+\indent \indent \indent  $E'_S(\lambda)$\>: \>exoatmospheric spectral irradiance\\
+\indent \indent \indent $\sigma'$\>:\>solar-zenith angle\\
+\indent \indent \indent $r(\lambda)$\>:\>spectral reflectance target\\
+\indent \indent \indent $\tau_1(\lambda)$\>:\>Sun-target path transmission of atmosphere\\
+\indent \indent \indent $\tau_2(\lambda)$\>:\>target-sensor path transmission of atmosphere\\
+\indent \indent \indent $E_{ds}(\lambda)$\>:\>solar downwelling irradiance\\
+\indent \indent \indent $L_{u}(\lambda)$\>:\>solar upwelling irradiance\\
+\end{tabbing}
+
+Equation \eqref{eq:gov1} is the solar term of the "big equation" described by \cite{Schott}.
 
 
-VSF
 
-Volumen Scattering Phase Function, or $\beta{hat}$ 
-% -----------------------------------------------------------------------------
-\section{ AOPs}
-Remote Sensing Reflectance
-% -----------------------------------------------------------------------------
-\section{ Landsat-8}
-Landsat-5, Landsat-7
-MODIS, VIRSS
-% -----------------------------------------------------------------------------
-\section{ Water Components}
+\subsection{Signal Component}
+\subsubsection{Bottom}
+\subsubsection{Water Constituents}
 Pure Water. Chl (pigments). CDOM (or DOM). SM or minerals.
-% -----------------------------------------------------------------------------
-\section{Retrieval Algorithms}
-Inversion algorithm 
-
-% -----------------------------------------------------------------------------
-\section{Atmospheric Effect and Water} 
-% -----------------------------------------------------------------------------
+% ----------------------------------------------------
+\subsubsection{Atmospheric Effect and Water} 
 The goal of this section is to describe the different approaches used to atmospherically correct satellite imagery over water. First, we need to understand the effect of the atmosphere on the propagating energy. To do so, a description of the processes involved in the energy interaction in the atmosphere are described in the first part of this section. Later on, different techniques for atmospherically correcting satellite images are defined.
 
-\subsection{ Energy Interaction in the Atmosphere }
+\subsubsection*{Energy Interaction in the Atmosphere }
 
 The smallest non-molecular particles that are responsible for scattering are aerosols. Aerosol can be defined as dispersed systems of particles of small particles, liquid or solid, suspended in a gas, like atmospheric air. Therefore dust, haze, smoke, smog, fog, mist, and clouds can be considered to be specific aerosol types. The typical size and number density for non-molecular particles are shown in Table \ref{tab:aerosol_size}
 
 %--------------------------------------
-\begin{table}[h!]
+\begin{table}[htb]
 \caption{ Typical sizes and typical number density for non-molecular particles. \label{tab:aerosol_size} } 
 \centering
 \begin{tabular}{c|c|c}
-        	\bfseries{Particle}  	& \bfseries{Size}  & \bfseries{Number Density} \\ 
-	& $[\mu m]$  		& $[m^{-3}]$ 			\\ \hline \hline
-		Aerosol (e.g. Haze)	& $0.01-1$ 	& 	$10^7-10^9$		\\
-		Fog			& 1-10		&	$10^7-10^8$		\\
-		Cloud			& 1-10		&	$10^7-10^9$		\\
-		Rain		& $10^2-10^4$		&	$10^3-10^4$		\\   
+          \bfseries{Particle}   & \bfseries{Size}  & \bfseries{Number Density} \\ 
+  & $[\mu m]$     & $[m^{-3}]$      \\ \hline \hline
+    Aerosol (e.g. Haze) & $0.01-1$  &   $10^7-10^9$   \\
+    Fog     & 1-10    & $10^7-10^8$   \\
+    Cloud     & 1-10    & $10^7-10^9$   \\
+    Rain    & $10^2-10^4$   & $10^3-10^4$   \\   
  \end{tabular}
 \end{table}
 
@@ -77,10 +94,309 @@ The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacit
 \end{equation}
 
 
-\subsection{ Atmospheric Correction for Ocean Color Satellites }
+
+\subsubsection*{Atmospheric Absorption}
+\addcontentsline{toc}{subsubsection}{Atmospheric Absorption}
+
+\subsubsection*{Atmospheric Scattering}
+\addcontentsline{toc}{subsubsection}{Atmospheric Scattering}
+
+\subsubsection*{Atmospheric Effect Removal}
+\addcontentsline{toc}{subsubsection}{Atmospheric Effect Removal}
+
+\todo{fit content below}
+{\it Atmospheric Correction for Ocean Color Satellites }
 \cite{Gordon:1994} developed an algorithm for atmospherically correcting SeaWiFS data.
 
-\subsection{ Empirical Line Method}
+\subsubsection{Glint Effect}
+
+\subsubsection*{Sun Glint}
+\addcontentsline{toc}{subsubsection}{Sun Glint}
+
+\subsubsection*{Sky Glint}
+\addcontentsline{toc}{subsubsection}{Sky Glint}
+% ----------------------------------------------------
+\subsection{Water Constituents Retrieval}
+See \cite{Jensen} and \cite{Mustard2001}.
+
+\subsubsection{In Water Radiative Transfer}
+
+\subsubsection*{Radiometric Quantities}
+\addcontentsline{toc}{subsubsection}{Radiometric Quantities}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
+\caption{Radiance (Figure from \cite{Mobley:2001}) \label{fig:radiance} } 
+\end{figure}
+\todo{can I use a fig. from other author?} 
+where:\\
+      \noindent $\Delta Q$: radian energy incident \\
+      $\Delta t$: time interval \\
+      $\Delta A$: surface area at location (x,y,z)\\
+      $\Delta\Omega$: solid angle in direction ($\theta$,$\varphi$) \\
+      $\Delta\lambda$: photons wavelength interval
+% ----------------------------------------------------
+
+\begin{equation}
+  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
+\end{equation}
+
+\begin{equation}
+  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
+\end{equation}
+
+
+{\bf Radiometric Quantities}
+\textbf{Spectral downwelling scalar irradiance} at depth z:
+\begin{equation}
+  E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+\textbf{Spectral upwelling scalar irradiance} at depth z:
+\begin{equation}
+  E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+\textbf{Spectral scalar irradiance} at depth z:
+\begin{align}
+  E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\\
+           &=\int_{4\pi} L(z,\theta,\varphi,\lambda)d\Omega
+\end{align}
+
+\textbf{Spectral downwelling plane irradiance} at depth z:
+\begin{equation}
+  E_{d}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)|cos\theta|d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+Photosynthetic available radiation, \textbf{PAR}:
+\begin{equation}
+  PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
+\end{equation}
+
+    \begin{figure}[H]
+    \centering
+    \includegraphics[height=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/IOPgeo.png}
+    \caption{caption \label{label} } 
+    \end{figure}
+
+% ------------------------------------------------
+\subsubsection*{IOPs}
+\addcontentsline{toc}{subsubsection}{IOPs}
+Absorption Coefficient.
+Scattering Coefficient.
+
+bb, Bb
+
+
+VSF
+
+Volumen Scattering Phase Function, or $\beta{hat}$ 
+
+    \textbf{Absorption coefficient:}
+    \begin{equation}
+      a(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_a(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+    \end{equation}
+    \textbf{Scattering coefficient:}
+    \begin{equation}
+      b(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_s(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+    \end{equation}
+    \textbf{Attenuation coefficient:}
+    \begin{equation}
+      c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right]
+    \end{equation}
+
+
+{\bf Inherent Optical Properties}
+Contributions by the various components to the absorption coefficient
+\begin{figure}[H]
+\centering
+      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
+\end{figure}
+
+
+\begin{figure}[H]
+\centering
+      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
+\end{figure}
+
+
+Volume scattering function, \textbf{VSF}:
+\begin{equation}
+  \beta(\psi,\lambda)\equiv \lim_{\Delta r\to 0} \lim_{\Delta \Omega\to 0}  \frac{\Phi_s(\psi,\lambda)}{\Phi_i(\lambda)\Delta r\Delta \Omega}~~\left[m^{-1}sr^{-1} \right]
+\end{equation}
+but $\Phi_s(\psi,\lambda)=I_s(\psi,\lambda)\Delta \Omega$ and $E_i(\lambda)=\Phi_i(\lambda)/\Delta A \Rightarrow$
+\begin{equation}
+  \beta(\psi,\lambda)= \lim_{\Delta V\to 0} \frac{I_s(\psi,\lambda)}{E_i(\lambda)\Delta V}~~\left[m^{-1}sr^{-1} \right]
+\end{equation}
+with $\Delta V=\Delta r\Delta A$
+
+Scattering coefficient from VSF:
+\begin{equation}
+  b(\lambda)=\int_{4\pi} \beta(\psi,\lambda)d\Omega=2\pi\int_0^\pi \beta(\psi,\lambda)sin\psi d\psi
+\end{equation}
+And \textbf{backscatter coefficient}:
+\begin{equation}
+  b_b(\lambda)\equiv 2\pi\int_{\pi/2}^\pi \beta(\psi,\lambda)sin\psi d\psi
+\end{equation}
+
+
+\begin{figure}[H]
+\centering
+      \includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
+\end{figure}
+Example VSFs:\\
+\textcolor{blue}{blue curve} : clear, open ocean water ($\lambda = 514 nm$)\\
+\textcolor{green}{green curve} : harbor ($\lambda = 514 nm$)\\
+\textcolor{red}{red curve} : very productive coastal waters ($\lambda = 530 nm$)
+
+\textbf{Backscatter fraction:}
+\begin{equation}
+  B_b=\frac{b_b}{b}
+\end{equation}
+\textbf{Single-scattering albedo:}
+\begin{equation}
+  \omega_o=\frac{b(\lambda)}{c(\lambda)}
+\end{equation}
+\textbf{Volumen scattering phase function:}
+\begin{equation}
+  \tilde{\beta}(\psi,\lambda)\equiv \frac{\beta(\psi,\lambda)}{b(\lambda)}~~\left[sr^{-1} \right]\Rightarrow \beta(\psi,\lambda)=b(\lambda)\tilde{\beta}(\psi,\lambda)
+\end{equation}
+
+
+{Optical Constituents of Water}
+\begin{itemize}
+  \item Water
+  \item Dissolved Organic Compounds (CDOM)
+  \item Organic Particles (Chlorophyll)
+  \item Inorganic Particles (Suspended Matter)
+\end{itemize}
+
+\textbf{Total IOP:}
+
+\begin{equation}
+  a_{total}(z,\lambda) = \sum_{i=1}^{ncomp} a_i(z,\lambda)
+\end{equation}
+e.g.,
+\begin{equation}
+  a_{total}(z,\lambda) =  a_w(\lambda) +a_{CDOM}(z,\lambda)+ a_{Chl}(z,\lambda)+a_{SM}(z,\lambda) \notag
+\end{equation}
+
+
+% ----------------------------------------------------
+\subsubsection*{The Radiative Transfer Equation}
+\addcontentsline{toc}{subsubsection}{The Radiative Transfer Equation}
+\textbf{RTE} expresses conservation of energy for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium
+
+\vspace{\baselineskip}
+
+The \textbf{RTE}:
+\begin{align}
+  \cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
+  &+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
+  &+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
+\end{align}
+
+\begin{figure}[H]
+\centering
+      \includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE1.png}
+\end{figure}
+
+\begin{equation}
+  -c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag 
+\end{equation}
+
+\begin{figure}[H]
+\centering
+      \includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
+\end{figure}
+
+\begin{equation}
++\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag
+\end{equation}
+
+{\centering
+\begin{equation}
+  S(z,\theta,\varphi,\lambda) \notag
+\end{equation}}
+
+\begin{itemize}
+
+\item {$S$ account for bioluminescence or inelastic-scattering processes}
+
+\vspace{\baselineskip}
+
+\item For example, the model is first run at the wavelength of excitation, $\lambda_{ex}$ to compute the energy shifted by inelastic scattering from $\lambda_{ex}$ to another wavelength $\lambda$, and the model is run again at $\lambda$, with the radiance shifted from $\lambda_{ex}$ appearing as a source term $S$ at $\lambda$
+
+\end{itemize}
+
+The \textbf{RTE}:
+\begin{align}
+  \cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
+  &+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
+  &+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
+\end{align}
+% ----------------------------------------------------
+\subsubsection*{AOPs}
+\addcontentsline{toc}{subsubsection}{AOPs}
+\textbf{AOPs:} depend both on the medium and on the directional structure of the ambient light field
+
+\vspace{\baselineskip}
+
+\textbf{Irradiance reflectance:}
+\begin{equation}
+  R(z,\lambda)\equiv \frac{E_u(z,\lambda)}{E_d(z,\lambda)}
+\end{equation}
+\textbf{Remote sensing reflectance:}
+\begin{equation}
+  R_{rs}(\theta,\varphi,\lambda)\equiv \frac{L_w(\theta,\varphi,\lambda)}{E_d(\lambda)}~~\left[sr^{-1} \right]
+\end{equation}
+where $L_w$ is the \textbf{water-leaving radiance}
+
+Under typical oceanic conditions, irradiances and radiances decrease exponentially with depth, then
+\begin{equation}
+  E_d(z,\lambda)\equiv E_d(0,\lambda) exp\left[-\int_0^{z}K_d(z',\lambda)dz'\right]
+\end{equation}
+where $K_d(z,\lambda)$ is the \textbf{spectral diffuse attenuation coefficient} for spectral downwelling plane irradiance. 
+\begin{align}
+  K_d(z,\lambda)  &=- \frac{d\ln E_d(z,\lambda)}{dz} \notag \\
+          &=-\frac{1}{E_d(z,\lambda)}\frac{dE_d(z,\lambda)}{dz} ~~\left[m^{-1} \right]
+\end{align}
+
+\textbf{Note:} IOPs are additive whereas AOPs are not
+
+% ------------------------------------------
+\subsection{Constituent Retrieval}
+
+When imaging water body, a set of new paths need to be taken in account to determine the sensor-reaching radiance.
+ \begin{figure}[H]
+  \centering
+      \includegraphics[width=100mm]{/Users/javier/Desktop/Javier/MASTER_RIT/2011_THESIS/LaTeX/Thesis/Images/WaterColumn.eps}
+  \caption{Contributions to sensor-reaching radiance from the water column \label{fig:WaterColumn}}
+  \end{figure}
+
+
+Each sensor-reaching radiance curve is associated with a specific combination of water components (CHL, SM and CDOM). HidroLight provides us the \hl{remote sensing reflectance}, $R_{RS}$, which describes how much of the total incident downwelling irradiance is ultimately returned from a water column in a given direction, defined as
+
+\begin{equation} \label{eq:Rrs}
+R_{RS}(\theta,\phi,\lambda,z=a) = \frac{L(\theta,\phi,\lambda,z=a)}{E_d(\lambda,z=a)}   \indent   \indent  \left[\frac{1}{sr}\right]  
+\end{equation} 
+where:
+\begin{tabbing}
+\indent \indent \indent  $\theta$ \hspace{1.5mm}\=:  \indent \= sensor-zenith angle\\
+\indent \indent \indent  $\phi$\>: \>sensor-azimuth angle\\
+\indent \indent \indent $L$\>:\>water-leaving radiance\\
+\indent \indent \indent $E_d$\>:\>total downwelling irradiance\\
+\indent \indent \indent $\lambda$\>:\>wavelength dependent\\
+\indent \indent \indent $a$\>:\>height just above the water's surface\\
+\end{tabbing}
+
+
+% ----------------------------------------------------
+\section{ Landsat-8}
+Landsat-5, Landsat-7
+MODIS, SeaWiFS
+
+
+% ----------------------------------------------
+\section{ Empirical Line Method}
 \label{subsec:ELM}
 The {\it empirical line method}\index{ELM} (ELM) is a method for calibration of image data to reflectance that uses ground truth.The ELM uses a linear regression in each band to relate digital counts or radiance to reflectance \cite{Schott}. The ground truth can be in general  either control panels or ad hoc control surfaces of known reflectance. These ground truth objects need to be approximately Lambertian to minimize any errors that could be introduced by sensor view angles effects. Also, this calibration targets are assumed flat and level, with no neighboring obscuration, and homogeneous as well. The ELM method generally assumes that the atmosphere is constant over the complete scene. If that is not the case, corrections must be made for changes in the atmosphere over the scene. The regression to be solved for each band in the ELM method is given by
 \begin{equation}
@@ -111,8 +427,6 @@ An ELM target needs to have a size at least three times the ground instantaneous
 
 \subsection{Band Ratio}
 
-
-\subsection{TAFKAA}
 % -----------------------------------------------------------------------------
 \section{Landsat Surface Reflectance CDR}
 \label{sec:CDR} 
@@ -127,9 +441,9 @@ The LEDAPS algorithm works in the following fashion. First, calibrated images fr
 where $\rho_s$ is the surface reflectance, $T_g$ is the gaseous transmission due to the atmospheric gases, $T_{R+A}$ is Rayleigh and aerosol transmission, $\rho_{R+A}$ is the Rayleigh and aerosols atmospheric intrinsic reflectance, and $S_{R+A}$ is the Rayleigh and aerosols spherical albedo. The 6S radiative transfer code is utilized to compute the transmission, intrinsic reflectance, and spherical albedo terms. Ozone concentrations and column water vapor are derived from ancillary data. The aerosol optical thickness (AOP) is extracted directly from the imagery by using the dark, dense vegetation (DDV) method of Kaufman {\it et al.} \todo{add reference}.This method postulates a linear relation between SWIR surface reflectance and reflectance in the visible bands, based on the physical correlation between chlorophyll absorption and bound water absorption \todo{Research more about AOT and the Kaufman method!!!}. Finally, the derived AOT, ozone, atmospheric pressure, and water vapor are supplied to the 6S radiative transfer algorithm, which then inverts TOA reflectance to surface reflectance using \autoref{eq:TOAref}. 
 
 According to the author in \cite{LandsatCDR}, the Landsat reflectance product has to be used with caution in coastal regions where land area is small relative to adjacent water because the efficacy of the surface correction is likely to be reduced. This product was available only for Landsat 4 TM, Landsat 5 TM and Landsat 7 ETM+ At the time of this publication. An quality assurance (QA) layers is attached to this product and it can be used for pixel-level conditions and validity production. The surface reflectance products is available in the earthexplorer.com website in a HDF-EOS package that contains all necessary files and it can be read in ENVI (through an ENVI header file).
-% -----------------------------------------------------------------------------
+% ----------------------------------------------------
 \section{MODTRAN}
-% -----------------------------------------------------------------------------
+% ----------------------------------------------------
 \section{HydroLight}
 HydroLight is a radiative transfer numerical model written in Fortran \cite{MobleyHE}. It computes radiance distributions and derived quantities (e.g. irradiances, reflectances, K functions, etc.) for natural water bodies. It was developed by Dr. Curtis Mobley for over 20 years (since 1989) and is a commercial software product of Squoia Scientific, Inc.
 
@@ -147,7 +461,7 @@ HydroLight is a radiative transfer numerical model written in Fortran \cite{Mobl
 % \end{columns}
 % \end{figure}
 \todo{Try to fix fig and talk about it.}
-\begin{figure}
+\begin{figure}[htb]
 % \resizebox{1.0\textwidth}{!}{%
 	\centering
   \begin{tikzpicture}[node distance=0.75cm, auto]
@@ -188,294 +502,7 @@ The HydroLight physical model has the following characteristics:
 	\item Polarization not included.
 \end{itemize}
 
-\begin{figure}[H]
-	\centering
-	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
-\caption{Radiance (Figure from \cite{Mobley:2001}) \label{fig:radiance} } 
-\end{figure}
-\todo{can I use a fig. from other author?} 
-where:\\
-			\noindent $\Delta Q$: radian energy incident \\
-			$\Delta t$: time interval \\
-			$\Delta A$: surface area at location (x,y,z)\\
-			$\Delta\Omega$: solid angle in direction ($\theta$,$\varphi$) \\
-			$\Delta\lambda$: photons wavelength interval
-% -----------------------------------------------------------------------------
-
-\begin{equation}
-	L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
-\end{equation}
-
-\begin{equation}
-	L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
-\end{equation}
-
-
-{\bf Radiometric Quantities}
-\textbf{Spectral downwelling scalar irradiance} at depth z:
-\begin{equation}
-	E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
-\end{equation}
-\textbf{Spectral upwelling scalar irradiance} at depth z:
-\begin{equation}
-	E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
-\end{equation}
-\textbf{Spectral scalar irradiance} at depth z:
-\begin{align}
-	E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\\
-					 &=\int_{4\pi} L(z,\theta,\varphi,\lambda)d\Omega
-\end{align}
-
-\textbf{Spectral downwelling plane irradiance} at depth z:
-\begin{equation}
-	E_{d}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)|cos\theta|d\Omega~~\left[Wm^{-2}nm^{-1} \right]
-\end{equation}
-Photosynthetic available radiation, \textbf{PAR}:
-\begin{equation}
-	PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
-\end{equation}
-
-		\begin{figure}[H]
-		\centering
-		\includegraphics[height=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/IOPgeo.png}
-		\caption{caption \label{label} } 
-		\end{figure}
-
-		\textbf{Absorption coefficient:}
-		\begin{equation}
-			a(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_a(\lambda)}{\Delta r}~~\left[m^{-1} \right]
-		\end{equation}
-		\textbf{Scattering coefficient:}
-		\begin{equation}
-			b(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_s(\lambda)}{\Delta r}~~\left[m^{-1} \right]
-		\end{equation}
-		\textbf{Attenuation coefficient:}
-		\begin{equation}
-			c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right]
-		\end{equation}
-
-{\bf Inherent Optical Properties}
-Contributions by the various components to the absorption coefficient
-\begin{figure}[H]
-\centering
-  		\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
-\end{figure}
-
-
-\begin{figure}[H]
-\centering
-  		\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
-\end{figure}
-
-
-Volume scattering function, \textbf{VSF}:
-\begin{equation}
-	\beta(\psi,\lambda)\equiv \lim_{\Delta r\to 0} \lim_{\Delta \Omega\to 0}  \frac{\Phi_s(\psi,\lambda)}{\Phi_i(\lambda)\Delta r\Delta \Omega}~~\left[m^{-1}sr^{-1} \right]
-\end{equation}
-but $\Phi_s(\psi,\lambda)=I_s(\psi,\lambda)\Delta \Omega$ and $E_i(\lambda)=\Phi_i(\lambda)/\Delta A \Rightarrow$
-\begin{equation}
-	\beta(\psi,\lambda)= \lim_{\Delta V\to 0} \frac{I_s(\psi,\lambda)}{E_i(\lambda)\Delta V}~~\left[m^{-1}sr^{-1} \right]
-\end{equation}
-with $\Delta V=\Delta r\Delta A$
-
-Scattering coefficient from VSF:
-\begin{equation}
-	b(\lambda)=\int_{4\pi} \beta(\psi,\lambda)d\Omega=2\pi\int_0^\pi \beta(\psi,\lambda)sin\psi d\psi
-\end{equation}
-And \textbf{backscatter coefficient}:
-\begin{equation}
-	b_b(\lambda)\equiv 2\pi\int_{\pi/2}^\pi \beta(\psi,\lambda)sin\psi d\psi
-\end{equation}
-
-
-\begin{figure}[H]
-\centering
-  		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
-\end{figure}
-Example VSFs:\\
-\textcolor{blue}{blue curve} : clear, open ocean water ($\lambda = 514 nm$)\\
-\textcolor{green}{green curve} : harbor ($\lambda = 514 nm$)\\
-\textcolor{red}{red curve} : very productive coastal waters ($\lambda = 530 nm$)
-
-\textbf{Backscatter fraction:}
-\begin{equation}
-	B_b=\frac{b_b}{b}
-\end{equation}
-\textbf{Single-scattering albedo:}
-\begin{equation}
-	\omega_o=\frac{b(\lambda)}{c(\lambda)}
-\end{equation}
-\textbf{Volumen scattering phase function:}
-\begin{equation}
-	\tilde{\beta}(\psi,\lambda)\equiv \frac{\beta(\psi,\lambda)}{b(\lambda)}~~\left[sr^{-1} \right]\Rightarrow \beta(\psi,\lambda)=b(\lambda)\tilde{\beta}(\psi,\lambda)
-\end{equation}
-
-{Apparent Optical Properties}
-\textbf{AOPs:} depend both on the medium and on the directional structure of the ambient light field
-
-\vspace{\baselineskip}
-
-\textbf{Irradiance reflectance:}
-\begin{equation}
-	R(z,\lambda)\equiv \frac{E_u(z,\lambda)}{E_d(z,\lambda)}
-\end{equation}
-\textbf{Remote sensing reflectance:}
-\begin{equation}
-	R_{rs}(\theta,\varphi,\lambda)\equiv \frac{L_w(\theta,\varphi,\lambda)}{E_d(\lambda)}~~\left[sr^{-1} \right]
-\end{equation}
-where $L_w$ is the \textbf{water-leaving radiance}
-
-Under typical oceanic conditions, irradiances and radiances decrease exponentially with depth, then
-\begin{equation}
-	E_d(z,\lambda)\equiv E_d(0,\lambda) exp\left[-\int_0^{z}K_d(z',\lambda)dz'\right]
-\end{equation}
-where $K_d(z,\lambda)$ is the \textbf{spectral diffuse attenuation coefficient} for spectral downwelling plane irradiance. 
-\begin{align}
-	K_d(z,\lambda) 	&=- \frac{d\ln E_d(z,\lambda)}{dz} \notag \\
-					&=-\frac{1}{E_d(z,\lambda)}\frac{dE_d(z,\lambda)}{dz} ~~\left[m^{-1} \right]
-\end{align}
-
-\textbf{Note:} IOPs are additive whereas AOPs are not
-
-{Optical Constituents of Water}
-\begin{itemize}
-	\item Water
-	\item Dissolved Organic Compounds (CDOM)
-	\item Organic Particles (Chlorophyll)
-	\item Inorganic Particles (Suspended Matter)
-\end{itemize}
-
-\textbf{Total IOP:}
-
-\begin{equation}
-	a_{total}(z,\lambda) = \sum_{i=1}^{ncomp} a_i(z,\lambda)
-\end{equation}
-e.g.,
-\begin{equation}
-	a_{total}(z,\lambda) =  a_w(\lambda) +a_{CDOM}(z,\lambda)+ a_{Chl}(z,\lambda)+a_{SM}(z,\lambda) \notag
-\end{equation}
-
-{The Radiative Transfer Equation}
-\textbf{RTE} expresses conservation of energy for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium
-
-\vspace{\baselineskip}
-
-The \textbf{RTE}:
-\begin{align}
-	\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
-	&+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
-	&+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
-\end{align}
-
-\begin{figure}[H]
-\centering
-  		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE1.png}
-\end{figure}
-
-\begin{equation}
-	-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag 
-\end{equation}
-
-\begin{figure}[H]
-\centering
-  		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
-\end{figure}
-
-\begin{equation}
-+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag
-\end{equation}
-
-{\centering
-\begin{equation}
-	S(z,\theta,\varphi,\lambda) \notag
-\end{equation}}
-
-\begin{itemize}
-
-\item {$S$ account for bioluminescence or inelastic-scattering processes}
-
-\vspace{\baselineskip}
-
-\item For example, the model is first run at the wavelength of excitation, $\lambda_{ex}$ to compute the energy shifted by inelastic scattering from $\lambda_{ex}$ to another wavelength $\lambda$, and the model is run again at $\lambda$, with the radiance shifted from $\lambda_{ex}$ appearing as a source term $S$ at $\lambda$
-
-\end{itemize}
-
-The \textbf{RTE}:
-\begin{align}
-	\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
-	&+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
-	&+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
-\end{align}
-% ----------------------------------------------------------------------------------
-\section{Water Quality Parameters Retrieval}
-\cite{Jensen}
-\cite{Mustard2001}
-\subsection{Governing Equation}
-
-\hl{The comparison is performed in the reflectance domain.}
-
-\hl{CHL, SM and CDOM explanation}
-
-From the total energy coming from the sun, only approximately 1390 $\left[\frac{W}{m^2}\right]$ reaches the Earth's atmosphere \cite{Schott}. This integrated value is known as the \emph{exoatmospheric irradiance}, or $E_S'$, and represents the total energy per unit area just outside the Earth's atmosphere due to the solar energy. Recall that \emph{irradiance} is the rate at which the radiant flux ($\Phi$) is delivered to a surface ($A$), defined as
-
-\begin{equation} \label{eq:irradiance}
-E = \frac{d\Phi}{dA}   \indent   \indent  \left[\frac{W}{m^2}\right]  
-\end{equation} 
-
-So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an existence at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band.
-
-The light source, usually the sun, interact with the target and then reach the sensor. This interaction will help us to extract about the target, in this case the water body. That is why in order to understand how the water quality parameter are retrieved, first it is necessary to introduce the concept of sensor reaching radiance. The sensor reaching radiance is defined as the accumulation of photons at the front of a sensor that one wishes to collect in an effort to obtain information about the target \cite{GeraceThesis} . The total sensor-reaching radiance is the sum of the radiances due to the individual solar and thermal paths.  \cite{Schott} shows that in the VNIR region (approximately 0.3-2.5 [$\mu m$]), the solar energy is so many orders of the magnitude higher than the self-emitted energy, so the thermal paths are negligible for this study. Also, we consider that radiance from the background is negligible because the water bodies are typically several kilometers wide. Assuming that the target is approximately Lambertian (radiance is equal in all directions), the total sensor-reaching radiance, $L$, is defined as
-
-\begin{equation} \label{eq:gov1}
-L(\lambda) = \frac{E'_S(\lambda)cos(\sigma')r(\lambda)\tau_1(\lambda)\tau_2(\lambda)}{\pi} +
-                        \frac{E_{ds}(\lambda)r(\lambda)\tau_2(\lambda)}{\pi} + L_{us}(\lambda)
-\end{equation} 
-where:
-\begin{tabbing}
-\indent \indent \indent  $L(\lambda)$ \hspace{1mm}\=:  \indent \= total sensor-reaching radiance\\
-\indent \indent \indent  $E'_S(\lambda)$\>: \>exoatmospheric spectral irradiance\\
-\indent \indent \indent $\sigma'$\>:\>solar-zenith angle\\
-\indent \indent \indent $r(\lambda)$\>:\>spectral reflectance target\\
-\indent \indent \indent $\tau_1(\lambda)$\>:\>Sun-target path transmission of atmosphere\\
-\indent \indent \indent $\tau_2(\lambda)$\>:\>target-sensor path transmission of atmosphere\\
-\indent \indent \indent $E_{ds}(\lambda)$\>:\>solar downwelling irradiance\\
-\indent \indent \indent $L_{u}(\lambda)$\>:\>solar upwelling irradiance\\
-\end{tabbing}
-
-Equation \eqref{eq:gov1} is the solar term of the "big equation" described by \cite{Schott}.
-
-\subsection{Constituent Retrieval}
-
-When imaging water body, a set of new paths need to be taken in account to determine the sensor-reaching radiance.
- \begin{figure}[H]
-	\centering
-    	\includegraphics[width=100mm]{/Users/javier/Desktop/Javier/MASTER_RIT/2011_THESIS/LaTeX/Thesis/Images/WaterColumn.eps}
- 	\caption{Contributions to sensor-reaching radiance from the water column \label{fig:WaterColumn}}
-  \end{figure}
-
-
-Each sensor-reaching radiance curve is associated with a specific combination of water components (CHL, SM and CDOM). HidroLight provides us the \hl{remote sensing reflectance}, $R_{RS}$, which describes how much of the total incident downwelling irradiance is ultimately returned from a water column in a given direction, defined as
-
-\begin{equation} \label{eq:Rrs}
-R_{RS}(\theta,\phi,\lambda,z=a) = \frac{L(\theta,\phi,\lambda,z=a)}{E_d(\lambda,z=a)}   \indent   \indent  \left[\frac{1}{sr}\right]  
-\end{equation} 
-where:
-\begin{tabbing}
-\indent \indent \indent  $\theta$ \hspace{1.5mm}\=:  \indent \= sensor-zenith angle\\
-\indent \indent \indent  $\phi$\>: \>sensor-azimuth angle\\
-\indent \indent \indent $L$\>:\>water-leaving radiance\\
-\indent \indent \indent $E_d$\>:\>total downwelling irradiance\\
-\indent \indent \indent $\lambda$\>:\>wavelength dependent\\
-\indent \indent \indent $a$\>:\>height just above the water's surface\\
-\end{tabbing}
-
-
-
-\section{Shallow Water Retrieval}
-\section{LUT Method}
-\subsection{Population}
-\subsection{Optimization Algorithm  - lsqnonlin}
-
+% ----------------------------------------------------
 \section{State of the Research}
 
 As shown in \cite{GeraceThesis}
