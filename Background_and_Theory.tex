@@ -5,16 +5,12 @@
 \label{ch:background}
 % ----------------------------------------------------
 \section{Remote Sensing of Water}
-
+\todo{define Case 1 and 2}
 \subsection{Sensor-reaching Radiance}
 \subsubsection{Reflective Paths}
 \subsubsection{Governing Equation}
 
 \subsection{Governing Equation}
-
-\hl{The comparison is performed in the reflectance domain.}
-
-\hl{CHL, SM and CDOM explanation}
 
 From the total energy coming from the sun, only approximately 1390 $\left[\frac{W}{m^2}\right]$ reaches the Earth's atmosphere \cite{Schott}. This integrated value is known as the \emph{exoatmospheric irradiance}, or $E_S'$, and represents the total energy per unit area just outside the Earth's atmosphere due to the solar energy. Recall that \emph{irradiance} is the rate at which the radiant flux ($\Phi$) is delivered to a surface ($A$), defined as
 
@@ -126,8 +122,9 @@ See \cite{Jensen} and \cite{Mustard2001}.
 
 \begin{figure}[H]
   \centering
-  \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
-\caption{Radiance (Figure from \cite{Mobley:2001}) \label{fig:radiance} } 
+  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
+\caption{Radiance (Note: image taken from \cite{Mobley:2001})}
+\label{fig:radiance} 
 \end{figure}
 \todo{can I use a fig. from other author?} 
 where:\\
@@ -171,50 +168,45 @@ Photosynthetic available radiation, \textbf{PAR}:
   PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
 \end{equation}
 
-    \begin{figure}[H]
-    \centering
-    \includegraphics[height=3.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/IOPgeo.png}
-    \caption{caption \label{label} } 
-    \end{figure}
+
 
 % ------------------------------------------------
 \subsubsection*{IOPs}
 \addcontentsline{toc}{subsubsection}{IOPs}
-Absorption Coefficient.
-Scattering Coefficient.
+The {\it inherent optical properties}\index{IOPs: inherent optical properties} (IOPs) are defined as those properties of the water that depend only upon the medium, and therefore are independent of the ambient light field (\cite{Mobley:2001}). The IOPs mostly used in optics oceanography are the absorption and scattering coefficients. 
 
-bb, Bb
+\begin{figure}[htb]
+\centering
+\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/IOPgeo.png}
+\caption{Geometry used to define IOPs (Note: image taken from \cite{Mobley:2001}). \label{label} } 
+\end{figure}
 
-
-VSF
-
-Volumen Scattering Phase Function, or $\beta{hat}$ 
-
-    \textbf{Absorption coefficient:}
-    \begin{equation}
-      a(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_a(\lambda)}{\Delta r}~~\left[m^{-1} \right]
-    \end{equation}
-    \textbf{Scattering coefficient:}
-    \begin{equation}
-      b(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_s(\lambda)}{\Delta r}~~\left[m^{-1} \right]
-    \end{equation}
-    \textbf{Attenuation coefficient:}
-    \begin{equation}
-      c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right]
-    \end{equation}
+The {\it absorption coefficient} \index{absorption coefficient, $a$} is defined as
+\begin{equation}
+  a(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_a(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+\end{equation}
+\textbf{Scattering coefficient:}
+\begin{equation}
+  b(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_s(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+\end{equation}
+\textbf{Attenuation coefficient:}
+\begin{equation}
+  c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right]
+\end{equation}
 
 
-{\bf Inherent Optical Properties}
 Contributions by the various components to the absorption coefficient
 \begin{figure}[H]
 \centering
-      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
+      \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
+      \caption{(Note: image taken from \cite{Mobley:2001})}
 \end{figure}
 
 
 \begin{figure}[H]
 \centering
-      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
+      \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
+      \caption{(Note: image taken from \cite{Mobley:2001})}
 \end{figure}
 
 
@@ -240,7 +232,8 @@ And \textbf{backscatter coefficient}:
 
 \begin{figure}[H]
 \centering
-      \includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
+      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
+      \caption{(Note: image taken from \cite{Mobley:2001})}
 \end{figure}
 Example VSFs:\\
 \textcolor{blue}{blue curve} : clear, open ocean water ($\lambda = 514 nm$)\\
@@ -259,15 +252,6 @@ Example VSFs:\\
 \begin{equation}
   \tilde{\beta}(\psi,\lambda)\equiv \frac{\beta(\psi,\lambda)}{b(\lambda)}~~\left[sr^{-1} \right]\Rightarrow \beta(\psi,\lambda)=b(\lambda)\tilde{\beta}(\psi,\lambda)
 \end{equation}
-
-
-{Optical Constituents of Water}
-\begin{itemize}
-  \item Water
-  \item Dissolved Organic Compounds (CDOM)
-  \item Organic Particles (Chlorophyll)
-  \item Inorganic Particles (Suspended Matter)
-\end{itemize}
 
 \textbf{Total IOP:}
 
@@ -296,7 +280,8 @@ The \textbf{RTE}:
 
 \begin{figure}[H]
 \centering
-      \includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE1.png}
+      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE1.png}
+      \caption{(Note: image taken from \hl{Mobley slides})}
 \end{figure}
 
 \begin{equation}
@@ -305,7 +290,8 @@ The \textbf{RTE}:
 
 \begin{figure}[H]
 \centering
-      \includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
+      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
+      \caption{(Note: image taken from \hl{Mobley slides})}
 \end{figure}
 
 \begin{equation}
