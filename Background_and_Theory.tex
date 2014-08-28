@@ -173,88 +173,42 @@ Photosynthetic available radiation, \textbf{PAR}:
 % ------------------------------------------------
 \subsubsection*{IOPs}
 \addcontentsline{toc}{subsubsection}{IOPs}
-The {\it inherent optical properties}\index{IOPs: inherent optical properties} (IOPs) are defined as those properties of the water that depend only upon the medium, and therefore are independent of the ambient light field (\cite{Mobley:2001}). The IOPs mostly used in optics oceanography are the absorption and scattering coefficients. 
+The {\it inherent optical properties}\index{IOPs: inherent optical properties} (IOPs) are defined as those properties of the water that depend only upon the medium, and therefore are independent of the ambient light field (\cite{Mobley:2001}). The IOPs mostly used in radiative transfer theory are the absorption and scattering coefficients. As a way to define these concepts, we use the geometry illustrated in \autoref{fig:IOPsdef}. Consider a collimated beam of monochromatic light of wavelength $\lambda$ and spectral radiant power $\Phi_i(\lambda)$ illuminating a small volume $\Delta V$ of water with thickness $\Delta r$. The portion of the incident power $\Phi_i(\lambda)$ that is absorbed by the volume of water is denoted $\Phi_a(\lambda)$, while the part that is scattered out of the beam at an angle $\psi$ is denoted $\Phi_s(\psi,\lambda)$ and total power scattered in all directions $\Phi_s(\lambda)$. The part that is transmitted through the volume with no change in direction is denoted $\Phi_t(\lambda)$. 
 
 \begin{figure}[htb]
 \centering
 \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/IOPgeo.png}
-\caption{Geometry used to define IOPs (Note: image taken from \cite{Mobley:2001}). \label{label} } 
+\caption{Geometry used to define IOPs (Note: image taken from \cite{Mobley:2001}). \label{fig:IOPsdef} } 
 \end{figure}
 
-The {\it absorption coefficient} \index{absorption coefficient, $a$} is defined as
+Using the geometry of \autoref{fig:IOPsdef}, we can define the {\it absorption coefficient} \index{absorption coefficient, $a$} $a(\lambda)$ as the limit of the fraction of the incident power that is absorbed within the volume, as the thickness becomes small (\cite{Mobley:2001}), i.e.
 \begin{equation}
   a(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_a(\lambda)}{\Delta r}~~\left[m^{-1} \right]
 \end{equation}
-\textbf{Scattering coefficient:}
+The absorption coefficient $a(\lambda)$ represents the fraction of the incident power that is absorbed per unit of distance. In the same way, the {\it scattering coefficient} \index{scattering coefficient, $b$} $b(\lambda)$ is defined as
 \begin{equation}
-  b(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_s(\lambda)}{\Delta r}~~\left[m^{-1} \right]
+  b(\lambda)\equiv \lim_{\Delta r\to 0} \frac{1}{\Phi_i(\lambda)}\frac{\Phi_s(\lambda)}{\Delta r}~~\left[m^{-1} \right],
 \end{equation}
-\textbf{Attenuation coefficient:}
+and represents the fraction of the incident power that is scattered out of the beam per unit of distance. The {\it beam attenuation coefficient} \index{beam attenuation coefficient, $c$} $c(\lambda)$ is defines as
 \begin{equation}
-  c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right]
+  c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right],
 \end{equation}
-
-
-Contributions by the various components to the absorption coefficient
+and represents the fraction of the incident power that is lost or attenuated. As examples of magnitudes and shapes, \autoref{fig:compabs} and \autoref{fig:compscat} show contributions by the various components of waters to the absorption and scattering coefficients, respectively, for Case 1 and Case 2 waters.
 \begin{figure}[H]
 \centering
       \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
-      \caption{(Note: image taken from \cite{Mobley:2001})}
+      \caption{Contribution by the various components to the absorption coefficient (Note: image taken from \cite{Mobley:2001}).}
+      \label{fig:compabs}
 \end{figure}
-
 
 \begin{figure}[H]
 \centering
       \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
-      \caption{(Note: image taken from \cite{Mobley:2001})}
+      \caption{Contribution by the various components to the scattering coefficient (Note: image taken from \cite{Mobley:2001}).}
+      \label{fig:compscat}
 \end{figure}
 
-
-Volume scattering function, \textbf{VSF}:
-\begin{equation}
-  \beta(\psi,\lambda)\equiv \lim_{\Delta r\to 0} \lim_{\Delta \Omega\to 0}  \frac{\Phi_s(\psi,\lambda)}{\Phi_i(\lambda)\Delta r\Delta \Omega}~~\left[m^{-1}sr^{-1} \right]
-\end{equation}
-but $\Phi_s(\psi,\lambda)=I_s(\psi,\lambda)\Delta \Omega$ and $E_i(\lambda)=\Phi_i(\lambda)/\Delta A \Rightarrow$
-\begin{equation}
-  \beta(\psi,\lambda)= \lim_{\Delta V\to 0} \frac{I_s(\psi,\lambda)}{E_i(\lambda)\Delta V}~~\left[m^{-1}sr^{-1} \right]
-\end{equation}
-with $\Delta V=\Delta r\Delta A$
-
-Scattering coefficient from VSF:
-\begin{equation}
-  b(\lambda)=\int_{4\pi} \beta(\psi,\lambda)d\Omega=2\pi\int_0^\pi \beta(\psi,\lambda)sin\psi d\psi
-\end{equation}
-And \textbf{backscatter coefficient}:
-\begin{equation}
-  b_b(\lambda)\equiv 2\pi\int_{\pi/2}^\pi \beta(\psi,\lambda)sin\psi d\psi
-\end{equation}
-
-
-\begin{figure}[H]
-\centering
-      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
-      \caption{(Note: image taken from \cite{Mobley:2001})}
-\end{figure}
-Example VSFs:\\
-\textcolor{blue}{blue curve} : clear, open ocean water ($\lambda = 514 nm$)\\
-\textcolor{green}{green curve} : harbor ($\lambda = 514 nm$)\\
-\textcolor{red}{red curve} : very productive coastal waters ($\lambda = 530 nm$)
-
-\textbf{Backscatter fraction:}
-\begin{equation}
-  B_b=\frac{b_b}{b}
-\end{equation}
-\textbf{Single-scattering albedo:}
-\begin{equation}
-  \omega_o=\frac{b(\lambda)}{c(\lambda)}
-\end{equation}
-\textbf{Volumen scattering phase function:}
-\begin{equation}
-  \tilde{\beta}(\psi,\lambda)\equiv \frac{\beta(\psi,\lambda)}{b(\lambda)}~~\left[sr^{-1} \right]\Rightarrow \beta(\psi,\lambda)=b(\lambda)\tilde{\beta}(\psi,\lambda)
-\end{equation}
-
-\textbf{Total IOP:}
-
+The IOPs are additive. Therefore, the total absorption coefficient, for instance, can be expressed as
 \begin{equation}
   a_{total}(z,\lambda) = \sum_{i=1}^{ncomp} a_i(z,\lambda)
 \end{equation}
@@ -262,21 +216,62 @@ e.g.,
 \begin{equation}
   a_{total}(z,\lambda) =  a_w(\lambda) +a_{CDOM}(z,\lambda)+ a_{Chl}(z,\lambda)+a_{SM}(z,\lambda) \notag
 \end{equation}
+This fact is important because it will help to retrieve simultaneously the CPAs in this case. This also implies that we need to know the IOPs for each component, which is not a easy task, specially scattering coefficient.
 
+The scattering coefficients does not take in account the angular distribution of the scattered power. The volume scattering function is an IOP that takes in account angular information. Consider $\Phi_s(\psi,\lambda)/\Phi_i(\lambda)$ as the fraction of incident power scattered out of the beam through an angle $\psi$ into a solid angle $\Delta\Omega$ centered on $\Psi$, as shown in \autoref{fig:IOPsdef}. Then, the {\it volume scattering fraction} (VSF) \index{volume scattering function, VSF} is defined as the fraction of scattered power per unit distance and unit solid angle, i.e.
+\begin{equation}\label{eq:VSF1}
+  \beta(\psi,\lambda)\equiv \lim_{\Delta r\to 0} \lim_{\Delta \Omega\to 0}  \frac{\Phi_s(\psi,\lambda)}{\Phi_i(\lambda)\Delta r\Delta \Omega}~~\left[m^{-1}sr^{-1} \right]
+\end{equation}
+but $\Phi_s(\psi,\lambda)=I_s(\psi,\lambda)\Delta \Omega$, with $I_s(\psi,\lambda)$ as the spectral radiant intensity scattered into direction $\psi$ and $E_i(\lambda)=\Phi_i(\lambda)/\Delta A$, with $E_i(\lambda)$ as the incident irradiance, therefore \autoref{eq:VSF1} can be written as
+\begin{equation} 
+  \beta(\psi,\lambda)= \lim_{\Delta V\to 0} \frac{I_s(\psi,\lambda)}{E_i(\lambda)\Delta V}~~\left[m^{-1}sr^{-1} \right]
+\end{equation}
+with $\Delta V=\Delta r\Delta A$. This last definition is the reason why it is called volume scattering function. The VSF represents the scattered intensity per unit incident irradiance per unit volume of water. \autoref{fig:VSFex} shows example of VSF for different kind of waters with its respective scattering coefficients.
+
+\begin{figure}[H]
+\centering
+      \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
+      \caption{Examples of VSF for different waters: open ocean water (blue curve), harbor (green curve) and very productive coastal water (red curve). $\lambda$ was set equal to $514nm$ (Note: image taken from \cite{Mobley:2001})}
+      \label{fig:VSFex}
+\end{figure}
+
+If we integrated the VSF over all directions, we obtain
+\begin{equation}
+  b(\lambda)=\int_{4\pi} \beta(\psi,\lambda)d\Omega=2\pi\int_0^\pi \beta(\psi,\lambda)sin\psi d\psi
+\end{equation}
+This integration can be divided into forward scattering, $0\leq\psi\leq\pi/2$, and backward scattering, $\pi/2\leq\psi\leq\pi$. Thus the {\it backscatter coefficient} \index{backscatter coefficient, $b_b$} is defined as
+\begin{equation}
+  b_b(\lambda)\equiv 2\pi\int_{\pi/2}^\pi \beta(\psi,\lambda)sin\psi d\psi
+\end{equation}
+and the {\it backscattered fraction} \index{backscattered fraction, $b_b/b$} as 
+\begin{equation}
+  B_b=\frac{b_b}{b},
+\end{equation}
+which tells how much of the total scattering is due to backscattering.
+
+It is important to note that the previous definition assumed that there are no inelastic-scattering processes present. However, fluorescence by dissolved matter or chlorophyll, and Raman scattering by the water molecules themselves, are inelastic-scattering processes that do occur in nature. The power that is lost from $\lambda$ by scattering into $\lambda'\neq\lambda$ results in absorption coefficient $a(\lambda)$ increment. The gain in power at $\lambda'$ is expressed as a source term in the radiative transfer equation.
+
+Other IOP commonly used in ocean optics is the {\it single-scattering albedo} \index{single-scattering albedo, $\omega_o$} $\omega_o$, defined as
+\begin{equation}
+  \omega_o=\frac{b(\lambda)}{c(\lambda)}
+\end{equation}
+$\omega_o$ is also known as the probability of photon survival because it tells the probability that a photon will be scattered and not absorbed.
+
+Additionally, the {\it volume scattering phase function} $\tilde{\beta}(\psi,\lambda)$ \index{volume scattering phase function, $\tilde{\beta}(\psi,\lambda)$} is defined as
+\begin{equation}
+  \tilde{\beta}(\psi,\lambda)\equiv \frac{\beta(\psi,\lambda)}{b(\lambda)}~~\left[sr^{-1} \right]
+\end{equation}
 
 % ----------------------------------------------------
-\subsubsection*{The Radiative Transfer Equation}
+\subsubsection*{The Radiative Transfer Equation (RTE)}
 \addcontentsline{toc}{subsubsection}{The Radiative Transfer Equation}
-\textbf{RTE} expresses conservation of energy for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium
-
-\vspace{\baselineskip}
-
-The \textbf{RTE}:
+The connection between the IOPs and the radiances is made through the radiative transfer equation (RTE). It expresses conservation of energy for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium. The RTE is expresses as
 \begin{align}
   \cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
   &+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
   &+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
 \end{align}
+where the angle between the incident direction $(\omega',\phi')$ and the scattered direction $(\omega,\phi)$ is the scattering angle $\psi$ in the VSF. Below there is an explanation for each term in the RTE.
 
 \begin{figure}[H]
 \centering
@@ -307,21 +302,12 @@ The \textbf{RTE}:
 
 \item {$S$ account for bioluminescence or inelastic-scattering processes}
 
-\vspace{\baselineskip}
-
 \item For example, the model is first run at the wavelength of excitation, $\lambda_{ex}$ to compute the energy shifted by inelastic scattering from $\lambda_{ex}$ to another wavelength $\lambda$, and the model is run again at $\lambda$, with the radiance shifted from $\lambda_{ex}$ appearing as a source term $S$ at $\lambda$
 
 \end{itemize}
-
-The \textbf{RTE}:
-\begin{align}
-  \cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
-  &+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
-  &+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
-\end{align}
 % ----------------------------------------------------
-\subsubsection*{AOPs}
-\addcontentsline{toc}{subsubsection}{AOPs}
+\subsubsection*{Apparent Optical Properties (AOPs)}
+\addcontentsline{toc}{subsubsection}{Apparent Optical Properties}
 \textbf{AOPs:} depend both on the medium and on the directional structure of the ambient light field
 
 \vspace{\baselineskip}
