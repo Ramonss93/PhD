@@ -114,45 +114,50 @@ The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacit
 % ----------------------------------------------------
 \subsection{Water Constituents Retrieval}
 See \cite{Jensen} and \cite{Mustard2001}.
-
+% ----------------------------------------------------
 \subsubsection{In Water Radiative Transfer}
 
 \subsubsection*{Radiometric Quantities}
 \addcontentsline{toc}{subsubsection}{Radiometric Quantities}
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
-\caption{Radiance (Note: image taken from \cite{Mobley:2001})}
-\label{fig:radiance} 
-\end{figure}
-\todo{can I use a fig. from other author?} 
+\autoref{fig:radiance} shows the geometry used to define the radiometric quantities. We need to define a fundamental radiometric quantity that specifies completely positional ($x,y,z$), temporal ($t$), directional ($\theta,\phi$) and spectral ($\lambda$) structure of the light field. This is accomplished by the spectral radiance $L$. The {\it spectral radiance} $L$ \index{\it spectral radiance, $L$} can be defined as (\cite{Mobley:2001})
+\begin{equation}\label{eq:rad1}
+  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
+\end{equation}
 where:\\
       \noindent $\Delta Q$: radian energy incident \\
       $\Delta t$: time interval \\
       $\Delta A$: surface area at location (x,y,z)\\
       $\Delta\Omega$: solid angle in direction ($\theta$,$\varphi$) \\
       $\Delta\lambda$: photons wavelength interval
-% ----------------------------------------------------
 
-\begin{equation}
-  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
-\end{equation}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
+\caption{Radiance (Note: image taken from \cite{Mobley:2001})}
+\label{fig:radiance} 
+\end{figure}
+\todo{can I use a fig. from other author?} 
 
+In the conceptual limit of infinitesimal parameter interval (\cite{Mobley:2001}), \autoref{eq:rad1} becomes
 \begin{equation}
   L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
 \end{equation}
 
+In most oceanographic applications, we can assume that there is horizontal homogeneity and time independence, then the spectral radiance can be written as $L(z,\theta,\phi,\lambda)$, which is consider a one dimensional (1-D) quantity.
 
-{\bf Radiometric Quantities}
-\textbf{Spectral downwelling scalar irradiance} at depth z:
-\begin{equation}
+Even though the spectral radiance describes completely the light field, it is not commonly used for instrumentation difficulties or for all that information is not needed. Irradiance is a radiometric quantity that is easier to measure and ofter more useful. Consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, the this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
+\begin{equation}\label{eq:Eod}
   E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
 \end{equation}
-\textbf{Spectral upwelling scalar irradiance} at depth z:
+because this instrument is summing radiance over all directions in the downward hemisphere.
+
+If the same instrument is place facing downward, the it will be measuring the spectral upwelling scalar irradiance $ E_{ou}(z,\lambda)$, defined as
 \begin{equation}
   E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
 \end{equation}
+
+
 \textbf{Spectral scalar irradiance} at depth z:
 \begin{align}
   E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\\
@@ -194,14 +199,14 @@ and represents the fraction of the incident power that is scattered out of the b
   c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right],
 \end{equation}
 and represents the fraction of the incident power that is lost or attenuated. As examples of magnitudes and shapes, \autoref{fig:compabs} and \autoref{fig:compscat} show contributions by the various components of waters to the absorption and scattering coefficients, respectively, for Case 1 and Case 2 waters.
-\begin{figure}[H]
+\begin{figure}[htb]
 \centering
       \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
       \caption{Contribution by the various components to the absorption coefficient (Note: image taken from \cite{Mobley:2001}).}
       \label{fig:compabs}
 \end{figure}
 
-\begin{figure}[H]
+\begin{figure}[htb]
 \centering
       \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
       \caption{Contribution by the various components to the scattering coefficient (Note: image taken from \cite{Mobley:2001}).}
@@ -228,7 +233,7 @@ but $\Phi_s(\psi,\lambda)=I_s(\psi,\lambda)\Delta \Omega$, with $I_s(\psi,\lambd
 \end{equation}
 with $\Delta V=\Delta r\Delta A$. This last definition is the reason why it is called volume scattering function. The VSF represents the scattered intensity per unit incident irradiance per unit volume of water. \autoref{fig:VSFex} shows example of VSF for different kind of waters with its respective scattering coefficients.
 
-\begin{figure}[H]
+\begin{figure}[htb]
 \centering
       \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/VSFweb.png}
       \caption{Examples of VSF for different waters: open ocean water (blue curve), harbor (green curve) and very productive coastal water (red curve). $\lambda$ was set equal to $514nm$ (Note: image taken from \cite{Mobley:2001})}
@@ -249,7 +254,7 @@ and the {\it backscattered fraction} \index{backscattered fraction, $b_b/b$} as
 \end{equation}
 which tells how much of the total scattering is due to backscattering.
 
-It is important to note that the previous definition assumed that there are no inelastic-scattering processes present. However, fluorescence by dissolved matter or chlorophyll, and Raman scattering by the water molecules themselves, are inelastic-scattering processes that do occur in nature. The power that is lost from $\lambda$ by scattering into $\lambda'\neq\lambda$ results in absorption coefficient $a(\lambda)$ increment. The gain in power at $\lambda'$ is expressed as a source term in the radiative transfer equation.
+It is important to note that the previous definition assumed that there are no inelastic-scattering processes present. However, fluorescence by dissolved matter or chlorophyll, and Raman scattering by the water molecules themselves, are inelastic-scattering processes that do occur in nature. The power that is lost from $\lambda$ by scattering into $\lambda'\neq\lambda$ results in absorption coefficient $a(\lambda)$ increment. The gain in power at $\lambda'$ is expressed as a source term in the radiative transfer equation (see \autoref{eq:RTEfinal}).
 
 Other IOP commonly used in ocean optics is the {\it single-scattering albedo} \index{single-scattering albedo, $\omega_o$} $\omega_o$, defined as
 \begin{equation}
@@ -265,46 +270,70 @@ Additionally, the {\it volume scattering phase function} $\tilde{\beta}(\psi,\la
 % ----------------------------------------------------
 \subsubsection*{The Radiative Transfer Equation (RTE)}
 \addcontentsline{toc}{subsubsection}{The Radiative Transfer Equation}
-The connection between the IOPs and the radiances is made through the radiative transfer equation (RTE). It expresses conservation of energy for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium. The RTE is expresses as
-\begin{align}
-  \cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag \\
-  &+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag  \\
-  &+S(z,\theta,\varphi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
-\end{align}
-where the angle between the incident direction $(\omega',\phi')$ and the scattered direction $(\omega,\phi)$ is the scattering angle $\psi$ in the VSF. Below there is an explanation for each term in the RTE.
+The connection between the IOPs, boundary conditions, and light sources (e.g. bioluminescence) to the radiances is made through the radiative transfer equation (RTE). It expresses conservation of energy in terms of radiance for a collimated beam of radiance traveling through an absorbing, scattering and emitting medium. All other radiometric variable (irradiances) and AOPs can be derived from the radiance.
 
-\begin{figure}[H]
+\begin{figure}[htb]
 \centering
       \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE1.png}
-      \caption{(Note: image taken from \hl{Mobley slides})}
+      \caption{Single beam of radiance and the processes that affect it as it propagates a distance $\Delta r$ (Note: image taken from \hl{Ocean Optics Book})}
+      \label{fig:RTE1}
 \end{figure}
 
-\begin{equation}
-  -c(z,\lambda)L(z,\theta,\varphi,\lambda)\cdots \notag 
+Consider a beam of photons of wavelength $\lambda$ traveling in some direction $(\theta,\phi)$, as shown in \autoref{fig:RTE1}. This beam of photons is accounted in the incident irradiance $L(r,\theta,\phi,\lambda)$. This irradiance can increase (source) or decrease (lost) in a distance $\Delta r$ along direction  $(\theta,\phi)$, going from depth $z$ to $z+\Delta z$. The losses in radiance can be due to absorption or scattering out of the beam. These losses can be expressed as
+\begin{align}\label{eq:RTE1}
+  \frac{\Delta L(r+\Delta r,\theta,\phi,\lambda)}{\Delta r}&= -a(r,\lambda)L(r,\theta,\phi,\lambda)-b(r,\lambda)L(r,\theta,\phi,\lambda)\notag\\ 
+  &= -c(r,\lambda)L(r,\theta,\phi,\lambda) 
+\end{align}
+where $a(r,\lambda)$, $b(r,\lambda)$ and $c(r,\lambda)$ are the absorption, scattering and beam attenuation coefficients, respectively. 
+
+The scattering into the beam from all other directions acts as a source increasing the radiance. This source can be expressed as
+\begin{equation}\label{eq:RTE2}
+\frac{\Delta L(r+\Delta r,\theta,\phi,\lambda)}{\Delta r} = \int_{4\pi} L(r,\theta',\phi',\lambda)\beta(r;\theta',\phi' \to \theta,\phi;\lambda)d\Omega'
+\end{equation}
+where $L(r,\theta',\phi',\lambda)$ is the radiance coming from direction $(\theta',\phi')$, and $\beta(r;\theta',\phi' \to \theta,\phi;\lambda)$ is the VSF, which tells what amount of the radiance coming from direction $(\theta',\phi')$ scatters into direction $(\theta,\phi)$. The integration is done over all angles (represent by solid angle $\Omega'$) because energy from every direction can be scattered into the direction $(\theta,\phi)$.
+
+There is also internal sources of radiance that could contribute to increase the total radiance, such as bioluminescence or inelastic-scattering processes. This is expressed as
+\begin{equation}\label{eq:RTE3}
+    \frac{\Delta L(r+\Delta r,\theta,\phi,\lambda)}{\Delta r} = S(r,\theta,\phi,\lambda)
 \end{equation}
 
-\begin{figure}[H]
-\centering
-      \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
-      \caption{(Note: image taken from \hl{Mobley slides})}
-\end{figure}
+We can use the conceptual limit of $\Delta r\rightarrow 0$, then
+\begin{equation}\label{eq:lim}
+  \frac{dL(r,\theta,\phi,\lambda)}{dr} = \lim_{\Delta r \to 0} \frac{\Delta L(r+\Delta r,\theta,\phi,\lambda)}{\Delta r}
+\end{equation}. 
 
-\begin{equation}
-+\int_{4\pi} L(z,\theta',\varphi',\lambda)\beta(z;\theta',\varphi' \to \theta,\varphi;\lambda)d\Omega'\cdots \notag
-\end{equation}
+Summing up all the different contributions in \autoref{eq:RTE1}-\ref{eq:RTE3} and applying \autoref{eq:lim}, gives
+\begin{align}\label{eq:RTEfinal}
+  \frac{dL(r,\theta,\phi,\lambda)}{dr}&=-c(r,\lambda)L(r,\theta,\phi,\lambda)\cdots \notag \\
+  &+\int_{4\pi} L(r,\theta',\phi',\lambda)\beta(r;\theta',\phi' \to \theta,\phi;\lambda)d\Omega'\cdots \notag  \\
+  &+S(r,\theta,\phi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right]
+\end{align}
+where the angle between the incident direction $(\theta',\phi')$ and the scattered direction $(\theta,\phi)$ is the scattering angle $\psi$ in the VSF. From \autoref{fig:RTE1} $dr=dz/\cos{\theta}$, then \autoref{eq:RTEfinal} becomes
+\begin{align}\label{eq:RTEfinal2}
+  \cos\theta\frac{dL(z,\theta,\phi,\lambda)}{dz}&=-c(z,\lambda)L(z,\theta,\phi,\lambda)\cdots \notag \\
+  &+\int_{4\pi} L(z,\theta',\phi',\lambda)\beta(z;\theta',\phi' \to \theta,\phi;\lambda)d\Omega'\cdots \notag  \\
+  &+S(z,\theta,\phi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right],
+\end{align}
+which is more convenient to use in oceanography because depends in the depth $z$ and not location $r$ along the beam path. This equation is called the monochromatic, one-dimensional, time-independent RTE, and it expresses location as geometric depth $z$ and the IOPs in terms of the beam attenuation $c$ and the volume scattering function $\beta$. This is the RTE solved by Hydrolight. It needs to be noted that this definition of the RTE do not take in account polarized light occurring in the medium. Therefore, this called unpolarized, or scalar RTE (SRTE). However, the SRTE gives sufficiently accurate solutions for many oceanographic applications\todo{cite Ocean Optics Book}. If polarization need to be included, then a polarized or vector RTE (VRTE) could be used.
 
-{\centering
-\begin{equation}
-  S(z,\theta,\varphi,\lambda) \notag
-\end{equation}}
 
-\begin{itemize}
 
-\item {$S$ account for bioluminescence or inelastic-scattering processes}
 
-\item For example, the model is first run at the wavelength of excitation, $\lambda_{ex}$ to compute the energy shifted by inelastic scattering from $\lambda_{ex}$ to another wavelength $\lambda$, and the model is run again at $\lambda$, with the radiance shifted from $\lambda_{ex}$ appearing as a source term $S$ at $\lambda$
 
-\end{itemize}
+% \begin{figure}[htb]
+% \centering
+%       \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
+%       \caption{(Note: image taken from \hl{Ocean Optics Book})}
+% \end{figure}
+
+
+
+
+
+
+
+
+
 % ----------------------------------------------------
 \subsubsection*{Apparent Optical Properties (AOPs)}
 \addcontentsline{toc}{subsubsection}{Apparent Optical Properties}
@@ -338,7 +367,7 @@ where $K_d(z,\lambda)$ is the \textbf{spectral diffuse attenuation coefficient} 
 \subsection{Constituent Retrieval}
 
 When imaging water body, a set of new paths need to be taken in account to determine the sensor-reaching radiance.
- \begin{figure}[H]
+ \begin{figure}[htb]
   \centering
       \includegraphics[width=100mm]{/Users/javier/Desktop/Javier/MASTER_RIT/2011_THESIS/LaTeX/Thesis/Images/WaterColumn.eps}
   \caption{Contributions to sensor-reaching radiance from the water column \label{fig:WaterColumn}}
