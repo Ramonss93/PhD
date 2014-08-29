@@ -120,7 +120,7 @@ See \cite{Jensen} and \cite{Mustard2001}.
 \subsubsection*{Radiometric Quantities}
 \addcontentsline{toc}{subsubsection}{Radiometric Quantities}
 
-\autoref{fig:radiance} shows the geometry used to define the radiometric quantities. We need to define a fundamental radiometric quantity that specifies completely positional ($x,y,z$), temporal ($t$), directional ($\theta,\phi$) and spectral ($\lambda$) structure of the light field. This is accomplished by the spectral radiance $L$. The {\it spectral radiance} $L$ \index{\it spectral radiance, $L$} can be defined as (\cite{Mobley:2001})
+\autoref{fig:radiance} shows the geometry used to define the radiometric quantities. We need to define a fundamental radiometric quantity that specifies completely positional ($x,y,z$), temporal ($t$), directional ($\theta,\phi$) and spectral ($\lambda$) structure of the light field. This is accomplished by the spectral radiance $L$. The {\it spectral radiance} $L$ \index{spectral radiance, $L$} can be defined as (\cite{Mobley:2001})
 \begin{equation}\label{eq:rad1}
   L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
 \end{equation}
@@ -141,34 +141,43 @@ where:\\
 
 In the conceptual limit of infinitesimal parameter interval (\cite{Mobley:2001}), \autoref{eq:rad1} becomes
 \begin{equation}
-  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
+  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]~or~\left[ W m^{-2}sr^{-1}nm^{-1} \right]
 \end{equation}
 
 In most oceanographic applications, we can assume that there is horizontal homogeneity and time independence, then the spectral radiance can be written as $L(z,\theta,\phi,\lambda)$, which is consider a one dimensional (1-D) quantity.
 
-Even though the spectral radiance describes completely the light field, it is not commonly used for instrumentation difficulties or for all that information is not needed. Irradiance is a radiometric quantity that is easier to measure and ofter more useful. Consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, the this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
-\begin{equation}\label{eq:Eod}
-  E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
-\end{equation}
-because this instrument is summing radiance over all directions in the downward hemisphere.
-
-If the same instrument is place facing downward, the it will be measuring the spectral upwelling scalar irradiance $ E_{ou}(z,\lambda)$, defined as
+Even though the spectral radiance describes completely the light field, it is not commonly used for instrumentation difficulties or for all that information is not needed. Irradiance is a radiometric quantity that is easier to measure and ofter more useful. {\it Irradiance} $E$ is formally defined as
 \begin{equation}
-  E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+  E(x,y,z,t,\lambda) \equiv \frac{\Delta Q}{\Delta t\Delta A\Delta\lambda}~~\left[ W m^{-2}nm^{-1} \right]
 \end{equation}
 
-
-\textbf{Spectral scalar irradiance} at depth z:
-\begin{align}
-  E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\\
-           &=\int_{4\pi} L(z,\theta,\varphi,\lambda)d\Omega
-\end{align}
-
-\textbf{Spectral downwelling plane irradiance} at depth z:
+The most commonly measured radiometric variable is the spectral plane irradiance. A collector surface (detector) is equally sensitive to light from any direction. However, the effective area (a.k.a. projected area) of the detector as seen by light in direction $\theta$ is $\Delta A|\cos{\theta}|$, where $\theta$ is the angle between the photon direction and the normal to the surface of the detector (see \autoref{fig:radiance}). If such a detector is placed at depth $z$ and oriented facing upward, so it detects photon traveling downward, then the detector will be measuring the spectral downwelling plane irradiance $E_d(z,\lambda)$. What this detector is really doing is adding the downwelling radiance weighted by the cosine of the photon direction. Therefore, the {\it spectral downwelling plane irradiance} $E_d(z,\lambda)$ can be defined as
 \begin{equation}
   E_{d}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)|cos\theta|d\Omega~~\left[Wm^{-2}nm^{-1} \right]
 \end{equation}
-Photosynthetic available radiation, \textbf{PAR}:
+ where $2\pi_d$ denotes the hemisphere of downward directions, i.e. the set of directions ($\theta,\phi$) such that $0\leq\theta\leq\pi/2$ and $0\leq\phi\leq2\pi$, if $\theta$ is measured from $+z$ or nadir direction
+
+Now, consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions, i.e. the detector has the same effective area for radiance in any downward direction, so no $\cos{\theta}$ factor is needed. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, the this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
+\begin{equation}\label{eq:Eod}
+  E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+because this instrument is summing radiance over all directions in the downward hemisphere $2\pi_d$.
+
+If the same instrument is placed facing downward, it will be measuring the spectral upwelling scalar irradiance $ E_{ou}(z,\lambda)$, defined as
+\begin{equation}
+  E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+where $2\pi_u$ denotes the hemisphere of upward direction.
+
+The sum of the downwelling and upwelling components can be defined as the {\it spectral scalar irradiance} $E_o(z,\lambda)$, i.e.
+\begin{align}
+  E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\notag \\
+           &=\int_{4\pi} L(z,\theta,\varphi,\lambda)d\Omega
+\end{align}
+The spectral scalar irradiance is the radiometric variable that is most relevant to photosynthesis because photosynthesis is independent of the traveling direction of the light.
+
+
+Photosynthetic available radiation (PAR):
 \begin{equation}
   PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
 \end{equation}
