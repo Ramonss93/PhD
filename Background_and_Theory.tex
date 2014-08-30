@@ -41,8 +41,20 @@ Equation \eqref{eq:gov1} is the solar term of the "big equation" described by \c
 
 \subsection{Signal Component}
 \subsubsection{Bottom}
-\subsubsection{Water Constituents}
-Pure Water. Chl (pigments). CDOM (or DOM). SM or minerals.
+% ----------------------------------------------------
+\subsubsection{Optical Constituents of Water}
+\subsubsection*{Pure Water}
+\addcontentsline{toc}{subsubsection}{Pure Water}
+Although water itself appears colorless in our everyday life, it display a blue hue. This is due to the dominant role of molecular scattering at small wavelengths and the dominant role of molecular absorption at large wavelength values. This blue color is clearly apparent under sunny conditions in oceanic water, for instance.
+% ----------------------------------------------------
+\subsubsection*{Dissolved Organic Compounds}
+\addcontentsline{toc}{subsubsection}{Dissolved Organic Compounds}
+% ----------------------------------------------------
+\subsubsection*{Organic Particles}
+\addcontentsline{toc}{subsubsection}{Organic Particles}
+% ----------------------------------------------------
+\subsubsection*{Inorganic Particles}
+\addcontentsline{toc}{subsubsection}{Inorganic Particles}
 % ----------------------------------------------------
 \subsubsection{Atmospheric Effect and Water} 
 The goal of this section is to describe the different approaches used to atmospherically correct satellite imagery over water. First, we need to understand the effect of the atmosphere on the propagating energy. To do so, a description of the processes involved in the energy interaction in the atmosphere are described in the first part of this section. Later on, different techniques for atmospherically correcting satellite images are defined.
@@ -155,7 +167,7 @@ The most commonly measured radiometric variable is the spectral plane irradiance
 \begin{equation}
   E_{d}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)|cos\theta|d\Omega~~\left[Wm^{-2}nm^{-1} \right]
 \end{equation}
- where $2\pi_d$ denotes the hemisphere of downward directions, i.e. the set of directions ($\theta,\phi$) such that $0\leq\theta\leq\pi/2$ and $0\leq\phi\leq2\pi$, if $\theta$ is measured from $+z$ or nadir direction
+where $2\pi_d$ denotes the hemisphere of downward directions, i.e. the set of directions ($\theta,\phi$) such that $0\leq\theta\leq\pi/2$ and $0\leq\phi\leq2\pi$, if $\theta$ is measured from $+z$ or nadir direction. If the instrument is placed facing downward, then the spectral upwelling plane irradiance $E_d(z,\lambda)$ is measured. The difference $E_{net}=E_d-E_u$ is named the net downward irradiance.
 
 Now, consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions, i.e. the detector has the same effective area for radiance in any downward direction, so no $\cos{\theta}$ factor is needed. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, the this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
 \begin{equation}\label{eq:Eod}
@@ -176,12 +188,11 @@ The sum of the downwelling and upwelling components can be defined as the {\it s
 \end{align}
 The spectral scalar irradiance is the radiometric variable that is most relevant to photosynthesis because photosynthesis is independent of the traveling direction of the light.
 
-
-Photosynthetic available radiation (PAR):
+Other important radiometric quantity in oceanography is the photosynthetic available radiation (PAR), defined as
 \begin{equation}
   PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
 \end{equation}
-
+where $h=6.6255\times10^{-34}J~s$ is the Planck constant and $c=3.0\times10^{17}nm~s^{-1}$ gives the number of available photons rather than the amount of radiant energy. This is relevant because photosynthesis depends on the number of photons absorbed.
 
 
 % ------------------------------------------------
@@ -325,52 +336,41 @@ where the angle between the incident direction $(\theta',\phi')$ and the scatter
 \end{align}
 which is more convenient to use in oceanography because depends in the depth $z$ and not location $r$ along the beam path. This equation is called the monochromatic, one-dimensional, time-independent RTE, and it expresses location as geometric depth $z$ and the IOPs in terms of the beam attenuation $c$ and the volume scattering function $\beta$. This is the RTE solved by Hydrolight. It needs to be noted that this definition of the RTE do not take in account polarized light occurring in the medium. Therefore, this called unpolarized, or scalar RTE (SRTE). However, the SRTE gives sufficiently accurate solutions for many oceanographic applications\todo{cite Ocean Optics Book}. If polarization need to be included, then a polarized or vector RTE (VRTE) could be used.
 
-
-
-
-
 % \begin{figure}[htb]
 % \centering
 %       \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE2.png}
 %       \caption{(Note: image taken from \hl{Ocean Optics Book})}
 % \end{figure}
-
-
-
-
-
-
-
-
-
 % ----------------------------------------------------
 \subsubsection*{Apparent Optical Properties (AOPs)}
 \addcontentsline{toc}{subsubsection}{Apparent Optical Properties}
-\textbf{AOPs:} depend both on the medium and on the directional structure of the ambient light field
+The apparent optical properties are those properties that not only depend on the medium (the IOPs) but also on the directional structure of the ambient light field (radiance distribution). Additionally, AOPs need to display enough stability to be useful descriptors of a water body. They are always a ratio of two radiometric quantities. Examples of AOPs are the irradiance reflectance, the remote-sensing reflectance, and various diffuse attenuation functions.
 
-\vspace{\baselineskip}
-
-\textbf{Irradiance reflectance:}
+The irradiance reflectance (a.k.a. irradiance ratio) is defined as
 \begin{equation}
   R(z,\lambda)\equiv \frac{E_u(z,\lambda)}{E_d(z,\lambda)}
 \end{equation}
-\textbf{Remote sensing reflectance:}
-\begin{equation}
-  R_{rs}(\theta,\varphi,\lambda)\equiv \frac{L_w(\theta,\varphi,\lambda)}{E_d(\lambda)}~~\left[sr^{-1} \right]
-\end{equation}
-where $L_w$ is the \textbf{water-leaving radiance}
 
-Under typical oceanic conditions, irradiances and radiances decrease exponentially with depth, then
+The fundamental quantity used in ocean color remote sensing is the remote-sensing reflectance $R_{rs}$, defined as
 \begin{equation}
+  R_{rs}(\theta,\phi,\lambda)\equiv \frac{L_w(\theta,\varphi,\lambda)}{E_d(\lambda)}~~\left[sr^{-1} \right]
+\end{equation}
+where $L_w$ is the upwelling water-leaving radiance and $E_d$ is the downwelling plane irradiance. $L_w$ is the total upward radiance minus the sky and solar radiance that is reflected upward by the water surface. $L_w$ and $E_d$ are measured in air, just above the water surface.
+
+Both $R$ and $R_{rs}$ are used to estimate water quality parameters, such as the chlorophyll concentration.
+
+When the incident light is provided by the sun and the sky, the irradiances and radiances decrease exponentially with depth (but only when they are measured far enough below the surface and far enough above the bottom for shallow water), then
+\begin{equation}\label{eq:EdKd}
   E_d(z,\lambda)\equiv E_d(0,\lambda) exp\left[-\int_0^{z}K_d(z',\lambda)dz'\right]
 \end{equation}
-where $K_d(z,\lambda)$ is the \textbf{spectral diffuse attenuation coefficient} for spectral downwelling plane irradiance. 
+where $K_d(z,\lambda)$ is the {\it spectral diffuse attenuation coefficient} for spectral downwelling plane irradiance. Solving \autoref{eq:EdKd} for $K_d$ gives
 \begin{align}
   K_d(z,\lambda)  &=- \frac{d\ln E_d(z,\lambda)}{dz} \notag \\
-          &=-\frac{1}{E_d(z,\lambda)}\frac{dE_d(z,\lambda)}{dz} ~~\left[m^{-1} \right]
+          &=-\frac{1}{E_d(z,\lambda)}\frac{dE_d(z,\lambda)}{dz} ~~\left[m^{-1} \right].
 \end{align}
+Other $K$ functions such as $K_u$, $K_o$, or $K_L$ can be obtained using similar definition with the corresponding radiometric quantities such $E_u$, $E_o$, or $L$.
 
-\textbf{Note:} IOPs are additive whereas AOPs are not
+It is important to note that AOPs are not additive as the IOPs. Also, AOPs can not be measured in the lab or on water sample, therefore they must be measured in situ.
 
 % ------------------------------------------
 \subsection{Constituent Retrieval}
