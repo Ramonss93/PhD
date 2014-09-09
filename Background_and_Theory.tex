@@ -70,6 +70,26 @@ where $h=6.6255\times10^{-34}J~s$ is the Planck constant and $c=3.0\times10^{17}
 
 % ----------------------------------------------------
 \subsection{Sensor-reaching Radiance}
+
+% ----------------------------------------------------
+\subsubsection{Exoatmospheric Irradiance}
+
+From the total energy coming from the sun, only approximately 1390 $\left[\frac{W}{m^2}\right]$ reaches the Earth's atmosphere \cite{Schott}. This integrated value is known as the \emph{exoatmospheric irradiance}, or $E_S'$, and represents the total energy per unit area just outside the Earth's atmosphere due to the solar energy. Recall that \emph{irradiance} is the rate at which the radiant flux ($\Phi$) is delivered to a surface ($A$), defined as
+
+\begin{equation} \label{eq:irradiance}
+E = \frac{d\Phi}{dA}   \indent   \indent  \left[\frac{W}{m^2}\right]  
+\end{equation} 
+
+So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an existence at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band. \autoref{fig:exoirrad} shows the exoatmospheric irradiance spectrum  along with the transmitted solar irradiance through the atmosphere. Major absorption bands in the atmosphere are clearly apparent. MODIS bands are shown. Note that the most of the exoatmospheric irradiance occurs in the visible part of the spectrum of light.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/MODIS_ATM_solar_irradiance.png}
+\caption{Exoatmospheric irradiance as a function of wavelength (green curve) and solar spectral irradiance transmitted through the  atmosphere to the the Earth's surface (brown curve). MODIS bands shown (orange).  (Source: \protect\url{http://commons.wikimedia.org/wiki/File:MODIS_ATM_solar_irradiance.svg}).}
+\label{fig:exoirrad} 
+\end{figure}
+
+% ----------------------------------------------------
 \subsubsection{Solar Energy Paths}
 \label{subsubsec:SolarPaths}
 The main goal of remote sensing is to extract information about a specific target from all information recorded by an imaging system. In order to only isolate the target information from the rest of the recorded information, we need first to understand what kinds of energy are recorded by the sensor (a satellite is this case). Conceptually, we will separate the information recorded in energy paths, as described by \cite{Schott}. The energy paths, or electromagnetic energy, most influent in the $0.4-2.5\mu m$ spectral region are the solar energy paths (a.k.a. reflective paths), which are radiation originated from the sun and could reach the satellite camera. \autoref{fig:paths} shows the most significant solar energy paths. The type A photons in the figure are originated in the sun, pass through the atmosphere, reflect off the target on Earth's surface, propagating through the atmosphere in the direction of the sensor. This is the path that carries information about the target of interest. Path of type B photons in the figure are photons originated in the sun, scattered by the atmosphere in the direction of the target, and then reflected by the target in the direction of the sensor. These photons are referred to as {\it skylight} or {\it sky shine}. Type C is another group of photons that are significant in total signal recorded by the sensor. This photons are originated in the sun, and scattered by the atmosphere into the camera's line of sight, without ever interacting with the target. This path is referred as {\it upwelled radiance}, and it is a function of how ``hazy'' the atmosphere is.
@@ -82,21 +102,13 @@ When the target is the water column, we can discard the type G photons over open
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[height=8cm]{./Images/PathsVisio.eps}
+  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PathsVisio.eps}
 \caption{Photon path contributions to the sensor-reaching radiance in the reflective portion of the spectrum.}
 \label{fig:paths} 
 \end{figure}
 
 % ----------------------------------------------------
 \subsubsection{Governing Equation}
-
-From the total energy coming from the sun, only approximately 1390 $\left[\frac{W}{m^2}\right]$ reaches the Earth's atmosphere \cite{Schott}. This integrated value is known as the \emph{exoatmospheric irradiance}, or $E_S'$, and represents the total energy per unit area just outside the Earth's atmosphere due to the solar energy. Recall that \emph{irradiance} is the rate at which the radiant flux ($\Phi$) is delivered to a surface ($A$), defined as
-
-\begin{equation} \label{eq:irradiance}
-E = \frac{d\Phi}{dA}   \indent   \indent  \left[\frac{W}{m^2}\right]  
-\end{equation} 
-
-So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an existence at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band.
 
 The light source, usually the sun, interact with the target and then reach the sensor, as described in the previous section. This interaction will help us to extract information about the target, in this case the water body. That is why in order to understand how the water quality parameter are retrieved, first it is necessary to introduce the concept of sensor reaching radiance. The sensor reaching radiance is defined as the accumulation of photons at the front of a sensor that one wishes to collect in an effort to obtain information about the target \cite{GeraceThesis}. 
 
@@ -117,16 +129,29 @@ where:
 \indent \indent \indent $r(\lambda)$\>:\>spectral reflectance target\\
 \indent \indent \indent $\tau_1(\lambda)$\>:\>Sun-target path transmission of atmosphere\\
 \indent \indent \indent $\tau_2(\lambda)$\>:\>target-sensor path transmission of atmosphere\\
-\indent \indent \indent $E_{ds}(\lambda)$\>:\>solar downwelling irradiance\\
-\indent \indent \indent $L_{u}(\lambda)$\>:\>solar upwelling irradiance\\
+\indent \indent \indent $E_{ds}(\lambda)$\>:\>solar scattered downwelled irradiance (skylight)\\
+\indent \indent \indent $L_{us}(\lambda)$\>:\>solar upwelled radiance (path radiance)\\
 \end{tabbing}
 
-Equation \eqref{eq:gov1} is the solar term of the "big equation" described by \cite{Schott}.
+\autoref{eq:gov1} is the solar term of the ``big equation'' described by \cite{Schott}.
 
+% ----------------------------------------------------
+\subsection{Water Contributions to the Total Signal}
+Besides the photon paths described in \S\ref{subsubsec:SolarPaths}, a set of different photon paths need to be added to the total signal recorded by the sensor when the target is a water body. \autoref{fig:watercontribution} shows conceptually the different contributions to the upwelling radiance $L_u$ measured by a sensor (e.g. satellite or aircraft). These contributions are from the atmosphere ($L_a$), the water surface ($L_r$), and water column ($L_w$). The atmospheric contribution $L_a$ is the same as the photons type C described in \S\ref{subsubsec:SolarPaths}. The surface-reflected radiance $L_r$ is the portion of the downwelling solar radiance that is reflected by the water surface into sensor's line of sight. This has two component, one from the sun and one from the skylight, and it is commonly referred to as glint. 
 
+Finally, the water-leaving radiance $L_w$ is the portion of the sun energy that propagates through the atmosphere, be transmitted through the water surface ($L_t$),interacts with the water column, and then scatter into the upward direction (subsurface $L_u$ in \autoref{fig:watercontribution}) to eventually be transmitted through the water surface and propagate through the atmosphere into the sensor direction. 
 
-\subsection{Signal Component}
-\subsubsection{Bottom}
+Each contribution previously described could be relevant by itself, depending of the application. $L_a$ gives information about the atmosphere such as aerosol composition, for instance. However, only the water-leaving radiance $L_w$ carries information about the water column, which is relevant to this study. Because the sensor only measures the total upwelling radiance (sensor-reaching radiance) $L_u=L_a+L_r+L_w$ and not each contribution separated, $L_u$ need to be isolated from the rest of contributions ($L_a$ and $L_r$) through a process called atmospheric correction. 
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/WaterRadiance.png}
+\caption{Contribution to the total upwelling radiance $L_u$ above the water surface. Thick arrows represent single-scattering contributions; thin arrows represent multiple scattering contributions (Source: \protect\url{http://www.oceanopticsbook.info/}).}
+\label{fig:watercontribution} 
+\end{figure}
+% ----------------------------------------------------
+\subsubsection{Water Column and Bottom Contribution}
+
 % ----------------------------------------------------
 \subsubsection{Optical Constituents of Water}
 The color of water bodies could vary from deep blue of the open ocean to yellowish-brown in a turbid estuary. Their color depend on different concentration and optical properties of dissolved and particulate matter. Bellow there is a brief description of the most important optical constituents of natural waters.
@@ -154,6 +179,8 @@ In clean oceanic waters where the larger phytoplankton are relatively scarce, {\
 {\it Inorganic particles} are non-living particles created by, for example, weathering of terrestrial rocks that can enter the water as wind-blown dust settles on the sea surface, or they could be eroded soil carry by rivers to the sea or lakes. Their size could vary from less than $0.1\mu m$ to tens of micrometers. When present in high concentrations, inorganic particles could dominate water optical properties.
 
 Note that suspended matter (SM) in natural water bodies comprises both organic and inorganic material. These group of organic and inorganic material it is referred to as seston in limnology. Seston could include mineral particles of terrigenous origin, plankton, detritus (largely residual products of the decomposition of phytoplankton and zooplankton cells as well as macrophytic plants), volcanic ash particles, particulates resulting from {\it in situ} chemical reactions, and particles of anthropogenic origin (\cite{Bukata1995}). The major contributor to the water absorption and scattering properties is the particulate matter, being responsible for most of the temporal and spatial variability in these optical properties (\cite{Mobley:2001}).
+
+The relevant water constituents for this research are referred to as color primary agents (CPAs) or optically active water constituents (OACs) and they are colored dissolved organic matter (CDOM), chlorophyll-{\it a}, and suspended matter (SM) (a.k.a. minerals or total suspended solid (TSS)).
 \todo{define Case 1 and 2}
 % ----------------------------------------------------
 \subsubsection{Atmospheric Effect and Water} 
@@ -328,7 +355,7 @@ The connection between the IOPs, boundary conditions, and light sources (e.g. bi
 \begin{figure}[htb]
 \centering
       \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RTE1.png}
-      \caption{Single beam of radiance and the processes that affect it as it propagates a distance $\Delta r$ (Note: image taken from \hl{Ocean Optics Book})}
+      \caption{Single beam of radiance and the processes that affect it as it propagates a distance $\Delta r$ (Source: \protect\url{http://www.oceanopticsbook.info/}).}
       \label{fig:RTE1}
 \end{figure}
 
