@@ -5,12 +5,90 @@
 \label{ch:background}
 % ----------------------------------------------------
 \section{Remote Sensing of Water}
-\todo{define Case 1 and 2}
-\subsection{Sensor-reaching Radiance}
-\subsubsection{Reflective Paths}
-\subsubsection{Governing Equation}
+\subsection{Radiometric Quantities}
+\autoref{fig:radiance} shows the geometry used to define the radiometric quantities. We need to define a fundamental radiometric quantity that specifies completely positional ($x,y,z$), temporal ($t$), directional ($\theta,\phi$) and spectral ($\lambda$) structure of the light field. This is accomplished by the spectral radiance $L$. The {\it spectral radiance} $L$ \index{spectral radiance, $L$} can be defined as (\cite{Mobley:2001})
+\begin{equation}\label{eq:rad1}
+  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
+\end{equation}
+where:\\
+      \noindent $\Delta Q$: radian energy incident \\
+      $\Delta t$: time interval \\
+      $\Delta A$: surface area at location (x,y,z)\\
+      $\Delta\Omega$: solid angle in direction ($\theta$,$\varphi$) \\
+      $\Delta\lambda$: photons wavelength interval
 
-\subsection{Governing Equation}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
+\caption{Radiance (Note: image taken from \cite{Mobley:2001})}
+\label{fig:radiance} 
+\end{figure}
+\todo{can I use a fig. from other author?} 
+
+In the conceptual limit of infinitesimal parameter interval (\cite{Mobley:2001}), \autoref{eq:rad1} becomes
+\begin{equation}
+  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]~or~\left[ W m^{-2}sr^{-1}nm^{-1} \right]
+\end{equation}
+
+In most oceanographic applications, we can assume that there is horizontal homogeneity and time independence, then the spectral radiance can be written as $L(z,\theta,\phi,\lambda)$, which is consider a one dimensional (1-D) quantity.
+
+Even though the spectral radiance describes completely the light field, it is not commonly used for instrumentation difficulties or for all that information is not needed. Irradiance is a radiometric quantity that is easier to measure and ofter more useful. {\it Irradiance} $E$ is formally defined as
+\begin{equation}
+  E(x,y,z,t,\lambda) \equiv \frac{\Delta Q}{\Delta t\Delta A\Delta\lambda}~~\left[ W m^{-2}nm^{-1} \right]
+\end{equation}
+
+The most commonly measured radiometric variable is the spectral plane irradiance. A collector surface (detector) is equally sensitive to light from any direction. However, the effective area (a.k.a. projected area) of the detector as seen by light in direction $\theta$ is $\Delta A|\cos{\theta}|$, where $\theta$ is the angle between the photon direction and the normal to the surface of the detector (see \autoref{fig:radiance}). If such a detector is placed at depth $z$ and oriented facing upward, so it detects photon traveling downward, then the detector will be measuring the spectral downwelling plane irradiance $E_d(z,\lambda)$. What this detector is really doing is adding the downwelling radiance weighted by the cosine of the photon direction. Therefore, the {\it spectral downwelling plane irradiance} $E_d(z,\lambda)$ can be defined as
+\begin{equation}
+  E_{d}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)|cos\theta|d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+where $2\pi_d$ denotes the hemisphere of downward directions, i.e. the set of directions ($\theta,\phi$) such that $0\leq\theta\leq\pi/2$ and $0\leq\phi\leq2\pi$, if $\theta$ is measured from $+z$ or nadir direction. If the instrument is placed facing downward, then the spectral upwelling plane irradiance $E_d(z,\lambda)$ is measured. The difference $E_{net}=E_d-E_u$ is named the net downward irradiance.
+
+Now, consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions, i.e. the detector has the same effective area for radiance in any downward direction, so no $\cos{\theta}$ factor is needed. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, the this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
+\begin{equation}\label{eq:Eod}
+  E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+because this instrument is summing radiance over all directions in the downward hemisphere $2\pi_d$.
+
+If the same instrument is placed facing downward, it will be measuring the spectral upwelling scalar irradiance $ E_{ou}(z,\lambda)$, defined as
+\begin{equation}
+  E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
+\end{equation}
+where $2\pi_u$ denotes the hemisphere of upward direction.
+
+The sum of the downwelling and upwelling components can be defined as the {\it spectral scalar irradiance} $E_o(z,\lambda)$, i.e.
+\begin{align}
+  E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\notag \\
+           &=\int_{4\pi} L(z,\theta,\varphi,\lambda)d\Omega
+\end{align}
+The spectral scalar irradiance is the radiometric variable that is most relevant to photosynthesis because photosynthesis is independent of the traveling direction of the light.
+
+Other important radiometric quantity in oceanography is the photosynthetic available radiation (PAR), defined as
+\begin{equation}
+  PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
+\end{equation}
+where $h=6.6255\times10^{-34}J~s$ is the Planck constant and $c=3.0\times10^{17}nm~s^{-1}$ gives the number of available photons rather than the amount of radiant energy. This is relevant because photosynthesis depends on the number of photons absorbed.
+
+% ----------------------------------------------------
+\subsection{Sensor-reaching Radiance}
+\subsubsection{Solar Energy Paths}
+\label{subsubsec:SolarPaths}
+The main goal of remote sensing is to extract information about a specific target from all information recorded by an imaging system. In order to only isolate the target information from the rest of the recorded information, we need first to understand what kinds of energy are recorded by the sensor (a satellite is this case). Conceptually, we will separate the information recorded in energy paths, as described by \cite{Schott}. The energy paths, or electromagnetic energy, most influent in the $0.4-2.5\mu m$ spectral region are the solar energy paths (a.k.a. reflective paths), which are radiation originated from the sun and could reach the satellite camera. \autoref{fig:paths} shows the most significant solar energy paths. The type A photons in the figure are originated in the sun, pass through the atmosphere, reflect off the target on Earth's surface, propagating through the atmosphere in the direction of the sensor. This is the path that carries information about the target of interest. Path of type B photons in the figure are photons originated in the sun, scattered by the atmosphere in the direction of the target, and then reflected by the target in the direction of the sensor. These photons are referred to as {\it skylight} or {\it sky shine}. Type C is another group of photons that are significant in total signal recorded by the sensor. This photons are originated in the sun, and scattered by the atmosphere into the camera's line of sight, without ever interacting with the target. This path is referred as {\it upwelled radiance}, and it is a function of how ``hazy'' the atmosphere is.
+
+Another photon path that could be added to the total signal is the photons that originated in the sun, propagate to the atmosphere, reflected off from background objects in the direction of the target and then reflected from the target of interest back through the atmosphere to the sensor. This photons are labeled as type G photons in \autoref{fig:paths}. As you can see, this path involves multiple reflection or bounces of the photons. 
+
+The type I photons in the figure are product of what is called {\it adjacency effect}. This is also a source of multiple bounce, or bounce and scatter photons. These photons are reflected from surrounding objects and then scattered into the line of sight of the sensor. This path can be included in the path radiance (type C photons). Lastly, if we are considering multiple scattering, we need to take in account the {\it trapping} effect, illustrated by path J in \autoref{fig:paths}. These photons that are generated in the sun, propagated through the atmosphere, reflected off the target to the air column, but reflected back onto the target the by the air column, and finally reflected into the line of sight of the sensor. 
+
+When the target is the water column, we can discard the type G photons over open water, but it could be important over pixel in close to the shoreline. For water studies, the most important paths will be type A, B and C photons. The goal of the atmospheric correction is to isolate the type A photons from the rest of the path. To do so, we need to characterize the rest of the paths.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=8cm]{./Images/PathsVisio.eps}
+\caption{Photon path contributions to the sensor-reaching radiance in the reflective portion of the spectrum.}
+\label{fig:paths} 
+\end{figure}
+
+% ----------------------------------------------------
+\subsubsection{Governing Equation}
 
 From the total energy coming from the sun, only approximately 1390 $\left[\frac{W}{m^2}\right]$ reaches the Earth's atmosphere \cite{Schott}. This integrated value is known as the \emph{exoatmospheric irradiance}, or $E_S'$, and represents the total energy per unit area just outside the Earth's atmosphere due to the solar energy. Recall that \emph{irradiance} is the rate at which the radiant flux ($\Phi$) is delivered to a surface ($A$), defined as
 
@@ -20,7 +98,15 @@ E = \frac{d\Phi}{dA}   \indent   \indent  \left[\frac{W}{m^2}\right]
 
 So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an existence at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band.
 
-The light source, usually the sun, interact with the target and then reach the sensor. This interaction will help us to extract about the target, in this case the water body. That is why in order to understand how the water quality parameter are retrieved, first it is necessary to introduce the concept of sensor reaching radiance. The sensor reaching radiance is defined as the accumulation of photons at the front of a sensor that one wishes to collect in an effort to obtain information about the target \cite{GeraceThesis} . The total sensor-reaching radiance is the sum of the radiances due to the individual solar and thermal paths.  \cite{Schott} shows that in the VNIR region (approximately 0.3-2.5 [$\mu m$]), the solar energy is so many orders of the magnitude higher than the self-emitted energy, so the thermal paths are negligible for this study. Also, we consider that radiance from the background is negligible because the water bodies are typically several kilometers wide. Assuming that the target is approximately Lambertian (radiance is equal in all directions), the total sensor-reaching radiance, $L$, is defined as \begin{equation} \label{eq:gov1} L(\lambda) = \frac{E'_S(\lambda)cos(\sigma')r(\lambda)\tau_1(\lambda)\tau_2(\lambda)}{\pi} +
+The light source, usually the sun, interact with the target and then reach the sensor, as described in the previous section. This interaction will help us to extract information about the target, in this case the water body. That is why in order to understand how the water quality parameter are retrieved, first it is necessary to introduce the concept of sensor reaching radiance. The sensor reaching radiance is defined as the accumulation of photons at the front of a sensor that one wishes to collect in an effort to obtain information about the target \cite{GeraceThesis}. 
+
+The total sensor-reaching radiance is the sum of the radiances due to the individual solar and thermal paths.  \cite{Schott} shows that in the VNIR region (approximately 0.3-2.5 [$\mu m$]), the solar energy is so many orders of the magnitude higher than the self-emitted energy, so the thermal paths are negligible for this study. Also, we consider that radiance from the background is negligible because the water bodies are typically several kilometers wide, as mentioned previously. The fundamental remote sensing equation that accounts for the most important photon interaction describes how the paths described in the previous section contribute to the signal reaching the imaging system. This equation could be written as (\cite{Schott})
+\begin{equation}
+   L = L_A+L_B+L_C+L_G+L_I+L_J
+\end{equation} 
+where $L$ is the total radiance reaching the sensor's aperture and the indexes represents the different reflective paths described in \S\ref{subsubsec:SolarPaths}.
+
+Assuming that the target is approximately Lambertian (radiance is equal in all directions, and therefore its reflectance is not a function of the viewing angle), the total sensor-reaching radiance, $L$, is defined as \begin{equation} \label{eq:gov1} L(\lambda) = \frac{E'_S(\lambda)cos(\sigma')r(\lambda)\tau_1(\lambda)\tau_2(\lambda)}{\pi} +
                         \frac{E_{ds}(\lambda)r(\lambda)\tau_2(\lambda)}{\pi} + L_{us}(\lambda)
 \end{equation} 
 where:
@@ -68,6 +154,7 @@ In clean oceanic waters where the larger phytoplankton are relatively scarce, {\
 {\it Inorganic particles} are non-living particles created by, for example, weathering of terrestrial rocks that can enter the water as wind-blown dust settles on the sea surface, or they could be eroded soil carry by rivers to the sea or lakes. Their size could vary from less than $0.1\mu m$ to tens of micrometers. When present in high concentrations, inorganic particles could dominate water optical properties.
 
 Note that suspended matter (SM) in natural water bodies comprises both organic and inorganic material. These group of organic and inorganic material it is referred to as seston in limnology. Seston could include mineral particles of terrigenous origin, plankton, detritus (largely residual products of the decomposition of phytoplankton and zooplankton cells as well as macrophytic plants), volcanic ash particles, particulates resulting from {\it in situ} chemical reactions, and particles of anthropogenic origin (\cite{Bukata1995}). The major contributor to the water absorption and scattering properties is the particulate matter, being responsible for most of the temporal and spatial variability in these optical properties (\cite{Mobley:2001}).
+\todo{define Case 1 and 2}
 % ----------------------------------------------------
 \subsubsection{Atmospheric Effect and Water} 
 The goal of this section is to describe the different approaches used to atmospherically correct satellite imagery over water. First, we need to understand the effect of the atmosphere on the propagating energy. To do so, a description of the processes involved in the energy interaction in the atmosphere are described in the first part of this section. Later on, different techniques for atmospherically correcting satellite images are defined.
@@ -141,73 +228,6 @@ The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacit
 See \cite{Jensen} and \cite{Mustard2001}.
 % ----------------------------------------------------
 \subsubsection{In Water Radiative Transfer}
-
-\subsubsection*{Radiometric Quantities}
-\addcontentsline{toc}{subsubsection}{Radiometric Quantities}
-
-\autoref{fig:radiance} shows the geometry used to define the radiometric quantities. We need to define a fundamental radiometric quantity that specifies completely positional ($x,y,z$), temporal ($t$), directional ($\theta,\phi$) and spectral ($\lambda$) structure of the light field. This is accomplished by the spectral radiance $L$. The {\it spectral radiance} $L$ \index{spectral radiance, $L$} can be defined as (\cite{Mobley:2001})
-\begin{equation}\label{eq:rad1}
-  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\Delta Q}{\Delta t\Delta A\Delta\Omega\Delta\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]
-\end{equation}
-where:\\
-      \noindent $\Delta Q$: radian energy incident \\
-      $\Delta t$: time interval \\
-      $\Delta A$: surface area at location (x,y,z)\\
-      $\Delta\Omega$: solid angle in direction ($\theta$,$\varphi$) \\
-      $\Delta\lambda$: photons wavelength interval
-
-\begin{figure}[htb]
-  \centering
-  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadianceDef.png}
-\caption{Radiance (Note: image taken from \cite{Mobley:2001})}
-\label{fig:radiance} 
-\end{figure}
-\todo{can I use a fig. from other author?} 
-
-In the conceptual limit of infinitesimal parameter interval (\cite{Mobley:2001}), \autoref{eq:rad1} becomes
-\begin{equation}
-  L(x,y,z,t,\theta,\varphi,\lambda)\equiv\frac{\partial^4 Q}{\partial t\partial A\partial\Omega\partial\lambda}~~\left[ Js^{-1}m^{-2}sr^{-1}nm^{-1} \right]~or~\left[ W m^{-2}sr^{-1}nm^{-1} \right]
-\end{equation}
-
-In most oceanographic applications, we can assume that there is horizontal homogeneity and time independence, then the spectral radiance can be written as $L(z,\theta,\phi,\lambda)$, which is consider a one dimensional (1-D) quantity.
-
-Even though the spectral radiance describes completely the light field, it is not commonly used for instrumentation difficulties or for all that information is not needed. Irradiance is a radiometric quantity that is easier to measure and ofter more useful. {\it Irradiance} $E$ is formally defined as
-\begin{equation}
-  E(x,y,z,t,\lambda) \equiv \frac{\Delta Q}{\Delta t\Delta A\Delta\lambda}~~\left[ W m^{-2}nm^{-1} \right]
-\end{equation}
-
-The most commonly measured radiometric variable is the spectral plane irradiance. A collector surface (detector) is equally sensitive to light from any direction. However, the effective area (a.k.a. projected area) of the detector as seen by light in direction $\theta$ is $\Delta A|\cos{\theta}|$, where $\theta$ is the angle between the photon direction and the normal to the surface of the detector (see \autoref{fig:radiance}). If such a detector is placed at depth $z$ and oriented facing upward, so it detects photon traveling downward, then the detector will be measuring the spectral downwelling plane irradiance $E_d(z,\lambda)$. What this detector is really doing is adding the downwelling radiance weighted by the cosine of the photon direction. Therefore, the {\it spectral downwelling plane irradiance} $E_d(z,\lambda)$ can be defined as
-\begin{equation}
-  E_{d}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)|cos\theta|d\Omega~~\left[Wm^{-2}nm^{-1} \right]
-\end{equation}
-where $2\pi_d$ denotes the hemisphere of downward directions, i.e. the set of directions ($\theta,\phi$) such that $0\leq\theta\leq\pi/2$ and $0\leq\phi\leq2\pi$, if $\theta$ is measured from $+z$ or nadir direction. If the instrument is placed facing downward, then the spectral upwelling plane irradiance $E_d(z,\lambda)$ is measured. The difference $E_{net}=E_d-E_u$ is named the net downward irradiance.
-
-Now, consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions, i.e. the detector has the same effective area for radiance in any downward direction, so no $\cos{\theta}$ factor is needed. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, the this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
-\begin{equation}\label{eq:Eod}
-  E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
-\end{equation}
-because this instrument is summing radiance over all directions in the downward hemisphere $2\pi_d$.
-
-If the same instrument is placed facing downward, it will be measuring the spectral upwelling scalar irradiance $ E_{ou}(z,\lambda)$, defined as
-\begin{equation}
-  E_{ou}(z,\lambda)=\int_{2\pi_u} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
-\end{equation}
-where $2\pi_u$ denotes the hemisphere of upward direction.
-
-The sum of the downwelling and upwelling components can be defined as the {\it spectral scalar irradiance} $E_o(z,\lambda)$, i.e.
-\begin{align}
-  E_{o}(z,\lambda) &\equiv E_{od}(z,\lambda)+E_{ou}(z,\lambda)\notag \\
-           &=\int_{4\pi} L(z,\theta,\varphi,\lambda)d\Omega
-\end{align}
-The spectral scalar irradiance is the radiometric variable that is most relevant to photosynthesis because photosynthesis is independent of the traveling direction of the light.
-
-Other important radiometric quantity in oceanography is the photosynthetic available radiation (PAR), defined as
-\begin{equation}
-  PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
-\end{equation}
-where $h=6.6255\times10^{-34}J~s$ is the Planck constant and $c=3.0\times10^{17}nm~s^{-1}$ gives the number of available photons rather than the amount of radiant energy. This is relevant because photosynthesis depends on the number of photons absorbed.
-
-
 % ------------------------------------------------
 \subsubsection*{IOPs}
 \addcontentsline{toc}{subsubsection}{IOPs}
