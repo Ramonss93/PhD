@@ -151,7 +151,17 @@ Each contribution previously described could be relevant by itself, depending of
 \end{figure}
 % ----------------------------------------------------
 \subsubsection{Water Column and Bottom Contribution}
+Once the incident energy is transmitted through the water surface, i.e. $L_w$ in the previous section, the incident light could be absorbed or scattering by the different water constituent within the water column. \autoref{fig:WaterColumn} illustrates the different kinds of interactions of the incident light with the water column (or water volume) and the water bottom.
 
+Path $I$ represents the bottom effect caused by the incident light that penetrates the water surface, transmitted through the water column, reflected by the bottom, transmitted through the water column, and leaves the water into the sensor direction. This contribution depends on the depth and the clarity of the water. This signal can be significant in shallow Case 2 waters, i.e. depth $<10-15m$, where there is not much organic and/or inorganic suspended particles within the water column, and it can be used to extract information about the bottom composition or bathymetry, for instance. However, for water quality studies, this is a signal that needs to be avoided or isolated from the total signal. In the present study, this path will assumed to have zero contribution to the water-leaving signal because the water bodies of interest are deep enough to not allow the incident light to interact with the bottom or the water have a significant concentration of suspended particles (i.e. >$0.1g/m^3$ (\cite{Pahlevan:2012})).
+
+\begin{figure}[htb]
+  \centering
+      \includegraphics[width=100mm]{./Images/WaterColumn.eps}
+  \caption{Contributions to sensor-reaching radiance from the water column.}
+  \label{fig:WaterColumn}
+\end{figure}
+\todo{fix sun color}
 % ----------------------------------------------------
 \subsubsection{Optical Constituents of Water}
 The color of water bodies could vary from deep blue of the open ocean to yellowish-brown in a turbid estuary. Their color depend on different concentration and optical properties of dissolved and particulate matter. Bellow there is a brief description of the most important optical constituents of natural waters.
@@ -434,13 +444,6 @@ It is important to note that AOPs are not additive as the IOPs. Also, AOPs can n
 
 % ------------------------------------------
 \subsection{Constituent Retrieval}
-
-When imaging water body, a set of new paths need to be taken in account to determine the sensor-reaching radiance.
- \begin{figure}[htb]
-  \centering
-      \includegraphics[width=100mm]{/Users/javier/Desktop/Javier/MASTER_RIT/2011_THESIS/LaTeX/Thesis/Images/WaterColumn.eps}
-  \caption{Contributions to sensor-reaching radiance from the water column \label{fig:WaterColumn}}
-  \end{figure}
 
 
 Each sensor-reaching radiance curve is associated with a specific combination of water components (CHL, SM and CDOM). HidroLight provides us the \hl{remote sensing reflectance}, $R_{RS}$, which describes how much of the total incident downwelling irradiance is ultimately returned from a water column in a given direction, defined as
