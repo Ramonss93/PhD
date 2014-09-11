@@ -150,18 +150,58 @@ Each contribution previously described could be relevant by itself, depending of
 \label{fig:watercontribution} 
 \end{figure}
 % ----------------------------------------------------
-\subsubsection{Water Column and Bottom Contribution}
+\subsubsection{Water Column and Bottom Contributions}
 Once the incident energy is transmitted through the water surface, i.e. $L_w$ in the previous section, the incident light could be absorbed or scattering by the different water constituent within the water column. \autoref{fig:WaterColumn} illustrates the different kinds of interactions of the incident light with the water column (or water volume) and the water bottom.
-
-Path $I$ represents the bottom effect caused by the incident light that penetrates the water surface, transmitted through the water column, reflected by the bottom, transmitted through the water column, and leaves the water into the sensor direction. This contribution depends on the depth and the clarity of the water. This signal can be significant in shallow Case 2 waters, i.e. depth $<10-15m$, where there is not much organic and/or inorganic suspended particles within the water column, and it can be used to extract information about the bottom composition or bathymetry, for instance. However, for water quality studies, this is a signal that needs to be avoided or isolated from the total signal. In the present study, this path will assumed to have zero contribution to the water-leaving signal because the water bodies of interest are deep enough to not allow the incident light to interact with the bottom or the water have a significant concentration of suspended particles (i.e. >$0.1g/m^3$ (\cite{Pahlevan:2012})).
 
 \begin{figure}[htb]
   \centering
-      \includegraphics[width=100mm]{./Images/WaterColumn.eps}
+      \includegraphics[width=100mm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/WaterColumn.eps}
   \caption{Contributions to sensor-reaching radiance from the water column.}
   \label{fig:WaterColumn}
 \end{figure}
 \todo{fix sun color}
+
+Path $I$ represents the bottom effect caused by the incident light that penetrates the water surface, transmitted through the water column, reflected by the bottom, transmitted through the water column, and leaves the water into the sensor direction. This contribution depends on the depth and the clarity of the water. This signal can be significant in shallow Case 2 waters, i.e. depth $<10-15m$, where there is not much organic and/or inorganic suspended particles within the water column, and it can be used to extract information about the bottom composition or bathymetry, for instance. However, for water quality studies, this is a signal that needs to be avoided or isolated from the total signal. In the present study, this path will assumed to have zero contribution to the water-leaving signal because the water bodies of interest are deep enough to not allow the incident light to interact with the bottom or the water have a significant concentration of suspended particles (i.e. $>0.1mg/L$ (\cite{Pahlevan:2012})).
+
+Path $II$ represents the interaction of the incident light with CDOM. CDOM is considered to only be an absorber, and not a scatterer. Therefore, it is an important component in light attenuation in the ultra-violet (UV) and the blue regions of the spectrum of light, therefore it is a important optical constituent of the water that often dominates absorption in the blue. In practice, CDOM is defined operational as the material that passes through a filter most often with pore size of $0.2\mu m$. Over the interval $[350nm,700nm]$, the CDOM absorption coefficient is described by an exponential decreasing function ([Jerlov, 1996]\todo{Cite Jerlov})
+\begin{equation}
+  a_{CDOM}(\lambda) = a_{CDOM}(\lambda_0)\exp{\left[-S_{CDOM}(\lambda-\lambda_0)\right]}
+\end{equation}
+where $S_{CDOM}$ is spectral slope and $\lambda_0$ is the reference wavelength. \autoref{fig:compabs} shows examples of CDOM absorption coefficient for Case 1 and Case 2 waters.
+
+Path $III$ illustrates the influence of inorganic suspended particles (or suspended material (SM) or minerals) on the incident light, but it could also include organic particles. These particles can scattered and/or absorb light, and they vary in size, composition, and distribution, which can influence the optical properties of the water, being different for different particles. For example, the optical properties of clay are different from silt (\cite{Pahlevan:2012}). \autoref{fig:compabs} shows examples of minerals absorption coefficient for Case 2 waters (labeled as ``Min'' on the right-hand figure). The inorganic suspended particles are often included within the non-algal particles (NAP), which is defined operationally as the particulate material that is not extracted by methanol in the spectrophotometric measurement of particles on filter pads ([Kishino {\it et al}., 1985]\todo{Cite Kishino}). The NAP absorption coefficient spectrum is often described by a exponential decreasing function, i.e.
+\begin{equation}
+  a_{NAP}(\lambda) = a_{NAP}(\lambda_0)\exp{\left[-S_{NAP}(\lambda-\lambda_0)\right]}
+\end{equation}
+where $S_{NAP}$ is the exponential slope for NAP, which could be estimated from a nonlinear regression from field data. The scattering properties of particles are difficult to measure. Basically, to measure the scattering due to particles, any undissolved material is treated as particle (\cite{GeraceThesis}). An example of scattering coefficient spectrum for minerals is shown in \ref{fig:compscat}, for Case 1 and Case 2 waters.
+
+Path $IV$ shows the case of scattering and absorption of light by pure water, which is considered to be composed of only water molecules (i.e. free from particles). \autoref{fig:WaterAbs1} shows the absorption coefficient spectrum for pure water over a wide range of wavelength. Note that pure water has a highly absorption in the UV and above NIR, having a window in the visible. \autoref{fig:WaterAbs2} shows the pure water absorption coefficient for visible ($[400nm,700nm]$), where the absorption is low in the blue and increases in the red and NIR. The scattering coefficient for pure water is illustrated in \autoref{fig:compabs}.
+
+\begin{figure}[htb]
+  \centering
+      \includegraphics[width=12cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Absorption_spectrum_of_liquid_water.png}
+  \caption{Pure water absorption coefficient spectrum. Source: \protect\url{http://en.wikipedia.org/wiki/Electromagnetic_absorption_by_water}}
+  \label{fig:WaterAbs1}
+\end{figure}
+
+\begin{figure}[htb]
+  \centering
+      \includegraphics[width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/WaterAbsorption.png}
+  \caption{Pure water absorption coefficients on a semilog scale [Pope and Frye, 1992].  Source: \protect\url{http://www.oceanopticsbook.info/}}
+  \label{fig:WaterAbs2}
+\end{figure}
+\todo{cite Pope and Frye}
+
+\begin{figure}[htb]
+  \centering
+      \includegraphics[width=10cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/WaterScattAbs.png}
+  \caption{Pure sea water absorption (solid line)  and scattering (dotted line) coefficients [Smith and Baker, 1981]. Source: \cite{Mobley1994}}
+  \label{fig:WaterScat1}
+\end{figure}
+\todo{cite Smith and Baker}
+
+Lastly, path $V$ in \ref{fig:WaterColumn} illustrates the interaction of the incident light with phytoplankton. This interaction can be absorption and/or scattering. Phytoplankton can dramatically affect the optical properties of the water column. Phytoplankton absorption depends in the composition and concentration of pigments. There exist different kind of pigment. The main pigment is chlorophyll-{\it a}, and it can be used as a surrogate or proxy for phytoplankton. \ref{fig:compabs} shows example of chlorophyll absorption coefficient spectrum (labeled as ``Chl'') for Case 1 and Case 2 water. Chlorophyll typically tends to be a strong absorber of visible light \cite{Mobley1994}, having two absorption peaks, one in the blue ($430nm$) and one in the red ($665nm$). An example of scattering coefficient spectrum for chlorophyll-{\it a} is shown in \ref{fig:compscat}, for Case 1 and Case 2 waters.
+
 % ----------------------------------------------------
 \subsubsection{Optical Constituents of Water}
 The color of water bodies could vary from deep blue of the open ocean to yellowish-brown in a turbid estuary. Their color depend on different concentration and optical properties of dissolved and particulate matter. Bellow there is a brief description of the most important optical constituents of natural waters.
@@ -291,14 +331,14 @@ and represents the fraction of the incident power that is scattered out of the b
 and represents the fraction of the incident power that is lost or attenuated. As examples of magnitudes and shapes, \autoref{fig:compabs} and \autoref{fig:compscat} show contributions by the various components of waters to the absorption and scattering coefficients, respectively, for Case 1 and Case 2 waters.
 \begin{figure}[htb]
 \centering
-      \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
+      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
       \caption{Contribution by the various components to the absorption coefficient (Note: image taken from \cite{Mobley:2001}).}
       \label{fig:compabs}
 \end{figure}
 
 \begin{figure}[htb]
 \centering
-      \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
+      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
       \caption{Contribution by the various components to the scattering coefficient (Note: image taken from \cite{Mobley:2001}).}
       \label{fig:compscat}
 \end{figure}

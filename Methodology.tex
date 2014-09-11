@@ -269,7 +269,7 @@ The absorption properties for the component chlorophyll were input by user-suppl
 For the CDOM component, the absorption specification was the following. First, the absorption coefficients were determined by spectrophotometric measurements in lab for the ONTNS water sample. This data is shown in \autoref{fig:CDOMa}. Then, the data were normalized by the absorption value $a(\lambda_0)=0.1151[1/m]$ at the reference wavelength $\lambda_0=440nm$, so that $a^*(\lambda_0)=1$. This normalized data is shown in \autoref{fig:CDOMaast} as purple dots. An exponential curve with the following equation
 \begin{equation}
 	\label{eq:CDOMabs}
-	a^*(\lambda)=a^*(\lambda_0)exp(-\gamma(\lambda-\lambda_0))
+	a^*(\lambda)=a^*(\lambda_0)\exp{\left[-\gamma(\lambda-\lambda_0)\right]}
 \end{equation}
 was fitted to the normalized data. It was determined that the decay constant $\gamma=0.0126$. The fitted curve is illustrated in \autoref{fig:CDOMaast} in solid line. The parameters of this fitted curve are input in Ecolight to specify the CDOM specific absorption $a^*$, and $a(\lambda_0)=0.1151[1/m]$ to specify the dependence of the CDOM absorption at a reference wavelength.
 
