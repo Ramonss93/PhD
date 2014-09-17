@@ -307,16 +307,30 @@ where $\beta_a$ is the absorption coefficient \index{absorption coefficient}  de
 \end{equation}
 where $\kappa$ is the imaginary part of the complex index of refraction and quantifies the absorptive characteristic of the medium. The absorption coefficient $\beta_a$ represents the fractional amount of flux lost to absorption per unit length of transit in a propagating beam \cite{Schott}. Equation \ref{eq:BeerLaw} is known as Beer's law \index{Beer's law} and tell us that the energy of light decreases exponentially with distance.
 
+The variability in optical characteristics of the atmosphere is caused mainly by variability  in gaseous absorption, and aerosol characteristics and loading. Size distribution of the aerosol, index of refraction of the chemical that composes the aerosol and aerosol density describe the physical characteristics of the aerosol. Sunlight interaction with aerosol can be absorption and/or scattering. The amount of radiation scattered and absorbed by a small volume of aerosol can be different and its properties can be described by three parameters: extinction coefficient $K_e$, single-scattering albedo $\omega_o$ and scattering phase function $P(\theta)$ \cite{Asrar1989}.
 
-The amount of radiation scattered and absorbed by a small volume of aerosol can be different. Therefore, the optical properties of a small volume of aerosol can be described by three parameters: extinction coefficient $K_e$, single-scattering albedo $\omega_o$ and scattering phase function $P(\theta)$ \cite{Asrar1989}.
+The connection between the physical characteristics of the aerosol (e.g. size distribution and refractive index) and the optical characteristics (extinction coefficient, single-scattering albedo, and scattering phase function) is made by using Mie theory for homogeneous spherical particles. Mie theory states that the extinction cross section $\beta$ ($cm^2$) can be computed as a function of the particle radius $r$ \cite{Asrar1989}. 
 
-The extinction coefficient $K_e$ describes the fraction of radiation taken from the direct beam by the aerosol (named beam attenuation in the aquatic medium). The single-scattering albedo $\omega_o$ is the fraction of scattering from the total extinction ($\omega_o$= scattering coefficient/extinction coefficient). The scattering phase function $P(\theta)$ describes the angular distribution of scattered radiation, where $\theta$ is the scattering angle.
+The extinction coefficient $K_e$ describes the fraction of radiation taken from the direct beam by the aerosol (named beam attenuation in the aquatic medium). The $K_e$ of a small volume of air is computed as the contribution of all particles in the volume
+\begin{equation}
+    K_e=\int\beta(r)n(r)dr
+\end{equation}
+where $r$ is each radius, $\beta$ is cross section, and $n(r)$ is density per radius interval $dr$ with $n(r)$ normalized as 
+\begin{equation}
+  \int n(r)dr=N_o
+\end{equation}
+where $N_o$ is the density of the particles in $cm^{-1}$.
+
+The single-scattering albedo $\omega_o$ is the fraction of scattering from the total extinction ($\omega_o$= scattering coefficient/extinction coefficient). 
+
+The scattering phase function $P(\theta)$ describes the angular distribution of scattered radiation, where $\theta$ is the scattering angle.
 
 The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacity) expresses the extent to which a given layer of material attenuates the intensity of the radiation passing through it \cite{Rees1990}. It is defined as
 \begin{equation}
     \delta = \beta_{a}z
 \end{equation}
 
+To be completed...
 
 % \subsubsection*{Atmospheric Effect Removal}
 % \addcontentsline{toc}{subsubsection}{Atmospheric Effect Removal}
@@ -326,6 +340,7 @@ The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacit
 % \cite{Gordon:1994} developed an algorithm for atmospherically correcting SeaWiFS data.
 % ----------------------------------------------------
 \subsubsection{Glint Effect}
+To be completed...
 % ----------------------------------------------------
 \subsubsection*{Sun Glint}
 \addcontentsline{toc}{subsubsection}{Sun Glint}

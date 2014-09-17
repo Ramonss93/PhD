@@ -287,14 +287,14 @@ was fitted to the normalized data. It was determined that the decay constant $\g
 
 The mineral mass-specific absorption coefficient was determined in the same fashion as for the chlorophyll mass-specific absorption coefficient from lab measurements of the ONTNS water sample. The mineral mass-specific absorption coefficient are shown in \autoref{fig:SMaast}. The mineral mass-specific scattering coefficient was the same used by \cite{Raqueno:2000} and \cite{Raqueno:2003} and are shown in \autoref{fig:SMbast}.
 
-\begin{figure}[!ht]
+\begin{figure}[htb]
   	\centering
   	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/SMaastJavier.eps}
   \caption{Mineral mass-specific absorption spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:SMaast} } 
   % \vspace{0.5cm}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[htb]
   	\centering
   	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/SMbastRolo.eps}
   \caption{Mineral mass-specific scattering spectra used for the determination of the reflectance spectra of the dark pixel in HydroLight. \label{fig:SMbast} } 
@@ -305,7 +305,7 @@ The mineral mass-specific absorption coefficient was determined in the same fash
 
 This best matched is used as the reflectance spectra of the dark pixel in the model-based ELM method. This reflectance is further spectrally sample to the Landsat 8 response. 
 
-\begin{figure}[!ht]
+\begin{figure}[htb]
   	\centering
   	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RefWithFFbbONTNS.eps}
   \caption{Reflectance for ONTNS sample and best matching from HydroLight. \label{fig:BestMatchONTNS} } 
@@ -318,7 +318,7 @@ The radiance spectra for the dark pixel is obtained from a ROI in the water pres
 
 As a resume, \autoref{fig:ELMpxsENVI} shows the different spectra used to perform the model-based ELM, where four different spectra can be seen: one reflectance and one radiance spectra for the bright pixel (obtained using the PIF extraction over the Landsat reflectance product and Landsat 8 image, respectively), one reflectance spectra for the dark pixel (obtained from HydroLight), and one radiance spectra for bright pixel (obtained from the statistics of a ROI over water in the Landsat 8 image). These spectra are used to atmospherically correct the Landsat 8 image using the ENVI Classic software \cite{ENVIUserGuide}. This is performed using the ``Empirical Line'' algorithm of the ``Calibration Utilities'' in ENVI classic, where the Landsat 8 image is used as the input image, and the reflectance spectra are labeled as ``field spectra'' and the radiance spectra are labeled as ``data spectra.'' The product of this process is an image in reflectance values, which will be used to perform the retrieval of water constituents described in \S\ref{sec:retrieval} below. 
 
-\begin{figure}[!ht]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=14cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ELMpixelsENVI.pdf}
   \caption{Bright and Dark pixels used in ENVI to apply ELM. \label{fig:ELMpxsENVI} } 
@@ -389,7 +389,7 @@ The next step is find a way to relate $\varepsilon(\lambda_i,\lambda_l)$ from $\
 \end{equation}
 where $c$ is a constant that depends on the viewing geometry and the aerosol model. 
 
-\begin{figure}[!ht]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=11cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png}
   \caption{$\varepsilon(\lambda,\lambda_l)$ values in natural logaritmic scale for different aerosol models and relative humidity (Note: image taken from \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
@@ -474,11 +474,10 @@ Once these aerosol reflectances $\rho_{am}(\lambda_s)$ and $\rho_{am}(\lambda_l)
 
 \cite{Ruddick:2000bs} suggested to determine the calibration parameter $\varepsilon_m(\lambda_s,\lambda_l)$ by inspection of the scatterplot between the Rayleigh-corrected reflectance $\rho_c$ in the NIR bands, as shown in \autoref{fig:ruddickplot}. This assumption is only valid for small scale space, where the aerosol type varies only weakly in space. As for the calibration parameter $\alpha$, \cite{Ruddick:2000bs} set it to a default value of $1.72$ 1.72, which is first-order estimate from a greatly simplified ocean color model. The derivation can be seen in \cite{Ruddick:2000bs} and will not be explained here.
 
-\begin{figure}[!ht]
+\begin{figure}[htb]
   \centering
   \includegraphics[width=10cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RuddickPlot.png}
   \caption{Scatterplot of Rayleigh-corrected reflectances at 765 and 865 nm for an subregion in a SeaWiFS image taken 28 October 1997, 12:15 UTC.  (Note: image taken from \cite{Ruddick:2000bs}). \label{fig:ruddickplot} } 
-  % \vspace{0.5cm}
 \end{figure}
 
 \noindent {\bf SeaWiFS/MODIS Atmospheric Correction for Turbid Water Summary:}(\cite{Ruddick:2000bs})
@@ -503,7 +502,23 @@ For Case 2 or high productive Case 1 waters, specially turbid waters, there is a
 
 % ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Blue Band)}
-To be completed from \cite{GeraceThesis}.
+\cite{GeraceThesis} proposed to use a combination of spectral matching and band ratio techniques (method developed by \cite{Gordon:1997}) to atmospherically correct OLI data over Case 2 waters. A requirement to use band ratio technique for atmospherically correct OLI data is $\varepsilon^{(1,6)}\cong constant$, or in other words the ratio of reflectance from OLI's band 1 (coastal band) and band 6 (SWIR 1 band) should be approximately constant for all water pixels in the region of interest. Due to variability in band 1, the previous requirement is not always true. However, this variability can be accounted using spectral matching. This method needs to be applied with caution as it will not work in highly turbid water due to highly variability in band 1. Therefore, an {\it a priori} analysis of the band histogram is needed, and only the bands whose histogram has little spread and resemble a normal distribution should be used.
+
+This method first uses a forwarding modeling to create a three dimensional (3-D) LUT. Then, it adds atmospheric visibility as a four dimension (4-D). First, a 3-D LUT is created using Hydrolight. The dimensions are concentration of chlorophyll-{\it a}, suspended particles and CDOM. The range of the LUT is made up of spectral water-leaving reflectances. Then, this 3-D reflectance LUT is propagated to the TOA using MODTRAN for a range of visibilities. Therefore, the 4-D LUT will be made up of the independent variables chlorophyll-{\it a}, suspended particles, CDOM and visibility, while the range will be made up of spectral sensor-reaching radiances. A diagram showing the concept of this 4-D LUT is shown in \autoref{fig:4DLUT}. Note that this approach requires some knowledge of the aerosol type (e.g. rural, urban, maritime, etc.). Furthermore, the sensor-reaching radiances should be spectrally sampled by the OLI's sensor response and the data from the image should corrected for glint effect before comparing with the 4-D LUT since it does not include this effect.
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=14cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/4DLUT.png}
+  \caption{Four dimensional LUT. The dimension are concentrations of chlorophyll-{\it a}, suspended particles, CDOM and visibility and the range is spectral sensor-reaching radiance. Source: \cite{GeraceThesis}}
+  \label{fig:4DLUT} 
+\end{figure}\todo{change figure}
+
+Once the 4-D LUT has been created, an iterative search of the closest match to an imaged water pixel is performed. The first step in this iteration is to obtain an initial guess of the visibility. To do so an imaged spectrum is compared to the spectra contained in the 4-D LUT. The parameters (concentration of CPAs and visibility) associated to the closest non-interpolated spectrum in the 4-D LUT in a RMS sense are associated to the imaged spectrum. Then, these associated parameters are fixed and the observed $\varepsilon^{(1,6)}$ is compared with the 4-D LUT $\varepsilon^{(1,6)}$ values for different visibility but same concentration, and the visibility of the closest match is selected as initial visibility estimate.
+
+After estimating the initial visibility, an optimization routine can be used to estimate the four parameters from the 4-D LUT by interpolation. The final result of this process are interpolated CPA's concentration and visibility associated with the imaged pixel.
+
+\cite{GeraceThesis} suggests to use an average of all visibility solutions obtained previously as a fixed visibility and repeat the estimation described above with this fixed visibility. This is because the atmosphere should not have a high variability in the scene and therefore be approximately constant over the study region.
+
 % ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Band Ratios)}
 To be completed from \cite{GeraceThesis}.
@@ -519,7 +534,7 @@ The retrieval algorithm will be based on previous work done by Gerace {\it et al
 The LUT is generated in Ecolight~\cite{MobleyHE} for different triplets of water constituent concentrations (CPAs). Ecolight was used in the same fashion as in the black pixel determination for the model-based ELM (\S\ref{subsubsec:blackpixel}). \autoref{tab:LUTconc2} shows the different parameters used to create the LUT in Ecolight. Two different sets of IOPs (mass-specific absorption and scattering spectra) were used, one set for modeling the open lake conditions (low concentration of CPAs) and one set for modeling the pond condition (high concentration of CPAs)\todo{show IOPs figures}. These IOPs are labeled in \autoref{tab:LUTconc2} as ``ONTNS'' for the open lake conditions and as ``LONGS'' for the pond conditions. \autoref{tab:LUTconc2} also shows the CPAs concentration used to create the LUT in Ecolight. Furthermore, discretized Fournier-Forand phase function with four different backscatter fraction values ($0.5$, $1.0$, $1.5$ and $2.0\%$) were used to account for the backscattering variability in the scene.
 
 
-\begin{table}[!ht]
+\begin{table}[htb]
 \caption{ Input parameters for the LUT generation in Ecolight. \label{tab:LUTconc2} } 
 \centering
 		\begin{tabular}{c|c|c|c|c}
