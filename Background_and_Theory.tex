@@ -5,6 +5,7 @@
 \label{ch:background}
 % ----------------------------------------------------
 \section{Remote Sensing of Water}
+When the target is a water body, besides the traditional remote sensing over land theory, additional concepts need to be introduced. This section first will explain the basics concept of remote sensing such as radiometric quantities and the governing equation. Later, the additional concepts needed to complete the remote sensing over water are introduced. These concepts include energy interaction with the water column and path associated with it. Some tools such as Hydrolight and the Landsat surface reflectance product are described at the end of this section.
 \subsection{Radiometric Quantities}
 \autoref{fig:radiance} shows the geometry used to define the radiometric quantities. We need to define a fundamental radiometric quantity that specifies completely positional ($x,y,z$), temporal ($t$), directional ($\theta,\phi$) and spectral ($\lambda$) structure of the light field. This is accomplished by the spectral radiance $L$. The {\it spectral radiance} $L$ \index{spectral radiance, $L$} can be defined as (\cite{Mobley:2001})
 \begin{equation}\label{eq:rad1}
@@ -102,7 +103,7 @@ When the target is the water column, we can discard the type G photons over open
 
 \begin{figure}[htb]
   \centering
-  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PathsVisio.eps}
+  \includegraphics[height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PathsVisio.png}
 \caption{Photon path contributions to the sensor-reaching radiance in the reflective portion of the spectrum.}
 \label{fig:paths} 
 \end{figure}
@@ -137,7 +138,7 @@ where:
 
 % ----------------------------------------------------
 \subsection{Water Contributions to the Total Signal}
-Besides the photon paths described in \S\ref{subsubsec:SolarPaths}, a set of different photon paths need to be added to the total signal recorded by the sensor when the target is a water body. \autoref{fig:watercontribution} shows conceptually the different contributions to the upwelling radiance $L_u$ measured by a sensor (e.g. satellite or aircraft). These contributions are from the atmosphere ($L_a$), the water surface ($L_r$), and water column ($L_w$). The atmospheric contribution $L_a$ is the same as the photons type C described in \S\ref{subsubsec:SolarPaths}. The surface-reflected radiance $L_r$ is the portion of the downwelling solar radiance that is reflected by the water surface into sensor's line of sight. This has two component, one from the sun and one from the skylight, and it is commonly referred to as glint. 
+Besides the photon paths described in \S\ref{subsubsec:SolarPaths}, a set of different photon paths need to be added to the total signal recorded by the sensor when the target is a water body. \autoref{fig:watercontribution} shows conceptually the different contributions to the upwelling radiance $L_u$ measured by a sensor (e.g. satellite or aircraft). These contributions are from the atmosphere ($L_a$), the water surface ($L_r$), and water column ($L_w$). The atmospheric contribution $L_a$ is the same as the photons type C described in \S\ref{subsubsec:SolarPaths}. The surface-reflected radiance $L_r$ is the portion of the downwelling solar radiance that is reflected by the water surface into the sensor's line of sight. This has two component, one from the sun and one from the skylight, and it is commonly referred to as glint. 
 
 Finally, the water-leaving radiance $L_w$ is the portion of the sun energy that propagates through the atmosphere, be transmitted through the water surface ($L_t$),interacts with the water column, and then scatter into the upward direction (subsurface $L_u$ in \autoref{fig:watercontribution}) to eventually be transmitted through the water surface and propagate through the atmosphere into the sensor direction. This is the path of interest because we are particularly interested in how the light is attenuated as it enters the water column. The {\it water column} is defined as a conceptual volume just below the water surface, which contains the constituents we will study.
 
@@ -340,10 +341,20 @@ To be completed...
 % \cite{Gordon:1994} developed an algorithm for atmospherically correcting SeaWiFS data.
 % ----------------------------------------------------
 \subsubsection{Glint Effect}
-To be completed...
+Referring to \autoref{fig:watercontribution}, recall that the water surface contribution $L_r$ represents the portion of the downwelling solar radiance that is reflected by the water surface into the sensor's line of sight. Actually, the contribution from the water surface can be caused by two different sources. One is the sun and the other is the skylight, which is solar energy scattered by the atmosphere. The signal reaching the sensor from the water surface is the reflection of these two sources. These contribution are illustrated in \autoref{fig:glint}, where the solar glint is represented by the yellow solid line while the sky glint is represented by the blue dashed line. The phenomenon of glint is undesired signal that is produced by the Fresnel reflection of light at the air-water surface \cite{GeraceThesis}. It is undesired because it does not tell any information about the water column, which is the desired signal in this case. For this reason, Ocean Color satellite are generally designed to avoid the glint by tilting away from the incident angle. However, some sensors, such as Landsat 8, are not designed to avoid glint, so at the right illumination conditions, the image can be contaminated by glint.
+
+Because water is a dynamic body, variable such as wind and tidal forces can change its shape. For this reason, water's surface is thought as being made up of many little facets \cite{GeraceThesis}. Some of these facets will illuminate the sensor with solar glint at an appropriate angle. On the other hand, the sensor is always illuminated by sky glint since every facet of the water reflects some portion of the sky. Below there is a description of both contribution. 
+
+\begin{figure}[htb]
+\centering
+\includegraphics[height=8cm]{./Images/Glint.png}
+\caption{Solar and sky glint. Solid line represents rays due to solar glint dashed line rays due to sun glint.} 
+\label{fig:glint}
+\end{figure}
 % ----------------------------------------------------
 \subsubsection*{Sun Glint}
 \addcontentsline{toc}{subsubsection}{Sun Glint}
+The water-leaving reflectance could be contaminated by glint effects product of sun light reflected off the air-water surface. There will be a bigger chance of have more glint-contaminated pixels when high spatial details are imaged by the sensor. For instance, Landsat 8's $30m$ pixels will captured more glint than MODIS' $1km$ pixels. It is important to note that the image-derived surface reflectance of the contaminated areas with the sun glint will closely resemble the solar spectrum (or ``white light''). This fact produces the NIR and SWIR pixels to appear brighter than common water pixels. Different algorithm have been developed to correct images from sun glint (glint removal). Most of these algorithm are based upon the concept that water-leaving radiance is zero beyond the NIR, and therefore any contribution is due to sun glint.
 % ----------------------------------------------------
 \subsubsection*{Sky Glint}
 \addcontentsline{toc}{subsubsection}{Sky Glint}
