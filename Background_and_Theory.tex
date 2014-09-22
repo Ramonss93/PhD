@@ -279,7 +279,7 @@ The Rayleigh's Law states that the amount of scattered energy is proportional to
 
 Mie scattering is characterized by an angular distribution predominately in the forward direction, as shown in \autoref{fig:ScatPhFn}. It has a much weaker dependence on wavelength, although scattering is still more intense at shorter wavelengths because it may often be crudely approximated as being proportional to $1/\lambda$ \cite{Rees1990}.
 
-{\it Non-selective scattering} (a.k.a. {\it isotropic scattering}) occurs when the particle size is very much larger than the wavelength. Non-selective scattering at visible wavelengths occurs in nature in thick clouds or in fog, and its cross-section\todo{define cross-section} is independent of the wavelength.
+{\it Non-selective scattering} (a.k.a. {\it isotropic scattering}) occurs when the particle size is very much larger than the wavelength. Non-selective scattering at visible wavelengths occurs in nature in thick clouds or in fog, and its cross-section is independent of the wavelength. \todo{define cross-section}
 
 \begin{figure}[htb]
   \centering
@@ -288,50 +288,64 @@ Mie scattering is characterized by an angular distribution predominately in the 
   \label{fig:ScatPhFn}
 \end{figure}
 
-
 % ----------------------------------------------------
 \subsubsection*{Atmospheric Absorption}
 \addcontentsline{toc}{subsubsection}{Atmospheric Absorption}
-To be completed...
+{\it Absorption}\index{Absorption} is defined as the process of removal of energy from a beam of light by conversion of energy to another form, which in general is thermal energy \cite{Schott}. The absorptive characteristics of the atmosphere can be described by the {\it absorption coefficient}\index{absorption coefficient} $C_\alpha$, which is defined as the fractional amount of flux lost due to absorption per unit length of transit in a propagating beam. $C_\alpha$ can be expressed as
+\begin{equation}
+  \beta_\alpha = mC_\alpha
+\end{equation}
+where $m$ is the number density of the molecules and $C_\alpha$ is the absorption cross-section. The {\it absorption cross-section} $C_\alpha$ is the effective size of a molecule relative to the photon flux \cite{Schott}.
+
+The transmission due to absorption $\tau_a$ is defined as
+\begin{equation}
+  \tau_a = e^{-\beta_\alpha z} = e^{-\delta_\alpha}
+\end{equation}
+where $z$ is the path length and the product 
+\begin{equation}
+  \beta_\alpha z=\delta_\alpha
+\end{equation}
+is referred to as {\it optical depth} $\delta$ \cite{Schott}.
 
 % ----------------------------------------------------
-\subsubsection*{Atmospheric Optics}
-\addcontentsline{toc}{subsubsection}{Atmospheric Optics}
-A plane wave traveling through a homogeneous material in the $z$ direction can be perceived as the time-averaged quantity irradiance \index{irradiance}  (power per unit area) on a surface \cite{Eismann2012}. The irradiance after propagation distance $z$ is given by
-\begin{equation}
-  \label{eq:BeerLaw}
-  E(\lambda,z) = E(\lambda,0)e^{-\beta_a z}
-\end{equation}
-where $\beta_a$ is the absorption coefficient \index{absorption coefficient}  defined as
-\begin{equation}
-  \beta_a = \frac{4\pi \kappa}{\lambda}~~[m^{-1}],
-\end{equation}
-where $\kappa$ is the imaginary part of the complex index of refraction and quantifies the absorptive characteristic of the medium. The absorption coefficient $\beta_a$ represents the fractional amount of flux lost to absorption per unit length of transit in a propagating beam \cite{Schott}. Equation \ref{eq:BeerLaw} is known as Beer's law \index{Beer's law} and tell us that the energy of light decreases exponentially with distance.
+\todo{not forget this section}
+% \subsubsection*{Atmospheric Optics}
+% \addcontentsline{toc}{subsubsection}{Atmospheric Optics}
+% A plane wave traveling through a homogeneous material in the $z$ direction can be perceived as the time-averaged quantity irradiance \index{irradiance}  (power per unit area) on a surface \cite{Eismann2012}. The irradiance after propagation distance $z$ is given by
+% \begin{equation}
+%   \label{eq:BeerLaw}
+%   E(\lambda,z) = E(\lambda,0)e^{-\beta_a z}
+% \end{equation}
+% where $\beta_a$ is the absorption coefficient \index{absorption coefficient}  defined as
+% \begin{equation}
+%   \beta_a = \frac{4\pi \kappa}{\lambda}~~[m^{-1}],
+% \end{equation}
+% where $\kappa$ is the imaginary part of the complex index of refraction and quantifies the absorptive characteristic of the medium. The absorption coefficient $\beta_a$ represents the fractional amount of flux lost to absorption per unit length of transit in a propagating beam \cite{Schott}. Equation \ref{eq:BeerLaw} is known as Beer's law \index{Beer's law} and tell us that the energy of light decreases exponentially with distance.
 
-The variability in optical characteristics of the atmosphere is caused mainly by variability  in gaseous absorption, and aerosol characteristics and loading. Size distribution of the aerosol, index of refraction of the chemical that composes the aerosol and aerosol density describe the physical characteristics of the aerosol. Sunlight interaction with aerosol can be absorption and/or scattering. The amount of radiation scattered and absorbed by a small volume of aerosol can be different and its properties can be described by three parameters: extinction coefficient $K_e$, single-scattering albedo $\omega_o$ and scattering phase function $P(\theta)$ \cite{Asrar1989}.
+% The variability in optical characteristics of the atmosphere is caused mainly by variability  in gaseous absorption, and aerosol characteristics and loading. Size distribution of the aerosol, index of refraction of the chemical that composes the aerosol and aerosol density describe the physical characteristics of the aerosol. Sunlight interaction with aerosol can be absorption and/or scattering. The amount of radiation scattered and absorbed by a small volume of aerosol can be different and its properties can be described by three parameters: extinction coefficient $K_e$, single-scattering albedo $\omega_o$ and scattering phase function $P(\theta)$ \cite{Asrar1989}.
 
-The connection between the physical characteristics of the aerosol (e.g. size distribution and refractive index) and the optical characteristics (extinction coefficient, single-scattering albedo, and scattering phase function) is made by using Mie theory for homogeneous spherical particles. Mie theory states that the extinction cross section $\beta$ ($cm^2$) can be computed as a function of the particle radius $r$ \cite{Asrar1989}. 
+% The connection between the physical characteristics of the aerosol (e.g. size distribution and refractive index) and the optical characteristics (extinction coefficient, single-scattering albedo, and scattering phase function) is made by using Mie theory for homogeneous spherical particles. Mie theory states that the extinction cross section $\beta$ ($cm^2$) can be computed as a function of the particle radius $r$ \cite{Asrar1989}. 
 
-The extinction coefficient $K_e$ describes the fraction of radiation taken from the direct beam by the aerosol (named beam attenuation in the aquatic medium). The $K_e$ of a small volume of air is computed as the contribution of all particles in the volume
-\begin{equation}
-    K_e=\int\beta(r)n(r)dr
-\end{equation}
-where $r$ is each radius, $\beta$ is cross section, and $n(r)$ is density per radius interval $dr$ with $n(r)$ normalized as 
-\begin{equation}
-  \int n(r)dr=N_o
-\end{equation}
-where $N_o$ is the density of the particles in $cm^{-1}$.
+% The extinction coefficient $K_e$ describes the fraction of radiation taken from the direct beam by the aerosol (named beam attenuation in the aquatic medium). The $K_e$ of a small volume of air is computed as the contribution of all particles in the volume
+% \begin{equation}
+%     K_e=\int\beta(r)n(r)dr
+% \end{equation}
+% where $r$ is each radius, $\beta$ is cross section, and $n(r)$ is density per radius interval $dr$ with $n(r)$ normalized as 
+% \begin{equation}
+%   \int n(r)dr=N_o
+% \end{equation}
+% where $N_o$ is the density of the particles in $cm^{-1}$.
 
-The single-scattering albedo $\omega_o$ is the fraction of scattering from the total extinction ($\omega_o$= scattering coefficient/extinction coefficient). 
+% The single-scattering albedo $\omega_o$ is the fraction of scattering from the total extinction ($\omega_o$= scattering coefficient/extinction coefficient). 
 
-The scattering phase function $P(\theta)$ describes the angular distribution of scattered radiation, where $\theta$ is the scattering angle.
+% The scattering phase function $P(\theta)$ describes the angular distribution of scattered radiation, where $\theta$ is the scattering angle.
 
-The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacity) expresses the extent to which a given layer of material attenuates the intensity of the radiation passing through it \cite{Rees1990}. It is defined as
-\begin{equation}
-    \delta = \beta_{a}z
-\end{equation}
+% The {\it optical depth} \index{Optical depth, $\delta$}  $\delta$ (a.k.a. opacity) expresses the extent to which a given layer of material attenuates the intensity of the radiation passing through it \cite{Rees1990}. It is defined as
+% \begin{equation}
+%     \delta = \beta_{a}z
+% \end{equation}
 
-To be completed...
+% To be completed...
 
 % \subsubsection*{Atmospheric Effect Removal}
 % \addcontentsline{toc}{subsubsection}{Atmospheric Effect Removal}
