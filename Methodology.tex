@@ -42,6 +42,7 @@ In order to perform the water constituent retrieval, we need to solve for only t
 This section describes the different alternatives to obtain the rest of the term in \autoref{eq:rho_t}.
 
 \subsection{Solar-Glint Removal Algorithm}
+\label{subsec:glintremoval}
 The first step to solve \autoref{eq:rho_t} is to find the term due to glint, $\rho_wc(\lambda)$ and remove it from the total signal. \autoref{eq:rho_t} assumes that effect from glint and it can be ignored since ocean-color sensors are designed to be tilted and to avoid the specular image of the sun. However, Landsat 8 is not cataloged as an ocean-color satellite and it needs to be corrected for the glint effect if needed.
 
 The method to remove the sun glint effect chosen for this study is the method suggested by \cite{Hedley:2005}, which is a revised version of the method suggested by \cite{Hochberg:2003}. The method described by Hochberg was developed for high spatial resolutions where glint effects occur at physical scales comparable to image pixels ($<10m$) as opposed to methods developed for ocean-color sensor, which tend to have large physical scales ($>1km$).
@@ -185,7 +186,7 @@ where $x$ represents the solar zenith angle and $m$ the reflectance value. \auto
 
 The Landsat 8 image has associated a particular solar zenith angle. The previous linear relationships calculated will help to estimate the values for the reflectance value of the bright pixel for that particular solar zenith angle. For example, the solar zenith angle for the 09-19-13 Landsat 8 scene is equal to $45^\circ$, and therefore $x=45^\circ$ in \autoref{eq:linear}. The reflectance values for $x=45^\circ$ are shown in the last column of \autoref{tab:ZenithCorr} and plotted in \autoref{fig:ZenithCorr} in red asterisks.
 %--------------------------------------
-\vspace{.5cm}
+% \vspace{.5cm}
 \begin{table}[!ht]
 \caption{ Zenith angle correction parameters. \label{tab:ZenithCorr} } 
 \centering

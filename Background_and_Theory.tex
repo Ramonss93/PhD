@@ -5,7 +5,7 @@
 \label{ch:background}
 % ----------------------------------------------------
 \section{Remote Sensing of Water}
-When the target is a water body, besides the traditional remote sensing over land theory, additional concepts need to be introduced. This section first will explain the basics concept of remote sensing such as radiometric quantities and the governing equation. Later, the additional concepts needed to complete the remote sensing over water are introduced. These concepts include energy interaction with the water column and path associated with it. Some tools such as Hydrolight and the Landsat surface reflectance product are described at the end of this section.
+When the target is a water body, besides the traditional concept applied to remote sensing over land, additional concepts need to be introduced. This section first will explain the basics concept of remote sensing such as radiometric quantities and the governing equation. Later, the additional concepts needed to complete the remote sensing over water are introduced. These concepts include energy interaction with the water column and path associated with it. Some tools such as Hydrolight and the Landsat surface reflectance product are described at the end of this section.
 \subsection{Radiometric Quantities}
 \autoref{fig:radiance} shows the geometry used to define the radiometric quantities. We need to define a fundamental radiometric quantity that specifies completely positional ($x,y,z$), temporal ($t$), directional ($\theta,\phi$) and spectral ($\lambda$) structure of the light field. This is accomplished by the spectral radiance $L$. The {\it spectral radiance} $L$ \index{spectral radiance, $L$} can be defined as (\cite{Mobley:2001})
 \begin{equation}\label{eq:rad1}
@@ -354,10 +354,18 @@ Because water is a dynamic body, variable such as wind and tidal forces can chan
 % ----------------------------------------------------
 \subsubsection*{Sun Glint}
 \addcontentsline{toc}{subsubsection}{Sun Glint}
-The water-leaving reflectance could be contaminated by glint effects product of sun light reflected off the air-water surface. There will be a bigger chance of have more glint-contaminated pixels when high spatial details are imaged by the sensor. For instance, Landsat 8's $30m$ pixels will captured more glint than MODIS' $1km$ pixels. It is important to note that the image-derived surface reflectance of the contaminated areas with the sun glint will closely resemble the solar spectrum (or ``white light''). This fact produces the NIR and SWIR pixels to appear brighter than common water pixels. Different algorithm have been developed to correct images from sun glint (glint removal). Most of these algorithm are based upon the concept that water-leaving radiance is zero beyond the NIR, and therefore any contribution is due to sun glint.
+The water-leaving reflectance could be contaminated by glint effects product of sun light reflected off the air-water surface. There will be a bigger chance of have more glint-contaminated pixels when high spatial details are imaged by the sensor. For instance, Landsat 8's $30m$ pixels will captured more glint than MODIS' $1km$ pixels. It is important to note that the image-derived surface reflectance of the contaminated areas with the sun glint will closely resemble the solar spectrum (or ``white light''). This fact produces the NIR and SWIR pixels to appear brighter than common water pixels. Different algorithm have been developed to correct images from sun glint (glint removal). Most of these algorithms are based upon the concept that water-leaving radiance is zero beyond the NIR, and therefore any contribution is due to sun glint \cite{Pahlevan:2012}. An example of these algorithms is described in \S\ref{subsec:glintremoval}. Another way to detect sun-glint contaminated areas is a simple band ratio between the SWIR bands, which will reveal atmospheric fronts, cloud coverage and/or low fog conditions \cite{Pahlevan:2012}.
 % ----------------------------------------------------
 \subsubsection*{Sky Glint}
 \addcontentsline{toc}{subsubsection}{Sky Glint}
+The effect of sky glint is much less than sun glint and wavelength dependent, i.e. higher in the blue region and smaller in longer wavelengths. However, the total sensor reaching radiance is most notable affected by the sky glint in the longer wavelengths, where it manifests as lower signal in such bands \cite{Pahlevan:2012}. Sky glint effect should be accounted for if a accurate constituent retrieval is needed.
+
+The sky glint is a function of the sky downwelled radiance $L_d$ and it can be expressed as
+\begin{equation}
+  L_{sg}(\lambda) = \rho_F(\lambda)L_d(\lambda)\tau_2(\lambda)~~~~~\left[\frac{W}{m^2\mu msr}\right]
+\end{equation}
+where $L_{sg}(\lambda)$ is the TOA radiance due to sky glint, $\rho_F(\lambda)$ is the Fresnel reflection coefficient, and $\tau_2(\lambda)$ is the sensor-target transmission. The Fresnel refraction is function of imaging geometry, wavelength, and concentration of water constituents \cite{Pahlevan:2012}. It can be considered constant over the entire spectrum, usually $\rho_F=0.002$, for calm water and nadir-viewing geometry. However, $\rho_F$ is parameter complex to quantify for real world conditions where wave-induced actions yield a non-uniform surface. $\tau_2$ can be either measured or derived from simulations.
+\todo{mention technique to account for the sun glint when measuring Rrs}
 % ----------------------------------------------------
 \subsection{Water Constituents Retrieval}
 % See \cite{Jensen} and \cite{Mustard2001}.
@@ -561,11 +569,51 @@ It is important to note that AOPs are not additive as the IOPs. Also, AOPs can n
 
 
 % ----------------------------------------------------
-\todo{complete this section}
-\section{Landsat-8}
-% Landsat-5, Landsat-7
-% MODIS, SeaWiFS
+\section{The OLI Sensor}
+The Landsat project, a joint initiative between USGS and NASA, has been monitoring the earth for over four decades, creating the longest uninterrupted data set available. Landsat-8, formally known as the Landsat Data Continuity Mission (LDCM), is the most recent satellite to continue this objective. Carrying two instruments onboard, the Operational Land Imager (OLI) and the Thermal InfraRed Scanner (TIRS), Landsat-8 is the first of a new generation of Landsat satellites with these state-of-the-art technologies. 
 
+Landsat-8 is optical passive satellite, which means it records the energy reflected from a source (in this case the sun) by a target. It has a temporal resolution is 16 days, which means that it images the same location on Earth every 16 days. Because the area of study (Rochester Embayment) appears in two Landsat-8 paths, there is one image of this area every eight days. OLI is considered to be a multispectral instrument with total of seven bands: four bands in the visible (VIS), one band in the near infrared (NIR) and two bands in the short wave infrared (SWIR), as can be seen in \autoref{fig:olibands}. \autoref{fig:olibands} also shows Landsat-7 bands for comparison. Note the two new bands: coastal band and cirrus bands.
+
+\begin{figure}[htb]
+\centering
+      \includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/OLIbands.jpg}
+      \caption{Landsat-8 bands compared with Landsat-7 bands (Source: \protect\url{http://landsat.gsfc.nasa.gov/}).}
+      \label{fig:olibands}
+\end{figure}
+
+OLI has a spatial resolution of $30m$ in all seven bands, same as previous Landsat satellites. Considering its 30-meter resolution, Landsat-8 should be especially useful for studying the nearshore and coastal environment at a much higher spatial resolution, when compared to ocean color satellites (e.g. MODIS, SeaWiFS, MERIS). This is illustrated in \autoref{fig:resol} where some features in the nearshore areas of Rochester, NY (such as ponds) can be fully resolved by Landsat-8 ($30m$) and not by Terra-MODIS ($500m$).
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/NESSF14/latex/ResolComp.pdf}
+  \caption{Spatial resolution comparison between Terra-MODIS (500m) and Landsat 8 (30m). \label{fig:resol} } 
+\end{figure}
+
+Although the OLI's spectral bands are not narrow enough to be compared with MODIS' spectral bands, the OLI's spectral bands are narrower when compared to Landsat 7 (L7), as seen in \autoref{tab:bandwidth}. OLI also includes a new coastal band that increases the spectral resolution of the instrument, plus a new cirrus band. These two improved features have the potential to more accurately capture signals leaving the water. Gerace, Schott and Nevins \cite{Gerace:2013} demonstrated with a simulated dataset that system noise is the main driver of retrieval error, and therefore a higher signal-to-noise ratio (SNR) means a better retrieval. In comparison to its predecessors (e.g. Landsat-5 and Landsat-7), Landsat 8 has an improved SNR because of its 12-bit quantization (4096 levels) and pushbroom sensor (which allows for more continuous integration on target). This improvement in SNR can be seen in \autoref{fig:L8SNR} which compares the SNR of Landsat-7 and Landsat-8, calculated from actual image data over uniform water regions of the Red Sea that have similar brightness \cite{Hu:2012}. \autoref{fig:L8SNR} also shows the specified SNR from Landsat-8 at typical input signal (radiance L typical) levels (which the instrument significantly exceeds), which were obtained from \cite{Irons:2012}. These improvements are significant drivers behind the hypothesis that the Landsat 8 satellite has superior performance and application in water quality studies than its predecessors.
+
+
+\begin{table}[!ht]
+\caption{ Bandwidth comparison between Landsat 8, Landsat 7 and MODIS (MO). \label{tab:bandwidth}} 
+\centering
+      \begin{tabular}{c|c|c|c|c}
+          \bfseries{Band}& \bfseries{Center}   & \bfseries{L8} & \bfseries{L7} & \bfseries{MO} \\ 
+                  & \bfseries{$[\mu m]$} & $[nm]$\footnote{Bandwidth}   & $[nm]${\it $^a$} & $[nm]${\it $^a$}   \\ \hline \hline
+          Coastal & 0.44 & 16 & N/A & 10  \\
+          Blue    & 0.48 & 60 & 73  & 10  \\
+          Green   & 0.56 & 57 & 82  & 10  \\
+          Red     & 0.66 & 37 & 61  & 10  \\  
+          NIR     & 0.83 & 28 & 126 & 15  \\
+          SWIR 1  & 1.65 & 85 & 202 & 24  \\
+          SWIR 2  & 2.22 & 18 & 281 & 50  \\ 
+       \end{tabular}
+\end{table}
+
+\begin{figure}[htb]
+\centering
+      \includegraphics[height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/L8SNR_2.eps}
+      \caption{Comparison between Landsat 7 and Landsat 8 SNR. \label{fig:L8SNR} } 
+      \label{fig:olisnr}
+\end{figure}
 
 % ----------------------------------------------
 \section{Empirical Line Method}\todo{complete from papers}
