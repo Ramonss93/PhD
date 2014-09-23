@@ -456,11 +456,11 @@ A summary of the method developed by \cite{Gordon:1994} is described below.
 % ------------------------------
 \subsection{SeaWiFS Algorithm for Case 2 Water}\label{subsec:ruddick}
 
-The next atmospheric correction method is based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS), and extended by \cite{Ruddick:2000bs} for use over turbid coastal and inland waters (Case 2) or high productive Case 1 waters. As stated previously, the methods developed by \cite{Gordon:1994} assumes a zero water-leaving radiance for the NIR bands, which is not valid for highly turbid coastal and inland waters. Backscatter from particles in this waters could contribute to signal in the NIR bands, causing a over-estimation of the aerosol contribution and therefore a under-estimation of the water-leaving reflectances, even leading to negative values in the visible, which is not possible. 
+The next atmospheric correction method is based in the method developed by Gordon~\cite{Gordon:1997} for ocean color satellites (i.e. SeaWiFS, MODIS), and extended by \cite{Ruddick:2000bs} for use over turbid coastal and inland waters (Case 2) or high productive Case 1 waters. As stated previously, the methods developed by \cite{Gordon:1994} assumes a zero water-leaving radiance for the NIR bands, which is not valid for highly turbid coastal and inland waters. Backscatter from particles in this waters could contribute to signal in the NIR bands, causing an over-estimation of the aerosol contribution and therefore an under-estimation of the water-leaving reflectances, even leading to negative values in the visible, which is not possible. 
 
 In order to overcome this problem, \cite{Ruddick:2000bs} replaced the black water assumption with two assumptions: the assumption of spatial homogeneity of the SeaWiFS's NIR bands ratio ($765:865-nm$) for aerosol reflectance and for water-leaving reflectance. These two ratios are used as calibration parameters after inspection of the Rayleigh-corrected reflectance scatterplot. The algorithm is described in more details below.
 
-In order to extend the standard atmospheric correction to procedure to turbid water, two assumptions are used:
+In order to extend the standard atmospheric correction procedure to turbid water, two assumptions are used:
 
 \begin{enumerate}[itemsep=2pt,parsep=2pt]
   \item At least over the ROI, the calibration parameter $\varepsilon_m(\lambda_s,\lambda_l)$, defined as the ratio of multiple-scattering aerosols and aerosol-Rayleigh reflectances at the NIR bands, is assumed to be spatially homogeneous, i.e.
@@ -488,7 +488,7 @@ and
 
 Once these aerosol reflectances $\rho_{am}(\lambda_s)$ and $\rho_{am}(\lambda_l)$ are determined, they can be used in the standard algorithm, described in the previous section (instead of $\rho_c(\lambda_s)$ and $\rho_c(\lambda_l)$) to derive $\rho_w(\lambda)$ in the VIS.
 
-\cite{Ruddick:2000bs} suggested to determine the calibration parameter $\varepsilon_m(\lambda_s,\lambda_l)$ by inspection of the scatterplot between the Rayleigh-corrected reflectance $\rho_c$ in the NIR bands, as shown in \autoref{fig:ruddickplot}. This assumption is only valid for small scale space, where the aerosol type varies only weakly in space. As for the calibration parameter $\alpha$, \cite{Ruddick:2000bs} set it to a default value of $1.72$ 1.72, which is first-order estimate from a greatly simplified ocean color model. The derivation can be seen in \cite{Ruddick:2000bs} and will not be explained here.
+\cite{Ruddick:2000bs} suggested to determine the calibration parameter $\varepsilon_m(\lambda_s,\lambda_l)$ by inspection of the scatterplot between the Rayleigh-corrected reflectance $\rho_c$ in the NIR bands, as shown in \autoref{fig:ruddickplot}. This assumption is only valid for small scale space, where the aerosol type varies only weakly in space. As for the calibration parameter $\alpha$, \cite{Ruddick:2000bs} set it to a default value of $1.72$, which is a first-order estimate from a greatly simplified ocean color model. The derivation can be seen in \cite{Ruddick:2000bs} and will not be explained here.
 
 The process is summarized as follows:
 
@@ -503,7 +503,7 @@ The process is summarized as follows:
   \item Using the aerosol LUTs, calculate the corresponding single-scattering aerosol value at the two NIR bands, i.e. $\rho_{as}(\lambda_s)$ and $\rho_{as}(\lambda_l)$. Then, calculate corresponding SSE.
 
   \item For each $N$ aerosol, compute the single-scattering value using \autoref{eq:rhoas}. Calculate corresponding SSE.
-  \item Select the best two aerosol model by comparing the retrieved SSE with the theoretical SSE and determine the interpolation ratio between them.
+  \item Select the best two aerosol models by comparing the retrieved SSE with the theoretical SSE and determine the interpolation ratio between them.
   \item For the optimal aerosol model use the tabulated $\varepsilon(\lambda)$ in the VIS and $\varepsilon(\lambda_l)$ to obtain $\rho_{as}(\lambda)$ and then $\rho_{am}(\lambda)$ in the VIS using \autoref{eq:rholambda_i} and LUT.
   \item Remove $\rho_{am}(\lambda)$ in the VIS from $\rho_c(\lambda)$ and divide by the corresponding atmospheric transmittance that corresponds to the best aerosol model to return $\rho_w(\lambda)$ in the VIS using \autoref{eq:rhoam}.
 \end{enumerate}
@@ -518,7 +518,7 @@ The process is summarized as follows:
 % ------------------------------
 \subsection{SWIR bands Atmospheric Correction}\label{subsec:wang}
 
-For Case 2 or high productive Case 1 waters, specially turbid waters, there is a significant contribution from the water-leaving radiance and hence the zero water-leaving assumption the NIR bands is not valid anymore. This is often the case in inland and coastal waters and therefore the NIR bands cannot be used to atmospherically correct this kind of imagery. However, these kinds of waters are indeed black in the shortwave infrared (SWIR) bands ($\geq 1000nm$) due to stronger water absorption. So, we can use the same atmospheric correction procedure for the SeaWiFS and MODIS but replacing the NIR bands with the two OLI's SWIR band ($1690$ and $2200nm$) for the data processing, as suggested by \cite{Wang:2007,Wang:2005}. \cite{Wang:2007} evaluated different combinations of the MODIS' SWIR bands to atmospherically correct a specific case of study image and compare with the traditional algorithm (NIR bands). Actually, the lasted MODIS atmospheric algorithm uses an NIR-SWIR combined atmospheric correction approach that uses the NIR bands for Case 1 non-high productive water and the SWIR bands for Case 2 or high productive Case 1 waters, and a turbidity index to decide when to use them (\cite{Wang:2007dz}). 
+For Case 2 or high productive Case 1 waters, specially turbid waters, there is a significant contribution from the water-leaving radiance and hence the zero water-leaving assumption in the NIR bands is not valid anymore. This is often the case in inland and coastal waters and therefore the NIR bands cannot be used to atmospherically correct this kind of imagery. However, these kinds of waters are indeed black in the shortwave infrared (SWIR) bands ($\geq 1000nm$) due to stronger water absorption. So, we can use the same atmospheric correction procedure used for SeaWiFS and MODIS but replacing the NIR bands with the two OLI's SWIR band ($1690$ and $2200nm$) for the data processing, as suggested by \cite{Wang:2007,Wang:2005}. \cite{Wang:2007} evaluated different combinations of the MODIS' SWIR bands to atmospherically correct a specific study image and compared the results with the traditional algorithm (NIR bands). Actually, the latest MODIS atmospheric algorithm uses a NIR-SWIR combined atmospheric correction approach that uses the NIR bands for Case 1 non-high productive water and the SWIR bands for Case 2 or high productive Case 1 waters, and a turbidity index to decide when to use them (\cite{Wang:2007dz}). 
 
 % ------------------------------
 \subsection{OLI Algorithm for Case 2 Waters (Blue Band)}
@@ -594,7 +594,7 @@ The LUT is generated in Ecolight~\cite{MobleyHE} for different triplets of water
 	 	\end{tabular}
 	\end{table}
 
-An example of a LUT created in Ecolight is shown in \autoref{fig:LUT}. 
+After obtaining the LUT from Ecolight, the spectral curves in the LUT are spectrally sampled to the OLI's spectral response. An example of a LUT created in Ecolight is shown in \autoref{fig:LUT} with 2000 spectral curves. 
 
 \begin{figure}[htb]
     \centering
@@ -622,7 +622,7 @@ An example of a LUT created in Ecolight is shown in \autoref{fig:LUT}.
 %   \caption{SM mass-specific absorption spectra used to create the LUT in HydroLight. \label{fig:SMaastLONGS} } 
 % \end{figure}
 \subsection{Retrieval}
-Two methods are investigated for performing the retrieval. The first one is using the root mean squared error (RMSE) to determine the concentrations based in the closest element in the LUT. The second one uses a non-linear optimization to estimate these values.
+Two methods are investigated for performing the retrieval. The first one is using the root mean squared error (RMSE) to determine the concentrations based in the closest element in the LUT. This method gives discretized concentration values corresponding to the LUT concentration values. The second one uses a non-linear optimization to estimate these values. This method gives continuous concentration values based in a trilinear interpolation that interpolated between the closest matches in the LUT.
 % -----------------------------------------
 \subsubsection{Root Mean Square Error}
 In this work, the RMSE is defined as
@@ -654,7 +654,7 @@ In this case, $x$ is the three CPA concentrations and the function $f(x)$ is the
 \begin{equation}
   f = R_{rs} - F
 \end{equation}
-where $F$ is obtained from a trilinear interpolation based in the CPA concentrations of the LUT. The dimension $m$ is the number of bands. In other words, for each pixel in the image, \texttt{lsqnonlin} tries to find a function that minimize the error between the measured value and a interpolated spectra from the LUT. \texttt{lsqnonlin} stops the search after reaching certain threshold. 
+where $F$ is obtained from a trilinear interpolation based in the CPA concentrations of the LUT. The dimension $m$ is the number of bands. In other words, for each pixel in the image, \texttt{lsqnonlin} tries to find a function that minimizes the error between the measured value and a interpolated spectra from the LUT. \texttt{lsqnonlin} stops the search after reaching certain threshold. 
 
 The output of this process is a concentration mapping for each water constituent that spans the range of constituents levels in the scene. 
 
@@ -674,7 +674,9 @@ The area of study for this research is the Lake Ontario Rochester Embayment (lat
 In order to have outputs in HydroLight that are representative of the water bodies that are being studied, inherent optical properties (IOPs) of those specific waters have to be defined as input to the HydroLight model. After collection, these water samples need to be analyzed in the lab to obtain IOPs for the main water constituents. Furthermore, apparent optical properties (AOPs) (i.e. water surface reflectance) and backscattering measurements will be also collected for further comparison and to pursue closure between the HydroLight AOPs results and in-situ AOPs measurements.
 
 \section{Validation}
-The results from the retrieval process will be validated by comparison with the concentration of water samples taken during field campaigns in the spring and summer of 2013, 2014 and 2015. These concentrations will be obtained from lab measurements made at the Rochester Institute of Technology. For further validation, the results will be compared with products derived from ocean color satellites such as MODIS (e.g. MODIS Chl-{\it a} product), in regions where it is possible.
+The results from the retrieval process will be validated by comparison with the concentration of water samples taken during field campaigns in the spring and summer of 2013 and 2014. These concentrations will be obtained from lab measurements made at the Rochester Institute of Technology. For further validation, the results will be compared with products derived from ocean color satellites such as MODIS (e.g. MODIS Chl-{\it a} product), in regions where it is possible. 
+
+Additionally, the results will be compared with the products derived in the SeaWiFS Data Analysis System (SeaDAS) software for Landsat-8, which is contemplated to be launched soon (more info: \url{http://seadas.gsfc.nasa.gov/}). The latest version (SeaDAS 7.0.2) is a comprehensive image analysis package for the processing, display, analysis, and quality control of ocean color data developed by the developers of ESA's BEAM software package and the Ocean Biology Processing Group (OBPG) at NASA. If this capability is launched in the next version of SeaDAS, Landsat-8 level L1 and L2 data could potentially be  atmospherically corrected using the method used for MODIS \cite{Gordon:1994,Ruddick:2000bs,Wang:2007dz}, and therefore L3 data (e.g. Chl-{\it a} product) could be obtained from Landsat-8 images.
 % \section{OLI Sensor}
 % \subsection{Sensor Response}
 % Noise level. Quantization. SNR.

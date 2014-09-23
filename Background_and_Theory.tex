@@ -3,6 +3,7 @@
 %% CHAPTER
 \chapter{ Background and Theory}
 \label{ch:background}
+\todo{introduction to the chapter}
 % ----------------------------------------------------
 \section{Remote Sensing of Water}
 When the target is a water body, besides the traditional concept applied to remote sensing over land, additional concepts need to be introduced. This section first will explain the basics concept of remote sensing such as radiometric quantities and the governing equation. Later, the additional concepts needed to complete the remote sensing over water are introduced. These concepts include energy interaction with the water column and path associated with it. Some tools such as Hydrolight and the Landsat surface reflectance product are described at the end of this section.
@@ -33,7 +34,7 @@ In the conceptual limit of infinitesimal parameter interval (\cite{Mobley:2001})
 
 In most oceanographic applications, we can assume that there is horizontal homogeneity and time independence, then the spectral radiance can be written as $L(z,\theta,\phi,\lambda)$, which is consider a one dimensional (1-D) quantity.
 
-Even though the spectral radiance describes completely the light field, it is not commonly used for instrumentation difficulties or for all that information is not needed. Irradiance is a radiometric quantity that is easier to measure and ofter more useful. {\it Irradiance} $E$ is formally defined as
+Even though the spectral radiance describes completely the light field, it is not commonly used due to instrumentation difficulties or because all that information is probably not needed. Irradiance is a radiometric quantity that is easier to measure and ofter more useful. {\it Irradiance} $E$ is formally defined as
 \begin{equation}
   E(x,y,z,t,\lambda) \equiv \frac{\Delta Q}{\Delta t\Delta A\Delta\lambda}~~\left[ W m^{-2}nm^{-1} \right]
 \end{equation}
@@ -44,7 +45,7 @@ The most commonly measured radiometric variable is the spectral plane irradiance
 \end{equation}
 where $2\pi_d$ denotes the hemisphere of downward directions, i.e. the set of directions ($\theta,\phi$) such that $0\leq\theta\leq\pi/2$ and $0\leq\phi\leq2\pi$, if $\theta$ is measured from $+z$ or nadir direction. If the instrument is placed facing downward, then the spectral upwelling plane irradiance $E_d(z,\lambda)$ is measured. The difference $E_{net}=E_d-E_u$ is named the net downward irradiance.
 
-Now, consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions, i.e. the detector has the same effective area for radiance in any downward direction, so no $\cos{\theta}$ factor is needed. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, the this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
+Now, consider a light detector that is equally sensitive to photons in any direction within a hemisphere of directions, i.e. the detector has the same effective area for radiance in any downward direction, so no $\cos{\theta}$ factor is needed. If that detector is placed at depth $z$, oriented facing upward and therefore collection photons coming from the downward direction, then this detector is measuring the spectral downwelling scalar irradiance at depth $z$, $E_{od}(x,\lambda)$. This spectral downwelling scalar irradiance is can be defined as
 \begin{equation}\label{eq:Eod}
   E_{od}(z,\lambda)=\int_{2\pi_d} L(z,\theta,\varphi,\lambda)d\Omega~~\left[Wm^{-2}nm^{-1} \right]
 \end{equation}
@@ -63,7 +64,7 @@ The sum of the downwelling and upwelling components can be defined as the {\it s
 \end{align}
 The spectral scalar irradiance is the radiometric variable that is most relevant to photosynthesis because photosynthesis is independent of the traveling direction of the light.
 
-Other important radiometric quantity in oceanography is the photosynthetic available radiation (PAR), defined as
+Another important radiometric quantity in oceanography is the photosynthetic available radiation (PAR), defined as
 \begin{equation}
   PAR(z)\equiv \int_{350nm}^{700nm} \frac{\lambda}{hc}E_o(z,\lambda)d\lambda~~~\left[photons~s^{-1}m^{-2} \right]
 \end{equation}
@@ -81,7 +82,7 @@ From the total energy coming from the sun, only approximately 1390 $\left[\frac{
 E = \frac{d\Phi}{dA}   \indent   \indent  \left[\frac{W}{m^2}\right]  
 \end{equation} 
 
-So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an existence at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band. \autoref{fig:exoirrad} shows the exoatmospheric irradiance spectrum  along with the transmitted solar irradiance through the atmosphere. Major absorption bands in the atmosphere are clearly apparent. MODIS bands are shown. Note that the most of the exoatmospheric irradiance occurs in the visible part of the spectrum of light.
+So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point source at the center of the sun such that it would produce an exitance at the sun's surface, producing a flux at the mean Earth-sun distance of 1390 $\left[\frac{W}{m^2}\right]$ . For the present work, it is more convenient to express the irradiance spectrally, or other words as a function of wavelength, so we can describe the energy at desired wavelength, or spectral band. \autoref{fig:exoirrad} shows the exoatmospheric irradiance spectrum  along with the transmitted solar irradiance through the atmosphere. Major absorption bands in the atmosphere are clearly apparent. MODIS bands are shown. Note that most of the exoatmospheric irradiance occurs in the visible part of the spectrum of light.
 
 \begin{figure}[htb]
   \centering
@@ -93,13 +94,13 @@ So, the $E_S'$ is calculated assuming that the flux $\Phi$ comes from a point so
 % ----------------------------------------------------
 \subsubsection{Solar Energy Paths}
 \label{subsubsec:SolarPaths}
-The main goal of remote sensing is to extract information about a specific target from all information recorded by an imaging system. In order to only isolate the target information from the rest of the recorded information, we need first to understand what kinds of energy are recorded by the sensor (a satellite is this case). Conceptually, we will separate the information recorded in energy paths, as described by \cite{Schott}. The energy paths, or electromagnetic energy, most influent in the $0.4-2.5\mu m$ spectral region are the solar energy paths (a.k.a. reflective paths), which are radiation originated from the sun and could reach the satellite camera. \autoref{fig:paths} shows the most significant solar energy paths. The type A photons in the figure are originated in the sun, pass through the atmosphere, reflect off the target on Earth's surface, propagating through the atmosphere in the direction of the sensor. This is the path that carries information about the target of interest. Path of type B photons in the figure are photons originated in the sun, scattered by the atmosphere in the direction of the target, and then reflected by the target in the direction of the sensor. These photons are referred to as {\it skylight} or {\it sky shine}. Type C is another group of photons that are significant in total signal recorded by the sensor. This photons are originated in the sun, and scattered by the atmosphere into the camera's line of sight, without ever interacting with the target. This path is referred as {\it upwelled radiance}, and it is a function of how ``hazy'' the atmosphere is.
+The main goal of remote sensing is to extract information about a specific target from all information recorded by an imaging system. In order to only isolate the target information from the rest of the recorded information, we need first to understand what kinds of energy are recorded by the sensor (a satellite is this case). Conceptually, we will separate the information recorded in energy paths, as described by \cite{Schott}. The energy paths, or electromagnetic energy, most influential in the $0.4-2.5\mu m$ spectral region are the solar energy paths (a.k.a. reflective paths), which are radiation originated from the sun that could reach the satellite camera. \autoref{fig:paths} shows the most significant solar energy paths. The type A photons in the figure are originated in the sun, pass through the atmosphere, reflect off the target on Earth's surface, propagating through the atmosphere in the direction of the sensor. This is the path that carries information about the target of interest. Type B photons in the figure are photons originated in the sun, scattered by the atmosphere in the direction of the target, and then reflected by the target in the direction of the sensor. These photons are referred to as {\it skylight} or {\it sky shine}. Type C is another group of photons that are significant in total signal recorded by the sensor. These photons are originated in the sun, and scattered by the atmosphere into the camera's line of sight, without ever interacting with the target. This path is referred as {\it upwelled radiance}, and it is a function of how ``hazy'' the atmosphere is.
 
 Another photon path that could be added to the total signal is the photons that originated in the sun, propagate to the atmosphere, reflected off from background objects in the direction of the target and then reflected from the target of interest back through the atmosphere to the sensor. This photons are labeled as type G photons in \autoref{fig:paths}. As you can see, this path involves multiple reflection or bounces of the photons. 
 
-The type I photons in the figure are product of what is called {\it adjacency effect}. This is also a source of multiple bounce, or bounce and scatter photons. These photons are reflected from surrounding objects and then scattered into the line of sight of the sensor. This path can be included in the path radiance (type C photons). Lastly, if we are considering multiple scattering, we need to take in account the {\it trapping} effect, illustrated by path J in \autoref{fig:paths}. These photons that are generated in the sun, propagated through the atmosphere, reflected off the target to the air column, but reflected back onto the target the by the air column, and finally reflected into the line of sight of the sensor. 
+The type I photons in the figure are product of what is called {\it adjacency effect}. This is also a source of multiple bounce, or bounce and scatter photons. These photons are reflected from surrounding objects and then scattered into the line of sight of the sensor. This path can be included in the path radiance (type C photons). Lastly, if we are considering multiple scattering, we need to take in account the {\it trapping} effect, illustrated by path J in \autoref{fig:paths}. These photons that are generated in the sun, propagated through the atmosphere, reflected off the target to the air column, but reflected back onto the target by the air column, and finally reflected into the line of sight of the sensor. 
 
-When the target is the water column, we can discard the type G photons over open water, but it could be important over pixel in close to the shoreline. For water studies, the most important paths will be type A, B and C photons. The goal of the atmospheric correction is to isolate the type A photons from the rest of the path. To do so, we need to characterize the rest of the paths.
+When the target is the water column, we can discard the type G photons over open water, but it could be important over pixel in close to the shoreline. For water studies, the most important paths will be type A, B and C photons. The goal of the atmospheric correction is to isolate the type A and B photons that penetrate, i.e. total irradiance, from the rest of the path. To do so, we need to characterize the rest of the paths.
 
 \begin{figure}[htb]
   \centering
@@ -140,9 +141,9 @@ where:
 \subsection{Water Contributions to the Total Signal}
 Besides the photon paths described in \S\ref{subsubsec:SolarPaths}, a set of different photon paths need to be added to the total signal recorded by the sensor when the target is a water body. \autoref{fig:watercontribution} shows conceptually the different contributions to the upwelling radiance $L_u$ measured by a sensor (e.g. satellite or aircraft). These contributions are from the atmosphere ($L_a$), the water surface ($L_r$), and water column ($L_w$). The atmospheric contribution $L_a$ is the same as the photons type C described in \S\ref{subsubsec:SolarPaths}. The surface-reflected radiance $L_r$ is the portion of the downwelling solar radiance that is reflected by the water surface into the sensor's line of sight. This has two component, one from the sun and one from the skylight, and it is commonly referred to as glint. 
 
-Finally, the water-leaving radiance $L_w$ is the portion of the sun energy that propagates through the atmosphere, be transmitted through the water surface ($L_t$),interacts with the water column, and then scatter into the upward direction (subsurface $L_u$ in \autoref{fig:watercontribution}) to eventually be transmitted through the water surface and propagate through the atmosphere into the sensor direction. This is the path of interest because we are particularly interested in how the light is attenuated as it enters the water column. The {\it water column} is defined as a conceptual volume just below the water surface, which contains the constituents we will study.
+Finally, the water-leaving radiance $L_w$ is the portion of the sun energy that propagates through the atmosphere, is transmitted through the water surface ($L_t$),interacts with the water column, and is then scattered into the upward direction (subsurface $L_u$ in \autoref{fig:watercontribution}) to eventually be transmitted through the water surface and propagate through the atmosphere into the sensor direction. This is the path of interest because we are particularly interested in how the light is attenuated as it enters the water column. The {\it water column} is defined as a conceptual volume just below the water surface, which contains the constituents we will study.
 
-Each contribution previously described could be relevant by itself, depending of the application. $L_a$ gives information about the atmosphere such as aerosol composition, for instance. However, only the water-leaving radiance $L_w$ carries information about the water column, which is relevant to this study. Because the sensor only measures the total upwelling radiance (sensor-reaching radiance) $L_u=L_a+L_r+L_w$ and not each contribution separated, $L_u$ need to be isolated from the rest of contributions ($L_a$ and $L_r$) through a process called atmospheric correction. 
+Each contribution previously described could be relevant by itself, depending of the application. $L_a$ gives information about the atmosphere such as aerosol composition, for instance. However, only the water-leaving radiance $L_w$ carries information about the water column, which is relevant to this study. Because the sensor only measures the total upwelling radiance (sensor-reaching radiance) $L_u=L_a+L_r+L_w$ and not each contribution separated, $L_u$ needs to be isolated from the rest of contributions ($L_a$ and $L_r$) through a process called atmospheric correction. 
 
 \begin{figure}[htb]
   \centering
@@ -162,21 +163,35 @@ Once the incident energy is transmitted through the water surface, i.e. $L_w$ in
 \end{figure}
 \todo{fix sun color}
 
-Path $I$ represents the bottom effect caused by the incident light that penetrates the water surface, transmitted through the water column, reflected by the bottom, transmitted through the water column, and leaves the water into the sensor direction. This contribution depends on the depth and the clarity of the water. This signal can be significant in shallow Case 2 waters, i.e. depth $<10-15m$, where there is not much organic and/or inorganic suspended particles within the water column, and it can be used to extract information about the bottom composition or bathymetry, for instance. However, for water quality studies, this is a signal that needs to be avoided or isolated from the total signal. In the present study, this path will assumed to have zero contribution to the water-leaving signal because the water bodies of interest are deep enough to not allow the incident light to interact with the bottom or the water have a significant concentration of suspended particles (i.e. $>0.1mg/L$ (\cite{Pahlevan:2012})).
+Path $I$ represents the bottom effect caused by the incident light that penetrates the water surface, transmitted through the water column, reflected by the bottom, transmitted through the water column, and leaves the water into the sensor direction. This contribution depends on the depth and the clarity of the water. This signal can be significant in shallow Case 2 waters, i.e. depth $<10-15m$, where there is not much organic and/or inorganic suspended particles within the water column, and it can be used to extract information about the bottom composition or bathymetry, for instance. However, for water quality studies, this is a signal that needs to be avoided or isolated from the total signal. In the present study, this path will be assumed to have zero contribution to the water-leaving signal because the water bodies of interest are deep enough to not allow the incident light to interact with the bottom or the water have a significant concentration of suspended particles (i.e. $>0.1mg/L$ (\cite{Pahlevan:2012})).
 
-Path $II$ represents the interaction of the incident light with CDOM. CDOM is considered to only be an absorber, and not a scatterer. Therefore, it is an important component in light attenuation in the ultra-violet (UV) and the blue regions of the spectrum of light, therefore it is a important optical constituent of the water that often dominates absorption in the blue. In practice, CDOM is defined operational as the material that passes through a filter most often with pore size of $0.2\mu m$. Over the interval $[350nm,700nm]$, the CDOM absorption coefficient is described by an exponential decreasing function ([Jerlov, 1996]\todo{Cite Jerlov})
+Path $II$ represents the interaction of the incident light with CDOM. CDOM is considered to only be an absorber, and not a scatterer. Therefore, it is an important component in light attenuation in the ultra-violet (UV) and the blue regions of the spectrum of light, therefore it is a important optical constituent of the water that often dominates absorption in the blue. In practice, CDOM is defined operationally as the material that passes through a filter most often with pore size of $0.2\mu m$. Over the interval $[350nm,700nm]$, the CDOM absorption coefficient is described by an exponential decreasing function ([Jerlov, 1996]\todo{Cite Jerlov})
 \begin{equation}
   a_{CDOM}(\lambda) = a_{CDOM}(\lambda_0)\exp{\left[-S_{CDOM}(\lambda-\lambda_0)\right]}
 \end{equation}
 where $S_{CDOM}$ is spectral slope and $\lambda_0$ is the reference wavelength. \autoref{fig:compabs} shows examples of CDOM absorption coefficient for Case 1 and Case 2 waters.
 
-Path $III$ illustrates the influence of inorganic suspended particles (or suspended material (SM) or minerals) on the incident light, but it could also include organic particles. These particles can scattered and/or absorb light, and they vary in size, composition, and distribution, which can influence the optical properties of the water, being different for different particles. For example, the optical properties of clay are different from silt (\cite{Pahlevan:2012}). \autoref{fig:compabs} shows examples of minerals absorption coefficient for Case 2 waters (labeled as ``Min'' on the right-hand figure). The inorganic suspended particles are often included within the non-algal particles (NAP), which is defined operationally as the particulate material that is not extracted by methanol in the spectrophotometric measurement of particles on filter pads ([Kishino {\it et al}., 1985]\todo{Cite Kishino}). The NAP absorption coefficient spectrum is often described by a exponential decreasing function, i.e.
+\begin{figure}[htb]
+\centering
+      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
+      \caption{Contribution by the various components to the absorption coefficient (Note: image taken from \cite{Mobley:2001}).}
+      \label{fig:compabs}
+\end{figure}
+
+Path $III$ illustrates the influence of inorganic suspended particles (or suspended material (SM) or minerals) on the incident light, but it could also include organic particles. These particles can scatter and/or absorb light, and they vary in size, composition, and distribution, which can influence the optical properties of the water, being different for different particles. For example, the optical properties of clay are different from silt (\cite{Pahlevan:2012}). \autoref{fig:compabs} shows examples of minerals absorption coefficient for Case 2 waters (labeled as ``Min'' on the right-hand figure). The inorganic suspended particles are often included within the non-algal particles (NAP), which are defined operationally as the particulate material that is not extracted by methanol in the spectrophotometric measurement of particles on filter pads ([Kishino {\it et al}., 1985]\todo{Cite Kishino}). The NAP absorption coefficient spectrum is often described by a exponential decreasing function, i.e.
 \begin{equation}
   a_{NAP}(\lambda) = a_{NAP}(\lambda_0)\exp{\left[-S_{NAP}(\lambda-\lambda_0)\right]}
 \end{equation}
-where $S_{NAP}$ is the exponential slope for NAP, which could be estimated from a nonlinear regression from field data. The scattering properties of particles are difficult to measure. Basically, to measure the scattering due to particles, any undissolved material is treated as particle (\cite{GeraceThesis}). An example of scattering coefficient spectrum for minerals is shown in \ref{fig:compscat}, for Case 1 and Case 2 waters.
+where $S_{NAP}$ is the exponential slope for NAP, which could be estimated from a nonlinear regression from field data. The scattering properties of particles are difficult to measure. Basically, to measure the scattering due to particles, any undissolved material is treated as particle (\cite{GeraceThesis}). An example of scattering coefficient spectrum for minerals is shown in \autoref{fig:compscat}, for Case 1 and Case 2 waters.
 
-Path $IV$ shows the case of scattering and absorption of light by pure water, which is considered to be composed of only water molecules (i.e. free from particles). \autoref{fig:WaterAbs1} shows the absorption coefficient spectrum for pure water over a wide range of wavelength. Note that pure water has a highly absorption in the UV and above NIR, having a window in the visible. \autoref{fig:WaterAbs2} shows the pure water absorption coefficient for visible ($[400nm,700nm]$), where the absorption is low in the blue and increases in the red and NIR. The scattering coefficient for pure water is illustrated in \autoref{fig:compabs}.
+\begin{figure}[htb]
+\centering
+      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
+      \caption{Contribution by the various components to the scattering coefficient (Note: image taken from \cite{Mobley:2001}).}
+      \label{fig:compscat}
+\end{figure}
+
+Path $IV$ shows the case of scattering and absorption of light by pure water, which is considered to be composed of only water molecules (i.e. free from particles). \autoref{fig:WaterAbs1} shows the absorption coefficient spectrum for pure water over a wide range of wavelength. Note that pure water has a high absorption in the UV and above NIR, having a window in the visible. \autoref{fig:WaterAbs2} shows the pure water absorption coefficient for visible ($[400nm,700nm]$), where the absorption is low in the blue and increases in the red and NIR. The scattering coefficient for pure water is illustrated in \autoref{fig:compabs}.
 
 \begin{figure}[htb]
   \centering
@@ -201,7 +216,7 @@ Path $IV$ shows the case of scattering and absorption of light by pure water, wh
 \end{figure}
 \todo{cite Smith and Baker}
 
-Lastly, path $V$ in \ref{fig:WaterColumn} illustrates the interaction of the incident light with phytoplankton. This interaction can be absorption and/or scattering. Phytoplankton can dramatically affect the optical properties of the water column. Phytoplankton absorption depends in the composition and concentration of pigments. There exist different kind of pigment. The main pigment is chlorophyll-{\it a}, and it can be used as a surrogate or proxy for phytoplankton. \ref{fig:compabs} shows example of chlorophyll absorption coefficient spectrum (labeled as ``Chl'') for Case 1 and Case 2 water. Chlorophyll typically tends to be a strong absorber of visible light \cite{Mobley1994}, having two absorption peaks, one in the blue ($430nm$) and one in the red ($665nm$). An example of scattering coefficient spectrum for chlorophyll-{\it a} is shown in \ref{fig:compscat}, for Case 1 and Case 2 waters.
+Lastly, path $V$ in \autoref{fig:WaterColumn} illustrates the interaction of the incident light with phytoplankton. This interaction can be absorption and/or scattering. Phytoplankton can dramatically affect the optical properties of the water column. Phytoplankton absorption depends in the composition and concentration of pigments. There are different kinds of pigments. The main pigment is chlorophyll-{\it a}, and it can be used as a surrogate or proxy for phytoplankton. \autoref{fig:compabs} shows examples of chlorophyll absorption coefficient spectrum (labeled as ``Chl'') for Case 1 and Case 2 water. Chlorophyll typically tends to be a strong absorber of visible light \cite{Mobley1994}, having two absorption peaks, one in the blue ($430nm$) and one in the red ($665nm$). An example of scattering coefficient spectrum for chlorophyll-{\it a} is shown in \autoref{fig:compscat}, for Case 1 and Case 2 waters.
 
 \cite{Mobley1994} describes the attenuation of light when interacting with the water column constituents with its complex index of refraction, $m=n-ik$, where $n$ is real part that governs scattering within the medium, and $k$ is the imaginary part that governs absorption in the medium. The absorption coefficient is related to the imaginary part $k$ of the index of refraction as [Kerker, 1969\todo{cite Kerker}]
 \begin{equation}
@@ -212,7 +227,7 @@ More details about the different water column constituents are presented in the 
 
 % ----------------------------------------------------
 \subsubsection{Optical Constituents of Water}
-The color of water bodies could vary from deep blue of the open ocean to yellowish-brown in a turbid estuary. Their color depend on different concentration and optical properties of dissolved and particulate matter. Bellow there is a brief description of the most important optical constituents of natural waters.
+The color of water bodies could vary from the deep blue of the open ocean to yellowish-brown in a turbid estuary. Their color depend on different concentration and optical properties of dissolved and particulate matter. Bellow there is a brief description of the most important optical constituents of natural waters.
 \subsubsection*{Pure Water}
 \addcontentsline{toc}{subsubsection}{Pure Water}
 Although water itself appears colorless in our everyday life, it display a blue hue. This is due to the dominant role of molecular scattering at small wavelengths and the dominant role of molecular absorption at large wavelength values. This blue color is clearly apparent under sunny conditions in oceanic water, for instance.
@@ -229,7 +244,7 @@ In clean oceanic waters where the larger phytoplankton are relatively scarce, {\
 
 {\it Phytoplankton} are microscopic, single cells, free-floating organisms (plants) and have a major effect on the ocean color. Phytoplankton is an important component of the oceanic food web and of the global carbon cycle, which make them the most important primary producers in the ocean, and most importantly for ocean optics, they determine the optical properties of most oceanic waters. Their size vary from less than $1\mu m$ to more than $200\mu m$ with different species, shapes and concentrations. Phytoplankton can scatter light strongly because they are in general much larger than the wavelength of visible light. They posses chlorophyll, which is a pigment that produces energy rich organic material and releases oxygen by absorbing light in a process named photosynthesis. Chlorophyll (and related pigments) have a strong absorption in the blue and red, determining the spectral absorption of water if concentration are high.
 
-{\it Detritus} (a.k.a. {\it tripton}) is non-phytoplankton, non-living organic particles, and it constitutes a large portion of the total organic matter of ecosystems. Detritus is produced when, for example, phytoplankton die and their cells break apart. It can suffer rapidly from photooxidation losing the characteristic absorption spectrum of living phytoplankton and therefore absorbing only in the blue. However, detritus can considerably scatter.  
+{\it Detritus} (a.k.a. {\it tripton}) is non-phytoplankton, non-living organic particles, and it constitutes a large portion of the total organic matter of ecosystems. Detritus is produced when, for example, phytoplankton die and their cells break apart. It can suffer rapidly from photooxidation losing the characteristic absorption spectrum of living phytoplankton and therefore absorbing only in the blue. However, detritus can scatter considerably.  
 % ----------------------------------------------------
 \subsubsection*{Inorganic Particles}
 \addcontentsline{toc}{subsubsection}{Inorganic Particles}
@@ -244,7 +259,7 @@ The relevant water constituents for this research are referred to as color prima
 \subsubsection{Atmospheric Effect and Water}
 At sea level, the principal constituents of the atmosphere are gases (e.g. nitrogen, oxygen, argon and carbon dioxide), water vapor (significant but variable amount), liquid and solid water (in cloud and in the form of precipitation), dust, and aerosol particles, with variable concentrations for each component. $90\%$ of the atmospheric mass is below a height of about $16km$, therefore a satellite looks through effectively all of the atmosphere.
 
-In order to atmospherically correct an image, first we need to understand the effect of the atmosphere on the propagating energy generated in the sun. Even with clear sky, the solar energy is significantly reduced when it passes through the atmosphere. The reduction is due mainly to two phenomena: scattering by air molecules and aerosols, and absorption by gases (e.g. water vapor, oxygen, ozone and carbon dioxide). Absorption decreases the amount of energy available in a particular wavelength, while scattering redistributes the energy by changing its direction. In the VIS, atmospheric transmission is mainly affected by ozone absorption and by molecular scattering \cite{Asrar1989}. For example, with Sun vertically overhead, the total solar irradiance on a horizontal surface at sea level is reduced by about $14\%$ with a dry, clean atmosphere and by about $40\%$ with a moist, dusty atmosphere \cite{Kirk1983}. {\it Attenuation} is the lost of the radiation energy that combines scattering and absorption effects.
+In order to atmospherically correct an image, first we need to understand the effect of the atmosphere on the propagating energy generated in the sun. Even with clear sky, the solar energy is significantly reduced when it passes through the atmosphere. The reduction is due mainly to two phenomena: scattering by air molecules and aerosols, and absorption by gases (e.g. water vapor, oxygen, ozone and carbon dioxide). Absorption decreases the amount of energy available in a particular wavelength, while scattering redistributes the energy by changing its direction. In the VIS, atmospheric transmission is mainly affected by ozone absorption and by molecular scattering \cite{Asrar1989}. For example, with Sun vertically overhead, the total solar irradiance on a horizontal surface at sea level is reduced by about $14\%$ with a dry, clean atmosphere and by about $40\%$ with a moist, dusty atmosphere \cite{Kirk1983}. {\it Attenuation}\index{Attenuation} is the loss of the radiation energy that combines scattering and absorption effects.
 
 
 
@@ -257,11 +272,11 @@ A description of the processes involved in the energy interaction in the atmosph
 
 It is often convenient in visible ocean remote sensing to consider the atmosphere to be made up of two components: Rayleigh scattering of the air molecules and Mie scattering of haze and other aerosols. 
 
-{\it Rayleigh scattering} \index{Rayleigh Scattering}  (a.k.a. molecular scattering) occurs where the wavelength of the radiation is much larger than the molecular diameters (e.g. daylight scattering or very pure water), or in other words when the scattering particles are small compared the wavelength. Rayleigh scattering dominates the blue to UV region of the spectrum. Air molecules are much smaller than the wavelength of solar radiation and therefore their scattering obeys Rayleigh scattering. 
+{\it Rayleigh scattering}\index{Rayleigh Scattering}  (a.k.a. molecular scattering) occurs where the wavelength of the radiation is much larger than the molecular diameters (e.g. daylight scattering or very pure water), or in other words when the scattering particles are small compared the wavelength. Rayleigh scattering dominates the blue to UV region of the spectrum. Air molecules are much smaller than the wavelength of solar radiation and therefore their scattering obeys Rayleigh scattering. 
 
-The Rayleigh's Law states that the amount of scattered energy is proportional to $1/\lambda^4$. Because this proportionality, blue light is very much more strongly scattered than red light. Therefore, the ``white'' light from the sun suffers selective scattering since much of the blue light is removed from the forward direction and redistributed  sideways. This is the reason why the sky appears blue, and why the rising or setting sun appears red even in the absence of scattering by dust particles \cite{Rees1990}. It is also important to mention that the Rayleigh scattering process generates increase in the degree of polarization of the scattered radiation. As can be seen in \autoref{fig:ScatPhFn}, in the Rayleigh scattering case there is as much scattering in the forward as in the backward direction. 
+The Rayleigh's Law states that the amount of scattered energy is proportional to $1/\lambda^4$. Because this proportionality, blue light is very much more strongly scattered than red light. Therefore, the ``white'' light from the sun suffers selective scattering since much of the blue light is removed from the forward direction and redistributed  sideways. This is the reason why the sky appears blue, and why the rising or setting sun appears red even in the absence of scattering by dust particles \cite{Rees1990}. It is also important to mention that the Rayleigh scattering process generates an increase in the degree of polarization of the scattered radiation. As can be seen in \autoref{fig:ScatPhFn}, in the Rayleigh scattering case there is as much scattering in the forward as in the backward direction. 
 
-{\it Mie scattering} occurs when the wavelength is of the same order of magnitude as the particle diameter.The smallest non-molecular particles that are responsible for scattering are aerosols. That is why Mie scattering is sometimes referred to as {\it aerosol scattering}. Aerosol can be defined as dispersed systems of particles of small particles, liquid or solid, suspended in a gas, like atmospheric air. Therefore dust, haze, smoke, smog, fog, mist, and clouds can be considered to be specific aerosol types. The typical size and number density for non-molecular particles are shown in Table \ref{tab:aerosol_size}.
+{\it Mie scattering}\index{Mie scattering} occurs when the wavelength is of the same order of magnitude as the particle diameter.The smallest non-molecular particles that are responsible for scattering are aerosols. That is why Mie scattering is sometimes referred to as {\it aerosol scattering}\index{aerosol scattering}. Aerosol can be defined as a dispersed systems of particles of small particles, liquid or solid, suspended in a gas, like atmospheric air. Therefore dust, haze, smoke, smog, fog, mist, and clouds can be considered to be specific aerosol types. The typical size and number density for non-molecular particles are shown in \autoref{tab:aerosol_size}.
 
 %--------------------------------------
 \begin{table}[htb]
@@ -279,7 +294,7 @@ The Rayleigh's Law states that the amount of scattered energy is proportional to
 
 Mie scattering is characterized by an angular distribution predominately in the forward direction, as shown in \autoref{fig:ScatPhFn}. It has a much weaker dependence on wavelength, although scattering is still more intense at shorter wavelengths because it may often be crudely approximated as being proportional to $1/\lambda$ \cite{Rees1990}.
 
-{\it Non-selective scattering} (a.k.a. {\it isotropic scattering}) occurs when the particle size is very much larger than the wavelength. Non-selective scattering at visible wavelengths occurs in nature in thick clouds or in fog, and its cross-section is independent of the wavelength. \todo{define cross-section}
+{\it Non-selective scattering}\index{Non-selective scattering} (a.k.a. {\it isotropic scattering}) occurs when the particle size is very much larger than the wavelength. Non-selective scattering at visible wavelengths occurs in nature in thick clouds or in fog, and its cross-section is independent of the wavelength. \todo{define cross-section}
 
 \begin{figure}[htb]
   \centering
@@ -305,7 +320,7 @@ where $z$ is the path length and the product
 \begin{equation}
   \beta_\alpha z=\delta_\alpha
 \end{equation}
-is referred to as {\it optical depth} $\delta$ \cite{Schott}.
+is referred to as {\it optical depth}\index{optical depth $\delta$} $\delta$ \cite{Schott}.
 
 % ----------------------------------------------------
 \todo{not forget this section}
@@ -409,19 +424,6 @@ and represents the fraction of the incident power that is scattered out of the b
   c(\lambda)=a(\lambda)+b(\lambda)~~\left[m^{-1} \right],
 \end{equation}
 and represents the fraction of the incident power that is lost or attenuated. As examples of magnitudes and shapes, \autoref{fig:compabs} and \autoref{fig:compscat} show contributions by the various components of waters to the absorption and scattering coefficients, respectively, for Case 1 and Case 2 waters.
-\begin{figure}[htb]
-\centering
-      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/AbsCoeff.png}
-      \caption{Contribution by the various components to the absorption coefficient (Note: image taken from \cite{Mobley:2001}).}
-      \label{fig:compabs}
-\end{figure}
-
-\begin{figure}[htb]
-\centering
-      \includegraphics[height=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/ScatCoeff.png}
-      \caption{Contribution by the various components to the scattering coefficient (Note: image taken from \cite{Mobley:2001}).}
-      \label{fig:compscat}
-\end{figure}
 
 The IOPs are additive. Therefore, the total absorption coefficient, for instance, can be expressed as
 \begin{equation}
@@ -431,7 +433,7 @@ e.g.,
 \begin{equation}
   a_{total}(z,\lambda) =  a_w(\lambda) +a_{CDOM}(z,\lambda)+ a_{Chl}(z,\lambda)+a_{SM}(z,\lambda) \notag
 \end{equation}
-This fact is important because it will help to retrieve simultaneously the CPAs in this case. This also implies that we need to know the IOPs for each component, which is not a easy task, specially scattering coefficient.
+This fact is important because it will help to retrieve simultaneously the CPAs in this case. This also implies that we need to know the IOPs for each component, which is not a easy task, especially the scattering coefficient.
 
 The scattering coefficients does not take in account the angular distribution of the scattered power. The volume scattering function is an IOP that takes in account angular information. Consider $\Phi_s(\psi,\lambda)/\Phi_i(\lambda)$ as the fraction of incident power scattered out of the beam through an angle $\psi$ into a solid angle $\Delta\Omega$ centered on $\Psi$, as shown in \autoref{fig:IOPsdef}. Then, the {\it volume scattering fraction} (VSF) \index{volume scattering function, VSF} is defined as the fraction of scattered power per unit distance and unit solid angle, i.e.
 \begin{equation}\label{eq:VSF1}
@@ -441,7 +443,7 @@ but $\Phi_s(\psi,\lambda)=I_s(\psi,\lambda)\Delta \Omega$, with $I_s(\psi,\lambd
 \begin{equation} 
   \beta(\psi,\lambda)= \lim_{\Delta V\to 0} \frac{I_s(\psi,\lambda)}{E_i(\lambda)\Delta V}~~\left[m^{-1}sr^{-1} \right]
 \end{equation}
-with $\Delta V=\Delta r\Delta A$. This last definition is the reason why it is called volume scattering function. The VSF represents the scattered intensity per unit incident irradiance per unit volume of water. \autoref{fig:VSFex} shows example of VSF for different kind of waters with its respective scattering coefficients.
+with $\Delta V=\Delta r\Delta A$. This last definition is the reason why it is called the volume scattering function \cite{Mobley:2001}. The VSF represents the scattered intensity per unit incident irradiance per unit volume of water. \autoref{fig:VSFex} shows example of VSF for different kind of waters with its respective scattering coefficients.
 
 \begin{figure}[htb]
 \centering
@@ -466,7 +468,7 @@ which tells how much of the total scattering is due to backscattering.
 
 It is important to note that the previous definition assumed that there are no inelastic-scattering processes present. However, fluorescence by dissolved matter or chlorophyll, and Raman scattering by the water molecules themselves, are inelastic-scattering processes that do occur in nature. The power that is lost from $\lambda$ by scattering into $\lambda'\neq\lambda$ results in absorption coefficient $a(\lambda)$ increment. The gain in power at $\lambda'$ is expressed as a source term in the radiative transfer equation (see \autoref{eq:RTEfinal}).
 
-Other IOP commonly used in ocean optics is the {\it single-scattering albedo} \index{single-scattering albedo, $\omega_o$} $\omega_o$, defined as
+Another IOP commonly used in ocean optics is the {\it single-scattering albedo} \index{single-scattering albedo, $\omega_o$} $\omega_o$, defined as
 \begin{equation}
   \omega_o=\frac{b(\lambda)}{c(\lambda)}
 \end{equation}
@@ -524,7 +526,7 @@ where the angle between the incident direction $(\theta',\phi')$ and the scatter
   &+\int_{4\pi} L(z,\theta',\phi',\lambda)\beta(z;\theta',\phi' \to \theta,\phi;\lambda)d\Omega'\cdots \notag  \\
   &+S(z,\theta,\phi,\lambda)~~\left[W~m^{-3}sr^{-1}nm^{-1} \right],
 \end{align}
-which is more convenient to use in oceanography because depends in the depth $z$ and not location $r$ along the beam path. This equation is called the monochromatic, one-dimensional, time-independent RTE, and it expresses location as geometric depth $z$ and the IOPs in terms of the beam attenuation $c$ and the volume scattering function $\beta$. This is the RTE solved by Hydrolight. It needs to be noted that this definition of the RTE do not take in account polarized light occurring in the medium. Therefore, this called unpolarized, or scalar RTE (SRTE). However, the SRTE gives sufficiently accurate solutions for many oceanographic applications\todo{cite Ocean Optics Book}. If polarization need to be included, then a polarized or vector RTE (VRTE) could be used.
+which is more convenient to use in oceanography because it depends on the depth $z$ and not location $r$ along the beam path. This equation is called the monochromatic, one-dimensional, time-independent RTE, and it expresses location as geometric depth $z$ and the IOPs in terms of the beam attenuation $c$ and the volume scattering function $\beta$. This is the RTE solved by Hydrolight. It needs to be noted that this definition of the RTE does not take in account polarized light occurring in the medium. Therefore, this is called the unpolarized, or scalar RTE (SRTE). However, the SRTE gives sufficiently accurate solutions for many oceanographic applications\todo{cite Ocean Optics Book}. If polarization need to be included, then a polarized or vector RTE (VRTE) could be used.
 
 % \begin{figure}[htb]
 % \centering
@@ -558,9 +560,10 @@ where $K_d(z,\lambda)$ is the {\it spectral diffuse attenuation coefficient} for
   K_d(z,\lambda)  &=- \frac{d\ln E_d(z,\lambda)}{dz} \notag \\
           &=-\frac{1}{E_d(z,\lambda)}\frac{dE_d(z,\lambda)}{dz} ~~\left[m^{-1} \right].
 \end{align}
-Other $K$ functions such as $K_u$, $K_o$, or $K_L$ can be obtained using similar definition with the corresponding radiometric quantities such $E_u$, $E_o$, or $L$.
+% Other $K$ functions such as $K_u$, $K_o$, or $K_L$ can be obtained using similar definition with the corresponding radiometric quantities such $E_u$, $E_o$, or $L$.
+\todo{not to forget this paragraph}
 
-It is important to note that AOPs are not additive as the IOPs. Also, AOPs can not be measured in the lab or on water sample, therefore they must be measured in situ.
+It is important to note that AOPs are not additive as the IOPs. Also, AOPs can not be measured in the lab or on a water sample, therefore they must be measured in situ.
 
 % ------------------------------------------
 % \subsection{Constituent Retrieval}
@@ -632,7 +635,7 @@ Although the OLI's spectral bands are not narrow enough to be compared with MODI
 % ----------------------------------------------
 \section{Empirical Line Method}\todo{complete from papers}
 \label{subsec:ELM}
-The {\it empirical line method}\index{ELM} (ELM) is a method for calibration of image data to reflectance that uses ground truth.The ELM uses a linear regression in each band to relate digital counts or radiance to reflectance \cite{Schott}. The ground truth can be in general  either control panels or ad hoc control surfaces of known reflectance. These ground truth objects need to be approximately Lambertian to minimize any errors that could be introduced by sensor view angles effects. Also, this calibration targets are assumed flat and level, with no neighboring obscuration, and homogeneous as well. The ELM method generally assumes that the atmosphere is constant over the complete scene. If that is not the case, corrections must be made for changes in the atmosphere over the scene. The regression to be solved for each band in the ELM method is given by
+The {\it empirical line method}\index{ELM} (ELM) is a method for calibration of image data to reflectance that uses ground truth.The ELM uses a linear regression in each band to relate digital counts or radiance to reflectance \cite{Schott}. The ground truth can be in general  either control panels or ad hoc control surfaces of known reflectance. These ground truth objects need to be approximately Lambertian to minimize any errors that could be introduced by sensor view angles effects. Also, these calibration targets are assumed flat and level, with no neighboring obscuration, and homogeneous as well. The ELM method generally assumes that the atmosphere is constant over the complete scene. If that is not the case, corrections must be made for changes in the atmosphere over the scene. The regression to be solved for each band in the ELM method is given by
 \begin{equation}
 	\label{eq:ELM} 
 	L = m\times r_d + b
@@ -674,7 +677,7 @@ The LEDAPS algorithm works in the following fashion. First, calibrated images fr
 \end{equation}
 where $\rho_s$ is the surface reflectance, $T_g$ is the gaseous transmission due to the atmospheric gases, $T_{R+A}$ is Rayleigh and aerosol transmission, $\rho_{R+A}$ is the Rayleigh and aerosols atmospheric intrinsic reflectance, and $S_{R+A}$ is the Rayleigh and aerosols spherical albedo. The 6S radiative transfer code is utilized to compute the transmission, intrinsic reflectance, and spherical albedo terms. Ozone concentrations and column water vapor are derived from ancillary data. The aerosol optical thickness (AOP) is extracted directly from the imagery by using the dark, dense vegetation (DDV) method of Kaufman {\it et al.} \todo{add reference}.This method postulates a linear relation between SWIR surface reflectance and reflectance in the visible bands, based on the physical correlation between chlorophyll absorption and bound water absorption \todo{Research more about AOT and the Kaufman method!!!}. Finally, the derived AOT, ozone, atmospheric pressure, and water vapor are supplied to the 6S radiative transfer algorithm, which then inverts TOA reflectance to surface reflectance using \autoref{eq:TOAref}. 
 
-According to the author in \cite{LandsatCDR}, the Landsat reflectance product has to be used with caution in coastal regions where land area is small relative to adjacent water because the efficacy of the surface correction is likely to be reduced. This product was available only for Landsat 4 TM, Landsat 5 TM and Landsat 7 ETM+ At the time of this publication. An quality assurance (QA) layers is attached to this product and it can be used for pixel-level conditions and validity production. The surface reflectance products is available in the earthexplorer.com website in a HDF-EOS package that contains all necessary files and it can be read in ENVI (through an ENVI header file).
+According to the author in \cite{LandsatCDR}, the Landsat reflectance product has to be used with caution in coastal regions where land area is small relative to adjacent water because the efficacy of the surface correction is likely to be reduced. This product was available only for Landsat 4 TM, Landsat 5 TM and Landsat 7 ETM+ at the time of this publication. A quality assurance (QA) layer is attached to this product and it can be used for pixel-level conditions and validity production. The surface reflectance products is available in the earthexplorer.com website in a HDF-EOS package that contains all necessary files and it can be read in ENVI (through an ENVI header file).
 % ----------------------------------------------------
 % \section{MODTRAN}
 % ----------------------------------------------------
