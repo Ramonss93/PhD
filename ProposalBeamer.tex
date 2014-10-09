@@ -1,0 +1,174 @@
+	\documentclass{beamer}
+	\usepackage[latin1]{inputenc}
+	\usepackage{textpos}
+	\usepackage{graphics}
+	\usepackage[english]{babel}
+	\usepackage{colortbl}
+	\usepackage{caption}
+	% \usepackage{subcaption}
+	\usepackage{multirow}
+	\usepackage{amsmath}
+	\usepackage{xcolor} % for colored text
+
+	\usepackage{tikz} % for flow charts
+	\usetikzlibrary{shapes,arrows,positioning,shadows,calc}
+
+\usepackage{filecontents}% http://ctan.org/pkg/filecontents
+\usepackage{silence}% http://ctan.org/pkg/silence
+\WarningFilter{latex}{Overwriting file}% Remove LaTeX warnings starting with "Overwriting file"
+\begin{filecontents*}{linereg.data}
+#x y
+0 4
+10 24
+\end{filecontents*} 
+
+\begin{filecontents*}{linereg2.data}
+#x y
+2 8
+8 20
+\end{filecontents*} 
+
+	\renewcommand<>{\item}[1]{\only#2{\beameroriginal{\item}{#1}}} % for replace a equation for other equation in the same place
+	
+	% \usetheme{Warsaw}
+	\usetheme{Frankfurt}
+	% \usetheme{Boadilla}
+	\setbeamertemplate{navigation symbols}{} 
+	% \useoutertheme{infolines} 
+\setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.0cm} \insertshorttitle \hspace*{4.0cm} \hfill\insertframenumber/\inserttotalframenumber}} 
+
+
+\def\braces#1{[#1]} % to define square parenthesis 
+	
+% \usecolortheme{orchid}
+
+% \usecolortheme{lily}
+
+% \usecolortheme{default}
+\usecolortheme{cranejavier}
+
+% \setbeamertemplate{footline}[frame number]
+% \setbeamertemplate{footline}[page number]
+	
+	
+	% -------------------------------------- Slide 1
+	\title[Landsat-8 over Case 2 Water]{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
+	\author[Javier A. Concha]{\Large Javier A. Concha \\\footnotesize Ph.D. Candidate\\ Advisor: Dr. John Schott}
+	\institute{\footnotesize Digital Imaging and Remote Sensing Lab\\Chester F. Carlson Center for Imaging Science\\ Rochester Institute of Technology}
+	\date{\today}
+	
+\begin{document}
+{	
+\setbeamertemplate{footline}{} 
+\setbeamertemplate{headline}{}
+	
+	\begin{frame} 
+	\titlepage
+	
+	\begin{textblock*}{10cm}(10.0cm,-8.5cm)
+	   \includegraphics[height=10mm]{/Users/javier/Desktop/Javier/MASTER_RIT/2011_THESIS/LaTeX/Presentation/tiger_walking_rit_color.eps}
+	\end{textblock*}
+	\begin{textblock*}{10cm}(4.7cm,-8.0cm)
+	   \includegraphics[height=5mm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/USGS_logo.eps}
+	\end{textblock*}	
+	\begin{textblock*}{10cm}(-.7cm,-8.5cm)
+	   \includegraphics[height=10mm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/dirs_logo.png}
+	\end{textblock*}
+	
+	\begin{textblock*}{9cm}(2cm,-5cm)
+
+	   \tikz\node[opacity=0.3]{ \includegraphics[width=65mm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/landsat8-earth.jpg}};
+	\end{textblock*}
+
+	\begin{textblock*}{12cm}(3.5cm,0cm)
+	   \scriptsize Presented for Candidacy Exam
+	\end{textblock*}
+	
+	\end{frame}
+
+}
+\addtocounter{framenumber}{-1}
+%\setbeamercovered{highly dynamic}
+%\setbeamercovered{transparent}
+\setbeamercovered{still covered={\opaqueness<1->{2}},again covered={\opaqueness<1->{2}}}
+
+% ----------------------------------- Slide ----------------------------------------------	
+
+\addtobeamertemplate{frametitle}{}{%
+\begin{textblock*}{90mm}(8.2cm,-0.5cm)
+% \includegraphics[height=0.5cm]{/Users/javier/Desktop/Javier/MASTER_RIT/SPIE2012/Slides/rit_white_no_bar.jpg}
+\includegraphics[height=0.4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RIT_LOGO.png}
+\end{textblock*}}
+
+
+% ----------------------------------- Slide ----------------------------------------------
+\begin{frame}{\LARGE Outline} 
+	\tableofcontents
+\end{frame}
+
+\addtocounter{framenumber}{-1}
+
+\AtBeginSection[ ]
+{		
+	\begin{frame}{\LARGE Outline} 
+		\tableofcontents[currentsection]
+	\end{frame}
+
+\addtocounter{framenumber}{-1}	
+}	
+
+% \AtBeginSubsection[ ]
+% {		
+% 	\begin{frame}{\LARGE Outline} 
+% 		\tableofcontents[currentsection,currentsubsection]
+% 	\end{frame}
+% \addtocounter{framenumber}{-1}	
+% }	
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Objectives}
+% --------- Slide ----------------------------------------- 
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Background}
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methodology}
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Preliminary Results}
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+
+% \section*{}
+% \begin{frame}%[shrink=30] 
+% \tiny
+%   \frametitle{References}
+%   \nocite{*}
+%   \bibliographystyle{apalike}
+%   \bibliography{HLbeamerbib}
+% \end{frame}
+
+%% ----------------------------------- Slide ----------------------------------------------
+
+{	
+\setbeamertemplate{footline}{} 
+\setbeamertemplate{headline}{}
+\begin{frame}[noframenumbering] 
+
+\vspace{\baselineskip}
+\centerline{\Large Thanks for your attention!}
+	\vspace{\baselineskip}
+
+% \centerline{\Huge QUESTIONS?}
+\uncover <2->{\centerline{\Huge QUESTIONS?}}
+\vspace{\baselineskip}
+\centerline{Javier A. Concha}
+\centerline{jxc4005@rit.edu}
+
+\begin{figure}[htb]
+\centering
+\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LC80160302013262LGN00.jpg}
+\end{figure}
+
+\end{frame}
+}
+
+% ----------------------------------- Slide ----------------------------------------------
+\end{document} % EEEEEEEEEEENNNNNNNNNNNNNNDDDDDDDDDDDD
