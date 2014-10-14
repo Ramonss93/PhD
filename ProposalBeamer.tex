@@ -310,6 +310,16 @@
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Methodology and Approach}
 % ---------------- Subsection ------------------------------
+\subsection*{Retrieval Process}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Process} 
+
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+\end{figure}
+
+\end{frame}
+% ---------------- Subsection ------------------------------
 \subsection{Over-Water Atmospheric Correction}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Over-Water Atmospheric Correction}{\Large Model-Based ELM}
@@ -337,7 +347,7 @@
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Model-based ELM} 
-{\Large Bright Pixel -- Pseudo-Invariant Features}
+{\vspace{0.1cm} \Large Bright Pixel -- Pseudo-Invariant Features}
 
 \begin{figure}[htb]
   \begin{minipage}[c]{0.48\linewidth}
@@ -360,7 +370,7 @@
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Model-based ELM} 
-{\Large Dark Pixel}
+{\vspace{0.1cm} \Large Dark Pixel}
 
 \begin{columns}[c] % contents are top vertically aligned
   	\begin{column}[T]{6cm} % each column can also be its own environment
@@ -381,7 +391,7 @@
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction} 
 {\Large Model-Based ELM}
-\centerline{\LARGE {\color{red} \emph{Bright}} and \emph{Dark} Pixel}
+\centerline{\LARGE {\color{red} \underline{\emph{Bright}}} and \underline{\emph{Dark}} Pixel}
 \begin{figure}[htb]
   \centering
   \includegraphics[width=12cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/ELMpixelsENVI.pdf}
@@ -392,8 +402,116 @@
 % ---------------- Subsection ------------------------------
 \subsection{In-Water Constituent Retrieval Process}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process}
+\begin{frame}{\LARGE Retrieval Process} 
 
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+\end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large LUT -- Hydrolight}
+IOPs
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process}
+{\vspace{0.1cm} \Large LUT -- Hydrolight}
+% \begin{block}{\footnotesize LUT}
+  \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  	\vspace{0.2cm}
+    	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
+    	    \vspace{0.2cm}
+    		\centerline{LUT}
+    		\centerline{(Known concentrations)}
+    \end{column}
+  	% \hspace{1cm}
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  	\vspace{1cm}
+	\tiny \addtolength{\tabcolsep}{-5pt}
+		\begin{tabular}{c|c|c|c|c}
+        		\bfseries{$<CHL>$}  	& \bfseries{$<SM>$}  & \bfseries{$a_{CDOM}(440)$} & \bfseries{$Backscatter$} & IOPs Input\\
+		$[ug/L]$  		& $[mg/L]$ & 	$[1/m]$ &	\bfseries{$Fraction$}, $[\%]$	\\ \hline \hline
+0.1   & 1.0  &  0.11 &  0.5 & ONTNS\\
+0.5   & 2.0  &  0.15 &  1.0 & LONGS\\
+1.0   & 5.0  &  0.21 &  1.5 & --\\
+3.0   & 10.0 &  0.6  &  2.0 & --\\
+10.0  & 25.0 &  1.0  &  --  & --\\
+20.0  & 45.0 &  1.2  &  --  & --\\
+40.0  & 50.0 &  --   &  --  & --\\
+60.0  & --   &  --   &  --  & --\\  
+90.0  & --   &  --   &  --  & --\\  
+110.0 & --   &  --   &  --  & --\\  
+135.0 & --   &  --   &  --  & --\\  
+150.0 & --   &  --   &  --  & --\\     
+	 	\end{tabular}
+     	\end{column}
+\end{columns}
+% \end{block}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process} 
+{\vspace{0.1cm} \Large LUT and Water Pixels}
+ \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6.5cm} % each column can also be its own environment
+    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
+    	    \vspace{0.2cm}
+    		\centerline{LUT}
+    		\centerline{(Known concentrations)}
+     	\end{column}
+  
+  	\begin{column}[T]{6.5cm} % each column can also be its own environment
+    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
+    	    \vspace{0.2cm}
+    		\centerline{Water Pixels}
+    		\centerline{(Unknown concentrations)}
+     	\end{column}
+\end{columns}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Process} 
+
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+\end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Algorithm} 
+{\vspace{0.05cm} \Large Root Mean Square Error}
+\begin{equation}
+  RMSE(i) = \sqrt{\frac{1}{m}\sum_1^m\left[\widetilde{R}_{rs}(i,\lambda_m)-R_{rs}(\lambda_m)\right]^2} \notag
+\end{equation}
+where:\\
+\vspace{.3cm}
+$\widetilde{R}_{rs}(i,\lambda_m)$: $i$th database spectrum from the LUT\\
+$m$: band number\\
+$R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Algorithm} 
+{\vspace{0.05cm} \Large Non-linear Optimization Routine}
+\vspace{-0.2cm}
+\begin{block}{\bf \texttt{lsqnonlin} in Matlab}
+	Solve nonlinear least-squares problems\\
+	\vspace{.2cm}
+		$\underset{x}{min}\parallel f(x) \parallel^2_2=\underset{x}{min}(f_1(x)^2+f_2(x)^2+f_3(x)^2+...+f_m(x)^2)$\\
+		\vspace{.2cm}
+		with $f$ a vector with $m$ number of bands
+\end{block}
+
+\begin{block}{\bf Syntax:}
+	$[x]~=~lsqnonlin(@MyFn,x_0,LUT,R_{rs},LUTconc)$\\
+		\vspace{-.2cm}
+		$...$\\
+		$f = MyFn(x_0,LUT,R_{rs},LUTconc)$\\
+		$f(x)=R_{rs}-F$\\
+		\vspace{.2cm}
+		where:\\
+		$x_0$: initial concentrations of CPAs\\
+		$R_{rs}$: pixel with unknown concentrations\\
+		$F$: estimated curve from the LUT using {\bf trilinear interpolation}\\
+\end{block}
 \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection{Ground Truth Data Collection}
