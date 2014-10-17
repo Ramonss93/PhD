@@ -195,7 +195,7 @@
 \begin{frame}{\LARGE Landsat 8 - OLI Specifications} 
 \vspace{-.5cm}
 \begin{itemize}
-\LARGE
+\Large
 	\item Optical satellite (passive)
 	\vspace{.2cm}
 	\item Multispectral: 4 VIS, 1 NIR, 2 SWIR, 1 Pan
@@ -213,6 +213,14 @@
 \begin{frame}{\LARGE Landsat 8} 
 \begin{figure}[H]
 		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/ldcmbands.png}
+\end{figure}
+\end{frame}
+
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Landsat 8}{\vspace{0.1cm} \Large Signal-to-Noise Ratio}
+\begin{figure}[htb]
+\centering
+      \includegraphics[height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/L8SNR_2.eps}
 \end{figure}
 \end{frame}
 % --- slide ------------------------------------------------
@@ -295,8 +303,50 @@
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{itemize}
+\Large
+\item Atmospheric correction used for Ocean Color Satellites (i.e. CZCS, MODIS, SeaWiFS) are based in the work done by \cite{Gordon:1994}: ``Retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS: a preliminary algorithm.''
+
+\vspace{.5cm}
+
+\item To estimate $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the visible (VIS) using an estimation of $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the near infrared (NIR).
+\end{itemize}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+
+\begin{block}
+{Apparent reflectance}
+\begin{equation}\label{eq:rho}
+  \rho = \frac{\pi L}{F_o \cos{\theta}}\notag
+\end{equation}
+\end{block}
 
 \end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+
+\begin{equation}\label{eq:rho_t}
+  \rho_t(\lambda) = \rho_r(\lambda) + \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v[\rho_w(\lambda) + \rho_{wc}(\lambda)]\notag
+\end{equation}
+where:\\
+\indent $\rho_t(\lambda)$ is the reflectance at the top of the atmosphere \\
+\indent $\rho_r(\lambda)$ is the reflectance due to multiple scatter by air molecules only (Rayleigh scattering)\\
+\indent $\rho_a(\lambda)$ is the reflectance due to multiple scatter by aerosols only\\
+\indent $\rho_{ra}(\lambda)$ is the reflectance due to the interaction between Rayleigh and aerosol scattering\\
+\indent $T_v(\lambda)$ is the diffuse atmospheric transmittance from the water to the sensor\\
+\indent $\rho_{wc}(\lambda)$ is the reflectance due to solar photons reflecting off the air-water interface (from whitecaps and glint or glitter)\\
+\indent $\rho_w(\lambda)$ is the water-leaving reflectance
+
+
+\end{frame}
+
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method}
+
+
+\end{frame}
+
 % ---------------- Subsection ------------------------------
 \subsection*{Physics Model: Hydrolight}
 % --- slide ------------------------------------------------
@@ -348,7 +398,7 @@
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Model-based ELM} 
 {\vspace{0.1cm} \Large Bright Pixel -- Pseudo-Invariant Features}
-
+\centerline{Landsat Reflectance Product (Landsat-5)}
 \begin{figure}[htb]
   \begin{minipage}[c]{0.48\linewidth}
     \centering
@@ -398,6 +448,27 @@
 \end{figure}
 \vspace{-.5cm}
 ~~~~~~~~~~~~~~~~~~Radiance~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Reflectance
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction} 
+{\Large SWIR Bands Approach}
+
+\cite{Gordon:1994} using SWIR bands
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction} 
+{\Large OLI Algorithm for Case 2 Waters (Blue Band)}
+
+\cite{GeraceThesis}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction} 
+{\Large OLI Algorithm for Case 2 Waters (Band Ratios)}
+
+\cite{GeraceThesis}
+
 \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection{In-Water Constituent Retrieval Process}
@@ -516,8 +587,41 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 % ---------------- Subsection ------------------------------
 \subsection{Ground Truth Data Collection}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Ground Truth Data Collection}
-
+\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  \centering
+	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy1.pdf} 
+  % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Lab Measurements} 
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
 \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection{Validation}
@@ -530,26 +634,70 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 % ---------------- Subsection ------------------------------
 \subsection{Data Collection}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Data Collection}
-
+\begin{frame}{\LARGE Data Collection}{\vspace{0.1cm} \Large 2013 and 2014 Seasons}
+\begin{table}[htb]
+  
+  \centering
+  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Collect1314.png}
+  \label{tab:collect}
+\end{table}
 \end{frame}
-% ---------------- Subsection ------------------------------
-\subsection{Laboratory Measurements}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Laboratory Measurements}
+% % ---------------- Subsection ------------------------------
+% \subsection{Laboratory Measurements}
+% % --- slide ------------------------------------------------
+% \begin{frame}{\LARGE Laboratory Measurements}
 
-\end{frame}
+% \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection{Atmospheric Correction}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}
-
+\vspace{-.5cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/ELMcomparison.eps}
+      
+\end{figure}
+\centerline{Comparison between traditional ELM (dashed lines)}
+\centerline{and model-based ELM (solid lines).}
 \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection{Retrieval}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Retrieval}
+% \vspace{-.3cm}
+\centering
+\begin{figure}[htb]
+\centering
+\includegraphics[trim=200 0 180 0,clip,height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/RetrievalResults.eps}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval}
+% \vspace{-.3cm}
+\centering
+% \begin{figure}[htb]
+% \centering
+% \includegraphics[trim=120 0 130 0,clip,height=3.5cm]{./Images/retrievedvsreal.png}
+%       % /Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_IAGLR
+% \end{figure}
 
+ \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{3cm} % each column can also be its own environment
+    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/chlcomp.eps}	    
+    \end{column}
+  
+  	\begin{column}[T]{3cm} % each column can also be its own environment
+    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/tsscomp.eps}   
+    \end{column}
+
+    \begin{column}[T]{3cm} % each column can also be its own environment
+    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/cdomcomp.eps}	   
+    \end{column}
+\end{columns}
 \end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
@@ -592,5 +740,7 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \end{frame}
 }
 
-% ----------------------------------- Slide ----------------------------------------------
+\bibliographystyle{apalike}
+
+\bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
 \end{document} % EEEEEEEEEEENNNNNNNNNNNNNNDDDDDDDDDDDD
