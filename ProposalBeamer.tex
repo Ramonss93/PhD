@@ -307,18 +307,71 @@
 \Large
 \item Atmospheric correction used for Ocean Color Satellites (i.e. CZCS, MODIS, SeaWiFS) are based in the work done by \cite{Gordon:1994}: ``Retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS: a preliminary algorithm.''
 
-\vspace{.5cm}
-
-\item To estimate $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the visible (VIS) using an estimation of $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the near infrared (NIR).
 \end{itemize}
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
 
+\Large
 \begin{block}
 {Apparent reflectance}
 \begin{equation}\label{eq:rho}
   \rho = \frac{\pi L}{F_o \cos{\theta}}\notag
+\end{equation}
+\end{block}
+where:\\
+\begin{itemize}\itemsep.2cm
+\item{ $L$: upward radiance in the given viewing direction}\\
+\item{ $F_o$: exoatmospheric irradiance}\\
+\item{ $\theta$: solar-zenith angle}
+\end{itemize}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+
+\begin{block}{Reflectance at the TOA}
+\begin{equation}\label{eq:rho_t}
+  \rho_t(\lambda) = \rho_r(\lambda) + \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v[\rho_w(\lambda) + \rho_{wc}(\lambda)]\notag
+\end{equation}
+\end{block}
+
+\begin{itemize}\itemsep.2cm
+\item {$\rho_r(\lambda)$: reflectance due to multiple scatter by air molecules only (Rayleigh scattering)}\\
+
+\item {$\rho_a(\lambda)$: reflectance due to multiple scatter by aerosols only}\\
+
+\item {$\rho_{ra}(\lambda)$: reflectance due to the interaction between Rayleigh and aerosol scattering}\\
+
+\item {$T_v(\lambda)$: diffuse atmospheric transmittance from the water to the sensor}\\
+
+\item {$\rho_{wc}(\lambda)$: glint}\\
+
+\item {$\rho_w(\lambda)$: water-leaving reflectance}
+
+\end{itemize}
+
+\end{frame}
+
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\Large
+\begin{block}{Reflectance at the TOA}
+\begin{equation}\label{eq:rho_t}
+  \rho_t(\lambda) = \rho_r(\lambda) + \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v[\rho_w(\lambda) + \rho_{wc}(\lambda)]\notag
+\end{equation}
+\end{block}
+\vspace{.3cm}
+\begin{itemize}
+	\item{ \cite{Gordon:1994} estimate $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the visible (VIS) using an estimation of $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the near infrared (NIR).}
+\end{itemize}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+
+\begin{block}{Single Scattering Epsilon (SSE) \cite{Gordon:1994}}
+\begin{equation}
+  \varepsilon(\lambda_s,\lambda_l) \equiv \frac{\rho_{as}(\lambda_s)}{\rho_{as}(\lambda_l)} = \frac{\omega_a(\lambda_s)\tau_a(\lambda_s)p_a(\theta_v,\phi_v;\theta_0,\phi_0;\lambda_s)}{\omega_a(\lambda_l)\tau_a(\lambda_l)p_a(\theta_v,\phi_v;\theta_0,\phi_0;\lambda_l)}\notag
 \end{equation}
 \end{block}
 
@@ -326,21 +379,14 @@
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
 
-\begin{equation}\label{eq:rho_t}
-  \rho_t(\lambda) = \rho_r(\lambda) + \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v[\rho_w(\lambda) + \rho_{wc}(\lambda)]\notag
-\end{equation}
-where:\\
-\indent $\rho_t(\lambda)$ is the reflectance at the top of the atmosphere \\
-\indent $\rho_r(\lambda)$ is the reflectance due to multiple scatter by air molecules only (Rayleigh scattering)\\
-\indent $\rho_a(\lambda)$ is the reflectance due to multiple scatter by aerosols only\\
-\indent $\rho_{ra}(\lambda)$ is the reflectance due to the interaction between Rayleigh and aerosol scattering\\
-\indent $T_v(\lambda)$ is the diffuse atmospheric transmittance from the water to the sensor\\
-\indent $\rho_{wc}(\lambda)$ is the reflectance due to solar photons reflecting off the air-water interface (from whitecaps and glint or glitter)\\
-\indent $\rho_w(\lambda)$ is the water-leaving reflectance
-
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=8cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png}
+  \caption{$\varepsilon(\lambda,\lambda_l)$ values in natural logaritmic scale for different aerosol models and relative humidity (Note: image taken from \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
+  % \vspace{0.5cm}
+\end{figure}
 
 \end{frame}
-
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method}
 
