@@ -8,6 +8,7 @@
 	% \usepackage{subcaption}
 	\usepackage{multirow}
 	\usepackage{amsmath}
+	\usepackage[makeroom]{cancel}
 	\usepackage{xcolor} % for colored text
 
 	\usepackage{tikz} % for flow charts
@@ -361,19 +362,50 @@ where:\\
 \end{equation}
 \end{block}
 \vspace{.3cm}
-\begin{itemize}
+\begin{itemize}\itemsep.2cm
 	\item{ \cite{Gordon:1994} estimate $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the visible (VIS) using an estimation of $\rho_a(\lambda) + \rho_{ra}(\lambda)$ in the near infrared (NIR).}
 \end{itemize}
 
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\Large
+\begin{block}{Rayleigh and glint corrected}
+	\begin{equation}
+		 \rho_c(\lambda) = \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v(\lambda)\rho_{w}(\lambda)\notag
+	\end{equation}
+\end{block}	
+
+\begin{block}{Single Scattering Approximation}
+\begin{equation}\label{eq:singleapprox}
+  \rho_a(\lambda)+\cancel{\rho_{ra}(\lambda)} \approx \rho_{as}(\lambda)\notag
+\end{equation}
+\end{block}	
+
+\begin{block}{Black pixel assumption: $\rho_w(\lambda_{NIR}) \approx 0$}
+	\begin{equation}
+		 \rho_c(\lambda_{NIR}) = \rho_{as}(\lambda_{NIR})\notag
+	\end{equation}
+\end{block}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\large
 
 \begin{block}{Single Scattering Epsilon (SSE) \cite{Gordon:1994}}
 \begin{equation}
-  \varepsilon(\lambda_s,\lambda_l) \equiv \frac{\rho_{as}(\lambda_s)}{\rho_{as}(\lambda_l)} = \frac{\omega_a(\lambda_s)\tau_a(\lambda_s)p_a(\theta_v,\phi_v;\theta_0,\phi_0;\lambda_s)}{\omega_a(\lambda_l)\tau_a(\lambda_l)p_a(\theta_v,\phi_v;\theta_0,\phi_0;\lambda_l)}\notag
+  \varepsilon(\lambda_{NIR1},\lambda_{NIR2}) \equiv \frac{\rho_{as}(\lambda_{NIR1})}{\rho_{as}(\lambda_{NIR2})}\notag
 \end{equation}
 \end{block}
+
+
+\begin{block}{For the VIS}
+\begin{equation}\label{eq:rholambda_i}
+  \rho_{as}(\lambda_{VIS}) = \varepsilon(\lambda_{VIS},\lambda_{NIR2})\rho_{as}(\lambda_{NIR2}),
+\end{equation}
+\end{block}
+
 
 \end{frame}
 % --- slide ------------------------------------------------
@@ -382,9 +414,32 @@ where:\\
 \begin{figure}[htb]
   \centering
   \includegraphics[width=8cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png}
-  \caption{$\varepsilon(\lambda,\lambda_l)$ values in natural logaritmic scale for different aerosol models and relative humidity (Note: image taken from \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
+  \caption{$\varepsilon(\lambda,\lambda_{NIR2})$ values in natural logaritmic scale for different aerosol models and relative humidity (Source: \cite{Gordon:1997}). \label{fig:epsilonvslambda} } 
   % \vspace{0.5cm}
 \end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/epsilonvslambdaGordon.png} 
+  \vspace{-0.7cm}
+\end{figure}
+
+% \begin{block}{For several aerosols}
+\begin{gather*}\label{eq:epsilonexp}
+  \varepsilon(\lambda_{VIS},\lambda_{NIR2}) = \frac{\rho_{as}(\lambda_{VIS})}{\rho_{as}(\lambda_{NIR2})} \approx exp[c(\lambda_{VIS}-\lambda_{NIR2})]\notag \\
+  \Rightarrow \rho_{as}(\lambda_i) = exp[c(\lambda_i-\lambda_l)]\rho_{as}(\lambda_l)
+  \notag
+\end{gather*}
+\vspace{-0.3cm}
+where:\\
+\begin{equation}
+  \varepsilon(\lambda_{NIR1},\lambda_{NIR2}) = \frac{\rho_{as}(\lambda_{NIR1})}{\rho_{as}(\lambda_{NIR2})} \approx exp[c(\lambda_{NIR1}-\lambda_{NIR2})]\Rightarrow c \notag
+\end{equation}
+% \end{block}
 
 \end{frame}
 % --- slide ------------------------------------------------
