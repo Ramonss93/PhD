@@ -382,9 +382,9 @@ where:\\
 \end{equation}
 \end{block}	
 
-\begin{block}{Black pixel assumption: $\rho_w(\lambda_{NIR}) \approx 0$}
+\begin{block}{Black Pixel Assumption}
 	\begin{equation}
-		 \rho_c(\lambda_{NIR}) = \rho_{as}(\lambda_{NIR})\notag
+		 \rho_w(\lambda_{NIR}) \approx 0 \Rightarrow \rho_c(\lambda_{NIR}) = \rho_{as}(\lambda_{NIR})\notag
 	\end{equation}
 \end{block}
 
@@ -443,11 +443,36 @@ where:\\
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method}
-
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Assumptions:\\
+		\begin{enumerate}[(a)]\itemsep.2cm
+		\Large
+			\item Brightness in the NIR:  only sun glint and spatially constant ambient NIR component (NIR backscatter in the atmosphere)
+			\item Sun glint in the VIS is linearly related to the brightness in the NIR
+		\end{enumerate}
+	\item Linear relationship: ROIs where sun glint is noticeable, and pixels values would be similar otherwise
+\end{itemize}
 
 \end{frame}
-
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
+\vspace{-.5cm}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=8.5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RegressionHedley.png}
+\end{figure}
+\vspace{-.7cm}
+\hfill \scriptsize (Source: \cite{Hedley:2005})
+% \vspace{-.3cm}
+\large
+\begin{block}{Sun-glint corrected pixel brightness}
+	\begin{equation}\label{eq:deglint}
+	  	R_i' = R_i - b_i(R_{NIR}-min_{NIR})\notag
+	\end{equation}
+\end{block}
+\end{frame}
 % ---------------- Subsection ------------------------------
 \subsection*{Physics Model: Hydrolight}
 % --- slide ------------------------------------------------
@@ -552,23 +577,40 @@ where:\\
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction} 
-{\Large SWIR Bands Approach}
+{\Large SWIR Bands Approach \cite{Wang:2007}}
+\Large
+\begin{itemize}\itemsep.3cm
+	\item For Case 2 or high productive Case 1 waters: 
+	\begin{equation}
+		\rho_w(\lambda_{NIR}) \neq 0\notag
+	\end{equation}
+	
+	\item Solution: \cite{Gordon:1994} method using SWIR bands since $\rho_w(\lambda_{SWIR}) \approx 0$
 
-\cite{Gordon:1994} using SWIR bands
+\end{itemize}
+
+\large
+\begin{block}{SSE}
+	\begin{equation}
+	  	\varepsilon(\lambda_{SWIR1},\lambda_{SWIR2}) = \frac{\rho_{as}(\lambda_{SWIR1})}{\rho_{as}(\lambda_{SWIR2})} \approx exp[c(\lambda_{SWIR1}-\lambda_{SWIR2})]\notag
+	\end{equation}
+\end{block}
+
+
 
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction} 
-{\Large OLI Algorithm for Case 2 Waters (Blue Band)}
+{\Large Blue Band \cite{GeraceThesis}}
 
-\cite{GeraceThesis}
+
 
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction} 
-{\Large OLI Algorithm for Case 2 Waters (Band Ratios)}
+{\Large Band Ratios \cite{GeraceThesis}}
 
-\cite{GeraceThesis}
+
 
 \end{frame}
 % ---------------- Subsection ------------------------------
@@ -583,7 +625,24 @@ where:\\
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large LUT -- Hydrolight}
-IOPs
+\Large
+\begin{itemize}\itemsep.4cm
+\item Case 2 algorithm: 4 component models
+
+\item Inputs:
+	\begin{itemize}\itemsep.2cm
+	\Large
+		\item IOPs from the field
+
+		\item Illumination conditions
+	\end{itemize}
+
+\item Output:
+	\begin{itemize}\itemsep.2cm
+	\Large
+		\item{ $R_{rs}$}
+	\end{itemize}
+\end{itemize}
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Constituent Retrieval Process}
