@@ -1,18 +1,22 @@
-	\documentclass{beamer}
-	\usepackage[latin1]{inputenc}
-	\usepackage{textpos}
-	\usepackage{graphics}
-	\usepackage[english]{babel}
-	\usepackage{colortbl}
-	\usepackage{caption}
-	% \usepackage{subcaption}
-	\usepackage{multirow}
-	\usepackage{amsmath}
-	\usepackage[makeroom]{cancel}
-	\usepackage{xcolor} % for colored text
+\documentclass{beamer}
+\usepackage[latin1]{inputenc}
+\usepackage{textpos}
 
-	\usepackage{tikz} % for flow charts
-	\usetikzlibrary{shapes,arrows,positioning,shadows,calc}
+\usepackage{graphics}
+% \usepackage[demo]{graphicx}
+\usepackage{adjustbox}
+
+\usepackage[english]{babel}
+\usepackage{colortbl}
+\usepackage{caption}
+% \usepackage{subcaption}
+\usepackage{multirow}
+\usepackage{amsmath}
+\usepackage[makeroom]{cancel}
+\usepackage{xcolor} % for colored text
+
+\usepackage{tikz} % for flow charts
+\usetikzlibrary{shapes,arrows,positioning,shadows,calc}
 
 \usepackage{filecontents}% http://ctan.org/pkg/filecontents
 \usepackage{silence}% http://ctan.org/pkg/silence
@@ -900,7 +904,26 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \subsection{Validation}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Validation}
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Atmospheric Correction: Compare with results in SeaDAS (future release)\\
+    	\begin{minipage}[t]{\linewidth}
+          	\centering
+          	\adjustbox{valign=t}{%
+				\includegraphics[height=1cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/SeaDAS_splash.png}
+			}
+		% \medskip
+    	\end{minipage}
+	\item Retrieval: Compare with Ocean Optics products. Example: MODIS chl-{\it a} product\\
+		\begin{minipage}[t]{\linewidth}
+          	\centering
+          	\adjustbox{valign=t}{%
+				\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
+			}
+		% \medskip
+    	\end{minipage}			
 
+\end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Preliminary Results}
@@ -924,20 +947,20 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 % ---------------- Subsection ------------------------------
 \subsection{Atmospheric Correction}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Model-Based ELM}
 \vspace{-.5cm}
 \begin{figure}[htb]
 \centering
 \includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/ELMcomparison.eps}
-      
 \end{figure}
+\vspace{-.4cm}
 \centerline{Comparison between traditional ELM (dashed lines)}
 \centerline{and model-based ELM (solid lines).}
 \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection{Retrieval}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval}
+\begin{frame}{\LARGE Retrieval}{\vspace{.1cm} \Large Using RMSE}
 % \vspace{-.3cm}
 \centering
 \begin{figure}[htb]
@@ -950,14 +973,7 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Retrieval}
-% \vspace{-.3cm}
 \centering
-% \begin{figure}[htb]
-% \centering
-% \includegraphics[trim=120 0 130 0,clip,height=3.5cm]{./Images/retrievedvsreal.png}
-%       % /Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_IAGLR
-% \end{figure}
-
  \begin{columns}[c] % contents are top vertically aligned
   	\begin{column}[T]{3cm} % each column can also be its own environment
     \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/chlcomp.eps}	    
@@ -971,25 +987,116 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
     \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/cdomcomp.eps}	   
     \end{column}
 \end{columns}
+\vspace{1cm}
+\centerline{For one day and one study area}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Work Published}
+
+\large
+\begin{itemize}\itemsep.4cm
+	\item Concha, J.A., Schott, J.R. (2014). ``A model-based ELM for atmospheric correction over Case 2 water with Landsat 8'', International Society for Optics and Photonics (SPIE) Defense, Security, and Sensing 2014 SPIE Conference, Baltimore, MD, USA, April, 2014\\
+
+	\item Concha, J.A., Schott, J.R. (2014). ``In-water component retrieval over Case 2 water using Landsat-8: initial results.'' IEEE International Geoscience and Remote Sensing Symposium (IGARSS), Quebec, Canada, July, 2014
+\end{itemize}
+
 \end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-\subsection*{Conclusions}
+\section{Conclusions and Future Work}
+\subsection*{Conclusions and Future Work}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Conclusions}
 
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Current retrieval algorithm depends on IOPs from the field. Not always available
+
+	\item LUT in Hydrolight: Highly dependent in phase function
+
+	\item Obtain field data for Landsat-8 is difficult, mainly for weather conditions
+\end{itemize}
+
 \end{frame}
-% \section*{}
-% \begin{frame}%[shrink=30] 
-% \tiny
-%   \frametitle{References}
-%   \nocite{*}
-%   \bibliographystyle{apalike}
-%   \bibliography{HLbeamerbib}
-% \end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Future Work}
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Fix LUT creation in Hydrolight to have a better agreement between the model and field data
 
-%% ----------------------------------- Slide ----------------------------------------------
+	\item Retrieval applied to more days in the area of study
 
+	\item Atmospheric Correction: Use \cite{Gordon:1994} methods with SWIR bands, and Blue Band and Band Ratio \cite{GeraceThesis}
+
+\end{itemize}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Future Work (con't)}
+\Large
+\begin{itemize}\itemsep.4cm
+
+	\item Applied Optimization routine for 4-D LUT
+
+	\item Comparison and Validation
+
+	\item Try in different area of study
+
+	\item Journal articles for atmospheric correction and retrieval
+
+\end{itemize}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Timeline}
+\small
+\begin{tabular*}{\textwidth}{l l}
+\hline
+        		\bfseries{Estimated Time}  	& \bfseries{Description} \\ 
+\hline \hline
+
+1 month   &  	\parbox[t]{7cm}{Fix LUT creation:\\
+				} \\
+\hline
+1 month   & 	\parbox[t]{7cm}{Retrieval applied to more days:\\
+				- Use images from 2013 and 2014 season\\
+				- More points to have better stats} \\
+\hline
+1 month   & 	\parbox[t]{7cm}{Atmospheric Correction:\\
+				- Apply \cite{Gordon:1994} method\\
+				- Apply \cite{GeraceThesis} method} \\
+\hline
+1 month   & 	\parbox[t]{7cm}{Optimization Routine for 4-D LUT:\\
+				} \\
+\hline \hline
+
+     
+\end{tabular*}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Timeline (con't)}
+\small
+\begin{tabular*}{\textwidth}{l l}
+\hline
+        		\bfseries{Estimated Time}  	& \bfseries{Description} \\ 
+\hline \hline
+1 month   & 	\parbox[t]{7cm}{Validation:\\
+				} \\
+\hline
+1 month   & 	\parbox[t]{7cm}{Apply retrieval in different are of study:\\
+				} \\
+\hline
+1 month   & 	\parbox[t]{7cm}{Write Thesis and Journal:\\
+				- Include final results\\
+				} \\
+\hline \hline
+
+     
+\end{tabular*}
+
+\end{frame}
+
+% --- slide ------------------------------------------------
 {	
 \setbeamertemplate{footline}{} 
 \setbeamertemplate{headline}{}
@@ -1012,8 +1119,17 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 
 \end{frame}
 }
+% % BIBLIOGRAPHY
+% \bibliographystyle{apalike}
 
-\bibliographystyle{apalike}
-
-\bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
+% \bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
+% --- slide ------------------------------------------------
+\section*{}
+\begin{frame}%[shrink=30] 
+\tiny
+  \frametitle{References}
+  \nocite{*}
+  \bibliographystyle{apalike}
+  \bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
+\end{frame}
 \end{document} % EEEEEEEEEEENNNNNNNNNNNNNNDDDDDDDDDDDD
