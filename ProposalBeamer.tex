@@ -303,7 +303,7 @@
 \end{columns}
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods}
 \begin{itemize}
 \Large
 \item Atmospheric correction used for Ocean Color Satellites (i.e. CZCS, MODIS, SeaWiFS) are based in the work done by \cite{Gordon:1994}: ``Retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS: a preliminary algorithm.''
@@ -311,7 +311,7 @@
 \end{itemize}
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
 \Large
 \begin{block}
@@ -328,7 +328,7 @@ where:\\
 \end{itemize}
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
 \begin{block}{Reflectance at the TOA}
 \begin{equation}\label{eq:rho_t}
@@ -354,7 +354,7 @@ where:\\
 \end{frame}
 
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 \Large
 \begin{block}{Reflectance at the TOA}
 \begin{equation}\label{eq:rho_t}
@@ -368,7 +368,7 @@ where:\\
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 \Large
 \begin{block}{Rayleigh and glint corrected}
 	\begin{equation}
@@ -390,7 +390,7 @@ where:\\
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 \large
 
 \begin{block}{Single Scattering Epsilon (SSE) \cite{Gordon:1994}}
@@ -402,14 +402,14 @@ where:\\
 
 \begin{block}{For the VIS}
 \begin{equation}\label{eq:rholambda_i}
-  \rho_{as}(\lambda_{VIS}) = \varepsilon(\lambda_{VIS},\lambda_{NIR2})\rho_{as}(\lambda_{NIR2}),
+  \rho_{as}(\lambda_{VIS}) = \varepsilon(\lambda_{VIS},\lambda_{NIR2})\rho_{as}(\lambda_{NIR2})\notag
 \end{equation}
 \end{block}
 
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
 \begin{figure}[htb]
   \centering
@@ -420,7 +420,7 @@ where:\\
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Gordon and Wang Methods}
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
 \begin{figure}[htb]
   \centering
@@ -442,6 +442,56 @@ where:\\
 % \end{block}
 
 \end{frame}
+
+
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Ruddick:2000bs} Methods}
+\vspace{-.5cm}
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Based on \cite{Gordon:1994}, but for Case 2 or high productive Case 1 waters since $\rho_w(\lambda_{NIR}) \neq 0$
+
+	\item Two assumptions:
+	\begin{enumerate}[1)]\itemsep.2cm
+	\large
+		\item  The ratio of multiple-scattering aerosols and aerosol-Rayleigh in the NIR:\\
+			$\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})\equiv \frac{\displaystyle \rho_{a}(\lambda_{NIR1})+\rho_{ra}(\lambda_{NIR1})}{\displaystyle \rho_{a}(\lambda_{NIR2})+\rho_{ra}(\lambda_{NIR2})}$\\
+			is spatially homogeneous and fixed
+
+  		\item The calibration parameter:\\
+  			$\alpha \equiv \frac{\displaystyle \rho_w(\lambda_{NIR1})/T_0(\lambda_{NIR1})}{\displaystyle \rho_w(\lambda_{NIR2})/T_0(\lambda_{NIR2})}$\\
+  			is spatially homogeneous and fixed
+	\end{enumerate}
+\end{itemize}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Ruddick:2000bs} Methods (con't)}
+\Large
+Then:
+\begin{equation}
+  \rho_{a}(\lambda_{NIR1})+\rho_{ra}(\lambda_{NIR1}) = \frac{\alpha\rho_c(\lambda_{NIR2})-\rho_c(\lambda_{NIR1})}{\alpha-\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})}\notag
+\end{equation}
+and
+\begin{gather*}
+  \rho_{a}(\lambda_{NIR2})+\rho_{ra}(\lambda_{NIR2})=~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ \notag\\
+  	~~~~~~~~~~~~~ \varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})\left[\frac{\alpha\rho_c(\lambda_{NIR2})-\rho_c(\lambda_{NIR1})}{\alpha-\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})}\right]\notag
+\end{gather*}
+where: $\rho_c$: Rayleigh-corrected reflectance
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Ruddick:2000bs} Methods (con't)}
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RuddickPlot.png}
+\end{figure}
+\vspace{-.4cm}
+\hfill \scriptsize (Source: \cite{Ruddick:2000bs})\\
+\vspace{.2cm}
+\Large
+\cite{Ruddick:2000bs} suggest $\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})$ from plot and $\alpha=1.72$
+\end{frame}
+
+
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
 \Large
@@ -602,15 +652,78 @@ where:\\
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction} 
 {\Large Blue Band \cite{GeraceThesis}}
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Combination of spectral matching and \cite{Gordon:1994} techniques
 
+	\item Requirement: $\varepsilon(\lambda_{Coastal},\lambda_{SWIR1})\cong constant$ (not always true!)
+
+	\item No for highly turbid water due to variability in Coastal band
+
+	\item Use only bands whose histogram are Gaussian
+\end{itemize}	
 
 
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction} 
+{\Large Blue Band \cite{GeraceThesis} (con't)}
+\Large
+\begin{enumerate}[1)]\itemsep.4cm
+	\item Create 3-D LUT using Hydrolight. Range: $R_{rs}$
+
+	\item 4-D LUT: propagate 3-D LUT using MODTRAN for a range of visibilities. Range: sensor-reaching radiances
+\end{enumerate}
+
+\begin{figure}[htb]
+  \centering
+  \includegraphics[width=9cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/4DLUT.png}
+\end{figure}
+\vspace{-.7cm}
+\hfill \scriptsize (Source: \cite{GeraceThesis})
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction} 
+{\Large Blue Band \cite{GeraceThesis} (con't)}
+\Large
+\begin{enumerate}[3)]\itemsep.4cm
+	\item Visibility initial guess: 
+		\begin{itemize}\itemsep.2cm
+		\large
+			\item Find closest match in the 4-D LUT for an imaged water pixel
+
+			\item Fix concentrations associated with this match
+
+			\item Compare $\varepsilon(\lambda_{Coastal},\lambda_{SWIR1})$ from imaged pixel with 4-D LUT $\varepsilon(\lambda_{Coastal},\lambda_{SWIR1})$ for different visibilities with the fixed concentrations
+
+			\item Select closest match as initial visibility estimate
+		\end{itemize}
+
+	\item Interpolation using an Optimization routine from the imaged pixel with the fixed visibility
+\end{enumerate}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction} 
 {\Large Band Ratios \cite{GeraceThesis}}
+\large
+\begin{itemize}\itemsep.4cm
+	\item To use \cite{Ruddick:2000bs} approach with NIR and SWIR2 bands for calculating $\varepsilon(\lambda_{NIR},\lambda_{SWIR1})$ instead of NIR bands (SeaWiFS)
 
+	\item Two assumptions:
+	\begin{enumerate}[1)]\itemsep.2cm
+	\large
+		\item  The ratio of multiple-scattering aerosols and aerosol-Rayleigh in the NIR:\\
+			$\varepsilon_m(\lambda_{NIR},\lambda_{SWIR1})\equiv \frac{\displaystyle \rho_{a}(\lambda_{NIR})+\rho_{ra}(\lambda_{NIR})}{\displaystyle \rho_{a}(\lambda_{SWIR1})+\rho_{ra}(\lambda_{SWIR1})}$\\
+			is spatially homogeneous and fixed
 
+  		\item The calibration parameter:\\
+  			$\alpha \equiv \frac{\displaystyle \rho_w(\lambda_{NIR})/T_0(\lambda_{NIR})}{\displaystyle \rho_w(\lambda_{SWIR1})/T_0(\lambda_{SWIR1})}$\\
+  			is spatially homogeneous and fixed
+	\end{enumerate}
+
+\end{itemize}
 
 \end{frame}
 % ---------------- Subsection ------------------------------
@@ -624,17 +737,17 @@ where:\\
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large LUT -- Hydrolight}
+\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large 3-D LUT -- Hydrolight}
 \Large
 \begin{itemize}\itemsep.4cm
-\item Case 2 algorithm: 4 component models
+\item Case 2 model:  four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model
 
 \item Inputs:
 	\begin{itemize}\itemsep.2cm
 	\Large
 		\item IOPs from the field
 
-		\item Illumination conditions
+		\item Illumination conditions (time, zenith angle, day of the year, etc.)
 	\end{itemize}
 
 \item Output:
