@@ -192,8 +192,16 @@
 \item Demo process to a different study site
 \end{itemize}
 \end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Process} 
+
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+\end{figure}
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Background and Theory}
+\section{Background and Literature Overview}
 % ---------------- Subsection ------------------------------
 \subsection*{Landsat-8}
 % --- slide ------------------------------------------------
@@ -310,7 +318,7 @@
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods}
 \begin{itemize}
 \Large
-\item Atmospheric correction used for Ocean Color Satellites (i.e. CZCS, MODIS, SeaWiFS) are based in the work done by \cite{Gordon:1994}: ``Retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS: a preliminary algorithm.''
+\item Atmospheric correction used for Ocean Color Satellites (i.e. CZCS, MODIS, SeaWiFS) are based on the work done by \cite{Gordon:1994}: ``Retrieval of water-leaving radiance and aerosol optical thickness over the oceans with SeaWiFS: a preliminary algorithm.''
 
 \end{itemize}
 \end{frame}
@@ -435,7 +443,7 @@ where:\\
 % \begin{block}{For several aerosols}
 \begin{gather*}\label{eq:epsilonexp}
   \varepsilon(\lambda_{VIS},\lambda_{NIR2}) = \frac{\rho_{as}(\lambda_{VIS})}{\rho_{as}(\lambda_{NIR2})} \approx exp[c(\lambda_{VIS}-\lambda_{NIR2})]\notag \\
-  \Rightarrow \rho_{as}(\lambda_i) = exp[c(\lambda_i-\lambda_l)]\rho_{as}(\lambda_l)
+  \Rightarrow \rho_{as}(\lambda_{VIS}) = exp[c(\lambda_{VIS}-\lambda_{NIR2})]\rho_{as}(\lambda_{NIR2})
   \notag
 \end{gather*}
 \vspace{-0.3cm}
@@ -496,37 +504,8 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 \end{frame}
 
 
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Assumptions:\\
-		\begin{enumerate}[(a)]\itemsep.2cm
-		\Large
-			\item Brightness in the NIR:  only sun glint and spatially constant ambient NIR component (NIR backscatter in the atmosphere)
-			\item Sun glint in the VIS is linearly related to the brightness in the NIR
-		\end{enumerate}
-	\item Linear relationship: ROIs where sun glint is noticeable, and pixels values would be similar otherwise
-\end{itemize}
 
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
-\vspace{-.5cm}
-\begin{figure}[!ht]
-  \centering
-  \includegraphics[width=8.5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RegressionHedley.png}
-\end{figure}
-\vspace{-.7cm}
-\hfill \scriptsize (Source: \cite{Hedley:2005})
-% \vspace{-.3cm}
-\large
-\begin{block}{Sun-glint corrected pixel brightness}
-	\begin{equation}\label{eq:deglint}
-	  	R_i' = R_i - b_i(R_{NIR}-min_{NIR})\notag
-	\end{equation}
-\end{block}
-\end{frame}
+
 % ---------------- Subsection ------------------------------
 \subsection*{Physics Model: Hydrolight}
 % --- slide ------------------------------------------------
@@ -537,8 +516,14 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 \end{figure}
 \hspace{5cm}{$*~$IOPs: Inherent Optical Properties}
 \end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Hydrolight} 
+
+Include more features of Hydrolight
+
+\end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Methodology and Approach}
+\section{Work Completed}
 % ---------------- Subsection ------------------------------
 \subsection*{Retrieval Process}
 % --- slide ------------------------------------------------
@@ -550,7 +535,7 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 
 \end{frame}
 % ---------------- Subsection ------------------------------
-\subsection{Over-Water Atmospheric Correction}
+\subsection*{Over-Water Atmospheric Correction}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Over-Water Atmospheric Correction}{\Large Model-Based ELM}
 
@@ -630,6 +615,299 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 ~~~~~~~~~~~~~~~~~~Radiance~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Reflectance
 \end{frame}
 % --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process} 
+{\vspace{0.1cm} \Large Water Pixel Reflectances}
+\begin{figure}
+\centering
+    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
+\end{figure}
+
+\vspace{0.2cm}
+\centerline{Water Pixels}
+\centerline{(Unknown concentrations)}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Model-Based ELM}
+\vspace{-.5cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/ELMcomparison.eps}
+\end{figure}
+\vspace{-.4cm}
+\centerline{Comparison between traditional ELM (dashed lines)}
+\centerline{and model-based ELM (solid lines).}
+\end{frame}
+% ---------------- Subsection ------------------------------
+\subsection*{In-Water Constituent Retrieval Process}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Process} 
+
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+\end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large 3-D LUT -- Hydrolight}
+\Large
+\begin{itemize}\itemsep.4cm
+\item Case 2 model:  four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model
+
+\item Inputs:
+	\begin{itemize}\itemsep.2cm
+	\Large
+		\item IOPs from the field
+
+		\item Illumination conditions (time, zenith angle, day of the year, etc.)
+	\end{itemize}
+
+\item Output:
+	\begin{itemize}\itemsep.2cm
+	\Large
+		\item{ $R_{rs}$}
+	\end{itemize}
+\end{itemize}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process}
+{\vspace{0.1cm} \Large LUT -- Hydrolight}
+% \begin{block}{\footnotesize LUT}
+  \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  	\vspace{0.2cm}
+    	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
+    	    \vspace{0.2cm}
+    		\centerline{LUT}
+    		\centerline{(Known concentrations)}
+    \end{column}
+  	% \hspace{1cm}
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+  	\vspace{1cm}
+	\tiny \addtolength{\tabcolsep}{-5pt}
+		\begin{tabular}{c|c|c|c|c}
+        		\bfseries{$<CHL>$}  	& \bfseries{$<SM>$}  & \bfseries{$a_{CDOM}(440)$} & \bfseries{$Backscatter$} & IOPs Input\\
+		$[ug/L]$  		& $[mg/L]$ & 	$[1/m]$ &	\bfseries{$Fraction$}, $[\%]$	\\ \hline \hline
+0.1   & 1.0  &  0.11 &  0.5 & ONTNS\\
+0.5   & 2.0  &  0.15 &  1.0 & LONGS\\
+1.0   & 5.0  &  0.21 &  1.5 & --\\
+3.0   & 10.0 &  0.6  &  2.0 & --\\
+10.0  & 25.0 &  1.0  &  --  & --\\
+20.0  & 45.0 &  1.2  &  --  & --\\
+40.0  & 50.0 &  --   &  --  & --\\
+60.0  & --   &  --   &  --  & --\\  
+90.0  & --   &  --   &  --  & --\\  
+110.0 & --   &  --   &  --  & --\\  
+135.0 & --   &  --   &  --  & --\\  
+150.0 & --   &  --   &  --  & --\\     
+	 	\end{tabular}
+     	\end{column}
+\end{columns}
+% \end{block}
+\end{frame}
+
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Process} 
+
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+\end{figure}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Constituent Retrieval Process} 
+{\vspace{0.1cm} \Large LUT and Water Pixels}
+ \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6.5cm} % each column can also be its own environment
+    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
+    	    \vspace{0.2cm}
+    		\centerline{LUT}
+    		\centerline{(Known concentrations)}
+     	\end{column}
+  
+  	\begin{column}[T]{6.5cm} % each column can also be its own environment
+    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
+    	    \vspace{0.2cm}
+    		\centerline{Water Pixels}
+    		\centerline{(Unknown concentrations)}
+     	\end{column}
+\end{columns}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Algorithm} 
+{\vspace{0.05cm} \Large Root Mean Square Error}
+\begin{equation}
+  RMSE(i) = \sqrt{\frac{1}{m}\sum_1^m\left[\widetilde{R}_{rs}(i,\lambda_m)-R_{rs}(\lambda_m)\right]^2} \notag
+\end{equation}
+where:\\
+\vspace{.3cm}
+$\widetilde{R}_{rs}(i,\lambda_m)$: $i$th database spectrum from the LUT\\
+$m$: band number\\
+$R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Algorithm} 
+{\vspace{0.05cm} \Large Non-linear Optimization Routine}
+\vspace{-0.2cm}
+\begin{block}{\bf \texttt{lsqnonlin} in Matlab}
+	Solve nonlinear least-squares problems\\
+	\vspace{.2cm}
+		$\underset{x}{min}\parallel f(x) \parallel^2_2=\underset{x}{min}(f_1(x)^2+f_2(x)^2+f_3(x)^2+...+f_m(x)^2)$\\
+		\vspace{.2cm}
+		with $f$ a vector with $m$ number of bands
+\end{block}
+
+\begin{block}{\bf Syntax:}
+	$[x]~=~lsqnonlin(@MyFn,x_0,LUT,R_{rs},LUTconc)$\\
+		\vspace{-.2cm}
+		$...$\\
+		$f = MyFn(x_0,LUT,R_{rs},LUTconc)$\\
+		$f(x)=R_{rs}-F$\\
+		\vspace{.2cm}
+		where:\\
+		$x_0$: initial concentrations of CPAs\\
+		$R_{rs}$: pixel with unknown concentrations\\
+		$F$: estimated curve from the LUT using {\bf trilinear interpolation}\\
+\end{block}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval}{\vspace{.1cm} \Large Concentration Maps Using RMSE}
+% \vspace{-.3cm}
+\centering
+\begin{figure}[htb]
+\centering
+\includegraphics[trim=200 0 180 0,clip,height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/RetrievalResults.eps}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval}{\vspace{.1cm} \Large Measured VS Retrieved Concentrations}
+\centering
+ \begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{3cm} % each column can also be its own environment
+    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/chlcomp.eps}	    
+    \end{column}
+  
+  	\begin{column}[T]{3cm} % each column can also be its own environment
+    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/tsscomp.eps}   
+    \end{column}
+
+    \begin{column}[T]{3cm} % each column can also be its own environment
+    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/cdomcomp.eps}	   
+    \end{column}
+\end{columns}
+\vspace{1cm}
+\centerline{Note: Just for one day and one study area!}
+\end{frame}
+% ---------------- Subsection ------------------------------
+\subsection*{Ground Truth Data Collection}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  \centering
+	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy1.pdf} 
+  % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\Large Lab Measurements} 
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large 2013 and 2014 Seasons}
+\begin{table}[htb]
+  
+  \centering
+  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Collect1314.png}
+  \label{tab:collect}
+\end{table}
+\end{frame}
+% % ---------------- Subsection ------------------------------
+% \subsection{Laboratory Measurements}
+% % --- slide ------------------------------------------------
+% \begin{frame}{\LARGE Laboratory Measurements}
+
+% \end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Work Published}
+
+\large
+\begin{itemize}\itemsep.4cm
+	\item Concha, J.A., Schott, J.R. (2014). ``A model-based ELM for atmospheric correction over Case 2 water with Landsat 8'', International Society for Optics and Photonics (SPIE) Defense, Security, and Sensing 2014 SPIE Conference, Baltimore, MD, USA, April, 2014\\
+
+	\item Concha, J.A., Schott, J.R. (2014). ``In-water component retrieval over Case 2 water using Landsat-8: initial results.'' IEEE International Geoscience and Remote Sensing Symposium (IGARSS), Quebec, Canada, July, 2014
+\end{itemize}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Future Work}
+% ---------------- Subsection ------------------------------
+\subsection*{Atmospheric Correction}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
+\Large
+Include glint image
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Assumptions:\\
+		\begin{enumerate}[(a)]\itemsep.2cm
+		\Large
+			\item Brightness in the NIR:  only sun glint and spatially constant ambient NIR component (NIR backscatter in the atmosphere)
+			\item Sun glint in the VIS is linearly related to the brightness in the NIR
+		\end{enumerate}
+	\item Linear relationship: ROIs where sun glint is noticeable, and pixels values would be similar otherwise
+\end{itemize}
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
+\vspace{-.5cm}
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=8.5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/RegressionHedley.png}
+\end{figure}
+\vspace{-.7cm}
+\hfill \scriptsize (Source: \cite{Hedley:2005})
+% \vspace{-.3cm}
+\large
+\begin{block}{Sun-glint corrected pixel brightness}
+	\begin{equation}\label{eq:deglint}
+	  	R_i' = R_i - b_i(R_{NIR}-min_{NIR})\notag
+	\end{equation}
+\end{block}
+\end{frame}
+% --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction} 
 {\Large SWIR Bands Approach \cite{Wang:2007}}
 \Large
@@ -649,8 +927,6 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 	  	\varepsilon(\lambda_{SWIR1},\lambda_{SWIR2}) = \frac{\rho_{as}(\lambda_{SWIR1})}{\rho_{as}(\lambda_{SWIR2})} \approx exp[c(\lambda_{SWIR1}-\lambda_{SWIR2})]\notag
 	\end{equation}
 \end{block}
-
-
 
 \end{frame}
 % --- slide ------------------------------------------------
@@ -731,177 +1007,7 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 
 \end{frame}
 % ---------------- Subsection ------------------------------
-\subsection{In-Water Constituent Retrieval Process}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
-
-\begin{figure}[H]
-		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
-\end{figure}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large 3-D LUT -- Hydrolight}
-\Large
-\begin{itemize}\itemsep.4cm
-\item Case 2 model:  four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model
-
-\item Inputs:
-	\begin{itemize}\itemsep.2cm
-	\Large
-		\item IOPs from the field
-
-		\item Illumination conditions (time, zenith angle, day of the year, etc.)
-	\end{itemize}
-
-\item Output:
-	\begin{itemize}\itemsep.2cm
-	\Large
-		\item{ $R_{rs}$}
-	\end{itemize}
-\end{itemize}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process}
-{\vspace{0.1cm} \Large LUT -- Hydrolight}
-% \begin{block}{\footnotesize LUT}
-  \begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-  	\vspace{0.2cm}
-    	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
-    	    \vspace{0.2cm}
-    		\centerline{LUT}
-    		\centerline{(Known concentrations)}
-    \end{column}
-  	% \hspace{1cm}
-  	\begin{column}[T]{6cm} % each column can also be its own environment
-  	\vspace{1cm}
-	\tiny \addtolength{\tabcolsep}{-5pt}
-		\begin{tabular}{c|c|c|c|c}
-        		\bfseries{$<CHL>$}  	& \bfseries{$<SM>$}  & \bfseries{$a_{CDOM}(440)$} & \bfseries{$Backscatter$} & IOPs Input\\
-		$[ug/L]$  		& $[mg/L]$ & 	$[1/m]$ &	\bfseries{$Fraction$}, $[\%]$	\\ \hline \hline
-0.1   & 1.0  &  0.11 &  0.5 & ONTNS\\
-0.5   & 2.0  &  0.15 &  1.0 & LONGS\\
-1.0   & 5.0  &  0.21 &  1.5 & --\\
-3.0   & 10.0 &  0.6  &  2.0 & --\\
-10.0  & 25.0 &  1.0  &  --  & --\\
-20.0  & 45.0 &  1.2  &  --  & --\\
-40.0  & 50.0 &  --   &  --  & --\\
-60.0  & --   &  --   &  --  & --\\  
-90.0  & --   &  --   &  --  & --\\  
-110.0 & --   &  --   &  --  & --\\  
-135.0 & --   &  --   &  --  & --\\  
-150.0 & --   &  --   &  --  & --\\     
-	 	\end{tabular}
-     	\end{column}
-\end{columns}
-% \end{block}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process} 
-{\vspace{0.1cm} \Large LUT and Water Pixels}
- \begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{6.5cm} % each column can also be its own environment
-    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
-    	    \vspace{0.2cm}
-    		\centerline{LUT}
-    		\centerline{(Known concentrations)}
-     	\end{column}
-  
-  	\begin{column}[T]{6.5cm} % each column can also be its own environment
-    \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
-    	    \vspace{0.2cm}
-    		\centerline{Water Pixels}
-    		\centerline{(Unknown concentrations)}
-     	\end{column}
-\end{columns}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
-
-\begin{figure}[H]
-		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
-\end{figure}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Algorithm} 
-{\vspace{0.05cm} \Large Root Mean Square Error}
-\begin{equation}
-  RMSE(i) = \sqrt{\frac{1}{m}\sum_1^m\left[\widetilde{R}_{rs}(i,\lambda_m)-R_{rs}(\lambda_m)\right]^2} \notag
-\end{equation}
-where:\\
-\vspace{.3cm}
-$\widetilde{R}_{rs}(i,\lambda_m)$: $i$th database spectrum from the LUT\\
-$m$: band number\\
-$R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Algorithm} 
-{\vspace{0.05cm} \Large Non-linear Optimization Routine}
-\vspace{-0.2cm}
-\begin{block}{\bf \texttt{lsqnonlin} in Matlab}
-	Solve nonlinear least-squares problems\\
-	\vspace{.2cm}
-		$\underset{x}{min}\parallel f(x) \parallel^2_2=\underset{x}{min}(f_1(x)^2+f_2(x)^2+f_3(x)^2+...+f_m(x)^2)$\\
-		\vspace{.2cm}
-		with $f$ a vector with $m$ number of bands
-\end{block}
-
-\begin{block}{\bf Syntax:}
-	$[x]~=~lsqnonlin(@MyFn,x_0,LUT,R_{rs},LUTconc)$\\
-		\vspace{-.2cm}
-		$...$\\
-		$f = MyFn(x_0,LUT,R_{rs},LUTconc)$\\
-		$f(x)=R_{rs}-F$\\
-		\vspace{.2cm}
-		where:\\
-		$x_0$: initial concentrations of CPAs\\
-		$R_{rs}$: pixel with unknown concentrations\\
-		$F$: estimated curve from the LUT using {\bf trilinear interpolation}\\
-\end{block}
-\end{frame}
-% ---------------- Subsection ------------------------------
-\subsection{Ground Truth Data Collection}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
-\begin{figure}[htb]
-  \centering
-	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy1.pdf} 
-  % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
-\begin{figure}[htb]
-  	\centering
-  	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}
-\vspace{-1cm}
-\begin{figure}[htb]
-\centering
-\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Lab Measurements} 
-\vspace{-1cm}
-\begin{figure}[htb]
-\centering
-\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% ---------------- Subsection ------------------------------
-\subsection{Validation}
+\subsection*{Validation}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Validation}
 \Large
@@ -926,84 +1032,8 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \end{itemize}
 \end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Preliminary Results}
-% ---------------- Subsection ------------------------------
-\subsection{Data Collection}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Data Collection}{\vspace{0.1cm} \Large 2013 and 2014 Seasons}
-\begin{table}[htb]
-  
-  \centering
-  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Collect1314.png}
-  \label{tab:collect}
-\end{table}
-\end{frame}
-% % ---------------- Subsection ------------------------------
-% \subsection{Laboratory Measurements}
-% % --- slide ------------------------------------------------
-% \begin{frame}{\LARGE Laboratory Measurements}
-
-% \end{frame}
-% ---------------- Subsection ------------------------------
-\subsection{Atmospheric Correction}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Model-Based ELM}
-\vspace{-.5cm}
-\begin{figure}[htb]
-\centering
-\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/ELMcomparison.eps}
-\end{figure}
-\vspace{-.4cm}
-\centerline{Comparison between traditional ELM (dashed lines)}
-\centerline{and model-based ELM (solid lines).}
-\end{frame}
-% ---------------- Subsection ------------------------------
-\subsection{Retrieval}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval}{\vspace{.1cm} \Large Using RMSE}
-% \vspace{-.3cm}
-\centering
-\begin{figure}[htb]
-\centering
-\includegraphics[trim=200 0 180 0,clip,height=8cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_RITResearchSymposium/Images/RetrievalResults.eps}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval}
-\centering
- \begin{columns}[c] % contents are top vertically aligned
-  	\begin{column}[T]{3cm} % each column can also be its own environment
-    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/chlcomp.eps}	    
-    \end{column}
-  
-  	\begin{column}[T]{3cm} % each column can also be its own environment
-    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/tsscomp.eps}   
-    \end{column}
-
-    \begin{column}[T]{3cm} % each column can also be its own environment
-    \includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/IGARSS2014/paper/Images/cdomcomp.eps}	   
-    \end{column}
-\end{columns}
-\vspace{1cm}
-\centerline{For one day and one study area}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Work Published}
-
-\large
-\begin{itemize}\itemsep.4cm
-	\item Concha, J.A., Schott, J.R. (2014). ``A model-based ELM for atmospheric correction over Case 2 water with Landsat 8'', International Society for Optics and Photonics (SPIE) Defense, Security, and Sensing 2014 SPIE Conference, Baltimore, MD, USA, April, 2014\\
-
-	\item Concha, J.A., Schott, J.R. (2014). ``In-water component retrieval over Case 2 water using Landsat-8: initial results.'' IEEE International Geoscience and Remote Sensing Symposium (IGARSS), Quebec, Canada, July, 2014
-\end{itemize}
-
-\end{frame}
-%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions and Future Work}
-\subsection*{Conclusions and Future Work}
+\section{Conclusions}
+\subsection*{Conclusions}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Conclusions}
 
