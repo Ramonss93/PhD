@@ -108,6 +108,7 @@
 
 % ----------------------------------- Slide ----------------------------------------------
 \begin{frame}{\LARGE Outline} 
+\LARGE
 	\tableofcontents
 \end{frame}
 
@@ -116,6 +117,7 @@
 \AtBeginSection[ ]
 {		
 	\begin{frame}{\LARGE Outline} 
+	\LARGE
 		\tableofcontents[currentsection]
 	\end{frame}
 
@@ -135,7 +137,7 @@
 \subsection*{Motivation}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Motivation} 
-\vspace{-.5cm}
+\vspace{-.7cm}
 \begin{columns}[c] % contents are top vertically aligned
   	\begin{column}[T]{6cm} % each column can also be its own environment
   		\vspace{0.5cm}
@@ -146,8 +148,12 @@
 	\end{column}
 
   	\begin{column}[T]{6cm} % each column can also be its own environment
+  	\centering
+  	\vspace{.35cm}
+  	\centerline{MODIS Chl-a product}
+  	\vspace{-.4cm}
  		\begin{figure}[H]
- 			\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
+ 			\includegraphics[height=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
  		\end{figure}
  		\vspace{-0.7cm}
  		{\hspace{4.2cm}\tiny $*~$Credit: NASA}
@@ -157,13 +163,22 @@
 \begin{figure}[H]
 		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/DiffResol.png}
 \end{figure}
+\vspace{-.5cm}
+~~~~~~GSD: $1Km~$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GSD: $30mt$
+
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Motivation (con't)} 
+\LARGE
+PROBLEM:\\
+``There is no product (like MODIS Chl-a product) for medium/small water bodies (hundreds or tens of meters) over coastal or inland water.''
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Goal} 
 \begin{itemize}
 \LARGE
 
-\item To Use Landsat 8 to retrieve Color Producing Agents (CPAs):
+\item To Use Landsat 8 to {\bf simultaneously} retrieve Color Producing Agents (CPAs):
 \begin{itemize}
 	\Large
  	\item chlorophyll-{\it a}
@@ -176,6 +191,14 @@
 \item Small/Medium Scale regions
 
 \end{itemize}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Process} 
+
+\begin{figure}[H]
+		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
+\end{figure}
+
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Objectives}
@@ -191,14 +214,6 @@
 \vspace{.4cm}
 \item Demo process to a different study site
 \end{itemize}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Retrieval Process} 
-
-\begin{figure}[H]
-		\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/RetProcess.pdf}
-\end{figure}
-
 \end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Background and Literature Overview}
@@ -649,29 +664,27 @@ Include more features of Hydrolight
 
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large 3-D LUT -- Hydrolight}
-\Large
+\begin{frame}{\LARGE Constituent Retrieval Process}{\vspace{0.1cm} \Large LUT -- Hydrolight}
+\large
 \begin{itemize}\itemsep.4cm
-\item Case 2 model:  four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model
+\item {\bf Case 2 model:}  four-component (pure water, chlorophyll-bearing particles, CDOM, and mineral particles) IOP model
 
-\item Inputs:
+\item {\bf Inputs:}
 	\begin{itemize}\itemsep.2cm
-	\Large
-		\item IOPs from the field
+	\large
+		\item IOPs from the field. ONLY absorption!
 
 		\item Illumination conditions (time, zenith angle, day of the year, etc.)
 	\end{itemize}
 
-\item Output:
-	\begin{itemize}\itemsep.2cm
-	\Large
-		\item{ $R_{rs}$}
-	\end{itemize}
+\item {\bf Output:} water-leaving reflectance or remote-sensing reflectance ($R_{rs}$)
+
+\item {\bf Difficulty:} No information about scattering and phase function. Smart guess!
 \end{itemize}
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Constituent Retrieval Process}
-{\vspace{0.1cm} \Large LUT -- Hydrolight}
+{\vspace{0.1cm} \Large 4-D LUT -- Hydrolight}
 % \begin{block}{\footnotesize LUT}
   \begin{columns}[c] % contents are top vertically aligned
   	\begin{column}[T]{6cm} % each column can also be its own environment
@@ -1007,9 +1020,36 @@ Include glint image
 
 \end{frame}
 % ---------------- Subsection ------------------------------
+\subsection*{Retrieval}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Retrieval Process} 
+{\vspace{0.1cm} \Large LUT and Water Pixels}
+\large
+\vspace{-.5cm}
+\begin{itemize}
+	\item Improve {\bf LUT creation in Hydrolight} and the {\bf Model-based ELM atmospheric correction }to have a better agreement between the modeled data and the image
+\end{itemize}
+\vspace{-.3cm}
+\begin{columns}[c] % contents are top vertically aligned
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+    \includegraphics[height=4.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LUT.eps}
+    	    \vspace{0.1cm}
+    		\centerline{LUT}
+    		% \centerline{(Known concentrations)}
+     	\end{column}
+  
+  	\begin{column}[T]{6cm} % each column can also be its own environment
+    \includegraphics[height=4.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/waterpixels.eps}
+    	    \vspace{0.1cm}
+    		\centerline{Water Pixels}
+    		% \centerline{(Unknown concentrations)}
+     	\end{column}
+\end{columns}
+\end{frame}
+% ---------------- Subsection ------------------------------
 \subsection*{Validation}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Validation}
+\begin{frame}{\LARGE Comparison and Validation}
 \Large
 \begin{itemize}\itemsep.4cm
 	\item Atmospheric Correction: Compare with results in SeaDAS (future release)\\
@@ -1031,48 +1071,17 @@ Include glint image
 
 \end{itemize}
 \end{frame}
-%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-\subsection*{Conclusions}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Conclusions}
-
-\Large
-\begin{itemize}\itemsep.4cm
-	\item Current retrieval algorithm depends on IOPs from the field. Not always available
-
-	\item LUT in Hydrolight: Highly dependent in phase function
-
-	\item Obtain field data for Landsat-8 is difficult, mainly for weather conditions
-\end{itemize}
-
-\end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Future Work}
 \Large
 \begin{itemize}\itemsep.4cm
-	\item Fix LUT creation in Hydrolight to have a better agreement between the model and field data
+	\item Improve Non-linear Optimization routine for 4-D LUT (3 components plus phase function) instead of 3-D LUT
 
 	\item Retrieval applied to more days in the area of study
 
-	\item Atmospheric Correction: Use \cite{Gordon:1994} methods with SWIR bands, and Blue Band and Band Ratio \cite{GeraceThesis}
+	\item Try retrieval in different area of studies
 
-\end{itemize}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Future Work (con't)}
-\Large
-\begin{itemize}\itemsep.4cm
-
-	\item Applied Optimization routine for 4-D LUT
-
-	\item Comparison and Validation
-
-	\item Try in different area of study
-
-	\item Journal articles for atmospheric correction and retrieval
-
+	\item Journal articles for: 1) atmospheric correction and 2) retrieval
 \end{itemize}
 
 \end{frame}
@@ -1095,7 +1104,7 @@ Include glint image
 				- Apply \cite{Gordon:1994} method\\
 				- Apply \cite{GeraceThesis} method} \\
 \hline
-1 month   & 	\parbox[t]{7cm}{Optimization Routine for 4-D LUT:\\
+2 month   & 	\parbox[t]{7cm}{Optimization Routine for 4-D LUT:\\
 				} \\
 \hline \hline
 
@@ -1123,6 +1132,22 @@ Include glint image
 
      
 \end{tabular*}
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusions}
+\subsection*{Conclusions}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Conclusions}
+
+\Large
+\begin{itemize}\itemsep.4cm
+	\item Current retrieval algorithm depends on IOPs from the field. Not always available!
+
+	\item LUT from Hydrolight: Highly dependent in phase function
+
+	\item Obtain field data for Landsat-8 is difficult, mainly for weather conditions
+\end{itemize}
 
 \end{frame}
 
