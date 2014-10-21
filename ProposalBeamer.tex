@@ -169,7 +169,7 @@
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Motivation (con't)} 
-\LARGE
+\huge
 PROBLEM:\\
 ``There is no product (like MODIS Chl-a product) for medium/small water bodies (hundreds or tens of meters) over coastal or inland water.''
 \end{frame}
@@ -178,7 +178,7 @@ PROBLEM:\\
 \begin{itemize}
 \LARGE
 
-\item To Use Landsat 8 to {\bf simultaneously} retrieve Color Producing Agents (CPAs):
+\item To Use Landsat-8 to {\bf simultaneously} retrieve Color Producing Agents (CPAs):
 \begin{itemize}
 	\Large
  	\item chlorophyll-{\it a}
@@ -220,7 +220,7 @@ PROBLEM:\\
 % ---------------- Subsection ------------------------------
 \subsection*{Landsat-8}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat 8 - OLI Specifications} 
+\begin{frame}{\LARGE Landsat-8 - OLI Specifications} 
 \vspace{-.5cm}
 \begin{itemize}
 \Large
@@ -238,26 +238,37 @@ PROBLEM:\\
 \end{itemize}
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat 8} 
+\begin{frame}{\LARGE Landsat-8} 
 \begin{figure}[H]
 		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/ldcmbands.png}
 \end{figure}
 \end{frame}
 
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat 8}{\vspace{0.1cm} \Large Signal-to-Noise Ratio}
+\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Signal-to-Noise Ratio}
 \begin{figure}[htb]
 \centering
       \includegraphics[height=6.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/L8SNR_2.eps}
 \end{figure}
 \end{frame}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat 8 Image} 
+\begin{frame}{\LARGE Landsat-8 Image} 
 \begin{figure}[htb]
   	\centering
   	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/LC80160302013262LGN00subset.jpg}
-  % \caption{Portion of the Landsat 8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
+  % \caption{Portion of the Landsat-8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
 \end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Comparison with Landsat-5}
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/NoiseComparison.png}
+  % \caption{Portion of the Landsat-8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
+\end{figure}
+\vspace{-.3cm}
+\large
+~~~~~~~~~~~~~Landsat-8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Landsat-5
 \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection*{Atmospheric Correction}
@@ -518,24 +529,72 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 \cite{Ruddick:2000bs} suggest $\varepsilon_m(\lambda_{NIR1},\lambda_{NIR2})$ from plot and $\alpha=1.72$
 \end{frame}
 
-
-
-
 % ---------------- Subsection ------------------------------
 \subsection*{Physics Model: Hydrolight}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Hydrolight} 
+\textbf{HYDROLIGHT} is a radiative transfer numerical model written in Fortran
+
+\vspace{\baselineskip}
+
+\textbf{HYDROLIGHT} computes radiance distributions and derived quantities for natural water bodies (e.g. irradiances, reflectances, K functions, etc.)
+
+\vspace{\baselineskip}
+
+\textbf{HYDROLIGHT} was developed by Curtis Mobley for over 20 years (1989) and is a commercial software product of Squoia Scientific, Inc.
+
+\begin{figure}[H]
+\begin{columns}[onlytextwidth] % contents are top vertically aligned
+	\column{.45\textwidth}
+  		\includegraphics[height=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/sequoia_logo.jpg}
+	\column{.45\textwidth} 
+		\includegraphics[height=2.5cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/HydroLight_logo.jpg}
+\end{columns}
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Hydrolight (con't)} 
+\begin{figure}[H]
+\begin{columns}[onlytextwidth] % contents are top vertically aligned
+	\column{.35\textwidth}
+  		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/absvsz.png}
+  	\column{.32\textwidth}
+  	\footnotesize
+  		\begin{equation}
+  			\cos\theta\frac{dL(z,\theta,\varphi,\lambda)}{dz}=\cdots \notag
+  		\end{equation}
+	\column{.35\textwidth} 
+		\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/20123_Spring/Modeling/HydroLight/Beamer/RadSpec.png}
+\end{columns}
+\end{figure}
+		\footnotesize
+        \resizebox{1.0\textwidth}{!}{%
+                \begin{tikzpicture}[node distance=0.75cm, auto]
+                        \tikzset{
+                                basenode/.style={rectangle,rounded corners,draw=black,very thick, inner sep=1em, minimum size=3em, text centered,text width=2cm},
+                                productnode/.style={ellipse,rounded corners,draw=black, very thick, text centered,text width=1.5cm},
+                                myarrow/.style={->,>=stealth',thick, double = black},
+                                mylabel/.style={text width=7em, text centered}
+                        }
+                        %\path[use as bounding box] (0,6) rectangle (4,2);
+                        \node[basenode] (IOPs) {Inherent Optical Properties};
+                        \node[basenode, below=of IOPs] (BC) {Boundary Conditions};
+                        \node[basenode, right=of IOPs] (RTE) {Radiative Transfer Equation};
+                        \node[basenode, right=of RTE] (rad) {Radiance Distribution};
+
+                        \draw[myarrow] (IOPs)--(RTE);
+                        \draw[myarrow] (BC)-|(RTE);
+                        \draw[myarrow] (RTE)--(rad);
+                \end{tikzpicture}
+        }
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Hydrolight (con't)} 
 \centerline{\LARGE For the Dark Pixel and LUT generation}
 \begin{figure}[H]
 		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/HLdiagram.pdf}
 \end{figure}
 \hspace{5cm}{$*~$IOPs: Inherent Optical Properties}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Hydrolight} 
-
-Include more features of Hydrolight
-
 \end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Work Completed}
@@ -557,7 +616,7 @@ Include more features of Hydrolight
 \begin{block}{\LARGE Bright Pixel}
  	\begin{itemize}
  	\Large
- 		\item Radiance: PIF\footnotemark[1] from Landsat 8 image
+ 		\item Radiance: PIF\footnotemark[1] from Landsat-8 image
  		\item Reflectance: PIF\footnotemark[1] from Landsat reflectance product
  	\end{itemize}
 \end{block} 
@@ -566,7 +625,7 @@ Include more features of Hydrolight
 
 	\begin{itemize}
 	\Large
-		\item Radiance: ROI\footnotemark[2] over water from Landsat 8 image
+		\item Radiance: ROI\footnotemark[2] over water from Landsat-8 image
 		\item Reflectance: Hydrolight
 	\end{itemize}
 
@@ -873,7 +932,7 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 
 \large
 \begin{itemize}\itemsep.4cm
-	\item Concha, J.A., Schott, J.R. (2014). ``A model-based ELM for atmospheric correction over Case 2 water with Landsat 8'', International Society for Optics and Photonics (SPIE) Defense, Security, and Sensing 2014 SPIE Conference, Baltimore, MD, USA, April, 2014\\
+	\item Concha, J.A., Schott, J.R. (2014). ``A model-based ELM for atmospheric correction over Case 2 water with Landsat-8'', International Society for Optics and Photonics (SPIE) Defense, Security, and Sensing 2014 SPIE Conference, Baltimore, MD, USA, April, 2014\\
 
 	\item Concha, J.A., Schott, J.R. (2014). ``In-water component retrieval over Case 2 water using Landsat-8: initial results.'' IEEE International Geoscience and Remote Sensing Symposium (IGARSS), Quebec, Canada, July, 2014
 \end{itemize}
@@ -884,9 +943,15 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 % ---------------- Subsection ------------------------------
 \subsection*{Atmospheric Correction}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Atmospheric Correction}{\Large Deglint Method \cite{Hedley:2005}}
-\Large
-Include glint image
+\begin{frame}{\LARGE Atmospheric Correction}{\Large Glint}
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=6.5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/L8Glint.png}
+\end{figure}
+\large
+\vspace{-.3cm}
+{\bf Glint:} Undesired signal due to sunlight and skylight reflected by the water surface.
 
 \end{frame}
 % --- slide ------------------------------------------------
@@ -1050,9 +1115,10 @@ Include glint image
 \subsection*{Validation}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Comparison and Validation}
+\vspace{-.3cm}
 \Large
 \begin{itemize}\itemsep.4cm
-	\item Atmospheric Correction: Compare with results in SeaDAS (future release)\\
+	\item Atmospheric Correction: Compare with results in SeaDAS by NASA (future release)\\
     	\begin{minipage}[t]{\linewidth}
           	\centering
           	\adjustbox{valign=t}{%
@@ -1060,14 +1126,22 @@ Include glint image
 			}
 		% \medskip
     	\end{minipage}
-	\item Retrieval: Compare with Ocean Optics products. Example: MODIS chl-{\it a} product\\
+	\item Retrieval: 
+
+		\begin{itemize}\itemsep.4cm
+		\Large
+		\item 	Compare with Ocean Optics products. Example: MODIS chl-{\it a} product\\
 		\begin{minipage}[t]{\linewidth}
           	\centering
           	\adjustbox{valign=t}{%
-				\includegraphics[height=3cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
+				\includegraphics[height=2cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/107325main_chloro_concentrate.jpg}
 			}
 		% \medskip
-    	\end{minipage}			
+    	\end{minipage}	
+
+    	\item Compare with field data
+
+    	\end{itemize}			
 
 \end{itemize}
 \end{frame}
@@ -1087,6 +1161,10 @@ Include glint image
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Timeline}
+
+{\bf Expected graduation:} August 2015\\
+
+\vspace{.5cm}
 \small
 \begin{tabular*}{\textwidth}{l l}
 \hline
@@ -1183,8 +1261,9 @@ Include glint image
 \begin{frame}%[shrink=30] 
 \tiny
   \frametitle{References}
-  \nocite{*}
+  % \nocite{*}
   \bibliographystyle{apalike}
   \bibliography{/Users/javier/Desktop/Javier/PHD_RIT/Latex/javier_bib}
 \end{frame}
-\end{document} % EEEEEEEEEEENNNNNNNNNNNNNNDDDDDDDDDDDD
+\end{document} 
+% EEEEEEEEEEENNNNNNNNNNNNNNDDDDDDDDDDDD
