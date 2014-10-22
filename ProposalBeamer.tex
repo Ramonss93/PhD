@@ -40,8 +40,9 @@
 	% \usetheme{Boadilla}
 	\setbeamertemplate{navigation symbols}{} 
 	% \useoutertheme{infolines} 
-\setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.0cm} \insertshorttitle \hspace*{4.0cm} \hfill\insertframenumber/\inserttotalframenumber}} 
+% \setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.5cm} \insertshorttitle \hspace*{4.0cm} \hfill\insertframenumber/\inserttotalframenumber}} 
 
+\setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.5cm} \insertshorttitle \hspace*{4.4cm} \hfill\insertframenumber}} 
 
 \def\braces#1{[#1]} % to define square parenthesis 
 	
@@ -61,7 +62,30 @@
 	\author[Javier A. Concha]{\Large Javier A. Concha \\\footnotesize Ph.D. Candidate\\ Advisor: Dr. John Schott}
 	\institute{\footnotesize Digital Imaging and Remote Sensing Lab\\Chester F. Carlson Center for Imaging Science\\ Rochester Institute of Technology}
 	\date{\today}
-	
+
+
+\AtBeginSection[ ]
+{	\setbeamertemplate{footline}{} 	
+	\begin{frame}{\LARGE Outline} 
+	\LARGE
+		\tableofcontents[currentsection]
+	\end{frame}
+
+\addtocounter{framenumber}{-1}	
+
+\setbeamertemplate{footline}{\hbox{\vspace{0.1cm} \insertshortauthor \hspace*{3.5cm} \insertshorttitle \hspace*{4.4cm} \hfill\insertframenumber}} 
+}	
+
+% \AtBeginSubsection[ ]
+% {		
+% 	\begin{frame}{\LARGE Outline} 
+% 		\tableofcontents[currentsection,currentsubsection]
+% 	\end{frame}
+% \addtocounter{framenumber}{-1}	
+% }		
+\newcounter{tmpc} % for resume counter
+%&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
+%&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&
 \begin{document}
 {	
 \setbeamertemplate{footline}{} 
@@ -107,30 +131,16 @@
 
 
 % ----------------------------------- Slide ----------------------------------------------
+{
+\setbeamertemplate{footline}{} 
 \begin{frame}{\LARGE Outline} 
 \LARGE
 	\tableofcontents
 \end{frame}
 
 \addtocounter{framenumber}{-1}
+}
 
-\AtBeginSection[ ]
-{		
-	\begin{frame}{\LARGE Outline} 
-	\LARGE
-		\tableofcontents[currentsection]
-	\end{frame}
-
-\addtocounter{framenumber}{-1}	
-}	
-
-% \AtBeginSubsection[ ]
-% {		
-% 	\begin{frame}{\LARGE Outline} 
-% 		\tableofcontents[currentsection,currentsubsection]
-% 	\end{frame}
-% \addtocounter{framenumber}{-1}	
-% }	
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Objectives}
 % ---------------- Subsection ------------------------------
@@ -164,7 +174,7 @@
 		\includegraphics[height=4cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/DiffResol.png}
 \end{figure}
 \vspace{-.5cm}
-~~~~~~GSD: $1Km~$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GSD: $30mt$
+~~~~~~GSD: $1Km~$~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~GSD: $30m$
 
 \end{frame}
 % --- slide ------------------------------------------------
@@ -204,13 +214,13 @@ PROBLEM:\\
 \begin{frame}{\LARGE Objectives}
 \begin{itemize}
 \Large
-\item Develop over-water atmospheric correction algorithm for Landsat-8
+\item Develop over-water atmospheric correction
 \vspace{.4cm}
-\item Design a water constituent retrieval algorithm that can be applied to a specific study area
+\item Design water constituent retrieval algorithm
 \vspace{.4cm}
-\item Include a glint correction
+\item Apply glint correction
 \vspace{.4cm}
-\item Validate results by comparing with in-situ measurements and products from Ocean Color satellites
+\item Validate results
 \vspace{.4cm}
 \item Demo process to a different study site
 \end{itemize}
@@ -220,10 +230,18 @@ PROBLEM:\\
 % ---------------- Subsection ------------------------------
 \subsection*{Landsat-8}
 % --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat-8 - OLI Specifications} 
+\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Spectral Bands}
+\begin{figure}[H]
+		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/ldcmbands.png}
+\end{figure}
+\vspace{-1cm}
+\hfill \scriptsize $*~$Credit: NASA
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm}\Large OLI Specifications} 
 \vspace{-.5cm}
 \begin{itemize}
-\Large
+\LARGE
 	\item Optical satellite (passive)
 	\vspace{.2cm}
 	\item Multispectral: 4 VIS, 1 NIR, 2 SWIR, 1 Pan
@@ -237,13 +255,6 @@ PROBLEM:\\
 	\item Pushbroom satellite
 \end{itemize}
 \end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Landsat-8} 
-\begin{figure}[H]
-		\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/ldcmbands.png}
-\end{figure}
-\end{frame}
-
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Signal-to-Noise Ratio}
 \begin{figure}[htb]
@@ -276,7 +287,7 @@ PROBLEM:\\
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Empirical Line Method (ELM)}
  \begin{columns}[c] % contents are top vertically aligned
   	\begin{column}[T]{5cm} % each column can also be its own environment
-  	{\centering \Large $L(\lambda)=m\times r_d(\lambda)+b$}\\
+  	{\centering \Large $L(\lambda)=m\cdot r_d(\lambda)+b$}\\
   	\vspace{0.1cm}
   	where: \begin{tabbing} $L$: Radiance\\
   	$r_d$: Reflectance\\
@@ -352,8 +363,7 @@ PROBLEM:\\
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
 \Large
-\begin{block}
-{Apparent reflectance}
+\begin{block}{Apparent reflectance \LARGE $\rho$}
 \begin{equation}\label{eq:rho}
   \rho = \frac{\pi L}{F_o \cos{\theta}}\notag
 \end{equation}
@@ -368,7 +378,7 @@ where:\\
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
-\begin{block}{Reflectance at the TOA}
+\begin{block}{Reflectance at the TOA \LARGE $\rho_t$}
 \begin{equation}\label{eq:rho_t}
   \rho_t(\lambda) = \rho_r(\lambda) + \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v[\rho_w(\lambda) + \rho_{wc}(\lambda)]\notag
 \end{equation}
@@ -597,7 +607,55 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 \hspace{5cm}{$*~$IOPs: Inherent Optical Properties}
 \end{frame}
 %%%%%%%%%%%%%%%%%%% SECTION %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Work Completed}
+\section{Completed Work}
+% ---------------- Subsection ------------------------------
+\subsection*{Ground Truth Data Collection}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  \centering
+	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy1.pdf} 
+  % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large Area of Study}
+\begin{figure}[htb]
+  	\centering
+  	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
+\end{figure}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\Large Lab Measurements} 
+\vspace{-1cm}
+\begin{figure}[htb]
+\centering
+\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
+      
+\end{figure}
+% \centerline{Comparison between traditional ELM (dashed lines)}
+% \centerline{and model-based ELM (solid lines).}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large 2013 and 2014 Seasons}
+\begin{table}[htb]
+  
+  \centering
+  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Collect1314.png}
+  \label{tab:collect}
+\end{table}
+\end{frame}
 % ---------------- Subsection ------------------------------
 \subsection*{Retrieval Process}
 % --- slide ------------------------------------------------
@@ -637,20 +695,22 @@ where: $\rho_c$: Rayleigh-corrected reflectance
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Model-based ELM} 
 {\vspace{0.1cm} \Large Bright Pixel -- Pseudo-Invariant Features}
-\centerline{Landsat Reflectance Product (Landsat-5)}
+\Large
+\centerline{Average Pixel from Landsat Reflectance Product (Landsat-5)}
+\large
 \begin{figure}[htb]
-  \begin{minipage}[c]{0.48\linewidth}
+  \begin{minipage}[c]{0.49\linewidth}
     \centering
       \includegraphics[trim=30 0 30 0,clip,height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/DTROCL8falsecolor.jpg}  
-    \vspace{0.3cm}
+    \vspace{0.2cm}
     \centerline{Downtown Rochester}
     \centerline{False Color Image}
   \end{minipage}
   \hfill
-  \begin{minipage}[d]{0.48\linewidth}
+  \begin{minipage}[d]{0.49\linewidth}
     \centering
       \includegraphics[trim=30 0 30 0,clip,height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/PIFmaskApplied.jpg}
-    \vspace{0.3cm}
+    \vspace{0.2cm}
     \centerline{Downtown Rochester}
     \centerline{PIF mask}
   \end{minipage}
@@ -873,60 +933,6 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \vspace{1cm}
 \centerline{Note: Just for one day and one study area!}
 \end{frame}
-% ---------------- Subsection ------------------------------
-\subsection*{Ground Truth Data Collection}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection}{\vspace{0.1cm} \Large Area of Study}
-\begin{figure}[htb]
-  \centering
-	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy1.pdf} 
-  % \caption{Sites in the Rochester Embayment for the water sample collection on September, $19^{th}$, 2013.\label{fig:0910913Sites} } 
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large Area of Study}
-\begin{figure}[htb]
-  	\centering
-  	\includegraphics[height=6cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/AreaOfStudy2.pdf}
-\end{figure}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}
-\vspace{-1cm}
-\begin{figure}[htb]
-\centering
-\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/Collection.pdf}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}{\Large Lab Measurements} 
-\vspace{-1cm}
-\begin{figure}[htb]
-\centering
-\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LabMeasurements.pdf}
-      
-\end{figure}
-% \centerline{Comparison between traditional ELM (dashed lines)}
-% \centerline{and model-based ELM (solid lines).}
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Field Data Collection (con't)}{\vspace{0.1cm} \Large 2013 and 2014 Seasons}
-\begin{table}[htb]
-  
-  \centering
-  \includegraphics[width=11cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/Collect1314.png}
-  \label{tab:collect}
-\end{table}
-\end{frame}
-% % ---------------- Subsection ------------------------------
-% \subsection{Laboratory Measurements}
-% % --- slide ------------------------------------------------
-% \begin{frame}{\LARGE Laboratory Measurements}
-
-% \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Work Published}
 
@@ -1031,6 +1037,7 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 	\item Create 3-D LUT using Hydrolight. Range: $R_{rs}$
 
 	\item 4-D LUT: propagate 3-D LUT using MODTRAN for a range of visibilities. Range: sensor-reaching radiances
+	\setcounter{tmpc}{\theenumi}
 \end{enumerate}
 
 \begin{figure}[htb]
@@ -1045,7 +1052,8 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \begin{frame}{\LARGE Atmospheric Correction} 
 {\Large Blue Band \cite{GeraceThesis} (con't)}
 \Large
-\begin{enumerate}[3)]\itemsep.4cm
+\begin{enumerate}[1)]\itemsep.4cm
+	\setcounter{enumi}{\thetmpc}
 	\item Visibility initial guess: 
 		\begin{itemize}\itemsep.2cm
 		\large
@@ -1171,41 +1179,24 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
         		\bfseries{Estimated Time}  	& \bfseries{Description} \\ 
 \hline \hline
 
-1 month   &  	\parbox[t]{7cm}{Fix LUT creation:\\
-				} \\
+1 month   &  	\parbox[t]{7cm}{Fix LUT creation} \\
 \hline
 1 month   & 	\parbox[t]{7cm}{Retrieval applied to more days:\\
 				- Use images from 2013 and 2014 season\\
 				- More points to have better stats} \\
 \hline
 1 month   & 	\parbox[t]{7cm}{Atmospheric Correction:\\
-				- Apply \cite{Gordon:1994} method\\
-				- Apply \cite{GeraceThesis} method} \\
+				- Apply \cite{Gordon:1994} methods\\
+				- Apply \cite{GeraceThesis} methods} \\
 \hline
-2 month   & 	\parbox[t]{7cm}{Optimization Routine for 4-D LUT:\\
-				} \\
-\hline \hline
-
-     
-\end{tabular*}
-
-\end{frame}
-% --- slide ------------------------------------------------
-\begin{frame}{\LARGE Timeline (con't)}
-\small
-\begin{tabular*}{\textwidth}{l l}
+1 month   & 	\parbox[t]{7cm}{Improve Optimization Routine for 4-D LUT} \\
 \hline
-        		\bfseries{Estimated Time}  	& \bfseries{Description} \\ 
-\hline \hline
-1 month   & 	\parbox[t]{7cm}{Validation:\\
-				} \\
+1 month   & 	\parbox[t]{7cm}{Validation} \\
 \hline
-1 month   & 	\parbox[t]{7cm}{Apply retrieval in different are of study:\\
-				} \\
+1 month   & 	\parbox[t]{7cm}{Apply retrieval in different ares of studies} \\
 \hline
-1 month   & 	\parbox[t]{7cm}{Write Thesis and Journal:\\
-				- Include final results\\
-				} \\
+6 months   & 	\parbox[t]{7cm}{Write Thesis and Journals:\\
+				- Include final results} \\
 \hline \hline
 
      
