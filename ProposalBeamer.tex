@@ -61,7 +61,7 @@
 	\title[Landsat-8 over Case 2 Water]{The Use of Landsat-8 for Monitoring of Fresh and Coastal Water}
 	\author[Javier A. Concha]{\Large Javier A. Concha \\\footnotesize Ph.D. Candidate\\ Advisor: Dr. John Schott}
 	\institute{\footnotesize Digital Imaging and Remote Sensing Lab\\Chester F. Carlson Center for Imaging Science\\ Rochester Institute of Technology}
-	\date{\today}
+	\date{October 22, 2014}
 
 
 \AtBeginSection[ ]
@@ -147,6 +147,27 @@
 \subsection*{Motivation}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Motivation} 
+\Large
+\begin{itemize}\itemsep.5cm
+\item {\bf Why?}\\
+``How is the Earth system changing, and what are the consequences of life on Earth?'' (NASA Strategic Plan)\\
+
+\item Changes can be observed in the patterns and quality of inland and coastal waters.\\
+\end{itemize}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Motivation} 
+\Large
+\begin{itemize}\itemsep.5cm
+\item Conditions of inland and coastal water drive: weather conditions, influence marine diversity, and impact agriculture, among other.\\
+
+\item This influence human conditions.\\
+
+\item By identifying, quantifying, and monitoring these changes, we could understand, describe, and predict the consequences of those changes, and more importantly stay ahead of them.\\
+\end{itemize}
+\end{frame}
+% --- slide ------------------------------------------------
+\begin{frame}{\LARGE Motivation (con't)} 
 \vspace{-.7cm}
 \begin{columns}[c] % contents are top vertically aligned
   	\begin{column}[T]{6cm} % each column can also be its own environment
@@ -180,8 +201,12 @@
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Motivation (con't)} 
 \huge
-PROBLEM:\\
-``There is no product (like MODIS Chl-a product) for medium/small water bodies (hundreds or tens of meters) over coastal or inland water.''
+{\bf PROBLEM}:\\
+\vspace{.1cm}
+``There is a lack of algorithms in the water research community to address coastal issues, including important metrics of water quality.'' Mainly because spatial resolution!!!\\
+\vspace{.7cm}
+\large
+\cite{Mueller2013} ``Satellite remote sensing in support of an integrated ocean observing system,'' Geoscience and Remote Sensing Magazine, IEEE
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Goal} 
@@ -269,6 +294,9 @@ PROBLEM:\\
   	\includegraphics[height=7cm]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/LC80160302013262LGN00subset.jpg}
   % \caption{Portion of the Landsat-8 image to be corrected showing part of the Lake Ontario, nearby ponds and Downtown Rochester. \label{fig:Scene} } 
 \end{figure}
+\centering
+\vspace{-.3cm}
+09/19/13
 \end{frame}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Landsat-8}{\vspace{0.1cm} \Large Comparison with Landsat-5}
@@ -280,6 +308,8 @@ PROBLEM:\\
 \vspace{-.3cm}
 \large
 ~~~~~~~~~~~~~Landsat-8~~~~~~~~~~~~~~~~~~~~~~~~~~~~~Landsat-5
+\vspace{-.3cm}
+~~~~~~~~~~~(09/29/2014)~~~~~~~~~~~~~~~~~~~~~~~~(04/24/2000)
 \end{frame}
 % ---------------- Subsection ------------------------------
 \subsection*{Atmospheric Correction}
@@ -363,7 +393,7 @@ PROBLEM:\\
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
 \Large
-\begin{block}{Apparent reflectance \LARGE $\rho$}
+\begin{block}{Apparent reflectance, \LARGE $\rho$}
 \begin{equation}\label{eq:rho}
   \rho = \frac{\pi L}{F_o \cos{\theta}}\notag
 \end{equation}
@@ -378,7 +408,7 @@ where:\\
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 
-\begin{block}{Reflectance at the TOA \LARGE $\rho_t$}
+\begin{block}{Reflectance at the TOA, $\rho_t$}
 \begin{equation}\label{eq:rho_t}
   \rho_t(\lambda) = \rho_r(\lambda) + \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v[\rho_w(\lambda) + \rho_{wc}(\lambda)]\notag
 \end{equation}
@@ -404,7 +434,7 @@ where:\\
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 \Large
-\begin{block}{Reflectance at the TOA}
+\begin{block}{Reflectance at the TOA, $\rho_t$}
 \begin{equation}\label{eq:rho_t}
   \rho_t(\lambda) = \rho_r(\lambda) + \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v[\rho_w(\lambda) + \rho_{wc}(\lambda)]\notag
 \end{equation}
@@ -418,7 +448,7 @@ where:\\
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large \cite{Gordon:1994} Methods (con't)}
 \Large
-\begin{block}{Rayleigh and glint corrected}
+\begin{block}{Rayleigh and glint corrected, $\rho_c$}
 	\begin{equation}
 		 \rho_c(\lambda) = \rho_a(\lambda) + \rho_{ra}(\lambda) + T_v(\lambda)\rho_{w}(\lambda)\notag
 	\end{equation}
@@ -950,13 +980,15 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \subsection*{Atmospheric Correction}
 % --- slide ------------------------------------------------
 \begin{frame}{\LARGE Atmospheric Correction}{\Large Glint}
-
+\vspace{-.5cm}
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=6.5cm,clip=true]{/Users/javier/Desktop/Javier/PHD_RIT/Latex/Proposal/Images/L8Glint.png}
 \end{figure}
+\vspace{-.7cm}
+\centerline{\scriptsize (07/11/2014)}
 \large
-\vspace{-.3cm}
+\vspace{-.1cm}
 {\bf Glint:} Undesired signal due to sunlight and skylight reflected by the water surface.
 
 \end{frame}
@@ -1229,7 +1261,7 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \vspace{\baselineskip}
 \centerline{\Large Thanks for your attention!}
 	\vspace{\baselineskip}
-
+\vspace{-.3cm}
 % \centerline{\Huge QUESTIONS?}
 \uncover <2->{\centerline{\Huge QUESTIONS?}}
 \vspace{\baselineskip}
@@ -1240,7 +1272,8 @@ $R_{rs}(\lambda_m)$: measured spectrum for a particular image pixel.
 \centering
 \includegraphics[height=5cm]{/Users/javier/Desktop/Javier/PHD_RIT/ConferencesAndApplications/2014_ASPRS_SOY/Images/LC80160302013262LGN00.jpg}
 \end{figure}
-
+\vspace{-.5cm}
+\centerline{\tiny (09/19/2013)}
 \end{frame}
 }
 % % BIBLIOGRAPHY
